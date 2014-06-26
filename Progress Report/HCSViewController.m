@@ -13,12 +13,16 @@
 @interface HCSViewController () <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *bigButton;
+@property (weak, nonatomic) IBOutlet UIButton *pauseButton;
 @property (weak, nonatomic) IBOutlet UITextField *titleButton;
 @property (weak, nonatomic) IBOutlet UILabel *timerLabel;
 
 @property (nonatomic) BOOL isStart;
+@property (nonatomic) BOOL isPaused;
 @property (strong, nonatomic) NSDate *startDate;
 @property (strong, nonatomic) NSDate *endDate;
+@property (strong, nonatomic) NSDate *pauseStartDate;
+@property (nonatomic) NSTimeInterval pausedSeconds; //lol typedef double
 @property (strong, nonatomic) NSTimer *timer;
 @property (nonatomic) int seconds;
 
@@ -49,6 +53,15 @@
     [self updateUI];
 }
 
+- (IBAction)pauseButtonPushed:(UIButton *)sender {
+    if (self.isPaused)
+        [self resumeTimer];
+    else
+        [self pauseTimer];
+    
+    self.isPaused = !self.isPaused;
+    [self updateUI];
+}
 // default isStart = YES
 /*
  //why the shit does this code break it
@@ -61,7 +74,6 @@
     return _isStart;
 }
  */
-
 - (void)scheduleEvent
 {
     //NSCalendar *cal = [[NSCalendar alloc]initWithCalendarIdentifier:NSGregorianCalendar];
@@ -86,7 +98,6 @@
         }
     }];
 }
-
 - (void)beginTimer
 {
     //CFRunLoopGetCurrent();
@@ -114,22 +125,44 @@
     int secs = self.seconds - (mins * 60);
      self.timerLabel.text = [NSString stringWithFormat:@"%02d:%02d", mins, secs];
 }
-
 - (void)endTimer
 {
     [self.timer invalidate];
 }
-
+- (void)pauseTimer
+{
+    //ty to http://stackoverflow.com/questions/347219/how-can-i-programmatically-pause-an-nstimer
+    self.pauseStartDate = [NSDate date];
+    [self.timer setFireDate:[NSDate distantFuture]]; //LOL NSDate distantFuture is actually a thing...
+}
+- (void)resumeTimer
+{
+    float pauseTimeWas = -1 * [self.pauseStartDate timeIntervalSinceNow]; //results in +.
+    NSLog(@"%f", pauseTimeWas);
+    [self.timer setFireDate:[self.startDate initWithTimeInterval:pauseTimeWas sinceDate:self.startDate]];
+    
+    //tracks pause time
+    self.pausedSeconds += pauseTimeWas;
+}
 - (void)updateUI
 {
     if (self.isStart) {
-        //self.bigButton.titleLabel.text = @"Start";
         [self.bigButton setTitle:@"Start" forState:UIControlStateNormal];
         self.bigButton.backgroundColor = [UIColor greenColor];
-        } else {
-        //self.bigButton.titleLabel.text = @"Stop";
+        self.pauseButton.hidden = YES;
+    } else {
         [self.bigButton setTitle:@"Stop" forState:UIControlStateNormal];
-        self.bigButton.backgroundColor = [UIColor colorWithRed:1 green:0.0335468 blue:1 alpha:1];
+        self.bigButton.backgroundColor = [UIColor colorWithRed:1 green:0.0335468 blue:0.00867602 alpha:1];
+        self.pauseButton.hidden = NO;
+        
+        if (self.isPaused) {
+            [self.pauseButton setTitle:@"Resume" forState:UIControlStateNormal];
+            
+        } else {
+            [self.pauseButton setTitle:@"Pause" forState:UIControlStateNormal];
+            self.pauseButton.backgroundColor = [UIColor lightGrayColor];
+        }
+        
     }
     
     //timerLabel updated on increaseTimerCount: method
@@ -139,6 +172,11 @@
     if (!_seconds) _seconds = 0;
     return _seconds;
 }
+- (NSTimeInterval)pausedSeconds
+{
+    if (!_pausedSeconds) _pausedSeconds = 0;
+    return _pausedSeconds;
+}
 
 - (void)viewDidLoad
 {
@@ -147,6 +185,7 @@
     
     //set defaults
     self.isStart = YES;
+    self.isPaused = NO;
     self.timerLabel.text = @"00:00";
     [self updateUI];
     
@@ -160,6 +199,8 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+//bigButton was pos 85 328,150 138 size
 
 #pragma mark - UITextFieldDelegate
 //yay copypasta from prototypeC
