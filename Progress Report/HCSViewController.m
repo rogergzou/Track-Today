@@ -10,10 +10,11 @@
 #import <EventKit/EventKit.h>
 //@import EventKitUI;
 
-@interface HCSViewController ()
+@interface HCSViewController () <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *bigButton;
 @property (weak, nonatomic) IBOutlet UITextField *titleButton;
+@property (weak, nonatomic) IBOutlet UILabel *timerLabel;
 @property (nonatomic) BOOL isStart;
 @property (strong, nonatomic) NSDate *startDate;
 @property (strong, nonatomic) NSDate *endDate;
@@ -60,14 +61,12 @@
 
 - (void)scheduleEvent
 {
-    NSCalendar *cal = [[NSCalendar alloc]initWithCalendarIdentifier:NSGregorianCalendar];
-    NSLog(@"meh");
+    //NSCalendar *cal = [[NSCalendar alloc]initWithCalendarIdentifier:NSGregorianCalendar];
     EKEventStore *eventStore = [[EKEventStore alloc]init];
     EKEvent *event = [EKEvent eventWithEventStore:eventStore];
     event.title = self.titleButton.text;
     event.startDate = self.startDate;
     event.endDate = self.endDate;
-    NSLog(@"much success");
     [eventStore requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error) {
         NSLog(@"gran");
         if (granted) {
@@ -109,9 +108,12 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    //default bool value at start
+    
+    //set defaults
     self.isStart = YES;
+    self.timerLabel.text = @"00:00";
     [self updateUI];
+    
     //self.startDate = [NSDate date];
     //self.endDate = [[NSDate alloc] initWithTimeInterval:600 sinceDate:self.startDate];
     //[self scheduleEvent];
@@ -121,6 +123,59 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - UITextFieldDelegate
+//yay copypasta from prototypeC
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+}
+- (void) setViewMoveUp:(BOOL)movedUp
+{
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.3];
+    
+    CGRect rect = self.view.frame;
+    if (movedUp) {
+        //move view origin up so textfield moves up
+        //increase size of view so area behind keyboard is covered up
+        rect.origin.y -= 80.0;
+        rect.size.height += 80.0;
+    } else {
+        //revert
+        rect.origin.y += 80.0;
+        rect.size.height -= 80.0;
+    }
+    self.view.frame = rect;
+    [UIView commitAnimations];
+}
+- (void)keyboardShow:(NSNotification *)notification {
+    if (self.view.frame.origin.y >= 0) {
+        [self setViewMoveUp:YES];
+    } else if (self.view.frame.origin.y < 0) {
+        [self setViewMoveUp:NO];
+    }
+}
+- (void)keyboardHide:(NSNotification *)notification {
+    if (self.view.frame.origin.y >= 0) {
+        [self setViewMoveUp:YES];
+    } else if (self.view.frame.origin.y < 0) {
+        [self setViewMoveUp:NO];
+    }
+}
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
 
 @end
