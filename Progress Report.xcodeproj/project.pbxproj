@@ -22,6 +22,7 @@
 		DB679EFC195BB92700C61F6F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB679EDB195BB92700C61F6F /* UIKit.framework */; };
 		DB679F04195BB92700C61F6F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DB679F02195BB92700C61F6F /* InfoPlist.strings */; };
 		DB679F06195BB92700C61F6F /* Progress_ReportTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DB679F05195BB92700C61F6F /* Progress_ReportTests.m */; };
+		DB679F12195BD43900C61F6F /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB679F11195BD43900C61F6F /* EventKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		DB679F01195BB92700C61F6F /* Progress ReportTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Progress ReportTests-Info.plist"; sourceTree = "<group>"; };
 		DB679F03195BB92700C61F6F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DB679F05195BB92700C61F6F /* Progress_ReportTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Progress_ReportTests.m; sourceTree = "<group>"; };
+		DB679F11195BD43900C61F6F /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB679F12195BD43900C61F6F /* EventKit.framework in Frameworks */,
 				DB679EDA195BB92700C61F6F /* CoreGraphics.framework in Frameworks */,
 				DB679EDC195BB92700C61F6F /* UIKit.framework in Frameworks */,
 				DB679ED8195BB92700C61F6F /* Foundation.framework in Frameworks */,
@@ -103,6 +106,7 @@
 		DB679ED6195BB92700C61F6F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DB679F11195BD43900C61F6F /* EventKit.framework */,
 				DB679ED7195BB92700C61F6F /* Foundation.framework */,
 				DB679ED9195BB92700C61F6F /* CoreGraphics.framework */,
 				DB679EDB195BB92700C61F6F /* UIKit.framework */,
@@ -203,6 +207,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Roger Zou";
 				TargetAttributes = {
+					DB679ED3195BB92700C61F6F = {
+						DevelopmentTeam = 8TKRWQTPVP;
+					};
 					DB679EF7195BB92700C61F6F = {
 						TestTargetID = DB679ED3195BB92700C61F6F;
 					};
@@ -391,10 +398,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Progress Report/Progress Report-Prefix.pch";
 				INFOPLIST_FILE = "Progress Report/Progress Report-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -404,10 +414,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Progress Report/Progress Report-Prefix.pch";
 				INFOPLIST_FILE = "Progress Report/Progress Report-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
