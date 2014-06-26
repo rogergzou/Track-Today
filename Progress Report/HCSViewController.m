@@ -82,14 +82,19 @@
     event.title = self.titleButton.text;
     event.startDate = self.startDate;
     event.endDate = self.endDate;
+    //event.location
+    
+    int mins = floor(self.seconds/60);
+    int secs = self.seconds - (mins * 60);
+    int pmins = floor(self.pausedSeconds/60);
+    int psecs = floor(self.pausedSeconds - (pmins * 60));
+    event.notes = [NSString stringWithFormat:@"%i:%02i active, %i:%02i paused", mins, secs, pmins, psecs];
     [eventStore requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error) {
-        NSLog(@"gran");
         if (granted) {
             //user lets calendar access
             [event setCalendar:[eventStore defaultCalendarForNewEvents]];
             NSError *err;
             [eventStore saveEvent:event span:EKSpanThisEvent error:&err];
-            NSLog(@"win");
         } else {
             //user no calendar access
             [event setCalendar:[eventStore defaultCalendarForNewEvents]];
@@ -137,8 +142,7 @@
 }
 - (void)resumeTimer
 {
-    float pauseTimeWas = -1 * [self.pauseStartDate timeIntervalSinceNow]; //results in +.
-    NSLog(@"%f", pauseTimeWas);
+    float pauseTimeWas = -1 * [self.pauseStartDate timeIntervalSinceNow]; //results in positive #
     [self.timer setFireDate:[self.startDate initWithTimeInterval:pauseTimeWas sinceDate:self.startDate]];
     
     //tracks pause time
@@ -157,7 +161,7 @@
         
         if (self.isPaused) {
             [self.pauseButton setTitle:@"Resume" forState:UIControlStateNormal];
-            
+            self.pauseButton.backgroundColor = [UIColor colorWithRed:0.720482 green:1 blue:0.632028 alpha:1];
         } else {
             [self.pauseButton setTitle:@"Pause" forState:UIControlStateNormal];
             self.pauseButton.backgroundColor = [UIColor lightGrayColor];
