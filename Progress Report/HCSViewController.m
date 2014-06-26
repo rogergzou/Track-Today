@@ -62,11 +62,15 @@
     [self updateUI];
 }
 - (IBAction)resetButtonPushed:(UIButton *)sender {
-    if (self.timer)
-        [self endTimer];
-    [self resetVars];
-    [self updateUI];
-    
+    [self runResetAlert];
+}
+- (void)runResetAlert
+{
+    UIAlertView *resetAlert = [[UIAlertView alloc]initWithTitle:@"Reset?" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"Reset", @"Cancel", nil];
+    resetAlert.cancelButtonIndex = 1; //set cancel as cancel
+    // tag for identification when handling
+    resetAlert.tag = 2;
+    [resetAlert show];
 }
 // default isStart = YES
 /*
@@ -84,8 +88,7 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     // tag indicates is Schedule alert
-    if (alertView.tag == 1)
-    {
+    if (alertView.tag == 1) {
         NSLog(@"buttonIndex %li", (long)buttonIndex);
         switch (buttonIndex) {
             //OK
@@ -96,6 +99,22 @@
                 [self updateUI];
                 break;
             //Cancel
+            case 1:
+                break;
+            default:
+                break;
+        }
+    // tag indicates Reset alert
+    } else if (alertView.tag == 2) {
+        switch (buttonIndex) {
+                //OK
+            case 0:
+                if (self.timer)
+                    [self endTimer];
+                [self resetVars];
+                [self updateUI];
+                break;
+                //Cancel
             case 1:
                 break;
             default:
