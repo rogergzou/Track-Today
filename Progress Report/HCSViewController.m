@@ -15,9 +15,12 @@
 @property (weak, nonatomic) IBOutlet UIButton *bigButton;
 @property (weak, nonatomic) IBOutlet UITextField *titleButton;
 @property (weak, nonatomic) IBOutlet UILabel *timerLabel;
+
 @property (nonatomic) BOOL isStart;
 @property (strong, nonatomic) NSDate *startDate;
 @property (strong, nonatomic) NSDate *endDate;
+@property (strong, nonatomic) NSTimer *timer;
+@property (nonatomic) int seconds;
 
 @end
 
@@ -86,11 +89,37 @@
 
 - (void)beginTimer
 {
+    //CFRunLoopGetCurrent();
+    /*
+     dispatch_async(dispatch_get_main_queue(), ^{
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(increaseTimerCount:) userInfo:nil repeats:YES];
+    });
+     */
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(increaseTimerCount:) userInfo:nil repeats:YES];
+    //self.timer = [NSTimer scheduledTimerWithTimeInterval: invocation: repeats:]
+}
+- (void)increaseTimerCount: (NSTimer *)timer
+{
+    //see http://stackoverflow.com/questions/1189252/how-to-convert-an-nstimeinterval-seconds-into-minutes if want to convert to more complex hours/days/months
+    //double secs = timer.timeInterval;
+    
+    //damn misleading documentation
+    /*
+     int mins = floor(timer.timeInterval/60);
+    int secs = timer.timeInterval - (mins * 60);
+    */
+    self.seconds++;
+    
+    int mins = floor(self.seconds/60);
+    int secs = self.seconds - (mins * 60);
+     self.timerLabel.text = [NSString stringWithFormat:@"%02d:%02d", mins, secs];
+    NSLog(@"called increas time");
+    
     
 }
 - (void)endTimer
 {
-    
+    [self.timer invalidate];
 }
 
 - (void)updateUI
@@ -102,6 +131,12 @@
         //self.bigButton.titleLabel.text = @"Stop";
         [self.bigButton setTitle:@"Stop" forState:UIControlStateNormal];
     
+    //timerLabel updated on increaseTimerCount: method
+}
+- (int)seconds
+{
+    if (!_seconds) _seconds = 0;
+    return _seconds;
 }
 
 - (void)viewDidLoad
