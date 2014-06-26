@@ -113,10 +113,8 @@
     int mins = floor(self.seconds/60);
     int secs = self.seconds - (mins * 60);
      self.timerLabel.text = [NSString stringWithFormat:@"%02d:%02d", mins, secs];
-    NSLog(@"called increas time");
-    
-    
 }
+
 - (void)endTimer
 {
     [self.timer invalidate];
@@ -124,12 +122,15 @@
 
 - (void)updateUI
 {
-    if (self.isStart)
+    if (self.isStart) {
         //self.bigButton.titleLabel.text = @"Start";
         [self.bigButton setTitle:@"Start" forState:UIControlStateNormal];
-    else
+        self.bigButton.backgroundColor = [UIColor greenColor];
+        } else {
         //self.bigButton.titleLabel.text = @"Stop";
         [self.bigButton setTitle:@"Stop" forState:UIControlStateNormal];
+        self.bigButton.backgroundColor = [UIColor colorWithRed:1 green:0.0335468 blue:1 alpha:1];
+    }
     
     //timerLabel updated on increaseTimerCount: method
 }
