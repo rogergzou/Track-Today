@@ -47,11 +47,7 @@
         self.endDate = [NSDate date];
         [self endTimer];
         [self scheduleEvent];
-        
-        //reset stored vars
-        self.seconds = 0;
-        self.pausedSeconds = 0;
-        self.timerLabel.text = @"00:00";
+        [self resetVars];
     }
     
     self.isStart = !self.isStart;
@@ -66,6 +62,13 @@
     
     self.isPaused = !self.isPaused;
     [self updateUI];
+}
+- (IBAction)resetButtonPushed:(UIButton *)sender {
+    if (self.timer)
+        [self endTimer];
+    [self resetVars];
+    [self updateUI];
+    
 }
 // default isStart = YES
 /*
@@ -152,6 +155,15 @@
     
     //tracks pause time
     self.pausedSeconds += pauseTimeWas;
+}
+- (void)resetVars
+{
+    //reset stored vars
+    self.seconds = 0;
+    self.pausedSeconds = 0;
+    self.timerLabel.text = @"00:00";
+    self.isPaused = NO;
+    self.isStart = YES;
 }
 - (void)updateUI
 {
