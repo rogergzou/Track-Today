@@ -105,7 +105,7 @@
 }
 - (void)runScheduleAlert
 {
-    UIAlertView *confirmAlert = [[UIAlertView alloc]initWithTitle:@"Schedule" message:@"Place event onto iCal?" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", @"Cancel", nil];
+    UIAlertView *confirmAlert = [[UIAlertView alloc]initWithTitle:@"Schedule" message:[NSString stringWithFormat:@"Place event onto iCal? %@ lasts from %@ to now", self.titleButton.text, self.startDate] delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", @"Cancel", nil];
     confirmAlert.cancelButtonIndex = 1; //set cancel as cancel
     // tag for identification when handling
     confirmAlert.tag = 1;
