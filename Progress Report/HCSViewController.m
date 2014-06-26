@@ -19,6 +19,7 @@
 
 @property (nonatomic) BOOL isStart;
 @property (nonatomic) BOOL isPaused;
+//@property (nonatomic) BOOL isConfirm;
 @property (strong, nonatomic) NSDate *startDate;
 @property (strong, nonatomic) NSDate *endDate;
 @property (strong, nonatomic) NSDate *pauseStartDate;
@@ -43,14 +44,11 @@
     if (self.isStart) {
         self.startDate = [NSDate date];
         [self beginTimer];
+        self.isStart = !self.isStart;
     } else {
         self.endDate = [NSDate date];
-        [self endTimer];
-        [self scheduleEvent];
-        [self resetVars];
+        [self runScheduleAlert]; //then will run scheduleEvent and handle resets
     }
-    
-    self.isStart = !self.isStart;
     [self updateUI];
 }
 
@@ -82,9 +80,43 @@
     return _isStart;
 }
  */
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    // tag indicates is Schedule alert
+    if (alertView.tag == 1)
+    {
+        NSLog(@"buttonIndex %li", (long)buttonIndex);
+        switch (buttonIndex) {
+            //OK
+            case 0:
+                [self scheduleEvent];
+                [self endTimer];
+                [self resetVars];
+                [self updateUI];
+                break;
+            //Cancel
+            case 1:
+                break;
+            default:
+                break;
+        }
+    }
+}
+- (void)runScheduleAlert
+{
+    UIAlertView *confirmAlert = [[UIAlertView alloc]initWithTitle:@"Schedule" message:@"Place event onto iCal?" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", @"Cancel", nil];
+    confirmAlert.cancelButtonIndex = 1; //set cancel as cancel
+    // tag for identification when handling
+    confirmAlert.tag = 1;
+    NSLog(@"lolwut");
+    [confirmAlert show];
+}
 - (void)scheduleEvent
 {
     //NSCalendar *cal = [[NSCalendar alloc]initWithCalendarIdentifier:NSGregorianCalendar];
+   
+    
     EKEventStore *eventStore = [[EKEventStore alloc]init];
     EKEvent *event = [EKEvent eventWithEventStore:eventStore];
     event.title = self.titleButton.text;
@@ -111,6 +143,7 @@
         }
     }];
 }
+
 - (void)beginTimer
 {
     //CFRunLoopGetCurrent();
