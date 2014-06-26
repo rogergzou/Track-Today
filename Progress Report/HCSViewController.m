@@ -22,12 +22,41 @@
 
 @implementation HCSViewController
 
+- (IBAction)buttonPushed:(UIButton *)sender {
+    /*
+    NSLog(self.isStart ? @"y" : @"n");
+    BOOL whatTheShitIsThis = !self.isStart;
+    NSLog(whatTheShitIsThis ? @"y" : @"n");
+    self.isStart = whatTheShitIsThis;
+    NSLog(self.isStart ? @"ye" : @"no");
+    NSLog(!self.isStart ? @"yes" : @"noo");
+    */
+    
+    if (self.isStart) {
+        self.startDate = [NSDate date];
+        [self beginTimer];
+    } else {
+        self.endDate = [NSDate date];
+        [self endTimer];
+        [self scheduleEvent];
+    }
+    
+    self.isStart = !self.isStart;
+    [self updateUI];
+}
+
 // default isStart = YES
+/*
+ //why the shit does this code break it
+ //edit nvm http://stackoverflow.com/questions/16082003/property-doesnt-set-after-lazy-initialization-objective-c screw these primitive types
 - (BOOL) isStart
 {
-    if (!_isStart) _isStart = YES;
+    if (!_isStart) {
+        _isStart = YES;
+    }
     return _isStart;
 }
+ */
 
 - (void)scheduleEvent
 {
@@ -56,12 +85,23 @@
     }];
 }
 
+- (void)beginTimer
+{
+    
+}
+- (void)endTimer
+{
+    
+}
+
 - (void)updateUI
 {
     if (self.isStart)
-        self.bigButton.titleLabel.text = @"Start";
+        //self.bigButton.titleLabel.text = @"Start";
+        [self.bigButton setTitle:@"Start" forState:UIControlStateNormal];
     else
-        self.bigButton.titleLabel.text = @"Stop";
+        //self.bigButton.titleLabel.text = @"Stop";
+        [self.bigButton setTitle:@"Stop" forState:UIControlStateNormal];
     
 }
 
@@ -69,6 +109,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    //default bool value at start
+    self.isStart = YES;
     [self updateUI];
     //self.startDate = [NSDate date];
     //self.endDate = [[NSDate alloc] initWithTimeInterval:600 sinceDate:self.startDate];
