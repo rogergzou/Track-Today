@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DB49F361195CF0D400067F96 /* HCSShortCutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB49F360195CF0D400067F96 /* HCSShortCutViewController.m */; };
+		DB49F364195CF1C000067F96 /* HCSShortCutTextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DB49F363195CF1C000067F96 /* HCSShortCutTextViewCell.m */; };
+		DB49F367195D19AC00067F96 /* HCSShortcut.m in Sources */ = {isa = PBXBuildFile; fileRef = DB49F366195D19AC00067F96 /* HCSShortcut.m */; };
 		DB679ED8195BB92700C61F6F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB679ED7195BB92700C61F6F /* Foundation.framework */; };
 		DB679EDA195BB92700C61F6F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB679ED9195BB92700C61F6F /* CoreGraphics.framework */; };
 		DB679EDC195BB92700C61F6F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB679EDB195BB92700C61F6F /* UIKit.framework */; };
@@ -36,6 +39,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DB49F35F195CF0D400067F96 /* HCSShortCutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSShortCutViewController.h; sourceTree = "<group>"; };
+		DB49F360195CF0D400067F96 /* HCSShortCutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCSShortCutViewController.m; sourceTree = "<group>"; };
+		DB49F362195CF1C000067F96 /* HCSShortCutTextViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSShortCutTextViewCell.h; sourceTree = "<group>"; };
+		DB49F363195CF1C000067F96 /* HCSShortCutTextViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCSShortCutTextViewCell.m; sourceTree = "<group>"; };
+		DB49F365195D19AC00067F96 /* HCSShortcut.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSShortcut.h; sourceTree = "<group>"; };
+		DB49F366195D19AC00067F96 /* HCSShortcut.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCSShortcut.m; sourceTree = "<group>"; };
 		DB679ED4195BB92700C61F6F /* Progress Report.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Progress Report.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB679ED7195BB92700C61F6F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DB679ED9195BB92700C61F6F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -124,6 +133,12 @@
 				DB679EEC195BB92700C61F6F /* Main_iPad.storyboard */,
 				DB679EEF195BB92700C61F6F /* HCSViewController.h */,
 				DB679EF0195BB92700C61F6F /* HCSViewController.m */,
+				DB49F35F195CF0D400067F96 /* HCSShortCutViewController.h */,
+				DB49F360195CF0D400067F96 /* HCSShortCutViewController.m */,
+				DB49F362195CF1C000067F96 /* HCSShortCutTextViewCell.h */,
+				DB49F363195CF1C000067F96 /* HCSShortCutTextViewCell.m */,
+				DB49F365195D19AC00067F96 /* HCSShortcut.h */,
+				DB49F366195D19AC00067F96 /* HCSShortcut.m */,
 				DB679EF2195BB92700C61F6F /* Images.xcassets */,
 				DB679EDE195BB92700C61F6F /* Supporting Files */,
 			);
@@ -262,8 +277,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB679EE4195BB92700C61F6F /* main.m in Sources */,
+				DB49F364195CF1C000067F96 /* HCSShortCutTextViewCell.m in Sources */,
+				DB49F367195D19AC00067F96 /* HCSShortcut.m in Sources */,
 				DB679EF1195BB92700C61F6F /* HCSViewController.m in Sources */,
 				DB679EE8195BB92700C61F6F /* HCSAppDelegate.m in Sources */,
+				DB49F361195CF0D400067F96 /* HCSShortCutViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -484,6 +502,7 @@
 				DB679F0B195BB92700C61F6F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DB679F0C195BB92700C61F6F /* Build configuration list for PBXNativeTarget "Progress ReportTests" */ = {
 			isa = XCConfigurationList;
@@ -492,6 +511,7 @@
 				DB679F0E195BB92700C61F6F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

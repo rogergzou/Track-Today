@@ -10,4 +10,6 @@
 
 @interface HCSViewController : UIViewController
 
+- (IBAction)myShortcutTextUnwindSegueCallback:(UIStoryboardSegue *)segue;
+
 @end

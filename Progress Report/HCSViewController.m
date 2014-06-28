@@ -8,6 +8,8 @@
 
 #import "HCSViewController.h"
 #import <EventKit/EventKit.h>
+#import "HCSShortcut.h"
+#import "HCSShortCutViewController.h"
 //@import EventKitUI;
 
 @interface HCSViewController () <UITextFieldDelegate>
@@ -240,6 +242,18 @@
     
     //timerLabel updated on increaseTimerCount: method
 }
+
+- (IBAction)myShortcutTextUnwindSegueCallback:(UIStoryboardSegue *)segue
+{
+    UIViewController *sourceVC = segue.sourceViewController;
+    if ([sourceVC isKindOfClass:[HCSShortCutViewController class]]) {
+        HCSShortCutViewController *shortcutVC = (HCSShortCutViewController *)sourceVC;
+        self.titleButton.text = shortcutVC.title;
+        NSLog(@"%@", shortcutVC.title);
+    }
+    
+}
+
 - (int)seconds
 {
     if (!_seconds) _seconds = 0;
@@ -260,6 +274,15 @@
     self.isStart = YES;
     self.isPaused = NO;
     self.timerLabel.text = @"00:00";
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if (![defaults arrayForKey:@"shortcuts"]) {
+        //HCSShortcut *shor = [[HCSShortcut alloc]initWithTitle:@"Work" image:[UIImage imageNamed:@"image1"]];
+        NSData *encodedSampleWorkObj = [NSKeyedArchiver archivedDataWithRootObject:[[HCSShortcut alloc]initWithTitle:@"Work" image:[UIImage imageNamed:@"image1"]]];
+        NSArray *arr = @[encodedSampleWorkObj];
+        [defaults setObject:arr forKey:@"shortcuts"];
+        [defaults synchronize];
+    }
+    
     [self updateUI];
     
     //self.startDate = [NSDate date];
