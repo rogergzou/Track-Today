@@ -20,6 +20,13 @@
     return self;
 }
 
+- (UIImage *)image
+{
+    if (!_image) _image = [UIImage imageNamed:@"Default_Shortcut_Image"];
+    return _image;
+}
+
+
 //needed to make nsdata for property list storage via nsuserdefaults
 - (void)encodeWithCoder:(NSCoder *)encoder
 {

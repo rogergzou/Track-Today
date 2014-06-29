@@ -8,6 +8,7 @@
 
 #import "HCSShortCutViewController.h"
 #import "HCSShortCutTextViewCell.h"
+#import "HCSAddCustomViewCell.h"
 #import "HCSShortcut.h"
 
 @interface HCSShortCutViewController ()
@@ -45,24 +46,51 @@
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 1; //for now
+    return 2; //for now
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return [[[NSUserDefaults standardUserDefaults] arrayForKey:@"shortcuts"] count];
+    switch (section) {
+        case 0:
+            return [[[NSUserDefaults standardUserDefaults] arrayForKey:@"shortcuts"] count];
+            break;
+        case 1:
+            return [[[NSUserDefaults standardUserDefaults] arrayForKey:@"customShortcuts"] count];
+            break;
+        default:
+            return 0;
+            break;
+    }
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    HCSShortCutTextViewCell *theCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MyShortCut" forIndexPath:indexPath];
+
     long fRow = [indexPath row];
-    
-    NSData *shortcutData = [[NSUserDefaults standardUserDefaults]arrayForKey:@"shortcuts"][fRow];
-    HCSShortcut *shortcut = (HCSShortcut *)[NSKeyedUnarchiver unarchiveObjectWithData:shortcutData];
-    theCell.imageView.image = shortcut.image;
-    theCell.titleLabel.text = shortcut.title;
-    //[theCell.titleLabel setText:shortcut.title];
-    return theCell;
+    switch ([indexPath section]) {
+        case 0:
+            if (true) {
+                HCSShortCutTextViewCell *theCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MyShortCut" forIndexPath:indexPath];
+                NSData *shortcutData = [[NSUserDefaults standardUserDefaults]arrayForKey:@"shortcuts"][fRow];
+                HCSShortcut *shortcut = (HCSShortcut *)[NSKeyedUnarchiver unarchiveObjectWithData:shortcutData];
+                theCell.imageView.image = shortcut.image;
+                theCell.titleLabel.text = shortcut.title;
+                //[theCell.titleLabel setText:shortcut.title];
+                return theCell;
+            }
+            break;
+        case 1:
+            if (true) {
+                HCSAddCustomViewCell *theCustCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MyAddCustom" forIndexPath:indexPath];
+                NSString *customTitle = [[NSUserDefaults standardUserDefaults]arrayForKey:@"customShortcuts"][fRow];
+                theCustCell.titleLabel.text = customTitle;
+                return theCustCell;
+            }
+            break;
+        default:
+            return nil;
+            break;
+    }
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath

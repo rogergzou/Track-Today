@@ -293,15 +293,20 @@
     if (![defaults arrayForKey:@"shortcuts"]) {
         //HCSShortcut *shor = [[HCSShortcut alloc]initWithTitle:@"Work" image:[UIImage imageNamed:@"image1"]];
         //set defaults
-        NSArray *wordArr = @[@"Work", @"School", @"Fun", @"Movies", @"Social", @"Coding", @"Sleeping", @"Transportation"];
+        //no school lol
+        NSArray *wordArr = @[@"Procrastination", @"Internet", @"Work", @"Shopping", @"Fun", @"Movies", @"Social", @"Travel", @"Drinking"];
         NSMutableArray *storeWords = [NSMutableArray array];
+        
         for (NSString *word in wordArr) {
-            NSData *encodedSampleWorkObj = [NSKeyedArchiver archivedDataWithRootObject:[[HCSShortcut alloc]initWithTitle:word image:[UIImage imageNamed:@"image1"]]];
+            NSData *encodedSampleWorkObj = [NSKeyedArchiver archivedDataWithRootObject:[[HCSShortcut alloc]initWithTitle:word image:[UIImage imageNamed:word]]];
             [storeWords addObject:encodedSampleWorkObj];
+           
         }
         [defaults setObject:storeWords forKey:@"shortcuts"];
         [defaults synchronize];
     }
+    [defaults setObject:@[@"Addcustom"] forKey:@"customShortcuts"];
+    [defaults synchronize];
     
     [self updateUI];
     
