@@ -12,7 +12,7 @@
 #import "HCSShortCutViewController.h"
 //@import EventKitUI;
 
-@interface HCSViewController () <UITextFieldDelegate>
+@interface HCSViewController () <UITextFieldDelegate, UIAlertViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *bigButton;
 @property (weak, nonatomic) IBOutlet UIButton *pauseButton;
@@ -87,14 +87,39 @@
 }
  */
 
+- (void)runScheduleAlert
+{
+    UIAlertView *confirmAlert = [[UIAlertView alloc]initWithTitle:@"Schedule" message:[NSString stringWithFormat:@"Place event onto iCal? %@ lasts from %@ to now", self.titleButton.text, self.startDate] delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", @"Cancel", nil];
+    confirmAlert.cancelButtonIndex = 1; //set cancel as cancel
+    // tag for identification when handling
+    confirmAlert.tag = 1;
+    confirmAlert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    UITextField *alertInputTextField = [confirmAlert textFieldAtIndex:0];
+    alertInputTextField.delegate = self;
+    //sets text to default
+    alertInputTextField.text = self.titleButton.text;
+    alertInputTextField.clearButtonMode = UITextFieldViewModeAlways;
+    
+    //if not paused, pause
+    if (!self.isPaused)
+    {
+        [self pauseTimer];
+        self.isPaused = !self.isPaused;
+    }
+    [self updateUI];
+    
+    //show alert after pausing
+    [confirmAlert show];
+}
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     // tag indicates is Schedule alert
     if (alertView.tag == 1) {
-        NSLog(@"buttonIndex %li", (long)buttonIndex);
         switch (buttonIndex) {
             //OK
             case 0:
+                self.titleButton.text = [alertView textFieldAtIndex:0].text;
                 [self scheduleEvent];
                 [self endTimer];
                 [self resetVars];
@@ -123,15 +148,6 @@
                 break;
         }
     }
-}
-- (void)runScheduleAlert
-{
-    UIAlertView *confirmAlert = [[UIAlertView alloc]initWithTitle:@"Schedule" message:[NSString stringWithFormat:@"Place event onto iCal? %@ lasts from %@ to now", self.titleButton.text, self.startDate] delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", @"Cancel", nil];
-    confirmAlert.cancelButtonIndex = 1; //set cancel as cancel
-    // tag for identification when handling
-    confirmAlert.tag = 1;
-    NSLog(@"lolwut");
-    [confirmAlert show];
 }
 - (void)scheduleEvent
 {
