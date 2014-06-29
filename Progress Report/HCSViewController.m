@@ -290,23 +290,22 @@
     self.isPaused = NO;
     self.timerLabel.text = @"00:00";
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if (![defaults arrayForKey:@"shortcuts"]) {
-        //HCSShortcut *shor = [[HCSShortcut alloc]initWithTitle:@"Work" image:[UIImage imageNamed:@"image1"]];
-        //set defaults
-        //no school lol
-        NSArray *wordArr = @[@"Procrastination", @"Internet", @"Work", @"Shopping", @"Fun", @"Movies", @"Social", @"Travel", @"Drinking"];
+ //   if (![defaults arrayForKey:@"shortcuts"]) {
+        //set defaults        //no school lol
+        NSArray *wordArr = @[@"Procrastination", @"Internet", @"Work", @"Shopping", @"Fun", @"Movies", @"Social", @"Travel", @"Drinking", @"Custom"]; //custom has no im, should be nil
         NSMutableArray *storeWords = [NSMutableArray array];
         
         for (NSString *word in wordArr) {
             NSData *encodedSampleWorkObj = [NSKeyedArchiver archivedDataWithRootObject:[[HCSShortcut alloc]initWithTitle:word image:[UIImage imageNamed:word]]];
             [storeWords addObject:encodedSampleWorkObj];
-           
         }
         [defaults setObject:storeWords forKey:@"shortcuts"];
         [defaults synchronize];
-    }
-    [defaults setObject:@[@"Addcustom"] forKey:@"customShortcuts"];
-    [defaults synchronize];
+//    }
+    
+    
+    //[defaults setObject:@[@"Addcustom"] forKey:@"customShortcuts"];
+    //[defaults synchronize];
     
     [self updateUI];
     

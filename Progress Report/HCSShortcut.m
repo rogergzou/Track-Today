@@ -20,11 +20,13 @@
     return self;
 }
 
-- (UIImage *)image
+/* //no lazy instantiation so can make nil comparison to tell if no default iamge
+ - (UIImage *)image
 {
     if (!_image) _image = [UIImage imageNamed:@"Default_Shortcut_Image"];
     return _image;
 }
+ */
 
 
 //needed to make nsdata for property list storage via nsuserdefaults

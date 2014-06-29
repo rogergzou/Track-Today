@@ -46,50 +46,29 @@
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 2; //for now
+    return 1; //for now
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    switch (section) {
-        case 0:
-            return [[[NSUserDefaults standardUserDefaults] arrayForKey:@"shortcuts"] count];
-            break;
-        case 1:
-            return [[[NSUserDefaults standardUserDefaults] arrayForKey:@"customShortcuts"] count];
-            break;
-        default:
-            return 0;
-            break;
-    }
+    return [[[NSUserDefaults standardUserDefaults] arrayForKey:@"shortcuts"] count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-
     long fRow = [indexPath row];
-    switch ([indexPath section]) {
-        case 0:
-            if (true) {
-                HCSShortCutTextViewCell *theCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MyShortCut" forIndexPath:indexPath];
-                NSData *shortcutData = [[NSUserDefaults standardUserDefaults]arrayForKey:@"shortcuts"][fRow];
-                HCSShortcut *shortcut = (HCSShortcut *)[NSKeyedUnarchiver unarchiveObjectWithData:shortcutData];
-                theCell.imageView.image = shortcut.image;
-                theCell.titleLabel.text = shortcut.title;
-                //[theCell.titleLabel setText:shortcut.title];
-                return theCell;
-            }
-            break;
-        case 1:
-            if (true) {
-                HCSAddCustomViewCell *theCustCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MyAddCustom" forIndexPath:indexPath];
-                NSString *customTitle = [[NSUserDefaults standardUserDefaults]arrayForKey:@"customShortcuts"][fRow];
-                theCustCell.titleLabel.text = customTitle;
-                return theCustCell;
-            }
-            break;
-        default:
-            return nil;
-            break;
+    NSData *shortcutData = [[NSUserDefaults standardUserDefaults]arrayForKey:@"shortcuts"][fRow];
+    HCSShortcut *shortcut = (HCSShortcut *)[NSKeyedUnarchiver unarchiveObjectWithData:shortcutData];
+    if (shortcut.image) {
+        HCSShortCutTextViewCell *theCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MyShortCut" forIndexPath:indexPath];
+        theCell.imageView.image = shortcut.image;
+        theCell.titleLabel.text = shortcut.title;
+        //[theCell.titleLabel setText:shortcut.title];
+        return theCell;
+    } else {
+        HCSAddCustomViewCell *theCustCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MyAddCustom" forIndexPath:indexPath];
+        theCustCell.titleLabel.text = shortcut.title;
+        //no image
+        return theCustCell;
     }
 }
 
