@@ -9,9 +9,10 @@
 #import "HCSShortCutViewController.h"
 #import "HCSShortCutTextViewCell.h"
 #import "HCSAddCustomViewCell.h"
+#import "HCSCustomViewCell.h"
 #import "HCSShortcut.h"
 
-@interface HCSShortCutViewController ()
+@interface HCSShortCutViewController () <UICollectionViewDelegateFlowLayout>
 
 @end
 
@@ -46,31 +47,54 @@
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 1; //for now
+    return 2; //for now, frick do need 2 sections
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return [[[NSUserDefaults standardUserDefaults] arrayForKey:@"shortcuts"] count];
+    switch (section) {
+        case 0:
+            return [[[NSUserDefaults standardUserDefaults] arrayForKey:@"shortcuts"] count];
+            break;
+        case 1:
+            return [[[NSUserDefaults standardUserDefaults] arrayForKey:@"customShortcuts"] count];
+            break;
+        default:
+            return 0;
+            break;
+    }
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     long fRow = [indexPath row];
-    NSData *shortcutData = [[NSUserDefaults standardUserDefaults]arrayForKey:@"shortcuts"][fRow];
-    HCSShortcut *shortcut = (HCSShortcut *)[NSKeyedUnarchiver unarchiveObjectWithData:shortcutData];
-    if (shortcut.image) {
-        HCSShortCutTextViewCell *theCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MyShortCut" forIndexPath:indexPath];
-        theCell.imageView.image = shortcut.image;
-        theCell.titleLabel.text = shortcut.title;
-        //[theCell.titleLabel setText:shortcut.title];
-        return theCell;
-    } else {
-        HCSAddCustomViewCell *theCustCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MyAddCustom" forIndexPath:indexPath];
-        theCustCell.titleLabel.text = shortcut.title;
-        //no image
-        return theCustCell;
+    switch ([indexPath section]) {
+        case 0:
+            if (true) {
+                NSData *shortcutData = [[NSUserDefaults standardUserDefaults]arrayForKey:@"shortcuts"][fRow];
+                HCSShortcut *shortcut = (HCSShortcut *)[NSKeyedUnarchiver unarchiveObjectWithData:shortcutData];
+                HCSShortCutTextViewCell *theCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MyShortCut" forIndexPath:indexPath];
+                theCell.imageView.image = shortcut.image;
+                theCell.titleLabel.text = shortcut.title;
+                //[theCell.titleLabel setText:shortcut.title];
+                return theCell;
+            }
+            break;
+        case 1:
+            if (true) {
+                NSData *shortcutCustomData = [[NSUserDefaults standardUserDefaults]arrayForKey:@"customShortcuts"][fRow];
+                HCSShortcut *shortcut = (HCSShortcut *)[NSKeyedUnarchiver unarchiveObjectWithData:shortcutCustomData];
+                HCSCustomViewCell *theCustCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MyCustom" forIndexPath:indexPath];
+                theCustCell.titleLabel.text = shortcut.title;
+                //no image
+                return theCustCell;
+                }
+            break;
+        default:
+            return nil;
+            break;
     }
-}
+    
+    }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -90,6 +114,18 @@
      */
 }
 
+#pragma mark - UICollectionViewDelegateFlowLayout
+//for sizing cells
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([indexPath section] == 0) {
+        return CGSizeMake(100, 114);
+    } else if ([indexPath section] == 1) {
+        return CGSizeMake(100, 80);
+    } else {
+        return CGSizeMake(0, 0);
+    }
+}
 
 #pragma mark - Navigation
 

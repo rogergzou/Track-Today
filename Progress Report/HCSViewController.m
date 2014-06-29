@@ -290,9 +290,9 @@
     self.isPaused = NO;
     self.timerLabel.text = @"00:00";
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
- //   if (![defaults arrayForKey:@"shortcuts"]) {
+    if (![defaults arrayForKey:@"shortcuts"]) {
         //set defaults        //no school lol
-        NSArray *wordArr = @[@"Procrastination", @"Internet", @"Work", @"Shopping", @"Fun", @"Movies", @"Social", @"Travel", @"Drinking", @"Custom"]; //custom has no im, should be nil
+        NSArray *wordArr = @[@"Procrastination", @"Internet", @"Work", @"Shopping", @"Fun", @"Movies", @"Social", @"Travel", @"Drinking"]; //custom has no im, should be nil
         NSMutableArray *storeWords = [NSMutableArray array];
         
         for (NSString *word in wordArr) {
@@ -301,9 +301,8 @@
         }
         [defaults setObject:storeWords forKey:@"shortcuts"];
         [defaults synchronize];
-//    }
-    
-    
+    }
+    [defaults setObject:@[[NSKeyedArchiver archivedDataWithRootObject:[[HCSShortcut alloc]initWithTitle:@"customz" image:nil]]] forKey:@"customShortcuts"];
     //[defaults setObject:@[@"Addcustom"] forKey:@"customShortcuts"];
     //[defaults synchronize];
     
