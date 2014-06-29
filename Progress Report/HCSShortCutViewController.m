@@ -67,16 +67,20 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
+    /* handled by the storyboard segue
+     
+     UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
     if ([cell isKindOfClass:[HCSShortCutTextViewCell class]]) {
         HCSShortCutTextViewCell *shortcutCell = (HCSShortCutTextViewCell *)cell;
         NSString *title = shortcutCell.titleLabel.text;
+     
         //segue with?
         //?????????????????
         //[self dismissViewControllerAnimated:YES completion:nil];
         
         //shortcutCell.titleLabel.text;
     }
+     */
 }
 
 
@@ -87,7 +91,6 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    NSLog(@"fwefw %@ %@", sender, segue.identifier);
     if ([sender isKindOfClass:[HCSShortCutTextViewCell class]]) {
         HCSShortCutTextViewCell *cell = (HCSShortCutTextViewCell *)sender;
         self.title = cell.titleLabel.text;

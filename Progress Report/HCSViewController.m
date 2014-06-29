@@ -249,7 +249,6 @@
     if ([sourceVC isKindOfClass:[HCSShortCutViewController class]]) {
         HCSShortCutViewController *shortcutVC = (HCSShortCutViewController *)sourceVC;
         self.titleButton.text = shortcutVC.title;
-        NSLog(@"%@", shortcutVC.title);
     }
     
 }
@@ -277,9 +276,14 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if (![defaults arrayForKey:@"shortcuts"]) {
         //HCSShortcut *shor = [[HCSShortcut alloc]initWithTitle:@"Work" image:[UIImage imageNamed:@"image1"]];
-        NSData *encodedSampleWorkObj = [NSKeyedArchiver archivedDataWithRootObject:[[HCSShortcut alloc]initWithTitle:@"Work" image:[UIImage imageNamed:@"image1"]]];
-        NSArray *arr = @[encodedSampleWorkObj];
-        [defaults setObject:arr forKey:@"shortcuts"];
+        //set defaults
+        NSArray *wordArr = @[@"Work", @"School", @"Fun", @"Movies", @"Social", @"Coding", @"Sleeping", @"Transportation"];
+        NSMutableArray *storeWords = [NSMutableArray array];
+        for (NSString *word in wordArr) {
+            NSData *encodedSampleWorkObj = [NSKeyedArchiver archivedDataWithRootObject:[[HCSShortcut alloc]initWithTitle:word image:[UIImage imageNamed:@"image1"]]];
+            [storeWords addObject:encodedSampleWorkObj];
+        }
+        [defaults setObject:storeWords forKey:@"shortcuts"];
         [defaults synchronize];
     }
     
