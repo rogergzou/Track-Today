@@ -117,7 +117,7 @@
             </objects>
             <point key="canvasLocation" x="-244" y="581"/>
         </scene>
-        <!--Short Cut View Controller-->
+        <!--Short Cut View Controller - Quickfills-->
         <scene sceneID="hB3-Yx-EYI">
             <objects>
                 <collectionViewController autoresizesArchivedViewToFullSize="NO" id="TsU-Sj-fHa" customClass="HCSShortCutViewController" sceneMemberID="viewController">
@@ -181,6 +181,7 @@
                                 <size key="customSize" width="100" height="80"/>
                                 <connections>
                                     <outlet property="titleLabel" destination="lPL-XB-4r3" id="twp-Zx-OQQ"/>
+                                    <segue destination="W12-ak-LV7" kind="unwind" unwindAction="myShortcutTextUnwindSegueCallback:" id="gWK-SX-i87"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -189,13 +190,17 @@
                             <outlet property="delegate" destination="TsU-Sj-fHa" id="XQ7-gu-fxT"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="9ak-gp-kha">
+                    <navigationItem key="navigationItem" title="Quickfills" id="9ak-gp-kha">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="YWi-2h-7K3">
                             <connections>
                                 <action selector="cancelPressed:" destination="TsU-Sj-fHa" id="jao-xs-uhT"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="bookmarks" id="7wR-nU-nh2"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="7wR-nU-nh2">
+                            <connections>
+                                <segue destination="dDn-WF-imQ" kind="modal" id="cli-p8-I5W"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OfI-q4-HFG" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -203,7 +208,90 @@
             </objects>
             <point key="canvasLocation" x="250" y="581"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="KdQ-iX-ZZL">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="dDn-WF-imQ" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="PHd-Ta-BLN">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Jkt-E0-hM4" kind="relationship" relationship="rootViewController" id="Xtl-h9-4mK"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rdc-ha-l7X" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="217" y="1286"/>
+        </scene>
+        <!--Add Custom Short Cut View Controller - Custom Shortcut-->
+        <scene sceneID="pa6-QM-r1j">
+            <objects>
+                <viewController id="Jkt-E0-hM4" customClass="HCSAddCustomShortCutViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zJt-xV-DxI"/>
+                        <viewControllerLayoutGuide type="bottom" id="op1-LE-xhQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fy1-4v-3Oh">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IPk-eD-xmF">
+                                <rect key="frame" x="137" y="450" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Create">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="bcQ-Ap-saU" kind="unwind" unwindAction="myCreateShortcutUnwindSegueCallback:" id="3nb-gP-qUy"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Custom Text" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PuB-x3-2hq">
+                                <rect key="frame" x="71" y="375" width="179" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Jkt-E0-hM4" id="ytC-9g-hgX"/>
+                                </connections>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="izs-DG-3yd">
+                                <rect key="frame" x="93" y="162" width="134" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="Insert_Image">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Add Image" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XdU-2e-v8a">
+                                <rect key="frame" x="118" y="273" width="84" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Custom Shortcut" id="krE-8k-uXk">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="YBm-YL-hO6">
+                            <connections>
+                                <action selector="cancelButtonTouched:" destination="Jkt-E0-hM4" id="E6q-qI-cJl"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="imageButton" destination="izs-DG-3yd" id="uhy-82-Z25"/>
+                        <outlet property="imageTextLabel" destination="XdU-2e-v8a" id="Boo-rS-s5r"/>
+                        <outlet property="textField" destination="PuB-x3-2hq" id="kJJ-me-EuJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fC4-RD-62d" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="bcQ-Ap-saU" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="805" y="1447"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="Insert_Image" width="128" height="128"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

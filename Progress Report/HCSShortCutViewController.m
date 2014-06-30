@@ -43,6 +43,13 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)myCreateShortcutUnwindSegueCallback:(UIStoryboardSegue *)segue
+{
+    //only called if something went thru and data changed
+    [self.collectionView reloadData];
+}
+
+
 #pragma mark - UICollectionView Delegate/Data Source
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -56,7 +63,7 @@
             return [[[NSUserDefaults standardUserDefaults] arrayForKey:@"shortcuts"] count];
             break;
         case 1:
-            return [[[NSUserDefaults standardUserDefaults] arrayForKey:@"customShortcuts"] count];
+            return [[[NSUserDefaults standardUserDefaults] arrayForKey:@"textShortcuts"] count];
             break;
         default:
             return 0;
@@ -81,7 +88,7 @@
             break;
         case 1:
             if (true) {
-                NSData *shortcutCustomData = [[NSUserDefaults standardUserDefaults]arrayForKey:@"customShortcuts"][fRow];
+                NSData *shortcutCustomData = [[NSUserDefaults standardUserDefaults]arrayForKey:@"textShortcuts"][fRow];
                 HCSShortcut *shortcut = (HCSShortcut *)[NSKeyedUnarchiver unarchiveObjectWithData:shortcutCustomData];
                 HCSCustomViewCell *theCustCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MyCustom" forIndexPath:indexPath];
                 theCustCell.titleLabel.text = shortcut.title;
@@ -118,6 +125,7 @@
 //for sizing cells
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    //warning hardcoded in, CAREFUL
     if ([indexPath section] == 0) {
         return CGSizeMake(100, 114);
     } else if ([indexPath section] == 1) {
@@ -134,10 +142,14 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    //sets self.title. rest is handled in myShortCutTextSegueUnwind method in parent VC
     if ([sender isKindOfClass:[HCSShortCutTextViewCell class]]) {
         HCSShortCutTextViewCell *cell = (HCSShortCutTextViewCell *)sender;
         self.title = cell.titleLabel.text;
-        //assigning of text handled in myShortCutTextSegueUnwind method in parent VC
+    } else if ([sender isKindOfClass:[HCSCustomViewCell class]]) {
+        HCSCustomViewCell *cell = (HCSCustomViewCell *)sender;
+        self.title = cell.titleLabel.text;
     }
 }
 

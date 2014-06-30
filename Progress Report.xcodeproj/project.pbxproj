@@ -11,6 +11,7 @@
 		DB49F364195CF1C000067F96 /* HCSShortCutTextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DB49F363195CF1C000067F96 /* HCSShortCutTextViewCell.m */; };
 		DB67659F19608E8D00C113D2 /* HCSShortcut.m in Sources */ = {isa = PBXBuildFile; fileRef = DB67659E19608E8D00C113D2 /* HCSShortcut.m */; };
 		DB6765A51960BAB400C113D2 /* HCSCustomViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DB6765A41960BAB400C113D2 /* HCSCustomViewCell.m */; };
+		DB6765A8196126FD00C113D2 /* HCSAddCustomShortCutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB6765A7196126FD00C113D2 /* HCSAddCustomShortCutViewController.m */; };
 		DB679ED8195BB92700C61F6F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB679ED7195BB92700C61F6F /* Foundation.framework */; };
 		DB679EDA195BB92700C61F6F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB679ED9195BB92700C61F6F /* CoreGraphics.framework */; };
 		DB679EDC195BB92700C61F6F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB679EDB195BB92700C61F6F /* UIKit.framework */; };
@@ -48,6 +49,8 @@
 		DB67659E19608E8D00C113D2 /* HCSShortcut.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCSShortcut.m; sourceTree = "<group>"; };
 		DB6765A31960BAB400C113D2 /* HCSCustomViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSCustomViewCell.h; sourceTree = "<group>"; };
 		DB6765A41960BAB400C113D2 /* HCSCustomViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCSCustomViewCell.m; sourceTree = "<group>"; };
+		DB6765A6196126FD00C113D2 /* HCSAddCustomShortCutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSAddCustomShortCutViewController.h; sourceTree = "<group>"; };
+		DB6765A7196126FD00C113D2 /* HCSAddCustomShortCutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCSAddCustomShortCutViewController.m; sourceTree = "<group>"; };
 		DB679ED4195BB92700C61F6F /* Progress Report.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Progress Report.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB679ED7195BB92700C61F6F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DB679ED9195BB92700C61F6F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -138,6 +141,8 @@
 				DB679EF0195BB92700C61F6F /* HCSViewController.m */,
 				DB49F35F195CF0D400067F96 /* HCSShortCutViewController.h */,
 				DB49F360195CF0D400067F96 /* HCSShortCutViewController.m */,
+				DB6765A6196126FD00C113D2 /* HCSAddCustomShortCutViewController.h */,
+				DB6765A7196126FD00C113D2 /* HCSAddCustomShortCutViewController.m */,
 				DB49F362195CF1C000067F96 /* HCSShortCutTextViewCell.h */,
 				DB49F363195CF1C000067F96 /* HCSShortCutTextViewCell.m */,
 				DB6765A31960BAB400C113D2 /* HCSCustomViewCell.h */,
@@ -285,6 +290,7 @@
 				DB49F364195CF1C000067F96 /* HCSShortCutTextViewCell.m in Sources */,
 				DB6765A51960BAB400C113D2 /* HCSCustomViewCell.m in Sources */,
 				DB67659F19608E8D00C113D2 /* HCSShortcut.m in Sources */,
+				DB6765A8196126FD00C113D2 /* HCSAddCustomShortCutViewController.m in Sources */,
 				DB679EF1195BB92700C61F6F /* HCSViewController.m in Sources */,
 				DB679EE8195BB92700C61F6F /* HCSAppDelegate.m in Sources */,
 				DB49F361195CF0D400067F96 /* HCSShortCutViewController.m in Sources */,

@@ -259,6 +259,7 @@
     //timerLabel updated on increaseTimerCount: method
 }
 
+//title is set in prepareSegue
 - (IBAction)myShortcutTextUnwindSegueCallback:(UIStoryboardSegue *)segue
 {
     UIViewController *sourceVC = segue.sourceViewController;
@@ -290,8 +291,8 @@
     self.isPaused = NO;
     self.timerLabel.text = @"00:00";
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if (![defaults arrayForKey:@"shortcuts"]) {
-        //set defaults        //no school lol
+    if (![defaults boolForKey:@"firstTime"]) {
+        //set defaults
         NSArray *wordArr = @[@"Procrastination", @"Internet", @"Work", @"Shopping", @"Fun", @"Movies", @"Social", @"Travel", @"Drinking"]; //custom has no im, should be nil
         NSMutableArray *storeWords = [NSMutableArray array];
         
@@ -300,9 +301,11 @@
             [storeWords addObject:encodedSampleWorkObj];
         }
         [defaults setObject:storeWords forKey:@"shortcuts"];
+        [defaults setObject:@[[NSKeyedArchiver archivedDataWithRootObject:[[HCSShortcut alloc]initWithTitle:@"School" image:nil]]] forKey:@"textShortcuts"];
+        [defaults setBool:true forKey:@"firstTime"];
         [defaults synchronize];
     }
-    [defaults setObject:@[[NSKeyedArchiver archivedDataWithRootObject:[[HCSShortcut alloc]initWithTitle:@"customz" image:nil]]] forKey:@"customShortcuts"];
+    
     //[defaults setObject:@[@"Addcustom"] forKey:@"customShortcuts"];
     //[defaults synchronize];
     
