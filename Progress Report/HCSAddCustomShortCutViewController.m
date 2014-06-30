@@ -8,8 +8,9 @@
 
 #import "HCSAddCustomShortCutViewController.h"
 #import "HCSShortcut.h"
+#import <MobileCoreServices/MobileCoreServices.h>
 
-@interface HCSAddCustomShortCutViewController () <UITextFieldDelegate>
+@interface HCSAddCustomShortCutViewController () <UITextFieldDelegate, UIImagePickerControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *imageButton;
 @property (weak, nonatomic) IBOutlet UILabel *imageTextLabel;
@@ -39,6 +40,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    //UIImage *sampleIm = [UIImage imageNamed:@"Social_Discarded"];
+    //UIImageWriteToSavedPhotosAlbum(sampleIm, nil, nil, nil);
 }
 
 - (void)didReceiveMemoryWarning
@@ -99,6 +103,45 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
+#pragma mark - UIImagePickerControllerDelegate
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    //code to work w/ media
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    NSString *mediaType = info[UIImagePickerControllerMediaType];
+    if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
+        self.imageButton.imageView.image = info[UIImagePickerControllerOriginalImage];
+        self.imageButton.imageView.highlightedImage = info[UIImagePickerControllerOriginalImage];
+        self.imageTextLabel.hidden = YES;
+    }
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+
+- (IBAction)imageUploadButtonTouch:(id)sender {
+    [self imageLibraryGetPhoto];
+    //uses UIImagePickerController
+}
+- (void)imageLibraryGetPhoto
+{
+    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+        return;
+    }
+    
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc]init];
+    imagePicker.delegate = self;
+    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    imagePicker.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+    imagePicker.allowsEditing = YES;
+    [self presentViewController:imagePicker animated:YES completion:nil];
+}
 
 
 
@@ -116,7 +159,7 @@
         //no image
         if (![self.textField.text length]) {
             //no text or image wtf
-            //alertview to say plz text or cancel
+            //okay nothing happens
         } else {
             //text but no image
             HCSShortcut *shortObj = [[HCSShortcut alloc]initWithTitle:self.textField.text image:nil];
@@ -125,7 +168,6 @@
             shortArr = [shortArr arrayByAddingObject:shortcut];
             [defaults setObject:shortArr forKey:@"textShortcuts"];
             [defaults synchronize];
-            [self dismissViewControllerAnimated:YES completion:nil];
         }
     } else {
         //there is image
@@ -140,7 +182,7 @@
         regularShortcuts = [regularShortcuts arrayByAddingObject:shortcut];
         [defaults setObject:regularShortcuts forKey:@"shortcuts"];
         [defaults synchronize];
-        [self dismissViewControllerAnimated:YES completion:nil];
+        
     }
 
 }
