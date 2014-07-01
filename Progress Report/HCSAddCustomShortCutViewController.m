@@ -10,7 +10,8 @@
 #import "HCSShortcut.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 
-@interface HCSAddCustomShortCutViewController () <UITextFieldDelegate, UIImagePickerControllerDelegate>
+@interface HCSAddCustomShortCutViewController () <UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+//I have no idea what UINavigationControllerDelegate does, but prevents error for delegation of UIImagePickerController
 
 @property (weak, nonatomic) IBOutlet UIButton *imageButton;
 @property (weak, nonatomic) IBOutlet UILabel *imageTextLabel;
@@ -24,8 +25,6 @@
 - (IBAction)cancelButtonTouched:(UIBarButtonItem *)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
-
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *bigButton;
 @property (weak, nonatomic) IBOutlet UIButton *pauseButton;
 @property (weak, nonatomic) IBOutlet UITextField *titleButton;
+@property (weak, nonatomic) IBOutlet UIButton *resetButton;
 @property (weak, nonatomic) IBOutlet UILabel *timerLabel;
 
 @property (nonatomic) BOOL isStart;
@@ -241,10 +242,12 @@
         [self.bigButton setTitle:@"Start" forState:UIControlStateNormal];
         self.bigButton.backgroundColor = [UIColor greenColor];
         self.pauseButton.hidden = YES;
+        self.resetButton.hidden = YES;
     } else {
         [self.bigButton setTitle:@"Stop" forState:UIControlStateNormal];
         self.bigButton.backgroundColor = [UIColor colorWithRed:1 green:0.0335468 blue:0.00867602 alpha:1];
         self.pauseButton.hidden = NO;
+        self.resetButton.hidden = NO;
         
         if (self.isPaused) {
             [self.pauseButton setTitle:@"Resume" forState:UIControlStateNormal];
