@@ -10,6 +10,7 @@
 #import <EventKit/EventKit.h>
 #import "HCSShortcut.h"
 #import "HCSShortCutViewController.h"
+#import <QuartzCore/QuartzCore.h>
 //@import EventKitUI;
 
 @interface HCSViewController () <UITextFieldDelegate, UIAlertViewDelegate>
@@ -24,6 +25,7 @@
 @property (nonatomic) BOOL isPaused;
 //@property (nonatomic) BOOL isConfirm;
 @property (strong, nonatomic) NSDate *startDate;
+@property (weak, nonatomic) IBOutlet UIButton *testButton;
 @property (strong, nonatomic) NSDate *endDate;
 @property (strong, nonatomic) NSDate *pauseStartDate;
 @property (nonatomic) NSTimeInterval pausedSeconds; //lol typedef double
@@ -259,7 +261,33 @@
         
     }
     
+    self.testButton.layer.cornerRadius = self.testButton.frame.size.width/2;
+    self.testButton.layer.borderWidth = 1;
+    [self.testButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [self.testButton setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
+    if (self.testButton.enabled) {
+        //[self.testButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+        self.testButton.backgroundColor = [UIColor whiteColor];
+        self.testButton.layer.borderColor = [UIColor blueColor].CGColor;
+        
+    } else {
+        //[self.testButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal]; //UIControlStateDisabled only resets textcolor, not bordercolor fml idk why. Or maybe self.testButton.titleLabel.textColor.CGColor only takes UIControlStateNormal color
+        self.testButton.backgroundColor = nil;//[UIColor whiteColor];
+        self.testButton.layer.borderColor = [UIColor grayColor].CGColor;
+        
+    }
+    
+    
+    //self.testButton.titleLabel.textColor = [UIColor grayColor];
+    //self.testButton.layer.borderColor = self.testButton.titleLabel.textColor.CGColor;
+    
+    
     //timerLabel updated on increaseTimerCount: method
+}
+
+- (IBAction)testButtonChecked:(UIButton *)sender {
+    self.testButton.enabled = !self.testButton.enabled;
+    [self updateUI];
 }
 
 //title is set in prepareSegue
