@@ -14,12 +14,14 @@
 //@import EventKitUI;
 
 @interface HCSViewController () <UITextFieldDelegate, UIAlertViewDelegate>
+//@property (weak, nonatomic) IBOutlet UIButton *ob;
 
 @property (weak, nonatomic) IBOutlet UIButton *bigButton;
 @property (weak, nonatomic) IBOutlet UIButton *pauseButton;
 @property (weak, nonatomic) IBOutlet UITextField *titleButton;
 @property (weak, nonatomic) IBOutlet UIButton *resetButton;
 @property (weak, nonatomic) IBOutlet UILabel *timerLabel;
+@property (weak, nonatomic) IBOutlet UIButton *shortcutButton;
 
 @property (nonatomic) BOOL isStart;
 @property (nonatomic) BOOL isPaused;
@@ -242,29 +244,77 @@
 {
     if (self.isStart) {
         [self.bigButton setTitle:@"Start" forState:UIControlStateNormal];
-        self.bigButton.backgroundColor = [UIColor greenColor];
-        self.pauseButton.hidden = YES;
-        self.resetButton.hidden = YES;
+        //prior design
+        //self.bigButton.backgroundColor = [UIColor greenColor];
+        //self.pauseButton.hidden = YES;
+        //self.resetButton.hidden = YES;
+        
+        //current design
+        
+        //set defaults
+        [self.bigButton setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
+        self.bigButton.backgroundColor = [UIColor whiteColor];
+        self.bigButton.layer.borderColor = [UIColor greenColor].CGColor;
+        self.bigButton.layer.borderWidth = 1.15;
+        self.bigButton.layer.cornerRadius = self.bigButton.frame.size.width/2;
+        
+        self.pauseButton.enabled = NO;
+        [self.pauseButton setTitleColor:[[UIColor lightGrayColor] colorWithAlphaComponent:0.3] forState:UIControlStateDisabled];
+        self.pauseButton.layer.borderColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.3].CGColor;
+        self.pauseButton.backgroundColor = nil;
+        [self.pauseButton setTitle:@"Pause" forState:UIControlStateDisabled];
+        self.pauseButton.layer.borderWidth = 1.15;
+        self.pauseButton.layer.cornerRadius = self.pauseButton.frame.size.width/2;
+        
+        self.resetButton.enabled = NO;
+        [self.resetButton setTitleColor:[UIColor colorWithRed:0.903978 green:0.344816 blue:0.823626 alpha:0.3] forState:UIControlStateDisabled];
+        //title never changes so just set here
+        [self.resetButton setTitle:@"Reset" forState:UIControlStateNormal];
+        self.resetButton.layer.borderColor = [UIColor colorWithRed:0.903978 green:0.344816 blue:0.823626 alpha:0.3].CGColor;
+        self.resetButton.backgroundColor = nil;
+        self.resetButton.layer.borderWidth = 1.15;
+        self.resetButton.layer.cornerRadius = self.resetButton.frame.size.width/2;
+        
+        self.shortcutButton.layer.borderWidth = 1;
+        self.shortcutButton.layer.cornerRadius = self.shortcutButton.frame.size.height/6;
+        self.shortcutButton.layer.borderColor = self.shortcutButton.titleLabel.textColor.CGColor;
+        //self.shortcutButton.backgroundColor = [UIColor whiteColor];
+        
+
     } else {
         [self.bigButton setTitle:@"Stop" forState:UIControlStateNormal];
-        self.bigButton.backgroundColor = [UIColor colorWithRed:1 green:0.0335468 blue:0.00867602 alpha:1];
-        self.pauseButton.hidden = NO;
-        self.resetButton.hidden = NO;
+        //self.bigButton.backgroundColor = [UIColor colorWithRed:1 green:0.0335468 blue:0.00867602 alpha:1];
+        [self.bigButton setTitleColor:[UIColor colorWithRed:1 green:0.0335468 blue:0.00867602 alpha:1] forState:UIControlStateNormal];
+        self.bigButton.layer.borderColor = [UIColor colorWithRed:1 green:0.0335468 blue:0.00867602 alpha:1].CGColor;
         
+        self.resetButton.enabled = YES;
+        [self.resetButton setTitleColor:[UIColor colorWithRed:0.903978 green:0.344816 blue:0.823626 alpha:1] forState:UIControlStateNormal];
+        self.resetButton.backgroundColor = [UIColor whiteColor];
+        self.resetButton.layer.borderColor = [UIColor colorWithRed:0.903978 green:0.344816 blue:0.823626 alpha:1].CGColor;
+        
+        //pause button
+       self.pauseButton.enabled = YES;
+        self.pauseButton.backgroundColor = [UIColor whiteColor];
         if (self.isPaused) {
             [self.pauseButton setTitle:@"Resume" forState:UIControlStateNormal];
-            self.pauseButton.backgroundColor = [UIColor colorWithRed:0.720482 green:1 blue:0.632028 alpha:1];
+            [self.pauseButton setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
+            self.pauseButton.layer.borderColor = [UIColor greenColor].CGColor;
+            //[self.pauseButton setTitleColor:[UIColor colorWithRed:0.720482 green:1 blue:0.632028 alpha:1] forState:UIControlStateNormal];
+            //self.pauseButton.layer.borderColor = [UIColor colorWithRed:0.720482 green:1 blue:0.632028 alpha:1].CGColor;
         } else {
             [self.pauseButton setTitle:@"Pause" forState:UIControlStateNormal];
-            self.pauseButton.backgroundColor = [UIColor lightGrayColor];
+            [self.pauseButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+            self.pauseButton.layer.borderColor = [UIColor lightGrayColor].CGColor;
         }
-        
     }
+    
     
     self.testButton.layer.cornerRadius = self.testButton.frame.size.width/2;
     self.testButton.layer.borderWidth = 1;
     [self.testButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [self.testButton setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
+    [self.testButton setTitle:@"ttEn" forState:UIControlStateNormal];
+    [self.testButton setTitle:@"gg" forState:UIControlStateDisabled];
     if (self.testButton.enabled) {
         //[self.testButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
         self.testButton.backgroundColor = [UIColor whiteColor];
@@ -316,7 +366,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    
+    //NSLog(@"%@", self.ob.backgroundColor);
     //set defaults
     self.isStart = YES;
     self.isPaused = NO;
