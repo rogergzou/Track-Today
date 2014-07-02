@@ -29,12 +29,13 @@
 @property (strong, nonatomic) NSDate *startDate;
 @property (weak, nonatomic) IBOutlet UIButton *testButton;
 @property (strong, nonatomic) NSDate *endDate;
-//moved to public so appdelegate can modify jk PAUSESTARTDATEOK
 @property (strong, nonatomic) NSDate *pauseStartDate;
 
 @property (nonatomic) NSTimeInterval pausedSeconds; //lol typedef double
 @property (strong, nonatomic) NSTimer *timer;
 //MOVED PUBLIC SO APPDEL CAN ACCESS @property (nonatomic) int seconds;
+
+@property (nonatomic) int pauseNumber;
 
 @end
 
@@ -64,8 +65,10 @@
 - (IBAction)pauseButtonPushed:(UIButton *)sender {
     if (self.isPaused)
         [self resumeTimer];
-    else
+    else {
         [self pauseTimer];
+        self.pauseNumber++;
+    }
     
     //self.isPaused = !self.isPaused; Moved to resume/pause timer methods so delegate works when app goes to background
     [self updateUI];
@@ -169,7 +172,7 @@
     int secs = self.seconds - (mins * 60);
     int pmins = floor(self.pausedSeconds/60);
     int psecs = floor(self.pausedSeconds - (pmins * 60));
-    event.notes = [NSString stringWithFormat:@"%i:%02i active, %i:%02i paused", mins, secs, pmins, psecs];
+    event.notes = [NSString stringWithFormat:@"%i:%02i active, %i:%02i inactive, paused %i times", mins, secs, pmins, psecs, self.pauseNumber];
     [eventStore requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error) {
         if (granted) {
             //user lets calendar access
@@ -225,18 +228,29 @@
 }
 - (void)resumeTimer
 {
-    float pauseTimeWas = -1 * [self.pauseStartDate timeIntervalSinceNow]; //results in positive #
-    [self.timer setFireDate:[self.startDate initWithTimeInterval:pauseTimeWas sinceDate:self.startDate]];
-    
-    //tracks pause time
-    self.pausedSeconds += pauseTimeWas;
+    //new additions stop rapidfire pause/resume from increasing time, but also basically pauses it entirely. idk how apple's code works. Tied to system clock? Whatever...please don't try to break this.
     self.isPaused = NO;
+    [self updateUI];
+    
+    float pauseTimeWas = -1 * [self.pauseStartDate timeIntervalSinceNow]; //results in positive #
+    if (floor(pauseTimeWas) >= 1) {
+        [self.timer setFireDate:[self.startDate initWithTimeInterval:pauseTimeWas sinceDate:self.startDate]];
+        
+        //tracks pause time
+        self.pausedSeconds += pauseTimeWas;
+        //self.isPaused = NO;
+    } else {
+        [self performSelector:@selector(resumeTimer) withObject:nil afterDelay:(1 - pauseTimeWas)];
+        
+        //just to trick into updatingUI so doesn't appear wrong
+    }
 }
 - (void)resetVars
 {
     //reset stored vars
     self.seconds = 0;
     self.pausedSeconds = 0;
+    self.pauseNumber = 0;
     self.timerLabel.text = @"00:00";
     self.isPaused = NO;
     self.isStart = YES;
@@ -356,6 +370,11 @@
 {
     if (!_seconds) _seconds = 0;
     return _seconds;
+}
+- (int)pauseNumber
+{
+    if (!_pauseNumber) _pauseNumber = 0;
+    return _pauseNumber;
 }
 - (NSTimeInterval)pausedSeconds
 {
