@@ -11,10 +11,8 @@
 #import "HCSShortcut.h"
 #import "HCSShortCutViewController.h"
 #import <QuartzCore/QuartzCore.h>
-//@import EventKitUI;
 
 @interface HCSViewController () <UITextFieldDelegate, UIAlertViewDelegate>
-//@property (weak, nonatomic) IBOutlet UIButton *ob;
 
 @property (weak, nonatomic) IBOutlet UIButton *bigButton;
 @property (weak, nonatomic) IBOutlet UIButton *pauseButton;
@@ -25,15 +23,14 @@
 
 @property (nonatomic, readwrite) BOOL isStart;
 @property (nonatomic, readwrite) BOOL isPaused;
-//@property (nonatomic) BOOL isConfirm;
 @property (strong, nonatomic) NSDate *startDate;
-@property (weak, nonatomic) IBOutlet UIButton *testButton;
 @property (strong, nonatomic) NSDate *endDate;
 @property (strong, nonatomic) NSDate *pauseStartDate;
 
 @property (nonatomic) NSTimeInterval pausedSeconds; //lol typedef double
 @property (strong, nonatomic) NSTimer *timer;
-//MOVED PUBLIC SO APPDEL CAN ACCESS @property (nonatomic) int seconds;
+//MOVED PUBLIC SO APPDEL CAN ACCESS
+//@property (nonatomic) int seconds;
 
 @property (nonatomic) int pauseNumber;
 
@@ -42,22 +39,13 @@
 @implementation HCSViewController
 
 - (IBAction)buttonPushed:(UIButton *)sender {
-    /*
-    NSLog(self.isStart ? @"y" : @"n");
-    BOOL whatTheShitIsThis = !self.isStart;
-    NSLog(whatTheShitIsThis ? @"y" : @"n");
-    self.isStart = whatTheShitIsThis;
-    NSLog(self.isStart ? @"ye" : @"no");
-    NSLog(!self.isStart ? @"yes" : @"noo");
-    */
-    
     if (self.isStart) {
         self.startDate = [NSDate date];
         [self beginTimer];
         self.isStart = !self.isStart;
     } else {
         self.endDate = [NSDate date];
-        [self runScheduleAlert]; //then will run scheduleEvent and handle resets
+        [self runScheduleAlert]; //will run scheduleEvent and handle resets
     }
     [self updateUI];
 }
@@ -69,8 +57,8 @@
         [self pauseTimer];
         self.pauseNumber++;
     }
-    
-    //self.isPaused = !self.isPaused; Moved to resume/pause timer methods so delegate works when app goes to background
+    //Moved to resume/pause timer methods so delegate works when app goes to background
+    //self.isPaused = !self.isPaused;
     [self updateUI];
 }
 - (IBAction)resetButtonPushed:(UIButton *)sender {
@@ -84,23 +72,11 @@
     resetAlert.tag = 2;
     [resetAlert show];
 }
-// default isStart = YES
-/*
- //why the shit does this code break it
- //edit nvm http://stackoverflow.com/questions/16082003/property-doesnt-set-after-lazy-initialization-objective-c screw these primitive types
-- (BOOL) isStart
-{
-    if (!_isStart) {
-        _isStart = YES;
-    }
-    return _isStart;
-}
- */
 - (void)runScheduleAlert
 {
     UIAlertView *confirmAlert = [[UIAlertView alloc]initWithTitle:@"Schedule" message:[NSString stringWithFormat:@"Place event onto iCal? %@ to %@", self.startDate, self.endDate] delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", @"Cancel", nil];
     confirmAlert.cancelButtonIndex = 1; //set cancel as cancel
-    // tag for identification when handling
+    //tag for identification when handling
     confirmAlert.tag = 1;
     confirmAlert.alertViewStyle = UIAlertViewStylePlainTextInput;
     UITextField *alertInputTextField = [confirmAlert textFieldAtIndex:0];
@@ -119,7 +95,7 @@
 }
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    // tag indicates is Schedule alert
+    //tag indicates is Schedule alert
     if (alertView.tag == 1) {
         switch (buttonIndex) {
             //OK
@@ -138,17 +114,18 @@
             default:
                 break;
         }
-    // tag indicates Reset alert
+    //tag indicates Reset alert
     } else if (alertView.tag == 2) {
         switch (buttonIndex) {
-                //OK
+            //OK
             case 0:
                 if (self.timer)
                     [self endTimer];
                 [self resetVars];
                 [self updateUI];
                 break;
-                //Cancel
+                
+            //Cancel
             case 1:
                 break;
             default:
@@ -159,14 +136,12 @@
 - (void)scheduleEvent
 {
     //NSCalendar *cal = [[NSCalendar alloc]initWithCalendarIdentifier:NSGregorianCalendar];
-   
-    
     EKEventStore *eventStore = [[EKEventStore alloc]init];
     EKEvent *event = [EKEvent eventWithEventStore:eventStore];
     event.title = self.titleButton.text;
     event.startDate = self.startDate;
     event.endDate = self.endDate;
-    //event.location
+    //event.location for later updates
     
     int mins = floor(self.seconds/60);
     int secs = self.seconds - (mins * 60);
@@ -181,13 +156,18 @@
             [eventStore saveEvent:event span:EKSpanThisEvent error:&err];
         } else {
             //user no calendar access
+            NSLog(@"No access :(");
+            UIAlertView *accessAlert = [[UIAlertView alloc]initWithTitle:@"Please allow calendar access for full app functionality" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            // tag for identification when handling
+            accessAlert.tag = 99999999;
+            [accessAlert show];
+
             [event setCalendar:[eventStore defaultCalendarForNewEvents]];
             NSError *err;
             [eventStore saveEvent:event span:EKSpanThisEvent error:&err];
         }
     }];
 }
-
 - (void)beginTimer
 {
     //CFRunLoopGetCurrent();
@@ -197,23 +177,16 @@
     });
      */
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(increaseTimerCount:) userInfo:nil repeats:YES];
-    //self.timer = [NSTimer scheduledTimerWithTimeInterval: invocation: repeats:]
 }
+//see http://stackoverflow.com/questions/1189252/how-to-convert-an-nstimeinterval-seconds-into-minutes if want to convert to more complex hours/days/months
+
 - (void)increaseTimerCount: (NSTimer *)timer
 {
-    //see http://stackoverflow.com/questions/1189252/how-to-convert-an-nstimeinterval-seconds-into-minutes if want to convert to more complex hours/days/months
-    //double secs = timer.timeInterval;
-    
-    //damn misleading documentation
-    /*
-     int mins = floor(timer.timeInterval/60);
-    int secs = timer.timeInterval - (mins * 60);
-    */
     self.seconds++;
     
     int mins = floor(self.seconds/60);
     int secs = self.seconds - (mins * 60);
-     self.timerLabel.text = [NSString stringWithFormat:@"%02d:%02d", mins, secs];
+    self.timerLabel.text = [NSString stringWithFormat:@"%02d:%02d", mins, secs];
 }
 - (void)endTimer
 {
@@ -223,26 +196,23 @@
 {
     //ty to http://stackoverflow.com/questions/347219/how-can-i-programmatically-pause-an-nstimer
     self.pauseStartDate = [NSDate date];
-    [self.timer setFireDate:[NSDate distantFuture]]; //LOL NSDate distantFuture is actually a thing...
+    [self.timer setFireDate:[NSDate distantFuture]];
     self.isPaused = YES;
 }
 - (void)resumeTimer
 {
-    //new additions stop rapidfire pause/resume from increasing time, but also basically pauses it entirely. idk how apple's code works. Tied to system clock? Whatever...please don't try to break this.
+    //new additions stop rapidfire pause/resume from increasing time, but also basically pauses timer during rapidfire switch. Apple's timer is better
     self.isPaused = NO;
     [self updateUI];
     
     float pauseTimeWas = -1 * [self.pauseStartDate timeIntervalSinceNow]; //results in positive #
     if (floor(pauseTimeWas) >= 1) {
         [self.timer setFireDate:[self.startDate initWithTimeInterval:pauseTimeWas sinceDate:self.startDate]];
-        
         //tracks pause time
         self.pausedSeconds += pauseTimeWas;
-        //self.isPaused = NO;
+        //self.isPaused = NO; moved to top
     } else {
         [self performSelector:@selector(resumeTimer) withObject:nil afterDelay:(1 - pauseTimeWas)];
-        
-        //just to trick into updatingUI so doesn't appear wrong
     }
 }
 - (void)resetVars
@@ -258,15 +228,8 @@
 - (void)updateUI
 {
     if (self.isStart) {
+        //set default states for title textcolor backgroundcolor bordercolor borderwidth cornerradius enabling
         [self.bigButton setTitle:@"Start" forState:UIControlStateNormal];
-        //prior design
-        //self.bigButton.backgroundColor = [UIColor greenColor];
-        //self.pauseButton.hidden = YES;
-        //self.resetButton.hidden = YES;
-        
-        //current design
-        
-        //set defaults
         [self.bigButton setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
         self.bigButton.backgroundColor = [UIColor whiteColor];
         self.bigButton.layer.borderColor = [UIColor greenColor].CGColor;
@@ -295,10 +258,8 @@
         self.shortcutButton.layer.borderColor = self.shortcutButton.titleLabel.textColor.CGColor;
         //self.shortcutButton.backgroundColor = [UIColor whiteColor];
         
-
     } else {
         [self.bigButton setTitle:@"Stop" forState:UIControlStateNormal];
-        //self.bigButton.backgroundColor = [UIColor colorWithRed:1 green:0.0335468 blue:0.00867602 alpha:1];
         [self.bigButton setTitleColor:[UIColor colorWithRed:1 green:0.0335468 blue:0.00867602 alpha:1] forState:UIControlStateNormal];
         self.bigButton.layer.borderColor = [UIColor colorWithRed:1 green:0.0335468 blue:0.00867602 alpha:1].CGColor;
         
@@ -314,8 +275,6 @@
             [self.pauseButton setTitle:@"Resume" forState:UIControlStateNormal];
             [self.pauseButton setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
             self.pauseButton.layer.borderColor = [UIColor greenColor].CGColor;
-            //[self.pauseButton setTitleColor:[UIColor colorWithRed:0.720482 green:1 blue:0.632028 alpha:1] forState:UIControlStateNormal];
-            //self.pauseButton.layer.borderColor = [UIColor colorWithRed:0.720482 green:1 blue:0.632028 alpha:1].CGColor;
         } else {
             [self.pauseButton setTitle:@"Pause" forState:UIControlStateNormal];
             [self.pauseButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
@@ -323,36 +282,7 @@
         }
     }
     
-    
-    self.testButton.layer.cornerRadius = self.testButton.frame.size.width/2;
-    self.testButton.layer.borderWidth = 1;
-    [self.testButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-    [self.testButton setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
-    [self.testButton setTitle:@"ttEn" forState:UIControlStateNormal];
-    [self.testButton setTitle:@"gg" forState:UIControlStateDisabled];
-    if (self.testButton.enabled) {
-        //[self.testButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-        self.testButton.backgroundColor = [UIColor whiteColor];
-        self.testButton.layer.borderColor = [UIColor blueColor].CGColor;
-        
-    } else {
-        //[self.testButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal]; //UIControlStateDisabled only resets textcolor, not bordercolor fml idk why. Or maybe self.testButton.titleLabel.textColor.CGColor only takes UIControlStateNormal color
-        self.testButton.backgroundColor = nil;//[UIColor whiteColor];
-        self.testButton.layer.borderColor = [UIColor grayColor].CGColor;
-        
-    }
-    
-    
-    //self.testButton.titleLabel.textColor = [UIColor grayColor];
-    //self.testButton.layer.borderColor = self.testButton.titleLabel.textColor.CGColor;
-    
-    
     //timerLabel updated on increaseTimerCount: method
-}
-
-- (IBAction)testButtonChecked:(UIButton *)sender {
-    self.testButton.enabled = !self.testButton.enabled;
-    [self updateUI];
 }
 
 //title is set in prepareSegue
@@ -363,9 +293,8 @@
         HCSShortCutViewController *shortcutVC = (HCSShortCutViewController *)sourceVC;
         self.titleButton.text = shortcutVC.title;
     }
-    
 }
-
+//lazy instantiation for seconds, pauseNumber, pausedSeconds
 - (int)seconds
 {
     if (!_seconds) _seconds = 0;
@@ -386,17 +315,18 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    //NSLog(@"%@", self.ob.backgroundColor);
+
     //set defaults
     self.isStart = YES;
     self.isPaused = NO;
     self.timerLabel.text = @"00:00";
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if (![defaults boolForKey:@"firstTime"]) {
-        //set defaults
-        NSArray *wordArr = @[@"Procrastination", @"Internet", @"Work", @"Shopping", @"Fun", @"Movies", @"Social", @"Travel", @"Drinking"]; //custom has no im, should be nil
+        //set firstTime defaults
+        NSArray *wordArr = @[@"Procrastination", @"Internet", @"Work", @"Shopping", @"Fun", @"Movies", @"Social", @"Travel", @"Drinking"];
         NSMutableArray *storeWords = [NSMutableArray array];
         
+        //encoding so able to store is nsuserdefaults
         for (NSString *word in wordArr) {
             NSData *encodedSampleWorkObj = [NSKeyedArchiver archivedDataWithRootObject:[[HCSShortcut alloc]initWithTitle:word image:[UIImage imageNamed:word]]];
             [storeWords addObject:encodedSampleWorkObj];
@@ -406,23 +336,13 @@
         [defaults setBool:true forKey:@"firstTime"];
         [defaults synchronize];
     }
-    
-    //[defaults setObject:@[@"Addcustom"] forKey:@"customShortcuts"];
-    //[defaults synchronize];
-    
     [self updateUI];
-    
-    //self.startDate = [NSDate date];
-    //self.endDate = [[NSDate alloc] initWithTimeInterval:600 sinceDate:self.startDate];
-    //[self scheduleEvent];
 }
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 //bigButton was pos 85 328,150 138 size
 
 #pragma mark - UITextFieldDelegate

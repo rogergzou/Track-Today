@@ -21,7 +21,6 @@
 - (IBAction)cancelPressed:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -30,31 +29,27 @@
     }
     return self;
 }
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 - (IBAction)myCreateShortcutUnwindSegueCallback:(UIStoryboardSegue *)segue
 {
     //only called if something went thru and data changed
     [self.collectionView reloadData];
 }
 
-
 #pragma mark - UICollectionView Delegate/Data Source
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 2; //for now, frick do need 2 sections
+    return 2; //images and textonly
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
@@ -70,7 +65,6 @@
             break;
     }
 }
-
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     long fRow = [indexPath row];
@@ -82,7 +76,6 @@
                 HCSShortCutTextViewCell *theCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MyShortCut" forIndexPath:indexPath];
                 theCell.imageView.image = shortcut.image;
                 theCell.titleLabel.text = shortcut.title;
-                //[theCell.titleLabel setText:shortcut.title];
                 return theCell;
             }
             break;
@@ -100,25 +93,10 @@
             return nil;
             break;
     }
-    
-    }
-
+}
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    /* handled by the storyboard segue
-     
-     UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
-    if ([cell isKindOfClass:[HCSShortCutTextViewCell class]]) {
-        HCSShortCutTextViewCell *shortcutCell = (HCSShortCutTextViewCell *)cell;
-        NSString *title = shortcutCell.titleLabel.text;
-     
-        //segue with?
-        //?????????????????
-        //[self dismissViewControllerAnimated:YES completion:nil];
-        
-        //shortcutCell.titleLabel.text;
-    }
-     */
+    //handled by the storyboard segue
 }
 
 #pragma mark - UICollectionViewDelegateFlowLayout

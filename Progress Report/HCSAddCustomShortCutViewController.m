@@ -122,8 +122,6 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-
-
 - (IBAction)imageUploadButtonTouch:(id)sender {
     [self imageLibraryGetPhoto];
     //uses UIImagePickerController
@@ -157,8 +155,8 @@
     if ([self.imageButton.imageView.image isEqual:[UIImage imageNamed:@"Insert_Image"]]) {
         //no image
         if (![self.textField.text length]) {
-            //no text or image wtf
-            //okay nothing happens
+            //no text or image
+            //nothing happens, would be just blank
         } else {
             //text but no image
             HCSShortcut *shortObj = [[HCSShortcut alloc]initWithTitle:self.textField.text image:nil];
@@ -181,10 +179,7 @@
         regularShortcuts = [regularShortcuts arrayByAddingObject:shortcut];
         [defaults setObject:regularShortcuts forKey:@"shortcuts"];
         [defaults synchronize];
-        
     }
-
 }
-
 
 @end
