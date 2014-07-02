@@ -10,6 +10,14 @@
 
 @interface HCSViewController : UIViewController
 
+//for appdelegate
+@property (nonatomic, readonly) BOOL isPaused;
+@property (nonatomic, readonly) BOOL isStart;
+@property (nonatomic) int seconds;
+
+
 - (IBAction)myShortcutTextUnwindSegueCallback:(UIStoryboardSegue *)segue;
+- (void)endTimer;
+- (void)beginTimer;
 
 @end

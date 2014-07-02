@@ -23,16 +23,18 @@
 @property (weak, nonatomic) IBOutlet UILabel *timerLabel;
 @property (weak, nonatomic) IBOutlet UIButton *shortcutButton;
 
-@property (nonatomic) BOOL isStart;
-@property (nonatomic) BOOL isPaused;
+@property (nonatomic, readwrite) BOOL isStart;
+@property (nonatomic, readwrite) BOOL isPaused;
 //@property (nonatomic) BOOL isConfirm;
 @property (strong, nonatomic) NSDate *startDate;
 @property (weak, nonatomic) IBOutlet UIButton *testButton;
 @property (strong, nonatomic) NSDate *endDate;
+//moved to public so appdelegate can modify jk PAUSESTARTDATEOK
 @property (strong, nonatomic) NSDate *pauseStartDate;
+
 @property (nonatomic) NSTimeInterval pausedSeconds; //lol typedef double
 @property (strong, nonatomic) NSTimer *timer;
-@property (nonatomic) int seconds;
+//MOVED PUBLIC SO APPDEL CAN ACCESS @property (nonatomic) int seconds;
 
 @end
 
@@ -65,7 +67,7 @@
     else
         [self pauseTimer];
     
-    self.isPaused = !self.isPaused;
+    //self.isPaused = !self.isPaused; Moved to resume/pause timer methods so delegate works when app goes to background
     [self updateUI];
 }
 - (IBAction)resetButtonPushed:(UIButton *)sender {
@@ -91,7 +93,6 @@
     return _isStart;
 }
  */
-
 - (void)runScheduleAlert
 {
     UIAlertView *confirmAlert = [[UIAlertView alloc]initWithTitle:@"Schedule" message:[NSString stringWithFormat:@"Place event onto iCal? %@ to %@", self.startDate, self.endDate] delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", @"Cancel", nil];
@@ -107,16 +108,12 @@
     
     //if not paused, pause
     if (!self.isPaused)
-    {
         [self pauseTimer];
-        self.isPaused = !self.isPaused;
-    }
     [self updateUI];
     
     //show alert after pausing
     [confirmAlert show];
 }
-
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     // tag indicates is Schedule alert
@@ -130,8 +127,10 @@
                 [self resetVars];
                 [self updateUI];
                 break;
+                
             //Cancel
             case 1:
+                [self updateUI];
                 break;
             default:
                 break;
@@ -222,6 +221,7 @@
     //ty to http://stackoverflow.com/questions/347219/how-can-i-programmatically-pause-an-nstimer
     self.pauseStartDate = [NSDate date];
     [self.timer setFireDate:[NSDate distantFuture]]; //LOL NSDate distantFuture is actually a thing...
+    self.isPaused = YES;
 }
 - (void)resumeTimer
 {
@@ -230,6 +230,7 @@
     
     //tracks pause time
     self.pausedSeconds += pauseTimeWas;
+    self.isPaused = NO;
 }
 - (void)resetVars
 {
