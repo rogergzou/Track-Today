@@ -321,6 +321,7 @@
     self.isPaused = NO;
     self.timerLabel.text = @"00:00";
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setBool:NO forKey:@"firstTime"];
     if (![defaults boolForKey:@"firstTime"]) {
         //set firstTime defaults
         NSArray *wordArr = @[@"Procrastination", @"Internet", @"Work", @"Shopping", @"Fun", @"Movies", @"Social", @"Travel", @"Drinking"];

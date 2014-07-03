@@ -50,23 +50,23 @@
 		DB6765A41960BAB400C113D2 /* HCSCustomViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCSCustomViewCell.m; sourceTree = "<group>"; };
 		DB6765A6196126FD00C113D2 /* HCSAddCustomShortCutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSAddCustomShortCutViewController.h; sourceTree = "<group>"; };
 		DB6765A7196126FD00C113D2 /* HCSAddCustomShortCutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCSAddCustomShortCutViewController.m; sourceTree = "<group>"; };
-		DB679ED4195BB92700C61F6F /* Progress Report.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Progress Report.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB679ED4195BB92700C61F6F /* Track Today.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Track Today.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB679ED7195BB92700C61F6F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DB679ED9195BB92700C61F6F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		DB679EDB195BB92700C61F6F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		DB679EDF195BB92700C61F6F /* Progress Report-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Progress Report-Info.plist"; sourceTree = "<group>"; };
+		DB679EDF195BB92700C61F6F /* Track Today-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Track Today-Info.plist"; sourceTree = "<group>"; };
 		DB679EE1195BB92700C61F6F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DB679EE3195BB92700C61F6F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		DB679EE5195BB92700C61F6F /* Progress Report-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Progress Report-Prefix.pch"; sourceTree = "<group>"; };
+		DB679EE5195BB92700C61F6F /* Track Today-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Track Today-Prefix.pch"; sourceTree = "<group>"; };
 		DB679EE6195BB92700C61F6F /* HCSAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HCSAppDelegate.h; sourceTree = "<group>"; };
 		DB679EE7195BB92700C61F6F /* HCSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HCSAppDelegate.m; sourceTree = "<group>"; };
 		DB679EEA195BB92700C61F6F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		DB679EEF195BB92700C61F6F /* HCSViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HCSViewController.h; sourceTree = "<group>"; };
 		DB679EF0195BB92700C61F6F /* HCSViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HCSViewController.m; sourceTree = "<group>"; };
 		DB679EF2195BB92700C61F6F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		DB679EF8195BB92700C61F6F /* Progress ReportTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Progress ReportTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB679EF8195BB92700C61F6F /* Track TodayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Track TodayTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB679EF9195BB92700C61F6F /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		DB679F01195BB92700C61F6F /* Progress ReportTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Progress ReportTests-Info.plist"; sourceTree = "<group>"; };
+		DB679F01195BB92700C61F6F /* Track TodayTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Track TodayTests-Info.plist"; sourceTree = "<group>"; };
 		DB679F03195BB92700C61F6F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DB679F05195BB92700C61F6F /* Progress_ReportTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Progress_ReportTests.m; sourceTree = "<group>"; };
 		DB679F11195BD43900C61F6F /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
@@ -110,8 +110,8 @@
 		DB679ED5195BB92700C61F6F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DB679ED4195BB92700C61F6F /* Progress Report.app */,
-				DB679EF8195BB92700C61F6F /* Progress ReportTests.xctest */,
+				DB679ED4195BB92700C61F6F /* Track Today.app */,
+				DB679EF8195BB92700C61F6F /* Track TodayTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -155,10 +155,10 @@
 		DB679EDE195BB92700C61F6F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				DB679EDF195BB92700C61F6F /* Progress Report-Info.plist */,
+				DB679EDF195BB92700C61F6F /* Track Today-Info.plist */,
 				DB679EE0195BB92700C61F6F /* InfoPlist.strings */,
 				DB679EE3195BB92700C61F6F /* main.m */,
-				DB679EE5195BB92700C61F6F /* Progress Report-Prefix.pch */,
+				DB679EE5195BB92700C61F6F /* Track Today-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -175,7 +175,7 @@
 		DB679F00195BB92700C61F6F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				DB679F01195BB92700C61F6F /* Progress ReportTests-Info.plist */,
+				DB679F01195BB92700C61F6F /* Track TodayTests-Info.plist */,
 				DB679F02195BB92700C61F6F /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
@@ -184,9 +184,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		DB679ED3195BB92700C61F6F /* Progress Report */ = {
+		DB679ED3195BB92700C61F6F /* Track Today */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DB679F09195BB92700C61F6F /* Build configuration list for PBXNativeTarget "Progress Report" */;
+			buildConfigurationList = DB679F09195BB92700C61F6F /* Build configuration list for PBXNativeTarget "Track Today" */;
 			buildPhases = (
 				DB679ED0195BB92700C61F6F /* Sources */,
 				DB679ED1195BB92700C61F6F /* Frameworks */,
@@ -196,14 +196,14 @@
 			);
 			dependencies = (
 			);
-			name = "Progress Report";
+			name = "Track Today";
 			productName = "Progress Report";
-			productReference = DB679ED4195BB92700C61F6F /* Progress Report.app */;
+			productReference = DB679ED4195BB92700C61F6F /* Track Today.app */;
 			productType = "com.apple.product-type.application";
 		};
-		DB679EF7195BB92700C61F6F /* Progress ReportTests */ = {
+		DB679EF7195BB92700C61F6F /* Track TodayTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DB679F0C195BB92700C61F6F /* Build configuration list for PBXNativeTarget "Progress ReportTests" */;
+			buildConfigurationList = DB679F0C195BB92700C61F6F /* Build configuration list for PBXNativeTarget "Track TodayTests" */;
 			buildPhases = (
 				DB679EF4195BB92700C61F6F /* Sources */,
 				DB679EF5195BB92700C61F6F /* Frameworks */,
@@ -214,9 +214,9 @@
 			dependencies = (
 				DB679EFE195BB92700C61F6F /* PBXTargetDependency */,
 			);
-			name = "Progress ReportTests";
+			name = "Track TodayTests";
 			productName = "Progress ReportTests";
-			productReference = DB679EF8195BB92700C61F6F /* Progress ReportTests.xctest */;
+			productReference = DB679EF8195BB92700C61F6F /* Track TodayTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -237,7 +237,7 @@
 					};
 				};
 			};
-			buildConfigurationList = DB679ECF195BB92700C61F6F /* Build configuration list for PBXProject "Progress Report" */;
+			buildConfigurationList = DB679ECF195BB92700C61F6F /* Build configuration list for PBXProject "Track Today" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -250,8 +250,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				DB679ED3195BB92700C61F6F /* Progress Report */,
-				DB679EF7195BB92700C61F6F /* Progress ReportTests */,
+				DB679ED3195BB92700C61F6F /* Track Today */,
+				DB679EF7195BB92700C61F6F /* Track TodayTests */,
 			);
 		};
 /* End PBXProject section */
@@ -306,7 +306,7 @@
 /* Begin PBXTargetDependency section */
 		DB679EFE195BB92700C61F6F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = DB679ED3195BB92700C61F6F /* Progress Report */;
+			target = DB679ED3195BB92700C61F6F /* Track Today */;
 			targetProxy = DB679EFD195BB92700C61F6F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -419,9 +419,9 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Progress Report/Progress Report-Prefix.pch";
-				INFOPLIST_FILE = "Progress Report/Progress Report-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "Progress Report/Track Today-Prefix.pch";
+				INFOPLIST_FILE = "Progress Report/Track Today-Info.plist";
+				PRODUCT_NAME = "Track Today";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
@@ -436,9 +436,9 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Progress Report/Progress Report-Prefix.pch";
-				INFOPLIST_FILE = "Progress Report/Progress Report-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "Progress Report/Track Today-Prefix.pch";
+				INFOPLIST_FILE = "Progress Report/Track Today-Info.plist";
+				PRODUCT_NAME = "Track Today";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
@@ -460,8 +460,8 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "Progress ReportTests/Progress ReportTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "Progress ReportTests/Track TodayTests-Info.plist";
+				PRODUCT_NAME = "Track TodayTests";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -478,8 +478,8 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Progress Report/Progress Report-Prefix.pch";
-				INFOPLIST_FILE = "Progress ReportTests/Progress ReportTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "Progress ReportTests/Track TodayTests-Info.plist";
+				PRODUCT_NAME = "Track TodayTests";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -488,7 +488,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		DB679ECF195BB92700C61F6F /* Build configuration list for PBXProject "Progress Report" */ = {
+		DB679ECF195BB92700C61F6F /* Build configuration list for PBXProject "Track Today" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DB679F07195BB92700C61F6F /* Debug */,
@@ -497,7 +497,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DB679F09195BB92700C61F6F /* Build configuration list for PBXNativeTarget "Progress Report" */ = {
+		DB679F09195BB92700C61F6F /* Build configuration list for PBXNativeTarget "Track Today" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DB679F0A195BB92700C61F6F /* Debug */,
@@ -506,7 +506,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DB679F0C195BB92700C61F6F /* Build configuration list for PBXNativeTarget "Progress ReportTests" */ = {
+		DB679F0C195BB92700C61F6F /* Build configuration list for PBXNativeTarget "Track TodayTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DB679F0D195BB92700C61F6F /* Debug */,
