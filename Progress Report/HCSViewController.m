@@ -185,8 +185,16 @@
     self.seconds++;
     
     int mins = floor(self.seconds/60);
+    int hours = 0;
+    if (mins > 59) {
+        hours = floor(mins/60);
+        mins -= hours * 60;
+    }
     int secs = self.seconds - (mins * 60);
-    self.timerLabel.text = [NSString stringWithFormat:@"%02d:%02d", mins, secs];
+    if (hours == 0)
+        self.timerLabel.text = [NSString stringWithFormat:@"%02d:%02d", mins, secs];
+    else
+        self.timerLabel.text = [NSString stringWithFormat:@"%d:%02d:%02d", hours, mins, secs];
 }
 - (void)endTimer
 {
