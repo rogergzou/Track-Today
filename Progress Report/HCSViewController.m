@@ -74,7 +74,17 @@
 }
 - (void)runScheduleAlert
 {
-    UIAlertView *confirmAlert = [[UIAlertView alloc]initWithTitle:@"Schedule" message:[NSString stringWithFormat:@"Place event onto iCal? %@ to %@", self.startDate, self.endDate] delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", @"Cancel", nil];
+    NSString *startDateString = [NSDateFormatter localizedStringFromDate:self.startDate dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterMediumStyle];
+    NSString *endDateString = [NSDateFormatter localizedStringFromDate:self.endDate dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterMediumStyle];
+    NSDate *startDateOnly = self.startDate;
+    NSDate *endDateOnly = self.endDate;
+    [[NSCalendar currentCalendar] rangeOfUnit:NSDayCalendarUnit startDate:&startDateOnly interval:NULL forDate:startDateOnly];
+    [[NSCalendar currentCalendar] rangeOfUnit:NSDayCalendarUnit startDate:&endDateOnly interval:NULL forDate:endDateOnly];
+    NSLog(@"%@ %@", startDateOnly, endDateOnly);
+    if ([startDateOnly compare:endDateOnly] == NSOrderedSame)
+        endDateString = [endDateString substringFromIndex:[endDateString length]-10];
+    
+    UIAlertView *confirmAlert = [[UIAlertView alloc]initWithTitle:@"Schedule" message:[NSString stringWithFormat:@"Place event onto iCal? %@ to %@", startDateString, endDateString] delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", @"Cancel", nil];
     confirmAlert.cancelButtonIndex = 1; //set cancel as cancel
     //tag for identification when handling
     confirmAlert.tag = 1;
@@ -344,6 +354,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
 
+    //NSLog(@"%@", [NSDateFormatter localizedStringFromDate:[NSDate date] dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterMediumStyle]);
+    
     //set defaults
     self.isStart = YES;
     self.isPaused = NO;
