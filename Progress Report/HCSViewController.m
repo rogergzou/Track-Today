@@ -145,9 +145,29 @@
     
     int mins = floor(self.seconds/60);
     int secs = self.seconds - (mins * 60);
+    int hours = 0;
+    if (mins > 59) {
+        hours = floor(mins/60);
+        mins -= hours * 60;
+    }
     int pmins = floor(self.pausedSeconds/60);
     int psecs = floor(self.pausedSeconds - (pmins * 60));
-    event.notes = [NSString stringWithFormat:@"%i:%02i active, %i:%02i inactive, paused %i times", mins, secs, pmins, psecs, self.pauseNumber];
+    int phours = 0;
+    if (pmins > 59) {
+        phours = floor(pmins/60);
+        pmins -= phours * 60;
+    }
+    NSString *timeString;
+    NSString *pTimeString;
+    if (hours == 0)
+        timeString = [NSString stringWithFormat:@"%i:%02i", mins, secs];
+    else
+        timeString = [NSString stringWithFormat:@"%i:%02i:%02i", hours, mins, secs];
+    if (phours == 0)
+        pTimeString = [NSString stringWithFormat:@"%i:%02i", pmins, psecs];
+    else
+        pTimeString = [NSString stringWithFormat:@"%i:%02i:%02i", phours, pmins, psecs];
+    event.notes = [NSString stringWithFormat:@"%@ active, %@ inactive, paused %i times", timeString, pTimeString, self.pauseNumber];
     [eventStore requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error) {
         if (granted) {
             //user lets calendar access
