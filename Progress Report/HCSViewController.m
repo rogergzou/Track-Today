@@ -375,7 +375,7 @@
     [defaults setBool:NO forKey:@"firstTime"];
     if (![defaults boolForKey:@"firstTime"]) {
         //set firstTime defaults
-        NSArray *wordArr = @[@"Procrastination", @"Internet", @"Work", @"Shopping", @"Fun", @"Movies", @"Social", @"Travel", @"Drinking"];
+        NSArray *wordArr = @[@"Procrastination", @"Internet", @"Work", @"Eating", @"Exercise", @"Fun", @"Social", @"Travel", @"Shopping"];
         NSMutableArray *storeWords = [NSMutableArray array];
         
         //encoding so able to store is nsuserdefaults
@@ -384,7 +384,14 @@
             [storeWords addObject:encodedSampleWorkObj];
         }
         [defaults setObject:storeWords forKey:@"shortcuts"];
-        [defaults setObject:@[[NSKeyedArchiver archivedDataWithRootObject:[[HCSShortcut alloc]initWithTitle:@"School" image:nil]]] forKey:@"textShortcuts"];
+        
+        NSArray *textOnlyArr = @[@"School", @"Nap", @"Other"];
+        NSMutableArray *textWords = [NSMutableArray array];
+        for (NSString *word in textOnlyArr) {
+            NSData *encodedSampleWorkObj = [NSKeyedArchiver archivedDataWithRootObject:[[HCSShortcut alloc]initWithTitle:word image:nil]];
+            [textWords addObject:encodedSampleWorkObj];
+        }
+        [defaults setObject:textWords forKey:@"textShortcuts"];
         [defaults setBool:true forKey:@"firstTime"];
         [defaults synchronize];
     }
