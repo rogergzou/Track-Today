@@ -15,13 +15,56 @@
 
 @interface HCSShortCutViewController () <UICollectionViewDelegateFlowLayout>
 
+@property (nonatomic) BOOL textDeleteActive;
+@property (nonatomic) BOOL imageDeleteActive;
+
 @end
 
 @implementation HCSShortCutViewController
 
+- (void)TextHeaderDeleteButtonDynamicHandler
+{
+    NSLog(@"texthead");
+    self.textDeleteActive = !self.textDeleteActive;
+    [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:1]];
+}
+- (void)ImageHeaderDeleteButtonDynamicHandler
+{
+    NSLog(@"imagehead");
+    self.imageDeleteActive = !self.imageDeleteActive;
+    [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:0]];
+}
+- (void)TextCellDeleteButtonDynamicHandler:(id)sender event:(id)event
+{
+    NSLog(@"textcell");
+    [self deleteItemAndReloadCollectionView:sender event:event defaultsKey:@"textShortcuts"];
+}
+- (void)ImageCellDeleteButtonDynamicHandler:(id)sender event:(id)event
+{
+    NSLog(@"imagecell");
+    [self deleteItemAndReloadCollectionView:sender event:event defaultsKey:@"shortcuts"];
+ 
+}
+- (void)deleteItemAndReloadCollectionView:(id)sender event:(id)event defaultsKey:(NSString *)key
+{
+    NSSet *touches = [event allTouches];
+    UITouch *touch = [touches anyObject];
+    CGPoint currentTouchPosition = [touch locationInView:self.collectionView];
+    NSIndexPath *indexPath = [self.collectionView indexPathForItemAtPoint:currentTouchPosition];
+    NSLog(@"sec %ld, row %ld", (long)indexPath.section, (long)indexPath.row);
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSMutableArray *shortcuts = [[defaults arrayForKey:key] mutableCopy];
+    [shortcuts removeObjectAtIndex:indexPath.row];
+    [defaults setObject:shortcuts forKey:key];
+    [defaults synchronize];
+    [self.collectionView reloadData];
+}
+
 - (IBAction)cancelPressed:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -34,6 +77,10 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    //set defaults
+    self.textDeleteActive = NO;
+    self.imageDeleteActive = NO;
 }
 - (void)didReceiveMemoryWarning
 {
@@ -77,6 +124,15 @@
                 HCSShortCutTextViewCell *theCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MyShortCut" forIndexPath:indexPath];
                 theCell.imageView.image = shortcut.image;
                 theCell.titleLabel.text = shortcut.title;
+                
+                if (self.imageDeleteActive) {
+                    theCell.deleteButton.hidden = NO;
+                } else {
+                    theCell.deleteButton.hidden = YES;
+                }
+                
+                
+                [theCell.deleteButton addTarget:self action:@selector(ImageCellDeleteButtonDynamicHandler:event:) forControlEvents:UIControlEventTouchUpInside];
                 return theCell;
             }
             break;
@@ -87,6 +143,15 @@
                 HCSCustomViewCell *theCustCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MyCustom" forIndexPath:indexPath];
                 theCustCell.titleLabel.text = shortcut.title;
                 //no image
+                
+                if (self.textDeleteActive) {
+                    theCustCell.deleteButton.hidden = NO;
+                } else {
+                    theCustCell.deleteButton.hidden = YES;
+                }
+                
+                
+                [theCustCell.deleteButton addTarget:self action:@selector(TextCellDeleteButtonDynamicHandler:event:) forControlEvents:UIControlEventTouchUpInside];
                 return theCustCell;
                 }
             break;
@@ -108,6 +173,8 @@
                 if (true) {
                     HCSMyHeaderReusableView *theCell = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"HeaderView" forIndexPath:indexPath];
                     theCell.titleLabel.text = @"Image Shortcuts";
+                    NSLog(@"ima");
+                    [theCell.deleteButton addTarget:self action:@selector(ImageHeaderDeleteButtonDynamicHandler) forControlEvents:UIControlEventTouchUpInside];
                     return theCell;
                 }
                 break;
@@ -115,6 +182,8 @@
                 if (true) {
                     HCSMyHeaderReusableView *theCell = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"HeaderView" forIndexPath:indexPath];
                     theCell.titleLabel.text = @"Text Shortcuts";
+                    NSLog(@"tex");
+                    [theCell.deleteButton addTarget:self action:@selector(TextHeaderDeleteButtonDynamicHandler) forControlEvents:UIControlEventTouchUpInside];
                     return theCell;
                 }
                 break;

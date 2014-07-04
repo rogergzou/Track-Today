@@ -133,7 +133,7 @@
                     <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="tMc-Rb-v8s">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="1" id="aL6-5x-7cU">
                             <size key="itemSize" width="100" height="114"/>
                             <size key="headerReferenceSize" width="50" height="25"/>
@@ -159,11 +159,19 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Upv-d9-M4w">
+                                            <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" image="Delete_Button">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <color key="backgroundColor" red="1" green="0.98138336843547114" blue="0.95180361110184875" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
+                                    <outlet property="deleteButton" destination="Upv-d9-M4w" id="jRE-37-4hB"/>
                                     <outlet property="imageView" destination="pQQ-yH-ugI" id="TxO-B8-Pri"/>
                                     <outlet property="titleLabel" destination="fhk-Fq-XHc" id="6rO-1J-Wuz"/>
                                     <segue destination="W12-ak-LV7" kind="unwind" unwindAction="myShortcutTextUnwindSegueCallback:" id="NAD-3R-Cwl"/>
@@ -183,12 +191,20 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cay-ZY-eVT">
+                                            <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" image="Delete_Button">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <color key="backgroundColor" red="1" green="0.98138336839999996" blue="0.9518036111" alpha="1" colorSpace="calibratedRGB"/>
                                 <size key="customSize" width="100" height="80"/>
                                 <connections>
+                                    <outlet property="deleteButton" destination="Cay-ZY-eVT" id="J4K-TE-2TZ"/>
                                     <outlet property="titleLabel" destination="lPL-XB-4r3" id="twp-Zx-OQQ"/>
                                     <segue destination="W12-ak-LV7" kind="unwind" unwindAction="myShortcutTextUnwindSegueCallback:" id="gWK-SX-i87"/>
                                 </connections>
@@ -199,15 +215,23 @@
                             <autoresizingMask key="autoresizingMask"/>
                             <subviews>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Image Shortcuts" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IdU-Z2-oLI">
-                                    <rect key="frame" x="20" y="2" width="254" height="21"/>
+                                    <rect key="frame" x="20" y="2" width="228" height="21"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f0F-z4-BcN">
+                                    <rect key="frame" x="256" y="-2" width="44" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" title="Delete">
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" red="0.80540626308626517" green="0.80898421497774231" blue="0.81971807065217395" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
+                                <outlet property="deleteButton" destination="f0F-z4-BcN" id="IQy-5o-KKU"/>
                                 <outlet property="titleLabel" destination="IdU-Z2-oLI" id="B4K-Z0-6cu"/>
                             </connections>
                         </collectionReusableView>
@@ -216,6 +240,7 @@
                             <outlet property="delegate" destination="TsU-Sj-fHa" id="XQ7-gu-fxT"/>
                         </connections>
                     </collectionView>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" title="Quickfills" id="9ak-gp-kha">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="YWi-2h-7K3">
                             <connections>
@@ -228,6 +253,7 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OfI-q4-HFG" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="W12-ak-LV7" userLabel="Exit" sceneMemberID="exit"/>
@@ -297,7 +323,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.81248376435286873" green="0.89012360644684163" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" title="Custom Shortcut" id="krE-8k-uXk">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="YBm-YL-hO6">
@@ -319,6 +345,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Delete_Button" width="24" height="24"/>
         <image name="Insert_Image" width="128" height="128"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

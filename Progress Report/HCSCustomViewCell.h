@@ -11,5 +11,6 @@
 @interface HCSCustomViewCell : UICollectionViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UIButton *deleteButton;
 
 @end

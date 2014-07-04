@@ -42,6 +42,7 @@
     
     //UIImage *sampleIm = [UIImage imageNamed:@"Social_Discarded"];
     //UIImageWriteToSavedPhotosAlbum(sampleIm, nil, nil, nil);
+    //self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
 }
 
 - (void)didReceiveMemoryWarning
