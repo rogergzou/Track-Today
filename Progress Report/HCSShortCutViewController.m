@@ -26,13 +26,11 @@
 {
     self.textDeleteActive = !self.textDeleteActive;
     [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:1]];
-    //[self.collectionView reloadData];
 }
 - (void)ImageHeaderDeleteButtonDynamicHandler
 {
     self.imageDeleteActive = !self.imageDeleteActive;
     [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:0]];
-    //[self.collectionView reloadData];
 }
 - (void)TextCellDeleteButtonDynamicHandler:(id)sender event:(id)event
 {
@@ -170,6 +168,10 @@
                 if (true) {
                     HCSMyHeaderReusableView *theCell = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"HeaderView" forIndexPath:indexPath];
                     theCell.titleLabel.text = @"Image Shortcuts";
+                    if (self.imageDeleteActive)
+                        theCell.deleteButton.titleLabel.text = @"Done";
+                    else
+                        theCell.deleteButton.titleLabel.text = @"Delete";
                     theCell.deleteButtonNumTwo.hidden = YES;
                     theCell.deleteButton.hidden = NO;
                     [theCell.deleteButton addTarget:self action:@selector(ImageHeaderDeleteButtonDynamicHandler) forControlEvents:UIControlEventTouchUpInside];
@@ -180,6 +182,10 @@
                 if (true) {
                     HCSMyHeaderReusableView *theCell = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"HeaderView" forIndexPath:indexPath];
                     theCell.titleLabel.text = @"Text Shortcuts";
+                    if (self.textDeleteActive)
+                        theCell.deleteButtonNumTwo.titleLabel.text = @"Done";
+                    else
+                        theCell.deleteButtonNumTwo.titleLabel.text = @"Delete";
                     theCell.deleteButtonNumTwo.hidden = NO;
                     theCell.deleteButton.hidden = YES;
                     [theCell.deleteButtonNumTwo addTarget:self action:@selector(TextHeaderDeleteButtonDynamicHandler) forControlEvents:UIControlEventTouchUpInside];

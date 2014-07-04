@@ -370,7 +370,6 @@
     [self resetVars];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setBool:NO forKey:@"firstTime"];
     if (![defaults boolForKey:@"firstTime"]) {
         //set firstTime defaults
         NSArray *wordArr = @[@"Procrastination", @"Internet", @"Work", @"Eating", @"Exercise", @"Fun", @"Social", @"Travel", @"Shopping"];
