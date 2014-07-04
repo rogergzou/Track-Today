@@ -39,7 +39,7 @@
 @implementation HCSViewController
 
 - (IBAction)testbuttonpush:(id)sender {
-    self.seconds += 49*60*60;
+    self.seconds += 1.56*60*60;
 }
 
 - (IBAction)buttonPushed:(UIButton *)sender {
@@ -366,8 +366,6 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
 
-    //NSLog(@"%@", [NSDateFormatter localizedStringFromDate:[NSDate date] dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterMediumStyle]);
-    
     //set defaults
     [self resetVars];
     
@@ -402,10 +400,8 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-//bigButton was pos 85 328,150 138 size
 
 #pragma mark - UITextFieldDelegate
-//yay copypasta from prototypeC
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];

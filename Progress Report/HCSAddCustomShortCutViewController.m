@@ -11,7 +11,7 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 
 @interface HCSAddCustomShortCutViewController () <UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
-//I have no idea what UINavigationControllerDelegate does, but prevents error for delegation of UIImagePickerController
+//UINavigationControllerDelegate prevents error for delegation of UIImagePickerController
 
 @property (weak, nonatomic) IBOutlet UIButton *imageButton;
 @property (weak, nonatomic) IBOutlet UILabel *imageTextLabel;
@@ -40,9 +40,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    //UIImage *sampleIm = [UIImage imageNamed:@"Social_Discarded"];
-    //UIImageWriteToSavedPhotosAlbum(sampleIm, nil, nil, nil);
-    //self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
 }
 
 - (void)didReceiveMemoryWarning
@@ -52,7 +49,6 @@
 }
 
 #pragma mark - UITextFieldDelegate
-//yay copypasta from prototypeC
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
