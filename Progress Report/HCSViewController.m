@@ -38,7 +38,7 @@
 
 @implementation HCSViewController
 
-- (IBAction)testingwtf:(id)sender {
+- (IBAction)testbuttonpush:(id)sender {
     self.seconds += 49*60*60;
 }
 
@@ -84,7 +84,6 @@
     NSDate *endDateOnly = self.endDate;
     [[NSCalendar currentCalendar] rangeOfUnit:NSDayCalendarUnit startDate:&startDateOnly interval:NULL forDate:startDateOnly];
     [[NSCalendar currentCalendar] rangeOfUnit:NSDayCalendarUnit startDate:&endDateOnly interval:NULL forDate:endDateOnly];
-    NSLog(@"%@ %@", startDateOnly, endDateOnly);
     if ([startDateOnly compare:endDateOnly] == NSOrderedSame)
         endDateString = [endDateString substringFromIndex:[endDateString length]-10];
     

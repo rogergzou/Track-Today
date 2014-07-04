@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		DB49F361195CF0D400067F96 /* HCSShortCutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB49F360195CF0D400067F96 /* HCSShortCutViewController.m */; };
 		DB49F364195CF1C000067F96 /* HCSShortCutTextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DB49F363195CF1C000067F96 /* HCSShortCutTextViewCell.m */; };
+		DB49FF06196634EF00D91BFE /* HCSMyHeaderReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB49FF05196634EF00D91BFE /* HCSMyHeaderReusableView.m */; };
 		DB67659F19608E8D00C113D2 /* HCSShortcut.m in Sources */ = {isa = PBXBuildFile; fileRef = DB67659E19608E8D00C113D2 /* HCSShortcut.m */; };
 		DB6765A51960BAB400C113D2 /* HCSCustomViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DB6765A41960BAB400C113D2 /* HCSCustomViewCell.m */; };
 		DB6765A8196126FD00C113D2 /* HCSAddCustomShortCutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB6765A7196126FD00C113D2 /* HCSAddCustomShortCutViewController.m */; };
@@ -45,6 +46,8 @@
 		DB49F362195CF1C000067F96 /* HCSShortCutTextViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSShortCutTextViewCell.h; sourceTree = "<group>"; };
 		DB49F363195CF1C000067F96 /* HCSShortCutTextViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCSShortCutTextViewCell.m; sourceTree = "<group>"; };
 		DB49F365195D19AC00067F96 /* HCSShortcut.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSShortcut.h; sourceTree = "<group>"; };
+		DB49FF04196634EF00D91BFE /* HCSMyHeaderReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSMyHeaderReusableView.h; sourceTree = "<group>"; };
+		DB49FF05196634EF00D91BFE /* HCSMyHeaderReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCSMyHeaderReusableView.m; sourceTree = "<group>"; };
 		DB67659E19608E8D00C113D2 /* HCSShortcut.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCSShortcut.m; sourceTree = "<group>"; };
 		DB6765A31960BAB400C113D2 /* HCSCustomViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSCustomViewCell.h; sourceTree = "<group>"; };
 		DB6765A41960BAB400C113D2 /* HCSCustomViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCSCustomViewCell.m; sourceTree = "<group>"; };
@@ -146,6 +149,8 @@
 				DB6765A41960BAB400C113D2 /* HCSCustomViewCell.m */,
 				DB49F365195D19AC00067F96 /* HCSShortcut.h */,
 				DB67659E19608E8D00C113D2 /* HCSShortcut.m */,
+				DB49FF04196634EF00D91BFE /* HCSMyHeaderReusableView.h */,
+				DB49FF05196634EF00D91BFE /* HCSMyHeaderReusableView.m */,
 				DB679EF2195BB92700C61F6F /* Images.xcassets */,
 				DB679EDE195BB92700C61F6F /* Supporting Files */,
 			);
@@ -285,6 +290,7 @@
 				DB679EE4195BB92700C61F6F /* main.m in Sources */,
 				DB49F364195CF1C000067F96 /* HCSShortCutTextViewCell.m in Sources */,
 				DB6765A51960BAB400C113D2 /* HCSCustomViewCell.m in Sources */,
+				DB49FF06196634EF00D91BFE /* HCSMyHeaderReusableView.m in Sources */,
 				DB67659F19608E8D00C113D2 /* HCSShortcut.m in Sources */,
 				DB6765A8196126FD00C113D2 /* HCSAddCustomShortCutViewController.m in Sources */,
 				DB679EF1195BB92700C61F6F /* HCSViewController.m in Sources */,

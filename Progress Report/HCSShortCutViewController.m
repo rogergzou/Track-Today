@@ -11,6 +11,7 @@
 #import "HCSAddCustomViewCell.h"
 #import "HCSCustomViewCell.h"
 #import "HCSShortcut.h"
+#import "HCSMyHeaderReusableView.h"
 
 @interface HCSShortCutViewController () <UICollectionViewDelegateFlowLayout>
 
@@ -97,6 +98,32 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     //handled by the storyboard segue
+}
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+{
+    if (kind == UICollectionElementKindSectionHeader) {
+        switch ([indexPath section]) {
+            case 0:
+                if (true) {
+                    HCSMyHeaderReusableView *theCell = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"HeaderView" forIndexPath:indexPath];
+                    theCell.titleLabel.text = @"Image Shortcuts";
+                    return theCell;
+                }
+                break;
+            case 1:
+                if (true) {
+                    HCSMyHeaderReusableView *theCell = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"HeaderView" forIndexPath:indexPath];
+                    theCell.titleLabel.text = @"Text Shortcuts";
+                    return theCell;
+                }
+                break;
+            default:
+                return nil;
+                break;
+        }
+    } else
+        return nil;
 }
 
 #pragma mark - UICollectionViewDelegateFlowLayout
