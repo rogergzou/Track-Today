@@ -26,13 +26,15 @@
 {
     NSLog(@"texthead");
     self.textDeleteActive = !self.textDeleteActive;
-    [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:1]];
+    //[self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:1]];
+    [self.collectionView reloadData];
 }
 - (void)ImageHeaderDeleteButtonDynamicHandler
 {
     NSLog(@"imagehead");
     self.imageDeleteActive = !self.imageDeleteActive;
-    [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:0]];
+    //[self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:0]];
+    [self.collectionView reloadData];
 }
 - (void)TextCellDeleteButtonDynamicHandler:(id)sender event:(id)event
 {
@@ -174,6 +176,8 @@
                     HCSMyHeaderReusableView *theCell = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"HeaderView" forIndexPath:indexPath];
                     theCell.titleLabel.text = @"Image Shortcuts";
                     NSLog(@"ima");
+                    theCell.deleteButtonNumTwo.hidden = YES;
+                    theCell.deleteButton.hidden = NO;
                     [theCell.deleteButton addTarget:self action:@selector(ImageHeaderDeleteButtonDynamicHandler) forControlEvents:UIControlEventTouchUpInside];
                     return theCell;
                 }
@@ -183,7 +187,9 @@
                     HCSMyHeaderReusableView *theCell = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"HeaderView" forIndexPath:indexPath];
                     theCell.titleLabel.text = @"Text Shortcuts";
                     NSLog(@"tex");
-                    [theCell.deleteButton addTarget:self action:@selector(TextHeaderDeleteButtonDynamicHandler) forControlEvents:UIControlEventTouchUpInside];
+                    theCell.deleteButtonNumTwo.hidden = NO;
+                    theCell.deleteButton.hidden = YES;
+                    [theCell.deleteButtonNumTwo addTarget:self action:@selector(TextHeaderDeleteButtonDynamicHandler) forControlEvents:UIControlEventTouchUpInside];
                     return theCell;
                 }
                 break;

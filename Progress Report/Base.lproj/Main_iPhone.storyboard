@@ -228,10 +228,18 @@
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                 </button>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZI3-dR-533">
+                                    <rect key="frame" x="256" y="-2" width="44" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" title="Delete">
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" red="0.80540626308626517" green="0.80898421497774231" blue="0.81971807065217395" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <outlet property="deleteButton" destination="f0F-z4-BcN" id="IQy-5o-KKU"/>
+                                <outlet property="deleteButtonNumTwo" destination="ZI3-dR-533" id="OAC-bC-lPt"/>
                                 <outlet property="titleLabel" destination="IdU-Z2-oLI" id="B4K-Z0-6cu"/>
                             </connections>
                         </collectionReusableView>
