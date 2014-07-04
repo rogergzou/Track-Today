@@ -38,6 +38,10 @@
 
 @implementation HCSViewController
 
+- (IBAction)testingwtf:(id)sender {
+    self.seconds += 49*60*60;
+}
+
 - (IBAction)buttonPushed:(UIButton *)sender {
     if (self.isStart) {
         self.startDate = [NSDate date];
@@ -215,16 +219,24 @@
     self.seconds++;
     
     int mins = floor(self.seconds/60);
+    int secs = self.seconds - (mins * 60);
     int hours = 0;
     if (mins > 59) {
         hours = floor(mins/60);
         mins -= hours * 60;
     }
-    int secs = self.seconds - (mins * 60);
     if (hours == 0)
         self.timerLabel.text = [NSString stringWithFormat:@"%02d:%02d", mins, secs];
     else
         self.timerLabel.text = [NSString stringWithFormat:@"%d:%02d:%02d", hours, mins, secs];
+    if (hours >= 10) {
+        if (hours >= 100)
+            [self.timerLabel setFont:[UIFont fontWithName:self.timerLabel.font.fontName size:72]];
+        else
+            [self.timerLabel setFont:[UIFont fontWithName:self.timerLabel.font.fontName size:90]];
+    }
+    
+    //[self.timerLabel sizeToFit];
 }
 - (void)endTimer
 {
@@ -260,6 +272,7 @@
     self.pausedSeconds = 0;
     self.pauseNumber = 0;
     self.timerLabel.text = @"00:00";
+    [self.timerLabel setFont:[UIFont fontWithName:self.timerLabel.font.fontName size:96]];
     self.isPaused = NO;
     self.isStart = YES;
 }
@@ -357,9 +370,8 @@
     //NSLog(@"%@", [NSDateFormatter localizedStringFromDate:[NSDate date] dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterMediumStyle]);
     
     //set defaults
-    self.isStart = YES;
-    self.isPaused = NO;
-    self.timerLabel.text = @"00:00";
+    [self resetVars];
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setBool:NO forKey:@"firstTime"];
     if (![defaults boolForKey:@"firstTime"]) {
