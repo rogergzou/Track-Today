@@ -112,11 +112,11 @@
     
     NSString *mediaType = info[UIImagePickerControllerMediaType];
     if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
-        self.imageButton.imageView.image = info[UIImagePickerControllerOriginalImage];
-        self.imageButton.imageView.highlightedImage = info[UIImagePickerControllerOriginalImage];
-        [self.imageButton setImage:info[UIImagePickerControllerOriginalImage] forState:UIControlStateNormal];
+        //self.imageButton.imageView.image = info[UIImagePickerControllerOriginalImage];
+        //self.imageButton.imageView.highlightedImage = info[UIImagePickerControllerOriginalImage];
+        //[self.imageButton setImage:info[UIImagePickerControllerOriginalImage] forState:UIControlStateNormal];
         [self.imageButton setBackgroundImage:info[UIImagePickerControllerOriginalImage] forState:UIControlStateNormal];
-        [self.imageButton setTitle:@"" forState:UIControlStateNormal];
+        [self.imageButton setAttributedTitle:@"" forState:UIControlStateNormal];
     }
 }
 
@@ -155,7 +155,7 @@
     
     NSUserDefaults *defaults =[NSUserDefaults standardUserDefaults];
     
-    if ([self.imageButton.imageView.image isEqual:[UIImage imageNamed:@"Insert_Image"]]) {
+    if ([self.imageButton.currentBackgroundImage isEqual:[UIImage imageNamed:@"Insert_Image"]]) {
         //no image
         if (![self.textField.text length]) {
             //no text or image
@@ -177,7 +177,7 @@
             title = self.textField.text;
             
             //moved up b/c if no text, useless. Therefore, only work if text
-            HCSShortcut *shortObj = [[HCSShortcut alloc]initWithTitle:title image:self.imageButton.imageView.image];
+            HCSShortcut *shortObj = [[HCSShortcut alloc]initWithTitle:title image:self.imageButton.currentBackgroundImage];
             NSData *shortcut = [NSKeyedArchiver archivedDataWithRootObject:shortObj];
             NSArray *regularShortcuts = [defaults arrayForKey:@"shortcuts"];
             regularShortcuts = [regularShortcuts arrayByAddingObject:shortcut];
