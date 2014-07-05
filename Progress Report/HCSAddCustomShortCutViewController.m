@@ -52,6 +52,7 @@
 }
 
 #pragma mark - UITextFieldDelegate
+//NOTE: USUAL VALUES OF KEYBOARD MOVEMENT CHANGED!
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
@@ -66,12 +67,12 @@
     if (movedUp) {
         //move view origin up so textfield moves up
         //increase size of view so area behind keyboard is covered up
-        rect.origin.y -= 80.0;
-        rect.size.height += 80.0;
+        rect.origin.y -= 140.0;
+        rect.size.height += 140.0;
     } else {
         //revert
-        rect.origin.y += 80.0;
-        rect.size.height -= 80.0;
+        rect.origin.y += 140.0;
+        rect.size.height -= 140.0;
     }
     self.view.frame = rect;
     [UIView commitAnimations];

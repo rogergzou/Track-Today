@@ -77,17 +77,6 @@
                                     <action selector="resetButtonPushed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="mmu-et-gR5"/>
                                 </connections>
                             </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lms-cA-NZT">
-                                <rect key="frame" x="221" y="449" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button">
-                                    <color key="titleColor" red="1" green="0.023573720190000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="testbuttonpush:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="pEW-pY-Duu"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.28756463668706478" green="0.48422123828880259" blue="0.82702105978260865" alpha="1" colorSpace="calibratedRGB"/>
                     </view>

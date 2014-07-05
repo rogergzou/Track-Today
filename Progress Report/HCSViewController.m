@@ -38,10 +38,6 @@
 
 @implementation HCSViewController
 
-- (IBAction)testbuttonpush:(id)sender {
-    self.seconds += 1.56*60*60;
-}
-
 - (IBAction)buttonPushed:(UIButton *)sender {
     if (self.isStart) {
         self.startDate = [NSDate date];
