@@ -114,9 +114,15 @@
     switch ([indexPath section]) {
         case 0:
             if (true) {
+                NSString *imageCellReuseIdentifier;
+                if (self.imageDeleteActive) {
+                    imageCellReuseIdentifier = @"MyDeleteShortCut";
+                } else {
+                    imageCellReuseIdentifier = @"MyShortCut";
+                }
                 NSData *shortcutData = [[NSUserDefaults standardUserDefaults]arrayForKey:@"shortcuts"][fRow];
                 HCSShortcut *shortcut = (HCSShortcut *)[NSKeyedUnarchiver unarchiveObjectWithData:shortcutData];
-                HCSShortCutTextViewCell *theCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MyShortCut" forIndexPath:indexPath];
+                HCSShortCutTextViewCell *theCell = [collectionView dequeueReusableCellWithReuseIdentifier:imageCellReuseIdentifier forIndexPath:indexPath];
                 theCell.imageView.image = shortcut.image;
                 theCell.titleLabel.text = shortcut.title;
                 
@@ -133,9 +139,15 @@
             break;
         case 1:
             if (true) {
+                NSString *textCellReuseIdentifier;
+                if (self.textDeleteActive) {
+                    textCellReuseIdentifier = @"MyDeleteCustom";
+                } else {
+                    textCellReuseIdentifier = @"MyCustom";
+                }
                 NSData *shortcutCustomData = [[NSUserDefaults standardUserDefaults]arrayForKey:@"textShortcuts"][fRow];
                 HCSShortcut *shortcut = (HCSShortcut *)[NSKeyedUnarchiver unarchiveObjectWithData:shortcutCustomData];
-                HCSCustomViewCell *theCustCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MyCustom" forIndexPath:indexPath];
+                HCSCustomViewCell *theCustCell = [collectionView dequeueReusableCellWithReuseIdentifier:textCellReuseIdentifier forIndexPath:indexPath];
                 theCustCell.titleLabel.text = shortcut.title;
                 //no image
                 

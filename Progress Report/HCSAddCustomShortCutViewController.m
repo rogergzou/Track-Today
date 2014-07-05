@@ -116,7 +116,7 @@
         //self.imageButton.imageView.highlightedImage = info[UIImagePickerControllerOriginalImage];
         //[self.imageButton setImage:info[UIImagePickerControllerOriginalImage] forState:UIControlStateNormal];
         [self.imageButton setBackgroundImage:info[UIImagePickerControllerOriginalImage] forState:UIControlStateNormal];
-        [self.imageButton setAttributedTitle:@"" forState:UIControlStateNormal];
+        [self.imageButton setAttributedTitle:[[NSAttributedString alloc] initWithString:@""] forState:UIControlStateNormal];
     }
 }
 
