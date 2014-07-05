@@ -9,12 +9,12 @@
 #import "HCSAddCustomShortCutViewController.h"
 #import "HCSShortcut.h"
 #import <MobileCoreServices/MobileCoreServices.h>
+#import <QuartzCore/QuartzCore.h>
 
 @interface HCSAddCustomShortCutViewController () <UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 //UINavigationControllerDelegate prevents error for delegation of UIImagePickerController
 
 @property (weak, nonatomic) IBOutlet UIButton *imageButton;
-@property (weak, nonatomic) IBOutlet UILabel *imageTextLabel;
 @property (weak, nonatomic) IBOutlet UITextField *textField;
 @property (weak, nonatomic) IBOutlet UIButton *createButton;
 
@@ -113,7 +113,9 @@
     if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
         self.imageButton.imageView.image = info[UIImagePickerControllerOriginalImage];
         self.imageButton.imageView.highlightedImage = info[UIImagePickerControllerOriginalImage];
-        self.imageTextLabel.hidden = YES;
+        [self.imageButton setImage:info[UIImagePickerControllerOriginalImage] forState:UIControlStateNormal];
+        [self.imageButton setBackgroundImage:info[UIImagePickerControllerOriginalImage] forState:UIControlStateNormal];
+        [self.imageButton setTitle:@"" forState:UIControlStateNormal];
     }
 }
 
@@ -172,13 +174,16 @@
         if ([self.textField.text length]) {
             //image has text so assign
             title = self.textField.text;
+            
+            //moved up b/c if no text, useless. Therefore, only work if text
+            HCSShortcut *shortObj = [[HCSShortcut alloc]initWithTitle:title image:self.imageButton.imageView.image];
+            NSData *shortcut = [NSKeyedArchiver archivedDataWithRootObject:shortObj];
+            NSArray *regularShortcuts = [defaults arrayForKey:@"shortcuts"];
+            regularShortcuts = [regularShortcuts arrayByAddingObject:shortcut];
+            [defaults setObject:regularShortcuts forKey:@"shortcuts"];
+            [defaults synchronize];
         }
-        HCSShortcut *shortObj = [[HCSShortcut alloc]initWithTitle:title image:self.imageButton.imageView.image];
-        NSData *shortcut = [NSKeyedArchiver archivedDataWithRootObject:shortObj];
-        NSArray *regularShortcuts = [defaults arrayForKey:@"shortcuts"];
-        regularShortcuts = [regularShortcuts arrayByAddingObject:shortcut];
-        [defaults setObject:regularShortcuts forKey:@"shortcuts"];
-        [defaults synchronize];
+        
     }
 }
 

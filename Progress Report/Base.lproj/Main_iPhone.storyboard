@@ -32,13 +32,6 @@
                                     <outlet property="delegate" destination="vXZ-lx-hvc" id="cN3-GE-56x"/>
                                 </connections>
                             </textField>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Made by Roger Zou. rzou@hcs.harvard.edu" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2F4-1u-1EU">
-                                <rect key="frame" x="0.0" y="555" width="320" height="13"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="8"/>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="uAy-3H-TN8">
                                 <rect key="frame" x="243" y="250" width="57" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -283,7 +276,7 @@
             </objects>
             <point key="canvasLocation" x="217" y="1286"/>
         </scene>
-        <!--Add Custom Short Cut View Controller - Custom Shortcut-->
+        <!--Add Custom Short Cut View Controller - Custom Quickfill-->
         <scene sceneID="pa6-QM-r1j">
             <objects>
                 <viewController id="Jkt-E0-hM4" customClass="HCSAddCustomShortCutViewController" sceneMemberID="viewController">
@@ -296,7 +289,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IPk-eD-xmF">
-                                <rect key="frame" x="20" y="413" width="280" height="87"/>
+                                <rect key="frame" x="120" y="430" width="80" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Create">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -306,7 +299,7 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Custom Text" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="PuB-x3-2hq">
-                                <rect key="frame" x="71" y="375" width="179" height="30"/>
+                                <rect key="frame" x="71" y="372" width="179" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -314,26 +307,28 @@
                                     <outlet property="delegate" destination="Jkt-E0-hM4" id="ytC-9g-hgX"/>
                                 </connections>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="izs-DG-3yd">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="izs-DG-3yd">
                                 <rect key="frame" x="93" y="162" width="134" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="Insert_Image">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                <inset key="contentEdgeInsets" minX="0.0" minY="50" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" backgroundImage="Insert_Image">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Add Image (Optional)">
+                                            <attributes>
+                                                <color key="NSColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <font key="NSFont" size="15" name="HelveticaNeue"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
                                 </state>
                                 <connections>
                                     <action selector="imageUploadButtonTouch:" destination="Jkt-E0-hM4" eventType="touchUpInside" id="5Q7-fK-IzY"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Add Image" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XdU-2e-v8a">
-                                <rect key="frame" x="118" y="273" width="84" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.81248376435286873" green="0.89012360644684163" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Custom Shortcut" id="krE-8k-uXk">
+                    <navigationItem key="navigationItem" title="Custom Quickfill" id="krE-8k-uXk">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="YBm-YL-hO6">
                             <connections>
                                 <action selector="cancelButtonTouched:" destination="Jkt-E0-hM4" id="E6q-qI-cJl"/>
@@ -341,8 +336,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="createButton" destination="IPk-eD-xmF" id="fmC-pn-TS3"/>
                         <outlet property="imageButton" destination="izs-DG-3yd" id="uhy-82-Z25"/>
-                        <outlet property="imageTextLabel" destination="XdU-2e-v8a" id="Boo-rS-s5r"/>
                         <outlet property="textField" destination="PuB-x3-2hq" id="kJJ-me-EuJ"/>
                     </connections>
                 </viewController>
