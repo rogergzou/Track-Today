@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *imageButton;
 @property (weak, nonatomic) IBOutlet UILabel *imageTextLabel;
 @property (weak, nonatomic) IBOutlet UITextField *textField;
+@property (weak, nonatomic) IBOutlet UIButton *createButton;
 
 
 @end
@@ -39,7 +40,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    self.createButton.layer.cornerRadius = self.createButton.frame.size.height/6;
+    self.createButton.layer.borderWidth = 1;
+    self.createButton.layer.borderColor = self.createButton.titleLabel.textColor.CGColor;
 }
 
 - (void)didReceiveMemoryWarning

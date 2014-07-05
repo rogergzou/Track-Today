@@ -171,7 +171,7 @@
                     if (self.imageDeleteActive)
                         theCell.deleteButton.titleLabel.text = @"Done";
                     else
-                        theCell.deleteButton.titleLabel.text = @"Delete";
+                        theCell.deleteButton.titleLabel.text = @"Edit";
                     theCell.deleteButtonNumTwo.hidden = YES;
                     theCell.deleteButton.hidden = NO;
                     [theCell.deleteButton addTarget:self action:@selector(ImageHeaderDeleteButtonDynamicHandler) forControlEvents:UIControlEventTouchUpInside];
@@ -185,7 +185,7 @@
                     if (self.textDeleteActive)
                         theCell.deleteButtonNumTwo.titleLabel.text = @"Done";
                     else
-                        theCell.deleteButtonNumTwo.titleLabel.text = @"Delete";
+                        theCell.deleteButtonNumTwo.titleLabel.text = @"Edit";
                     theCell.deleteButtonNumTwo.hidden = NO;
                     theCell.deleteButton.hidden = YES;
                     [theCell.deleteButtonNumTwo addTarget:self action:@selector(TextHeaderDeleteButtonDynamicHandler) forControlEvents:UIControlEventTouchUpInside];
