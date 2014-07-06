@@ -85,6 +85,13 @@
     }
 }
 - (void)keyboardHide:(NSNotification *)notification {
+    
+    if (self.view.frame.origin.y == 20 || self.view.frame.origin.y == 0) {
+        //double status bar/call changed origin
+        //don't move
+        return;
+    }
+
     if (self.view.frame.origin.y >= 0) {
         [self setViewMoveUp:YES];
     } else if (self.view.frame.origin.y < 0) {
