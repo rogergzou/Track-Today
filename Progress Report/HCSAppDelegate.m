@@ -17,11 +17,6 @@
 
 @implementation HCSAppDelegate
 
-- (void)application:(UIApplication *)application didChangeStatusBarFrame:(CGRect)oldStatusBarFrame
-{
-    
-}
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
@@ -40,7 +35,7 @@
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     
-    UIViewController *rootVC = self.window.rootViewController; //should be HCSViewController. Modals aren't root?
+    UIViewController *rootVC = self.window.rootViewController; //should be HCSViewController. Check anyway.
     if ([rootVC isKindOfClass:[HCSViewController class]]) {
         HCSViewController *hcsVC = (HCSViewController *)rootVC;
         if (!hcsVC.isPaused && !hcsVC.isStart) {
@@ -53,13 +48,13 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-    UIViewController *rootVC = self.window.rootViewController; //should be HCSViewController. Modals aren't root?
+    UIViewController *rootVC = self.window.rootViewController; //should be HCSViewController. Modals aren't rootVC's. Check anyway
     if ([rootVC isKindOfClass:[HCSViewController class]]) {
         HCSViewController *hcsVC = (HCSViewController *)rootVC;
         if (!hcsVC.isPaused && !hcsVC.isStart) {
             hcsVC.seconds -= floor([self.exitDate timeIntervalSinceNow]); //-= b/c timeIntervalSince returns a neg #
             //developer's note: screw timeIntervalSinceReferenceDate and autocomplete. Didn't realize, meant timeIntervalSinceNow
-            self.exitDate = nil; //resets for next time just in case something fucks up
+            self.exitDate = nil; //resets for next time just in case
             [hcsVC beginTimer];
         }
     }
