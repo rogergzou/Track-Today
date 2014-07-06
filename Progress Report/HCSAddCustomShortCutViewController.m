@@ -119,9 +119,6 @@
     
     NSString *mediaType = info[UIImagePickerControllerMediaType];
     if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
-        //self.imageButton.imageView.image = info[UIImagePickerControllerOriginalImage];
-        //self.imageButton.imageView.highlightedImage = info[UIImagePickerControllerOriginalImage];
-        //[self.imageButton setImage:info[UIImagePickerControllerOriginalImage] forState:UIControlStateNormal];
         [self.imageButton setBackgroundImage:info[UIImagePickerControllerOriginalImage] forState:UIControlStateNormal];
         [self.imageButton setAttributedTitle:[[NSAttributedString alloc] initWithString:@""] forState:UIControlStateNormal];
     }

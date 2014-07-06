@@ -397,6 +397,7 @@
 }
 
 #pragma mark - UITextFieldDelegate
+//NOTE: This solution would probably fail if a UIScrollView was used b/c it uses a static comparison on double status bar. Utilize with caution on regular UIViews
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
@@ -409,21 +410,15 @@
     
     CGRect rect = self.view.frame;
     
-    NSLog(@"%f PRE %f", rect.origin.y, rect.size.height);
     if (movedUp) {
         //move view origin up so textfield moves up
         //increase size of view so area behind keyboard is covered up
-       
         rect.origin.y -= 80.0;
-        //rect.origin.y = -80.0;
         rect.size.height += 80.0;
-         NSLog(@"%f MOVEUP %f", rect.origin.y, rect.size.height);
     } else {
         //revert
         rect.origin.y += 80.0;
-        //rect.origin.y = 0.0;
         rect.size.height -= 80.0;
-         NSLog(@"%f MOVEDOWN %f", rect.origin.y, rect.size.height);
     }
     self.view.frame = rect;
     
@@ -431,22 +426,16 @@
 }
 - (void)keyboardShow:(NSNotification *)notification {
     if (self.view.frame.origin.y >= 0) {
-                NSLog(@"SHOW upYES");
         [self setViewMoveUp:YES];
     } else if (self.view.frame.origin.y < 0) {
-        NSLog(@"SHOW upNO");
         [self setViewMoveUp:NO];
     }
 }
 - (void)keyboardHide:(NSNotification *)notification {
 
     if (self.view.frame.origin.y == 20 || self.view.frame.origin.y == 0) {
-        //double status bar/call changed origin to 20.0. Change back
-        //CGRect callrect = self.view.frame;
-        //callrect.origin.y -= 80.0;
-        //self.view.frame = callrect;
-        
-        //fuck it don't move it at all
+        //double status bar/call changed origin
+        //don't move
         return;
     }
     
@@ -457,9 +446,6 @@
                 NSLog(@"HIDE upNO");
         [self setViewMoveUp:NO];
     } 
- 
-    //fuck it set view to move down all the time :/
-    //[self setViewMoveUp:NO];
 }
 - (void)viewWillAppear:(BOOL)animated
 {
