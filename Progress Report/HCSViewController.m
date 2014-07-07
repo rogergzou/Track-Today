@@ -367,6 +367,7 @@
     [self resetVars];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    //[defaults setBool:NO forKey:@"firstTime"];
     if (![defaults boolForKey:@"firstTime"]) {
         //set firstTime defaults
         NSArray *wordArr = @[@"Procrastination", @"Internet", @"Work", @"Eating", @"Exercise", @"Fun", @"Social", @"Travel", @"Shopping"];
@@ -439,12 +440,9 @@
         //don't move
         return;
     }
-    
     if (self.view.frame.origin.y >= 0) {
-        NSLog(@"HIDE upYES");
         [self setViewMoveUp:YES];
     } else if (self.view.frame.origin.y < 0) {
-                NSLog(@"HIDE upNO");
         [self setViewMoveUp:NO];
     } 
 }
