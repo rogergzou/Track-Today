@@ -183,6 +183,7 @@
             [event setCalendar:[eventStore defaultCalendarForNewEvents]];
             NSError *err;
             [eventStore saveEvent:event span:EKSpanThisEvent error:&err];
+            
         } else {
             //user no calendar access
             NSLog(@"No access :(");

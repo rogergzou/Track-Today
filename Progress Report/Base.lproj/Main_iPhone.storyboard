@@ -116,7 +116,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="1" id="aL6-5x-7cU">
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="2" minimumInteritemSpacing="2" id="aL6-5x-7cU">
                             <size key="itemSize" width="100" height="114"/>
                             <size key="headerReferenceSize" width="50" height="25"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -227,7 +227,7 @@
                                 </connections>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MyDeleteCustom" id="nCN-hb-IYY" customClass="HCSCustomViewCell">
-                                <rect key="frame" x="7" y="211" width="100" height="80"/>
+                                <rect key="frame" x="7" y="212" width="100" height="80"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="100" height="80"/>
