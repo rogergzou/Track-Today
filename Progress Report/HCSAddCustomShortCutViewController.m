@@ -10,7 +10,6 @@
 #import "HCSShortcut.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <QuartzCore/QuartzCore.h>
-#import "HCSImagePickerNavigationBar.h"
 
 @interface HCSAddCustomShortCutViewController () <UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 //UINavigationControllerDelegate prevents error for delegation of UIImagePickerController
@@ -159,10 +158,16 @@
         navControl.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(cameraButtonPressed)];
         navControl.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelThisImagePicker)];
          */
-        [self presentViewController:imagePicker animated:YES completion:nil];
+        //imagePicker.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(cameraButtonPressed)];
+        //imagePicker.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(cameraButtonPressed)];
         
-    } else
-        [self presentViewController:imagePicker animated:YES completion:nil];
+        imagePicker.navigationItem.leftItemsSupplementBackButton = YES;
+        UIBarButtonItem *cameraButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(cameraButtonPressed)];
+        //imagePicker.navigationItem.leftBarButtonItems = [imagePicker.navigationItem.leftBarButtonItems arrayByAddingObject:cameraButton];
+ 
+        
+    }
+    [self presentViewController:imagePicker animated:YES completion:nil];
 }
 
 #pragma mark - UINavigationControllerDelegate
@@ -176,6 +181,7 @@
         [bar setHidden:NO];
         ipcNavBar = bar.topItem;
         ipcNavBar.title = @"Photos";
+        ipcNavBar.leftItemsSupplementBackButton = YES;
         ipcNavBar.leftBarButtonItem = cameraButton;
         //navigationController.navigationItem.leftItemsSupplementBackButton = NO;
         //NSLog(@"%@ %@ %@", navigationController.navigationBar, navigationController.navigationItem, navigationController.navigationItem.leftBarButtonItem)
