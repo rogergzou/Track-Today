@@ -10,6 +10,7 @@
 #import "HCSShortcut.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <QuartzCore/QuartzCore.h>
+#import "HCSImagePickerNavigationBar.h"
 
 @interface HCSAddCustomShortCutViewController () <UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 //UINavigationControllerDelegate prevents error for delegation of UIImagePickerController
@@ -128,6 +129,10 @@
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+- (void)cancelThisImagePicker
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 - (IBAction)imageUploadButtonTouch:(id)sender {
     [self imageLibraryGetPhoto];
@@ -139,14 +144,51 @@
         return;
     }
     
+
+    
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc]init];
     imagePicker.delegate = self;
     imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     imagePicker.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
     imagePicker.allowsEditing = YES;
-    [self presentViewController:imagePicker animated:YES completion:nil];
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        //imagePicker.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:imagePicker action:nil];
+        /*
+        imagePicker.navigationBarHidden = YES;
+        UINavigationController *navControl = [[UINavigationController alloc] initWithRootViewController:imagePicker.navigationController.viewControllers[1]];
+        navControl.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(cameraButtonPressed)];
+        navControl.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelThisImagePicker)];
+         */
+        [self presentViewController:imagePicker animated:YES completion:nil];
+        
+    } else
+        [self presentViewController:imagePicker animated:YES completion:nil];
 }
 
+#pragma mark - UINavigationControllerDelegate
+
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    if ([viewController isKindOfClass:[UIImagePickerController class]]) {
+        UINavigationItem *ipcNavBar;
+        UIBarButtonItem *cameraButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(cameraButtonPressed)];
+        UINavigationBar *bar = navigationController.navigationBar;
+        [bar setHidden:NO];
+        ipcNavBar = bar.topItem;
+        ipcNavBar.title = @"Photos";
+        ipcNavBar.leftBarButtonItem = cameraButton;
+        //navigationController.navigationItem.leftItemsSupplementBackButton = NO;
+        //NSLog(@"%@ %@ %@", navigationController.navigationBar, navigationController.navigationItem, navigationController.navigationItem.leftBarButtonItem)
+    }
+}
+
+
+- (void)cameraButtonPressed
+{
+    NSLog(@"confirm");
+    [self dismissViewControllerAnimated:YES completion:nil];
+    NSLog(@"no idea what will happen");
+}
 
 
 #pragma mark - Navigation
