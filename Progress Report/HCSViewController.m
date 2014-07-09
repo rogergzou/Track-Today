@@ -16,7 +16,6 @@ const int scheduleAlertTag = 1;
 const int resetAlertTag = 2;
 const int calendarAccessMissingAlertTag = 99999999;
 const double roundButtonBorderWidth = 1.15;
-const double keyboardHeightWhenMoved = 80.0;
 
 @interface HCSViewController () <UITextFieldDelegate, UIAlertViewDelegate>
 
@@ -423,12 +422,12 @@ const double keyboardHeightWhenMoved = 80.0;
     if (movedUp) {
         //move view origin up so textfield moves up
         //increase size of view so area behind keyboard is covered up
-        rect.origin.y -= keyboardHeightWhenMoved;
-        rect.size.height += keyboardHeightWhenMoved;
+        rect.origin.y -= 75.0;
+        rect.size.height += 75.0;
     } else {
         //revert
-        rect.origin.y += keyboardHeightWhenMoved;
-        rect.size.height -= keyboardHeightWhenMoved;
+        rect.origin.y += 75.0;
+        rect.size.height -= 75.0;
     }
     self.view.frame = rect;
     

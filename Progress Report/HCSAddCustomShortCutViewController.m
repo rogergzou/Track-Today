@@ -11,8 +11,6 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <QuartzCore/QuartzCore.h>
 
-const double keyboardHeightWhenMoved = 140.0;
-
 @interface HCSAddCustomShortCutViewController () <UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 //UINavigationControllerDelegate prevents error for delegation of UIImagePickerController
 
@@ -69,12 +67,12 @@ const double keyboardHeightWhenMoved = 140.0;
     if (movedUp) {
         //move view origin up so textfield moves up
         //increase size of view so area behind keyboard is covered up
-        rect.origin.y -= keyboardHeightWhenMoved;
-        rect.size.height += keyboardHeightWhenMoved;
+        rect.origin.y -= 140.0;
+        rect.size.height += 140.0;
     } else {
         //revert
-        rect.origin.y += keyboardHeightWhenMoved;
-        rect.size.height -= keyboardHeightWhenMoved;
+        rect.origin.y += 140.0;
+        rect.size.height -= 140.0;
     }
     self.view.frame = rect;
     [UIView commitAnimations];
