@@ -12,6 +12,12 @@
 #import "HCSShortCutViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
+const int scheduleAlertTag = 1;
+const int resetAlertTag = 2;
+const int calendarAccessMissingAlertTag = 99999999;
+const double roundButtonBorderWidth = 1.15;
+const double keyboardHeightWhenMoved = 80.0;
+
 @interface HCSViewController () <UITextFieldDelegate, UIAlertViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *bigButton;
@@ -35,6 +41,8 @@
 @property (nonatomic) int pauseNumber;
 
 @end
+
+
 
 @implementation HCSViewController
 
@@ -69,7 +77,7 @@
     UIAlertView *resetAlert = [[UIAlertView alloc]initWithTitle:@"Reset?" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"Reset", @"Cancel", nil];
     resetAlert.cancelButtonIndex = 1; //set cancel as cancel
     // tag for identification when handling
-    resetAlert.tag = 2;
+    resetAlert.tag = resetAlertTag;
     [resetAlert show];
 }
 - (void)runScheduleAlert
@@ -86,7 +94,7 @@
     UIAlertView *confirmAlert = [[UIAlertView alloc]initWithTitle:@"Schedule" message:[NSString stringWithFormat:@"Place event onto iCal? %@ to %@", startDateString, endDateString] delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", @"Cancel", nil];
     confirmAlert.cancelButtonIndex = 1; //set cancel as cancel
     //tag for identification when handling
-    confirmAlert.tag = 1;
+    confirmAlert.tag = scheduleAlertTag;
     confirmAlert.alertViewStyle = UIAlertViewStylePlainTextInput;
     UITextField *alertInputTextField = [confirmAlert textFieldAtIndex:0];
     alertInputTextField.delegate = self;
@@ -105,7 +113,7 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     //tag indicates is Schedule alert
-    if (alertView.tag == 1) {
+    if (alertView.tag == scheduleAlertTag) {
         switch (buttonIndex) {
             //OK
             case 0:
@@ -124,7 +132,7 @@
                 break;
         }
     //tag indicates Reset alert
-    } else if (alertView.tag == 2) {
+    } else if (alertView.tag == resetAlertTag) {
         switch (buttonIndex) {
             //OK
             case 0:
@@ -189,7 +197,7 @@
             NSLog(@"No access :(");
             UIAlertView *accessAlert = [[UIAlertView alloc]initWithTitle:@"Please allow calendar access for full app functionality" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
             // tag for identification when handling
-            accessAlert.tag = 99999999;
+            accessAlert.tag = calendarAccessMissingAlertTag;
             [accessAlert show];
 
             [event setCalendar:[eventStore defaultCalendarForNewEvents]];
@@ -280,7 +288,7 @@
         [self.bigButton setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
         self.bigButton.backgroundColor = [UIColor whiteColor];
         self.bigButton.layer.borderColor = [UIColor greenColor].CGColor;
-        self.bigButton.layer.borderWidth = 1.15;
+        self.bigButton.layer.borderWidth = roundButtonBorderWidth;
         self.bigButton.layer.cornerRadius = self.bigButton.frame.size.width/2;
         
         self.pauseButton.enabled = NO;
@@ -288,7 +296,7 @@
         self.pauseButton.layer.borderColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.3].CGColor;
         self.pauseButton.backgroundColor = nil;
         [self.pauseButton setTitle:@"Pause" forState:UIControlStateDisabled];
-        self.pauseButton.layer.borderWidth = 1.15;
+        self.pauseButton.layer.borderWidth = roundButtonBorderWidth;
         self.pauseButton.layer.cornerRadius = self.pauseButton.frame.size.width/2;
         
         self.resetButton.enabled = NO;
@@ -297,7 +305,7 @@
         [self.resetButton setTitle:@"Reset" forState:UIControlStateNormal];
         self.resetButton.layer.borderColor = [UIColor colorWithRed:0.903978 green:0.344816 blue:0.823626 alpha:0.3].CGColor;
         self.resetButton.backgroundColor = nil;
-        self.resetButton.layer.borderWidth = 1.15;
+        self.resetButton.layer.borderWidth = roundButtonBorderWidth;
         self.resetButton.layer.cornerRadius = self.resetButton.frame.size.width/2;
         
         self.shortcutButton.layer.borderWidth = 1;
@@ -415,12 +423,12 @@
     if (movedUp) {
         //move view origin up so textfield moves up
         //increase size of view so area behind keyboard is covered up
-        rect.origin.y -= 80.0;
-        rect.size.height += 80.0;
+        rect.origin.y -= keyboardHeightWhenMoved;
+        rect.size.height += keyboardHeightWhenMoved;
     } else {
         //revert
-        rect.origin.y += 80.0;
-        rect.size.height -= 80.0;
+        rect.origin.y += keyboardHeightWhenMoved;
+        rect.size.height -= keyboardHeightWhenMoved;
     }
     self.view.frame = rect;
     
