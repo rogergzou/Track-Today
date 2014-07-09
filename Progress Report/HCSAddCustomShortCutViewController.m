@@ -119,8 +119,10 @@
     
     NSString *mediaType = info[UIImagePickerControllerMediaType];
     if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
-        [self.imageButton setBackgroundImage:info[UIImagePickerControllerOriginalImage] forState:UIControlStateNormal];
+        [self.imageButton setBackgroundImage:info[UIImagePickerControllerEditedImage] forState:UIControlStateNormal];
+        [self.imageButton setBackgroundImage:info[UIImagePickerControllerEditedImage] forState:UIControlStateHighlighted];
         [self.imageButton setAttributedTitle:[[NSAttributedString alloc] initWithString:@""] forState:UIControlStateNormal];
+        [self.imageButton setAttributedTitle:[[NSAttributedString alloc]initWithString:@""] forState:UIControlStateHighlighted];
     }
 }
 
@@ -128,48 +130,46 @@
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-- (void)cancelThisImagePicker
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
 
 - (IBAction)imageUploadButtonTouch:(id)sender {
-    [self imageLibraryGetPhoto];
-    //uses UIImagePickerController
+    [self imagePickerWithSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
 }
-- (void)imageLibraryGetPhoto
+- (IBAction)cameraButtonTouch:(id)sender {
+    [self imagePickerWithSourceType:UIImagePickerControllerSourceTypeCamera];
+}
+- (void)imagePickerWithSourceType:(UIImagePickerControllerSourceType)sourceType
 {
-    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+    if (![UIImagePickerController isSourceTypeAvailable:sourceType]) {
         return;
     }
     
-
-    
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc]init];
     imagePicker.delegate = self;
-    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    imagePicker.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+    imagePicker.sourceType = sourceType;
+    imagePicker.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:sourceType];
     imagePicker.allowsEditing = YES;
+    /*
+     //I give up
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         //imagePicker.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:imagePicker action:nil];
-        /*
+     
         imagePicker.navigationBarHidden = YES;
         UINavigationController *navControl = [[UINavigationController alloc] initWithRootViewController:imagePicker.navigationController.viewControllers[1]];
         navControl.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(cameraButtonPressed)];
         navControl.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelThisImagePicker)];
-         */
+     
         //imagePicker.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(cameraButtonPressed)];
         //imagePicker.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(cameraButtonPressed)];
         
-        imagePicker.navigationItem.leftItemsSupplementBackButton = YES;
-        UIBarButtonItem *cameraButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(cameraButtonPressed)];
+        //imagePicker.navigationItem.leftItemsSupplementBackButton = YES;
+        //UIBarButtonItem *cameraButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(cameraButtonPressed)];
         //imagePicker.navigationItem.leftBarButtonItems = [imagePicker.navigationItem.leftBarButtonItems arrayByAddingObject:cameraButton];
- 
-        
     }
+     */
     [self presentViewController:imagePicker animated:YES completion:nil];
 }
 
+/*
 #pragma mark - UINavigationControllerDelegate
 
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
@@ -187,14 +187,7 @@
         //NSLog(@"%@ %@ %@", navigationController.navigationBar, navigationController.navigationItem, navigationController.navigationItem.leftBarButtonItem)
     }
 }
-
-
-- (void)cameraButtonPressed
-{
-    NSLog(@"confirm");
-    [self dismissViewControllerAnimated:YES completion:nil];
-    NSLog(@"no idea what will happen");
-}
+*/
 
 
 #pragma mark - Navigation

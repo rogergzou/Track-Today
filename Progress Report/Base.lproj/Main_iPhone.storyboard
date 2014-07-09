@@ -389,6 +389,11 @@
                                 <action selector="cancelButtonTouched:" destination="Jkt-E0-hM4" id="E6q-qI-cJl"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="camera" id="hq1-rY-UwD">
+                            <connections>
+                                <action selector="cameraButtonTouch:" destination="Jkt-E0-hM4" id="QCX-mq-ote"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="createButton" destination="IPk-eD-xmF" id="fmC-pn-TS3"/>
