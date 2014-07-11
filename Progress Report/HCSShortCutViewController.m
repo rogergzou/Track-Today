@@ -128,6 +128,7 @@
                 
                 if (self.imageDeleteActive) {
                     theCell.deleteButton.hidden = NO;
+                    [theCell startJiggling];
                 } else {
                     theCell.deleteButton.hidden = YES;
                 }
