@@ -28,7 +28,11 @@
 		DB679F04195BB92700C61F6F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DB679F02195BB92700C61F6F /* InfoPlist.strings */; };
 		DB679F06195BB92700C61F6F /* Progress_ReportTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DB679F05195BB92700C61F6F /* Progress_ReportTests.m */; };
 		DB679F12195BD43900C61F6F /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB679F11195BD43900C61F6F /* EventKit.framework */; };
-		DBDBD786196F6F6400521826 /* LXReorderableCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = DBDBD785196F6F6400521826 /* LXReorderableCollectionViewFlowLayout.m */; };
+		DBDBD7A9196FEBD400521826 /* LSCollectionViewHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = DBDBD79F196FEBD400521826 /* LSCollectionViewHelper.m */; };
+		DBDBD7AA196FEBD400521826 /* LSCollectionViewLayoutHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = DBDBD7A1196FEBD400521826 /* LSCollectionViewLayoutHelper.m */; };
+		DBDBD7AB196FEBD400521826 /* DraggableCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = DBDBD7A4196FEBD400521826 /* DraggableCollectionViewFlowLayout.m */; };
+		DBDBD7AC196FEBD400521826 /* UICollectionView+Draggable.m in Sources */ = {isa = PBXBuildFile; fileRef = DBDBD7A6196FEBD400521826 /* UICollectionView+Draggable.m */; };
+		DBDBD7AE196FEF5000521826 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBDBD7AD196FEF5000521826 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,8 +78,17 @@
 		DB679F03195BB92700C61F6F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DB679F05195BB92700C61F6F /* Progress_ReportTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Progress_ReportTests.m; sourceTree = "<group>"; };
 		DB679F11195BD43900C61F6F /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
-		DBDBD784196F6F6400521826 /* LXReorderableCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXReorderableCollectionViewFlowLayout.h; sourceTree = "<group>"; };
-		DBDBD785196F6F6400521826 /* LXReorderableCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXReorderableCollectionViewFlowLayout.m; sourceTree = "<group>"; };
+		DBDBD79E196FEBD400521826 /* LSCollectionViewHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSCollectionViewHelper.h; sourceTree = "<group>"; };
+		DBDBD79F196FEBD400521826 /* LSCollectionViewHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSCollectionViewHelper.m; sourceTree = "<group>"; };
+		DBDBD7A0196FEBD400521826 /* LSCollectionViewLayoutHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSCollectionViewLayoutHelper.h; sourceTree = "<group>"; };
+		DBDBD7A1196FEBD400521826 /* LSCollectionViewLayoutHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSCollectionViewLayoutHelper.m; sourceTree = "<group>"; };
+		DBDBD7A3196FEBD400521826 /* DraggableCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DraggableCollectionViewFlowLayout.h; sourceTree = "<group>"; };
+		DBDBD7A4196FEBD400521826 /* DraggableCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DraggableCollectionViewFlowLayout.m; sourceTree = "<group>"; };
+		DBDBD7A5196FEBD400521826 /* UICollectionView+Draggable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UICollectionView+Draggable.h"; sourceTree = "<group>"; };
+		DBDBD7A6196FEBD400521826 /* UICollectionView+Draggable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UICollectionView+Draggable.m"; sourceTree = "<group>"; };
+		DBDBD7A7196FEBD400521826 /* UICollectionViewDataSource_Draggable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionViewDataSource_Draggable.h; sourceTree = "<group>"; };
+		DBDBD7A8196FEBD400521826 /* UICollectionViewLayout_Warpable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionViewLayout_Warpable.h; sourceTree = "<group>"; };
+		DBDBD7AD196FEF5000521826 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +96,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBDBD7AE196FEF5000521826 /* QuartzCore.framework in Frameworks */,
 				DB679F12195BD43900C61F6F /* EventKit.framework in Frameworks */,
 				DB679EDA195BB92700C61F6F /* CoreGraphics.framework in Frameworks */,
 				DB679EDC195BB92700C61F6F /* UIKit.framework in Frameworks */,
@@ -125,6 +139,7 @@
 		DB679ED6195BB92700C61F6F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DBDBD7AD196FEF5000521826 /* QuartzCore.framework */,
 				DB679F11195BD43900C61F6F /* EventKit.framework */,
 				DB679ED7195BB92700C61F6F /* Foundation.framework */,
 				DB679ED9195BB92700C61F6F /* CoreGraphics.framework */,
@@ -154,7 +169,7 @@
 				DB6765A7196126FD00C113D2 /* HCSAddCustomShortCutViewController.m */,
 				DB49F365195D19AC00067F96 /* HCSShortcut.h */,
 				DB67659E19608E8D00C113D2 /* HCSShortcut.m */,
-				DBDBD783196F6F6400521826 /* LXReorderableCollectionViewFlowLayout */,
+				DBDBD79C196FEBD400521826 /* DraggableCollectionView */,
 				DB679EF2195BB92700C61F6F /* Images.xcassets */,
 				DB679EDE195BB92700C61F6F /* Supporting Files */,
 			);
@@ -190,14 +205,38 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		DBDBD783196F6F6400521826 /* LXReorderableCollectionViewFlowLayout */ = {
+		DBDBD79C196FEBD400521826 /* DraggableCollectionView */ = {
 			isa = PBXGroup;
 			children = (
-				DBDBD784196F6F6400521826 /* LXReorderableCollectionViewFlowLayout.h */,
-				DBDBD785196F6F6400521826 /* LXReorderableCollectionViewFlowLayout.m */,
+				DBDBD79D196FEBD400521826 /* Helpers */,
+				DBDBD7A2196FEBD400521826 /* Layout */,
+				DBDBD7A5196FEBD400521826 /* UICollectionView+Draggable.h */,
+				DBDBD7A6196FEBD400521826 /* UICollectionView+Draggable.m */,
+				DBDBD7A7196FEBD400521826 /* UICollectionViewDataSource_Draggable.h */,
+				DBDBD7A8196FEBD400521826 /* UICollectionViewLayout_Warpable.h */,
 			);
-			name = LXReorderableCollectionViewFlowLayout;
-			path = "LXReorderableCollectionViewFlowLayout-master/LXReorderableCollectionViewFlowLayout";
+			name = DraggableCollectionView;
+			path = "DraggableCollectionView-master/DraggableCollectionView";
+			sourceTree = "<group>";
+		};
+		DBDBD79D196FEBD400521826 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				DBDBD79E196FEBD400521826 /* LSCollectionViewHelper.h */,
+				DBDBD79F196FEBD400521826 /* LSCollectionViewHelper.m */,
+				DBDBD7A0196FEBD400521826 /* LSCollectionViewLayoutHelper.h */,
+				DBDBD7A1196FEBD400521826 /* LSCollectionViewLayoutHelper.m */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		DBDBD7A2196FEBD400521826 /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				DBDBD7A3196FEBD400521826 /* DraggableCollectionViewFlowLayout.h */,
+				DBDBD7A4196FEBD400521826 /* DraggableCollectionViewFlowLayout.m */,
+			);
+			path = Layout;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -301,16 +340,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DBDBD786196F6F6400521826 /* LXReorderableCollectionViewFlowLayout.m in Sources */,
+				DBDBD7AB196FEBD400521826 /* DraggableCollectionViewFlowLayout.m in Sources */,
 				DB679EE4195BB92700C61F6F /* main.m in Sources */,
 				DB49F364195CF1C000067F96 /* HCSShortCutTextViewCell.m in Sources */,
 				DB6765A51960BAB400C113D2 /* HCSCustomViewCell.m in Sources */,
 				DB49FF06196634EF00D91BFE /* HCSMyHeaderReusableView.m in Sources */,
 				DB67659F19608E8D00C113D2 /* HCSShortcut.m in Sources */,
 				DB6765A8196126FD00C113D2 /* HCSAddCustomShortCutViewController.m in Sources */,
+				DBDBD7AA196FEBD400521826 /* LSCollectionViewLayoutHelper.m in Sources */,
 				DB679EF1195BB92700C61F6F /* HCSViewController.m in Sources */,
+				DBDBD7AC196FEBD400521826 /* UICollectionView+Draggable.m in Sources */,
 				DB679EE8195BB92700C61F6F /* HCSAppDelegate.m in Sources */,
 				DB49F361195CF0D400067F96 /* HCSShortCutViewController.m in Sources */,
+				DBDBD7A9196FEBD400521826 /* LSCollectionViewHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
