@@ -13,6 +13,4 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIButton *deleteButton;
 
-- (void)startJiggling;
-
 @end

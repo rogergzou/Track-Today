@@ -28,7 +28,6 @@
 		DB679F04195BB92700C61F6F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DB679F02195BB92700C61F6F /* InfoPlist.strings */; };
 		DB679F06195BB92700C61F6F /* Progress_ReportTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DB679F05195BB92700C61F6F /* Progress_ReportTests.m */; };
 		DB679F12195BD43900C61F6F /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB679F11195BD43900C61F6F /* EventKit.framework */; };
-		DBDBD786196F6F6400521826 /* LXReorderableCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = DBDBD785196F6F6400521826 /* LXReorderableCollectionViewFlowLayout.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,8 +73,6 @@
 		DB679F03195BB92700C61F6F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DB679F05195BB92700C61F6F /* Progress_ReportTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Progress_ReportTests.m; sourceTree = "<group>"; };
 		DB679F11195BD43900C61F6F /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
-		DBDBD784196F6F6400521826 /* LXReorderableCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXReorderableCollectionViewFlowLayout.h; sourceTree = "<group>"; };
-		DBDBD785196F6F6400521826 /* LXReorderableCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXReorderableCollectionViewFlowLayout.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,7 +151,6 @@
 				DB6765A7196126FD00C113D2 /* HCSAddCustomShortCutViewController.m */,
 				DB49F365195D19AC00067F96 /* HCSShortcut.h */,
 				DB67659E19608E8D00C113D2 /* HCSShortcut.m */,
-				DBDBD783196F6F6400521826 /* LXReorderableCollectionViewFlowLayout */,
 				DB679EF2195BB92700C61F6F /* Images.xcassets */,
 				DB679EDE195BB92700C61F6F /* Supporting Files */,
 			);
@@ -188,16 +184,6 @@
 				DB679F02195BB92700C61F6F /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		DBDBD783196F6F6400521826 /* LXReorderableCollectionViewFlowLayout */ = {
-			isa = PBXGroup;
-			children = (
-				DBDBD784196F6F6400521826 /* LXReorderableCollectionViewFlowLayout.h */,
-				DBDBD785196F6F6400521826 /* LXReorderableCollectionViewFlowLayout.m */,
-			);
-			name = LXReorderableCollectionViewFlowLayout;
-			path = "LXReorderableCollectionViewFlowLayout-master/LXReorderableCollectionViewFlowLayout";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -301,7 +287,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DBDBD786196F6F6400521826 /* LXReorderableCollectionViewFlowLayout.m in Sources */,
 				DB679EE4195BB92700C61F6F /* main.m in Sources */,
 				DB49F364195CF1C000067F96 /* HCSShortCutTextViewCell.m in Sources */,
 				DB6765A51960BAB400C113D2 /* HCSCustomViewCell.m in Sources */,

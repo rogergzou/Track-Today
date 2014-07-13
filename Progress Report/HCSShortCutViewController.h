@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "LXReorderableCollectionViewFlowLayout.h"
 
 @interface HCSShortCutViewController : UICollectionViewController
 
