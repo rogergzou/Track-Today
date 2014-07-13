@@ -28,6 +28,10 @@
 		DB679F04195BB92700C61F6F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DB679F02195BB92700C61F6F /* InfoPlist.strings */; };
 		DB679F06195BB92700C61F6F /* Progress_ReportTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DB679F05195BB92700C61F6F /* Progress_ReportTests.m */; };
 		DB679F12195BD43900C61F6F /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB679F11195BD43900C61F6F /* EventKit.framework */; };
+		DBE08AEF19721E77006AE034 /* LSCollectionViewHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = DBE08AE519721E77006AE034 /* LSCollectionViewHelper.m */; };
+		DBE08AF019721E77006AE034 /* LSCollectionViewLayoutHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = DBE08AE719721E77006AE034 /* LSCollectionViewLayoutHelper.m */; };
+		DBE08AF119721E77006AE034 /* DraggableCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = DBE08AEA19721E77006AE034 /* DraggableCollectionViewFlowLayout.m */; };
+		DBE08AF219721E77006AE034 /* UICollectionView+Draggable.m in Sources */ = {isa = PBXBuildFile; fileRef = DBE08AEC19721E77006AE034 /* UICollectionView+Draggable.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +77,16 @@
 		DB679F03195BB92700C61F6F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DB679F05195BB92700C61F6F /* Progress_ReportTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Progress_ReportTests.m; sourceTree = "<group>"; };
 		DB679F11195BD43900C61F6F /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
+		DBE08AE419721E77006AE034 /* LSCollectionViewHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSCollectionViewHelper.h; sourceTree = "<group>"; };
+		DBE08AE519721E77006AE034 /* LSCollectionViewHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSCollectionViewHelper.m; sourceTree = "<group>"; };
+		DBE08AE619721E77006AE034 /* LSCollectionViewLayoutHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSCollectionViewLayoutHelper.h; sourceTree = "<group>"; };
+		DBE08AE719721E77006AE034 /* LSCollectionViewLayoutHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSCollectionViewLayoutHelper.m; sourceTree = "<group>"; };
+		DBE08AE919721E77006AE034 /* DraggableCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DraggableCollectionViewFlowLayout.h; sourceTree = "<group>"; };
+		DBE08AEA19721E77006AE034 /* DraggableCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DraggableCollectionViewFlowLayout.m; sourceTree = "<group>"; };
+		DBE08AEB19721E77006AE034 /* UICollectionView+Draggable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UICollectionView+Draggable.h"; sourceTree = "<group>"; };
+		DBE08AEC19721E77006AE034 /* UICollectionView+Draggable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UICollectionView+Draggable.m"; sourceTree = "<group>"; };
+		DBE08AED19721E77006AE034 /* UICollectionViewDataSource_Draggable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionViewDataSource_Draggable.h; sourceTree = "<group>"; };
+		DBE08AEE19721E77006AE034 /* UICollectionViewLayout_Warpable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionViewLayout_Warpable.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +178,7 @@
 				DB679EE0195BB92700C61F6F /* InfoPlist.strings */,
 				DB679EE3195BB92700C61F6F /* main.m */,
 				DB679EE5195BB92700C61F6F /* Track Today-Prefix.pch */,
+				DBE08AE219721E77006AE034 /* DraggableCollectionView */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -184,6 +199,39 @@
 				DB679F02195BB92700C61F6F /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DBE08AE219721E77006AE034 /* DraggableCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				DBE08AE319721E77006AE034 /* Helpers */,
+				DBE08AE819721E77006AE034 /* Layout */,
+				DBE08AEB19721E77006AE034 /* UICollectionView+Draggable.h */,
+				DBE08AEC19721E77006AE034 /* UICollectionView+Draggable.m */,
+				DBE08AED19721E77006AE034 /* UICollectionViewDataSource_Draggable.h */,
+				DBE08AEE19721E77006AE034 /* UICollectionViewLayout_Warpable.h */,
+			);
+			path = DraggableCollectionView;
+			sourceTree = "<group>";
+		};
+		DBE08AE319721E77006AE034 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				DBE08AE419721E77006AE034 /* LSCollectionViewHelper.h */,
+				DBE08AE519721E77006AE034 /* LSCollectionViewHelper.m */,
+				DBE08AE619721E77006AE034 /* LSCollectionViewLayoutHelper.h */,
+				DBE08AE719721E77006AE034 /* LSCollectionViewLayoutHelper.m */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		DBE08AE819721E77006AE034 /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				DBE08AE919721E77006AE034 /* DraggableCollectionViewFlowLayout.h */,
+				DBE08AEA19721E77006AE034 /* DraggableCollectionViewFlowLayout.m */,
+			);
+			path = Layout;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -287,15 +335,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBE08AF119721E77006AE034 /* DraggableCollectionViewFlowLayout.m in Sources */,
 				DB679EE4195BB92700C61F6F /* main.m in Sources */,
 				DB49F364195CF1C000067F96 /* HCSShortCutTextViewCell.m in Sources */,
 				DB6765A51960BAB400C113D2 /* HCSCustomViewCell.m in Sources */,
 				DB49FF06196634EF00D91BFE /* HCSMyHeaderReusableView.m in Sources */,
 				DB67659F19608E8D00C113D2 /* HCSShortcut.m in Sources */,
 				DB6765A8196126FD00C113D2 /* HCSAddCustomShortCutViewController.m in Sources */,
+				DBE08AF019721E77006AE034 /* LSCollectionViewLayoutHelper.m in Sources */,
 				DB679EF1195BB92700C61F6F /* HCSViewController.m in Sources */,
+				DBE08AF219721E77006AE034 /* UICollectionView+Draggable.m in Sources */,
 				DB679EE8195BB92700C61F6F /* HCSAppDelegate.m in Sources */,
 				DB49F361195CF0D400067F96 /* HCSShortCutViewController.m in Sources */,
+				DBE08AEF19721E77006AE034 /* LSCollectionViewHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

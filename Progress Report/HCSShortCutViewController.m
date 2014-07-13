@@ -128,6 +128,8 @@
                 
                 if (self.imageDeleteActive) {
                     theCell.deleteButton.hidden = NO;
+                    [theCell startJiggling];
+                    
                 } else {
                     theCell.deleteButton.hidden = YES;
                 }
@@ -153,6 +155,7 @@
                 
                 if (self.textDeleteActive) {
                     theCustCell.deleteButton.hidden = NO;
+                    [theCustCell startJiggling];
                 } else {
                     theCustCell.deleteButton.hidden = YES;
                 }
@@ -225,6 +228,78 @@
         return CGSizeMake(0, 0);
     }
 }
+
+
+#pragma mark - UICollectionViewDataSource_Draggable
+//copy pasta from previous reverted commits
+
+- (BOOL)collectionView:(LSCollectionViewHelper *)collectionView canMoveItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+
+- (BOOL)collectionView:(UICollectionView *)collectionView canMoveItemAtIndexPath:(NSIndexPath *)indexPath toIndexPath:(NSIndexPath *)toIndexPath
+{
+    // Prevent item from being moved to index 0
+    //    if (toIndexPath.item == 0) {
+    //        return NO;
+    //    }
+    return YES;
+}
+
+- (void)collectionView:(LSCollectionViewHelper *)collectionView moveItemAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
+{
+    NSMutableArray *myArray;
+    NSMutableArray *myDestinationArray;
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([fromIndexPath section] == 0) {
+        //image
+        myArray = [[defaults arrayForKey:@"shortcuts"] mutableCopy];
+    } else if ([fromIndexPath section] == 1) {
+        //text
+        myArray = [[defaults arrayForKey:@"textShortcuts"] mutableCopy];
+    }
+    NSData *myData = [myArray objectAtIndex:fromIndexPath.item];
+    
+    [myArray removeObjectAtIndex:fromIndexPath.item];
+    
+    if ([fromIndexPath section] == [toIndexPath section])
+        myDestinationArray = myArray;
+    else if ([toIndexPath section] == 0)
+        myDestinationArray = [[defaults arrayForKey:@"shortcuts"] mutableCopy];
+    else if ([toIndexPath section] == 1)
+        myDestinationArray = [[defaults arrayForKey:@"textShortcuts"] mutableCopy];
+    
+    
+    [myDestinationArray insertObject:myData atIndex:toIndexPath.item]; //NOTE: Was myShortcut, but if NSUserDefaults should still use myData;
+    
+    if ([fromIndexPath section] == 0) {
+        [defaults setObject:[NSArray arrayWithArray:myArray] forKey:@"shortcuts"];
+    } else if ([fromIndexPath section] == 1) {
+        [defaults setObject:[NSArray arrayWithArray:myArray] forKey:@"textShortcuts"];
+    }
+    
+    if ([fromIndexPath section] != [toIndexPath section]) {
+        if ([toIndexPath section] == 0) {
+            [defaults setObject:[NSArray arrayWithArray:myArray] forKey:@"shortcuts"];
+        } else if ([toIndexPath section] == 1) {
+            [defaults setObject:[NSArray arrayWithArray:myArray] forKey:@"textShortcuts"];
+        }
+    }
+    [defaults synchronize];
+    
+    //PlayingCard *playingCard = [self.deck objectAtIndex:fromIndexPath.item];
+    //[self.deck removeObjectAtIndex:fromIndexPath.item];
+    //[self.deck insertObject:playingCard atIndex:toIndexPath.item];
+    
+    //    NSMutableArray *data1 = [sections objectAtIndex:fromIndexPath.section];
+    //  NSMutableArray *data2 = [sections objectAtIndex:toIndexPath.section];
+    //NSString *index = [data1 objectAtIndex:fromIndexPath.item];
+    
+    //[data1 removeObjectAtIndex:fromIndexPath.item];
+    //[data2 insertObject:index atIndex:toIndexPath.item];
+}
+
 
 #pragma mark - Navigation
 

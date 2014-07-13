@@ -111,7 +111,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="2" minimumInteritemSpacing="2" id="aL6-5x-7cU">
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="2" minimumInteritemSpacing="2" id="aL6-5x-7cU" customClass="DraggableCollectionViewFlowLayout">
                             <size key="itemSize" width="100" height="114"/>
                             <size key="headerReferenceSize" width="50" height="25"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -273,6 +273,9 @@
                                 <outlet property="titleLabel" destination="IdU-Z2-oLI" id="B4K-Z0-6cu"/>
                             </connections>
                         </collectionReusableView>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="draggable" value="YES"/>
+                        </userDefinedRuntimeAttributes>
                         <connections>
                             <outlet property="dataSource" destination="TsU-Sj-fHa" id="uGc-oe-Ec9"/>
                             <outlet property="delegate" destination="TsU-Sj-fHa" id="XQ7-gu-fxT"/>

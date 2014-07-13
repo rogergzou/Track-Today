@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UICollectionView+Draggable.h"
 
-@interface HCSShortCutViewController : UICollectionViewController
+@interface HCSShortCutViewController : UICollectionViewController <UICollectionViewDataSource_Draggable, UICollectionViewDelegate>
 
 @property (nonatomic, strong) NSString *title;
 
