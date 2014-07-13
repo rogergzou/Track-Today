@@ -244,7 +244,11 @@
     //    if (toIndexPath.item == 0) {
     //        return NO;
     //    }
-    return YES;
+    
+    if (indexPath.section == toIndexPath.section)
+        return YES;
+    else
+        return NO;
 }
 
 - (void)collectionView:(LSCollectionViewHelper *)collectionView moveItemAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
