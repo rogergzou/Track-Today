@@ -168,15 +168,10 @@
             break;
     }
 }
-/*
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     //handled by the storyboard segue
-    if (self.editing) {
-        NSLog(@"we are editing one at %ld %ld", (long)indexPath.section, (long)indexPath.item);
-    }
 }
- */
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
@@ -218,7 +213,6 @@
         return nil;
 }
 
-
 #pragma mark - UICollectionViewDelegateFlowLayout
 //for sizing cells
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -232,189 +226,6 @@
         return CGSizeMake(0, 0);
     }
 }
-/*
-#pragma mark - LXReorderableCollectionViewDataSource methods
-
-- (void)collectionView:(UICollectionView *)collectionView itemAtIndexPath:(NSIndexPath *)fromIndexPath willMoveToIndexPath:(NSIndexPath *)toIndexPath {
-    
-    NSMutableArray *myArray;
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if ([fromIndexPath section] == 0) {
-        //image
-        myArray = [[defaults arrayForKey:@"shortcuts"] mutableCopy];
-    } else if ([fromIndexPath section] == 1) {
-        myArray = [[defaults arrayForKey:@"textShortcuts"] mutableCopy];
-    }
-    NSData *myData = [myArray objectAtIndex:fromIndexPath.item];
-//    HCSShortcut *myShortcut = (HCSShortcut *)[NSKeyedUnarchiver unarchiveObjectWithData:myData];
-    
-    [myArray removeObjectAtIndex:fromIndexPath.item];
-    [myArray insertObject:myData atIndex:toIndexPath.item]; //NOTE: Was myShortcut, but if NSUserDefaults should still use myData;
-    if ([fromIndexPath section] == 0) {
-        [defaults setObject:[NSArray arrayWithArray:myArray] forKey:@"shortcuts"];
-    } else if ([fromIndexPath section] == 1) {
-        [defaults setObject:[NSArray arrayWithArray:myArray] forKey:@"textShortcuts"];
-    }
-    [defaults synchronize];
-    
-    //PlayingCard *playingCard = [self.deck objectAtIndex:fromIndexPath.item];
-    //[self.deck removeObjectAtIndex:fromIndexPath.item];
-    //[self.deck insertObject:playingCard atIndex:toIndexPath.item];
-}
-
-- (BOOL)collectionView:(UICollectionView *)collectionView canMoveItemAtIndexPath:(NSIndexPath *)indexPath {
-#if LX_LIMITED_MOVEMENT == 1
-    //PlayingCard *playingCard = [deck objectAtIndex:indexPath.item];
-    
-    if ([indexPath section] == 0) {
-        //image
-        if (self.imageDeleteActive)
-            return YES;
-        else
-            return NO;
-    } else if ([indexPath section] == 1) {
-        //text
-        if (self.textDeleteActive)
-            return YES;
-        else
-            return NO;
-    } else {
-        return NO;
-    }
-    //switch (playingCard.suit) {
-      //  case PlayingCardSuitSpade:
-        //case PlayingCardSuitClub:
-          //  return YES;
-       // default:
-         //   return NO;
-    //}
-    return YES;
-#else
-    return YES;
-#endif
-}
-
-- (BOOL)collectionView:(UICollectionView *)collectionView itemAtIndexPath:(NSIndexPath *)fromIndexPath canMoveToIndexPath:(NSIndexPath *)toIndexPath {
-    /
-     if ([toIndexPath section] == [fromIndexPath section]) {
-        if ([toIndexPath section] == 0 && self.imageDeleteActive)
-            //image
-            return YES;
-        else if ([toIndexPath section] == 1 && self.textDeleteActive)
-            return YES;
-        else
-            return NO;
-    } else
-        return NO;
-     
-    #if LX_LIMITED_MOVEMENT == 1
-  //  PlayingCard *fromPlayingCard = [deck objectAtIndex:fromIndexPath.item];
-    //PlayingCard *toPlayingCard = [deck objectAtIndex:toIndexPath.item];
-    
-    //switch (toPlayingCard.suit) {
-      //  case PlayingCardSuitSpade:
-        //case PlayingCardSuitClub:
-          //  return fromPlayingCard.rank == toPlayingCard.rank;
-        //default:
-            //return NO;
-    //}
-    return YES;
-#else
-    return YES;
-#endif
-}
-
-
-#pragma mark - LXReorderableCollectionViewDelegateFlowLayout methods
-
-- (void)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout willBeginDraggingItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"will begin drag");
-}
-
-- (void)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout didBeginDraggingItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"did begin drag");
-}
-
-- (void)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout willEndDraggingItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"will end drag");
-}
-
-- (void)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout didEndDraggingItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"did end drag");
-}
-
-
-*/
-
-#pragma mark - UICollectionViewDataSource_Draggable
-
-- (BOOL)collectionView:(LSCollectionViewHelper *)collectionView canMoveItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    return YES;
-}
-
-- (BOOL)collectionView:(UICollectionView *)collectionView canMoveItemAtIndexPath:(NSIndexPath *)indexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-    // Prevent item from being moved to index 0
-    //    if (toIndexPath.item == 0) {
-    //        return NO;
-    //    }
-    return YES;
-}
-
-- (void)collectionView:(LSCollectionViewHelper *)collectionView moveItemAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-    NSMutableArray *myArray;
-    NSMutableArray *myDestinationArray;
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if ([fromIndexPath section] == 0) {
-        //image
-        myArray = [[defaults arrayForKey:@"shortcuts"] mutableCopy];
-    } else if ([fromIndexPath section] == 1) {
-        //text
-        myArray = [[defaults arrayForKey:@"textShortcuts"] mutableCopy];
-    }
-    NSData *myData = [myArray objectAtIndex:fromIndexPath.item];
-    
-    [myArray removeObjectAtIndex:fromIndexPath.item];
-    
-    if ([fromIndexPath section] == [toIndexPath section])
-        myDestinationArray = myArray;
-    else if ([toIndexPath section] == 0)
-        myDestinationArray = [[defaults arrayForKey:@"shortcuts"] mutableCopy];
-    else if ([toIndexPath section] == 1)
-        myDestinationArray = [[defaults arrayForKey:@"textShortcuts"] mutableCopy];
-
-    
-    [myDestinationArray insertObject:myData atIndex:toIndexPath.item]; //NOTE: Was myShortcut, but if NSUserDefaults should still use myData;
-
-    if ([fromIndexPath section] == 0) {
-        [defaults setObject:[NSArray arrayWithArray:myArray] forKey:@"shortcuts"];
-    } else if ([fromIndexPath section] == 1) {
-        [defaults setObject:[NSArray arrayWithArray:myArray] forKey:@"textShortcuts"];
-    }
-    
-    if ([fromIndexPath section] != [toIndexPath section]) {
-        if ([toIndexPath section] == 0) {
-            [defaults setObject:[NSArray arrayWithArray:myArray] forKey:@"shortcuts"];
-        } else if ([toIndexPath section] == 1) {
-            [defaults setObject:[NSArray arrayWithArray:myArray] forKey:@"textShortcuts"];
-        }
-    }
-    [defaults synchronize];
-    
-    //PlayingCard *playingCard = [self.deck objectAtIndex:fromIndexPath.item];
-    //[self.deck removeObjectAtIndex:fromIndexPath.item];
-    //[self.deck insertObject:playingCard atIndex:toIndexPath.item];
-    
-//    NSMutableArray *data1 = [sections objectAtIndex:fromIndexPath.section];
-  //  NSMutableArray *data2 = [sections objectAtIndex:toIndexPath.section];
-    //NSString *index = [data1 objectAtIndex:fromIndexPath.item];
-    
-    //[data1 removeObjectAtIndex:fromIndexPath.item];
-    //[data2 insertObject:index atIndex:toIndexPath.item];
-}
-
 
 #pragma mark - Navigation
 

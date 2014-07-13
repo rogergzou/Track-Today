@@ -44,12 +44,6 @@
                      completion:nil];
 }
 
-#pragma mark - LXLayout
-- (void)setHighlighted:(BOOL)highlighted
-{
-    [super setHighlighted:highlighted];
-    self.imageView.alpha = highlighted ? 0.75f : 1.0f;
-}
 
 /*
 // Only override drawRect: if you perform custom drawing.
