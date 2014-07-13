@@ -47,7 +47,7 @@
 - (void)setHighlighted:(BOOL)highlighted
 {
     [super setHighlighted:highlighted];
-    self.titleLabel.alpha = highlighted ? 0.75f : 1.0f;
+    self.titleLabel.alpha = highlighted ? 0.5f : 1.0f;
 }
 
 /*
