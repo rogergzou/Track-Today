@@ -140,7 +140,10 @@
 - (void)imagePickerWithSourceType:(UIImagePickerControllerSourceType)sourceType
 {
     if (![UIImagePickerController isSourceTypeAvailable:sourceType]) {
-        return;
+        if (sourceType == UIImagePickerControllerSourceTypeCamera)
+            [self imagePickerWithSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+        else
+            return;
     }
     
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc]init];
@@ -166,6 +169,12 @@
         //imagePicker.navigationItem.leftBarButtonItems = [imagePicker.navigationItem.leftBarButtonItems arrayByAddingObject:cameraButton];
     }
      */
+    if (sourceType == UIImagePickerControllerSourceTypeCamera) {
+        //imagePicker.showsCameraControls = NO;
+        
+    }
+    
+    
     [self presentViewController:imagePicker animated:YES completion:nil];
 }
 

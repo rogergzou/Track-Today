@@ -390,7 +390,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Delete_Button" width="24" height="24"/>
+        <image name="Delete_Button" width="32" height="32"/>
         <image name="Insert_Image" width="128" height="128"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
