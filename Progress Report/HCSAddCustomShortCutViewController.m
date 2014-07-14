@@ -11,12 +11,13 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <QuartzCore/QuartzCore.h>
 
-@interface HCSAddCustomShortCutViewController () <UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface HCSAddCustomShortCutViewController () <UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate>
 //UINavigationControllerDelegate prevents error for delegation of UIImagePickerController
 
 @property (weak, nonatomic) IBOutlet UIButton *imageButton;
 @property (weak, nonatomic) IBOutlet UITextField *textField;
 @property (weak, nonatomic) IBOutlet UIButton *createButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *cameraButton;
 
 
 @end
@@ -43,6 +44,10 @@
     self.createButton.layer.cornerRadius = self.createButton.frame.size.height/6;
     self.createButton.layer.borderWidth = 1;
     self.createButton.layer.borderColor = self.createButton.titleLabel.textColor.CGColor;
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] || [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
+        self.navigationItem.rightBarButtonItem = self.cameraButton;
+    else
+        self.navigationItem.rightBarButtonItem = nil;
 }
 
 - (void)didReceiveMemoryWarning
@@ -110,15 +115,58 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
+
+- (IBAction)imageUploadButtonTouch:(id)sender {
+    [self imagePickerWithSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+}
+- (IBAction)cameraButtonTouch:(id)sender {
+    UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        [actionSheet addButtonWithTitle:@"Take Picture"];
+    }
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+        [actionSheet addButtonWithTitle:@"Choose from Photo Library"];
+    }
+    actionSheet.cancelButtonIndex = [actionSheet addButtonWithTitle:@"Cancel"];
+    [actionSheet showFromBarButtonItem:self.cameraButton animated:YES];
+}
+
+#pragma mark - UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    switch (buttonIndex) {
+        case 0:
+            //Take Picture or Photo Library
+            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+                [self imagePickerWithSourceType:UIImagePickerControllerSourceTypeCamera];
+            else
+                [self imagePickerWithSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+            break;
+        case 1:
+            //Choose from Photo Library or Cancel
+            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] && [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
+                [self imagePickerWithSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+            else
+                //cancel button, do nothing
+            break;
+        default:
+            //cancel, nothing
+            break;
+    }
+}
+
 #pragma mark - UIImagePickerControllerDelegate
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     //code to work w/ media
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [picker dismissViewControllerAnimated:YES completion:nil];
     
     NSString *mediaType = info[UIImagePickerControllerMediaType];
     if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
+        UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+        UIImageWriteToSavedPhotosAlbum(image,nil,nil,nil);
         [self.imageButton setBackgroundImage:info[UIImagePickerControllerEditedImage] forState:UIControlStateNormal];
         [self.imageButton setBackgroundImage:info[UIImagePickerControllerEditedImage] forState:UIControlStateHighlighted];
         [self.imageButton setAttributedTitle:[[NSAttributedString alloc] initWithString:@""] forState:UIControlStateNormal];
@@ -131,12 +179,7 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (IBAction)imageUploadButtonTouch:(id)sender {
-    [self imagePickerWithSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
-}
-- (IBAction)cameraButtonTouch:(id)sender {
-    [self imagePickerWithSourceType:UIImagePickerControllerSourceTypeCamera];
-}
+
 - (void)imagePickerWithSourceType:(UIImagePickerControllerSourceType)sourceType
 {
     if (![UIImagePickerController isSourceTypeAvailable:sourceType]) {
@@ -169,14 +212,20 @@
         //imagePicker.navigationItem.leftBarButtonItems = [imagePicker.navigationItem.leftBarButtonItems arrayByAddingObject:cameraButton];
     }
      */
-    if (sourceType == UIImagePickerControllerSourceTypeCamera) {
-        //imagePicker.showsCameraControls = NO;
-        
-    }
+    //if (sourceType == UIImagePickerControllerSourceTypeCamera) {
+        //imagePicker.showsCameraControls = YES; Default is YES. Also apparently bug for retake if this is uncommented, idk why.
+        //imagePicker.cameraDevice = UIImagePickerControllerCameraDeviceRear; UNNEEDED default camera controls allow switch between the two
+        //UIView *customview = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];//[UIScreen mainScreen].applicationFrame];
+        //customview.backgroundColor = [UIColor redColor];
+        //imagePicker.cameraOverlayView = customview;
+        //imagePicker.toolbarHidden = YES; if not hidden looks bad, covers camera control buttons
+        //imagePicker.navigationBarHidden = NO; DOES NOTHING on either state. Useless
+    //}
     
     
     [self presentViewController:imagePicker animated:YES completion:nil];
 }
+
 
 /*
 #pragma mark - UINavigationControllerDelegate

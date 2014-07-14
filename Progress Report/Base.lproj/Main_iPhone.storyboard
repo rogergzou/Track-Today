@@ -378,6 +378,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="cameraButton" destination="hq1-rY-UwD" id="4Fp-UX-eu9"/>
                         <outlet property="createButton" destination="IPk-eD-xmF" id="fmC-pn-TS3"/>
                         <outlet property="imageButton" destination="izs-DG-3yd" id="uhy-82-Z25"/>
                         <outlet property="textField" destination="PuB-x3-2hq" id="kJJ-me-EuJ"/>
