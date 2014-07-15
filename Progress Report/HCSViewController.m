@@ -412,7 +412,8 @@ const double roundButtonBorderWidth = 1.15;
     
     if (![defaults boolForKey:@"firstTime"]) {
         //set firstTime defaults
-        NSArray *wordArr = @[@"Procrastination", @"Internet", @"Work", @"Eating", @"Exercise", @"Fun", @"Social", @"Travel", @"Shopping"];
+        NSLog(@"first");
+        NSArray *wordArr = @[@"Procrastination", @"Work", @"Eating", @"Exercise", @"Fun", @"Social", @"Travel", @"Shopping"];
         NSMutableArray *storeWords = [NSMutableArray array];
         
         //encoding so able to store is nsuserdefaults
@@ -422,7 +423,7 @@ const double roundButtonBorderWidth = 1.15;
         }
         [defaults setObject:storeWords forKey:@"shortcuts"];
         
-        NSArray *textOnlyArr = @[@"Nap", @"Walk", @"Reading", @"Other"];
+        NSArray *textOnlyArr = @[@"Sleep", @"Walk", @"Reading"];
         NSMutableArray *textWords = [NSMutableArray array];
         for (NSString *word in textOnlyArr) {
             NSData *encodedSampleWorkObj = [NSKeyedArchiver archivedDataWithRootObject:[[HCSShortcut alloc]initWithTitle:word image:nil]];

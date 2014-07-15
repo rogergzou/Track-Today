@@ -44,6 +44,14 @@
     return _imageArrayForPicker;
 }
 
+- (UIImage *)currentlySelectedImage
+{
+    if (!_currentlySelectedImage) {
+        _currentlySelectedImage = [UIImage imageNamed:@"No_Image_Image"];
+    }
+    return _currentlySelectedImage;
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
