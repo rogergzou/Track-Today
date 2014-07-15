@@ -28,6 +28,7 @@
 @implementation HCSAddCustomShortCutViewController
 
 - (IBAction)cancelButtonTouched:(UIBarButtonItem *)sender {
+    self.imageArrayForPicker = nil; //so will reload when view loads again
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -93,65 +94,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - UITextFieldDelegate
-//NOTE: USUAL VALUES OF KEYBOARD MOVEMENT CHANGED!
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [textField resignFirstResponder];
-    return YES;
-}
-- (void) setViewMoveUp:(BOOL)movedUp
-{
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.3];
-    
-    CGRect rect = self.view.frame;
-    if (movedUp) {
-        //move view origin up so textfield moves up
-        //increase size of view so area behind keyboard is covered up
-        rect.origin.y -= 140.0;
-        rect.size.height += 140.0;
-    } else {
-        //revert
-        rect.origin.y += 140.0;
-        rect.size.height -= 140.0;
-    }
-    self.view.frame = rect;
-    [UIView commitAnimations];
-}
-- (void)keyboardShow:(NSNotification *)notification {
-    if (self.view.frame.origin.y >= 0) {
-        [self setViewMoveUp:YES];
-    } else if (self.view.frame.origin.y < 0) {
-        [self setViewMoveUp:NO];
-    }
-}
-- (void)keyboardHide:(NSNotification *)notification {
-    
-    if (self.view.frame.origin.y == 20 || self.view.frame.origin.y == 0) {
-        //double status bar/call changed origin
-        //don't move
-        return;
-    }
-
-    if (self.view.frame.origin.y >= 0) {
-        [self setViewMoveUp:YES];
-    } else if (self.view.frame.origin.y < 0) {
-        [self setViewMoveUp:NO];
-    }
-}
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardShow:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardHide:) name:UIKeyboardWillHideNotification object:nil];
-}
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
-}
 
 - (IBAction)imageUploadButtonTouch:(id)sender {
     [self imagePickerWithSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
@@ -203,11 +146,19 @@
     NSString *mediaType = info[UIImagePickerControllerMediaType];
     if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
         UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
-        UIImageWriteToSavedPhotosAlbum(image,nil,nil,nil);
+        
+        
+        if (picker.sourceType == UIImagePickerControllerSourceTypeCamera)
+                UIImageWriteToSavedPhotosAlbum(image,nil,nil,nil);
+
+        
         [self.imageButton setBackgroundImage:info[UIImagePickerControllerEditedImage] forState:UIControlStateNormal];
         [self.imageButton setBackgroundImage:info[UIImagePickerControllerEditedImage] forState:UIControlStateHighlighted];
         [self.imageButton setAttributedTitle:[[NSAttributedString alloc] initWithString:@""] forState:UIControlStateNormal];
         [self.imageButton setAttributedTitle:[[NSAttributedString alloc]initWithString:@""] forState:UIControlStateHighlighted];
+        
+        self.imageArrayForPicker[0] = image;
+        [self.pickerOfImages reloadAllComponents];
     }
 }
 
@@ -367,6 +318,67 @@
     return image.size.width + 20.f;
 }
 */
+
+#pragma mark - UITextFieldDelegate
+//NOTE: USUAL VALUES OF KEYBOARD MOVEMENT CHANGED!
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+}
+- (void) setViewMoveUp:(BOOL)movedUp
+{
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.3];
+    
+    CGRect rect = self.view.frame;
+    if (movedUp) {
+        //move view origin up so textfield moves up
+        //increase size of view so area behind keyboard is covered up
+        rect.origin.y -= 140.0;
+        rect.size.height += 140.0;
+    } else {
+        //revert
+        rect.origin.y += 140.0;
+        rect.size.height -= 140.0;
+    }
+    self.view.frame = rect;
+    [UIView commitAnimations];
+}
+- (void)keyboardShow:(NSNotification *)notification {
+    if (self.view.frame.origin.y >= 0) {
+        [self setViewMoveUp:YES];
+    } else if (self.view.frame.origin.y < 0) {
+        [self setViewMoveUp:NO];
+    }
+}
+- (void)keyboardHide:(NSNotification *)notification {
+    
+    if (self.view.frame.origin.y == 20 || self.view.frame.origin.y == 0) {
+        //double status bar/call changed origin
+        //don't move
+        return;
+    }
+    
+    if (self.view.frame.origin.y >= 0) {
+        [self setViewMoveUp:YES];
+    } else if (self.view.frame.origin.y < 0) {
+        [self setViewMoveUp:NO];
+    }
+}
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+}
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -377,7 +389,7 @@
     
     NSUserDefaults *defaults =[NSUserDefaults standardUserDefaults];
     
-    if ([self.imageButton.currentBackgroundImage isEqual:[UIImage imageNamed:@"Insert_Image"]]) {
+    if ([self.currentlySelectedImage isEqual:[UIImage imageNamed:@"No_Image_Image"]]) {
         //no image
         if (![self.textField.text length]) {
             //no text or image
@@ -408,6 +420,7 @@
         }
         
     }
+    self.imageArrayForPicker = nil; //so will reload when view loads again
 }
 
 @end
