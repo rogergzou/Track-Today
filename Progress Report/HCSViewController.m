@@ -25,6 +25,7 @@ const double roundButtonBorderWidth = 1.15;
 @property (weak, nonatomic) IBOutlet UIButton *resetButton;
 @property (weak, nonatomic) IBOutlet UILabel *timerLabel;
 @property (weak, nonatomic) IBOutlet UIButton *shortcutButton;
+@property (weak, nonatomic) IBOutlet UILabel *resultLabel;
 
 @property (nonatomic, readwrite) BOOL isStart;
 @property (nonatomic, readwrite) BOOL isPaused;
@@ -118,6 +119,7 @@ const double roundButtonBorderWidth = 1.15;
             case 0:
                 self.titleButton.text = [alertView textFieldAtIndex:0].text;
                 [self scheduleEvent];
+                [self resultLabelUpdate];
                 [self endTimer];
                 [self resetVars];
                 [self updateUI];
@@ -279,6 +281,33 @@ const double roundButtonBorderWidth = 1.15;
     self.isPaused = NO;
     self.isStart = YES;
 }
+- (void)resultLabelUpdate
+{
+    //copypasta from scheduleAlert
+    NSString *startDateString = [NSDateFormatter localizedStringFromDate:self.startDate dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterMediumStyle];
+    NSString *endDateString = [NSDateFormatter localizedStringFromDate:self.endDate dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterMediumStyle];
+    NSDate *startDateOnly = self.startDate;
+    NSDate *endDateOnly = self.endDate;
+    [[NSCalendar currentCalendar] rangeOfUnit:NSDayCalendarUnit startDate:&startDateOnly interval:NULL forDate:startDateOnly];
+    [[NSCalendar currentCalendar] rangeOfUnit:NSDayCalendarUnit startDate:&endDateOnly interval:NULL forDate:endDateOnly];
+    if ([startDateOnly compare:endDateOnly] == NSOrderedSame)
+        endDateString = [endDateString substringFromIndex:[endDateString length]-10];
+    
+    
+    self.resultLabel.text = [NSString stringWithFormat:@"Event '%@' added to calendar (%@ to %@)", self.titleButton.text, startDateString, endDateString];
+    
+    //animation fails and just is blank if user schedules events within 4.5 seconds of each ending. However, I find that unlikely and thus this should work
+    [UIView animateWithDuration:5.0 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{ self.resultLabel.alpha = 0;} completion:^(BOOL finished){
+        if (finished) {
+            self.resultLabel.text = @"";
+            self.resultLabel.alpha = 1;
+        }
+    }];
+    //[UIView beginAnimations:nil context:NULL];
+    //[UIView setAnimationDuration:5.0];
+    //self.resultLabel.text = @"";
+    //[UIView commitAnimations];
+}
 - (void)updateUI
 {
     if (self.isStart) {
@@ -372,7 +401,7 @@ const double roundButtonBorderWidth = 1.15;
 
     //set defaults
     [self resetVars];
-    
+    self.resultLabel.text = @"";
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     

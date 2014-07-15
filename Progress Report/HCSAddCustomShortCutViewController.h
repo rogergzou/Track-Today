@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+//#import "V8HorizontalPickerView.h"
 
 @interface HCSAddCustomShortCutViewController : UIViewController
 

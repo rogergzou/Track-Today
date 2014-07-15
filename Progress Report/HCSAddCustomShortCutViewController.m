@@ -11,13 +11,16 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <QuartzCore/QuartzCore.h>
 
-@interface HCSAddCustomShortCutViewController () <UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate>
+@interface HCSAddCustomShortCutViewController () <UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate, UIPickerViewDataSource, UIPickerViewDelegate> //V8HorizontalPickerViewDataSource, V8HorizontalPickerViewDelegate>
 //UINavigationControllerDelegate prevents error for delegation of UIImagePickerController
 
 @property (weak, nonatomic) IBOutlet UIButton *imageButton;
 @property (weak, nonatomic) IBOutlet UITextField *textField;
 @property (weak, nonatomic) IBOutlet UIButton *createButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *cameraButton;
+@property (strong, nonatomic) NSMutableArray *imageArrayForPicker;
+@property (strong, nonatomic) UIImage *currentlySelectedImage;
+@property (weak, nonatomic) IBOutlet UIPickerView *pickerOfImages;
 
 
 @end
@@ -48,6 +51,13 @@
         self.navigationItem.rightBarButtonItem = self.cameraButton;
     else
         self.navigationItem.rightBarButtonItem = nil;
+    self.imageArrayForPicker = [@[[UIImage imageNamed:@"Default_Shortcut_Image"]]mutableCopy];
+    //CGAffineTransform rotate = CGAffineTransformMakeRotation(3.14/2);
+    //rotate = CGAffineTransformScale(rotate, 0.2, 1.65); //.02 1.65
+    //[self.pickerOfImages setTransform:rotate];
+    //rotate rect
+    //self.pickerOfImages.transform = CGAffineTransformMakeRotation(M_PI_2); //rotation in radians
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -247,7 +257,73 @@
 }
 */
 
+#pragma mark - UIPickerViewDataSource
 
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    self.currentlySelectedImage = self.imageArrayForPicker[row];
+}
+
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
+{
+    UIImage *image = self.imageArrayForPicker[row];
+    
+    UIImageView *imageView = [[UIImageView alloc]initWithImage:image];
+    //http://stackoverflow.com/questions/5581241/how-to-programmatically-rotate-image-by-90-degrees-in-iphone
+    //set point of rotation
+    imageView.center = CGPointMake(100.0, 100.0);
+    
+    //rotate rect
+    imageView.transform = CGAffineTransformMakeRotation(M_PI_2); //rotation in radians
+    return imageView;
+}
+
+/*
+- (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component
+{
+    UIImage *image = self.imageArrayForPicker[0]; //change later into 1
+    return image.size.width * 0.0002;
+}*/
+
+#pragma mark - UIPickerViewDelegate
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return [self.imageArrayForPicker count];
+}
+
+/*
+#pragma mark - V8HorizontalPickerViewDelegate
+
+- (NSInteger)numberOfElementsInHorizontalPickerView:(V8HorizontalPickerView *)picker
+{
+    return [self.imageArrayForPicker count];
+}
+
+#pragma mark - V8HorizontalPickerViewDataSource
+
+- (void)horizontalPickerView:(V8HorizontalPickerView *)picker didSelectElementAtIndex:(NSInteger)index
+{
+    self.currentlySelectedImage = self.imageArrayForPicker[index];
+}
+
+- (UIView *)horizontalPickerView:(V8HorizontalPickerView *)picker viewForElementAtIndex:(NSInteger)index
+{
+    UIImage *image = self.imageArrayForPicker[index];
+    return [[UIImageView alloc]initWithImage:image];
+}
+
+- (NSInteger)horizontalPickerView:(V8HorizontalPickerView *)picker widthForElementAtIndex:(NSInteger)index
+{
+    UIImage *image = self.imageArrayForPicker[index];
+    return image.size.width + 20.f;
+}
+*/
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
