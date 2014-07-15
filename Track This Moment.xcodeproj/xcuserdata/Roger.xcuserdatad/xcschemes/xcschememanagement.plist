@@ -4,7 +4,7 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Track Today.xcscheme</key>
+		<key>Track This Moment.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
@@ -12,12 +12,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>DB66C8961965E957008A661B</key>
+		<key>DB679ED3195BB92700C61F6F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DB66C8B11965E957008A661B</key>
+		<key>DB679EF7195BB92700C61F6F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
