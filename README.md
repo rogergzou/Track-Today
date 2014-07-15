@@ -10,5 +10,5 @@ Main Features include:
 -Customizable quickfills for event descriptions
 -No ads
 
-Questions/Suggestions can be forwarded to the.roger.zou@gmail.com
+Questions/Suggestions can be forwarded to the.roger.zou@gmail.com.
 Quickfill icons by Nick Frost at ballicons.net
