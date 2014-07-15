@@ -31,6 +31,18 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (NSMutableArray *)imageArrayForPicker
+{
+    if (!_imageArrayForPicker) {
+        _imageArrayForPicker = [NSMutableArray array];
+        NSArray *xcassets = @[@"No_Image_Image", @"Default_Shortcut_Image", @"Eating", @"Exercise", @"Fun", @"Internet", @"Procrastination", @"Shopping", @"Social", @"Travel", @"Work", @"analytics", @"box", @"Briefcase", @"diamond", @"imac", @"keyboards", @"man", @"wooman", @"open-box", @"settings", @"speakers", @"target", @"wine"];
+        for (NSString *name in xcassets) {
+            [_imageArrayForPicker addObject:[UIImage imageNamed:name]];
+        }
+    }
+    return _imageArrayForPicker;
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -51,13 +63,28 @@
         self.navigationItem.rightBarButtonItem = self.cameraButton;
     else
         self.navigationItem.rightBarButtonItem = nil;
-    self.imageArrayForPicker = [@[[UIImage imageNamed:@"Default_Shortcut_Image"]]mutableCopy];
-    //CGAffineTransform rotate = CGAffineTransformMakeRotation(3.14/2);
-    //rotate = CGAffineTransformScale(rotate, 0.2, 1.65); //.02 1.65
-    //[self.pickerOfImages setTransform:rotate];
+    //self.imageArrayForPicker = [@[[UIImage imageNamed:@"Default_Shortcut_Image"]]mutableCopy];
+    CGAffineTransform rotate = CGAffineTransformMakeRotation(-M_PI_2);
+    rotate = CGAffineTransformScale(rotate, 0.2, 1.65); //.02 1.65
+    [self.pickerOfImages setTransform:rotate];
     //rotate rect
+    
+    //self.pickerOfImages.center = CGPointMake(100.0, 100.0);
     //self.pickerOfImages.transform = CGAffineTransformMakeRotation(M_PI_2); //rotation in radians
-
+    
+    
+    //http://isujith.wordpress.com/2009/03/17/horizontal-uipickerview/
+    
+    /*
+    UIPickerView *myPickerView = [[UIPickerView alloc] initWithFrame:CGRectZero];
+    myPickerView.delegate = self;
+    myPickerView.showsSelectionIndicator =YES;
+    myPickerView.backgroundColor = [UIColor clearColor];
+    CGAffineTransform rot = CGAffineTransformMakeRotation(-3.14/2);
+    rot = CGAffineTransformScale(rotate, 0.25, 2.0);
+    [myPickerView setTransform:rot];
+    [self.view addSubview:myPickerView];
+     */
 }
 
 - (void)didReceiveMemoryWarning
@@ -266,6 +293,22 @@
 
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
 {
+    CGRect rect = CGRectMake(0, 0, 120, 80);
+    //UILabel *label = [[UILabel alloc]initWithFrame:rect];
+    CGAffineTransform rotate = CGAffineTransformMakeRotation(3.14/2);
+    rotate = CGAffineTransformScale(rotate, 0.25, 2.0);
+    UIImageView *imagV = [[UIImageView alloc]initWithFrame:rect];
+    imagV.image = self.imageArrayForPicker[row];
+    [imagV setTransform:rotate];
+    //label.text = [pickerViewArray objectAtIndex:row];
+    //label.font = [UIFont systemFontOfSize:22.0];
+    //label.textAlignment = UITextAlignmentCenter;
+    //label.numberOfLines = 2;
+    //label.lineBreakMode = UILineBreakModeWordWrap;
+    //label.backgroundColor = [UIColor clearColor];
+    imagV.clipsToBounds = YES;
+    return imagV ;
+    
     UIImage *image = self.imageArrayForPicker[row];
     
     UIImageView *imageView = [[UIImageView alloc]initWithImage:image];
