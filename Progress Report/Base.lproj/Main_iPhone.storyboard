@@ -34,7 +34,7 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="uAy-3H-TN8">
                                 <rect key="frame" x="243" y="250" width="57" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <state key="normal" title="Auto Fill">
+                                <state key="normal" title="AutoFill">
                                     <color key="titleColor" red="1" green="0.8293630461" blue="0.36916703080000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </state>
@@ -111,7 +111,7 @@
             </objects>
             <point key="canvasLocation" x="-244" y="581"/>
         </scene>
-        <!--Short Cut View Controller - Quickfills-->
+        <!--Short Cut View Controller - AutoFills-->
         <scene sceneID="hB3-Yx-EYI">
             <objects>
                 <collectionViewController autoresizesArchivedViewToFullSize="NO" id="TsU-Sj-fHa" customClass="HCSShortCutViewController" sceneMemberID="viewController">
@@ -290,7 +290,7 @@
                         </connections>
                     </collectionView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Quickfills" id="9ak-gp-kha">
+                    <navigationItem key="navigationItem" title="AutoFills" id="9ak-gp-kha">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="YWi-2h-7K3">
                             <connections>
                                 <action selector="cancelPressed:" destination="TsU-Sj-fHa" id="jao-xs-uhT"/>
@@ -324,7 +324,7 @@
             </objects>
             <point key="canvasLocation" x="217" y="1286"/>
         </scene>
-        <!--Add Custom Short Cut View Controller - Custom Quickfill-->
+        <!--Add Custom Short Cut View Controller - Custom AutoFill-->
         <scene sceneID="pa6-QM-r1j">
             <objects>
                 <viewController id="Jkt-E0-hM4" customClass="HCSAddCustomShortCutViewController" sceneMemberID="viewController">
@@ -381,7 +381,7 @@
                         </subviews>
                         <color key="backgroundColor" red="0.81248376435286873" green="0.89012360644684163" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Custom Quickfill" id="krE-8k-uXk">
+                    <navigationItem key="navigationItem" title="Custom AutoFill" id="krE-8k-uXk">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="YBm-YL-hO6">
                             <connections>
                                 <action selector="cancelButtonTouched:" destination="Jkt-E0-hM4" id="E6q-qI-cJl"/>
