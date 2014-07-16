@@ -156,9 +156,9 @@
         UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
         
         
-        if (picker.sourceType == UIImagePickerControllerSourceTypeCamera)
+        if (picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
                 UIImageWriteToSavedPhotosAlbum(image,nil,nil,nil);
-
+        }
         
         [self.imageButton setBackgroundImage:info[UIImagePickerControllerEditedImage] forState:UIControlStateNormal];
         [self.imageButton setBackgroundImage:info[UIImagePickerControllerEditedImage] forState:UIControlStateHighlighted];
@@ -419,7 +419,7 @@
             title = self.textField.text;
             
             //moved up b/c if no text, useless. Therefore, only work if text
-            HCSShortcut *shortObj = [[HCSShortcut alloc]initWithTitle:title image:self.imageButton.currentBackgroundImage];
+            HCSShortcut *shortObj = [[HCSShortcut alloc]initWithTitle:title image:self.currentlySelectedImage];
             NSData *shortcut = [NSKeyedArchiver archivedDataWithRootObject:shortObj];
             NSArray *regularShortcuts = [defaults arrayForKey:@"shortcuts"];
             regularShortcuts = [regularShortcuts arrayByAddingObject:shortcut];

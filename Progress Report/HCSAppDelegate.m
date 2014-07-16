@@ -58,7 +58,6 @@
             [hcsVC beginTimer];
         }
     }
-    
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application

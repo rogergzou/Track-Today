@@ -5,10 +5,11 @@ Track This Moment answers the quintessential question: What did I do today? Trac
 
 Main Features include:
 
--Real-time event tracking
--Automatic scheduling to your calendar
--Customizable quickfills for event descriptions
--No ads
+- Real-time event tracking
+- Automatic scheduling to your calendar
+- Customizable quickfills for event descriptions
+- No ads
 
 Questions/Suggestions can be forwarded to the.roger.zou@gmail.com.
+
 Quickfill icons by Nick Frost at ballicons.net

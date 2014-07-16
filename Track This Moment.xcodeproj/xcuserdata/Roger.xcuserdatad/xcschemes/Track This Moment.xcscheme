@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "DB679ED3195BB92700C61F6F"
-               BuildableName = "Track Today.app"
+               BuildableName = "Track This Moment.app"
                BlueprintName = "Track This Moment"
                ReferencedContainer = "container:Track This Moment.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "DB679EF7195BB92700C61F6F"
-               BuildableName = "Track TodayTests.xctest"
+               BuildableName = "Track This MomentTests.xctest"
                BlueprintName = "Track This MomentTests"
                ReferencedContainer = "container:Track This Moment.xcodeproj">
             </BuildableReference>
@@ -43,7 +43,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DB679ED3195BB92700C61F6F"
-            BuildableName = "Track Today.app"
+            BuildableName = "Track This Moment.app"
             BlueprintName = "Track This Moment"
             ReferencedContainer = "container:Track This Moment.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DB679ED3195BB92700C61F6F"
-            BuildableName = "Track Today.app"
+            BuildableName = "Track This Moment.app"
             BlueprintName = "Track This Moment"
             ReferencedContainer = "container:Track This Moment.xcodeproj">
          </BuildableReference>
@@ -80,7 +80,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DB679ED3195BB92700C61F6F"
-            BuildableName = "Track Today.app"
+            BuildableName = "Track This Moment.app"
             BlueprintName = "Track This Moment"
             ReferencedContainer = "container:Track This Moment.xcodeproj">
          </BuildableReference>
