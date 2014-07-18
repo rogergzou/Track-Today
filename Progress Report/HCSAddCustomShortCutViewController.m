@@ -19,7 +19,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *createButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *cameraButton;
 @property (strong, nonatomic) NSMutableArray *imageArrayForPicker;
-@property (strong, nonatomic) UIImage *currentlySelectedImage;
+//@property (strong, nonatomic) UIImage *currentlySelectedImage;
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerOfImages;
 
 
@@ -44,13 +44,13 @@
     return _imageArrayForPicker;
 }
 
-- (UIImage *)currentlySelectedImage
+/*- (UIImage *)currentlySelectedImage
 {
     if (!_currentlySelectedImage) {
         _currentlySelectedImage = [UIImage imageNamed:@"No_Image_Image"];
     }
     return _currentlySelectedImage;
-}
+}*/
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -208,6 +208,7 @@
         //imagePicker.navigationItem.leftBarButtonItems = [imagePicker.navigationItem.leftBarButtonItems arrayByAddingObject:cameraButton];
     }
      */
+    /*
     //if (sourceType == UIImagePickerControllerSourceTypeCamera) {
         //imagePicker.showsCameraControls = YES; Default is YES. Also apparently bug for retake if this is uncommented, idk why.
         //imagePicker.cameraDevice = UIImagePickerControllerCameraDeviceRear; UNNEEDED default camera controls allow switch between the two
@@ -217,7 +218,7 @@
         //imagePicker.toolbarHidden = YES; if not hidden looks bad, covers camera control buttons
         //imagePicker.navigationBarHidden = NO; DOES NOTHING on either state. Useless
     //}
-    
+    */
     
     [self presentViewController:imagePicker animated:YES completion:nil];
 }
@@ -247,7 +248,7 @@
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    self.currentlySelectedImage = self.imageArrayForPicker[row];
+    //self.currentlySelectedImage = self.imageArrayForPicker[row];
 }
 
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
@@ -396,8 +397,8 @@
     // Pass the selected object to the new view controller.
     
     NSUserDefaults *defaults =[NSUserDefaults standardUserDefaults];
-    
-    if ([self.currentlySelectedImage isEqual:[UIImage imageNamed:@"No_Image_Image"]]) {
+    UIImage *image = [self.imageArrayForPicker objectAtIndex:[self.pickerOfImages selectedRowInComponent:0]];
+    if ([image isEqual:[UIImage imageNamed:@"No_Image_Image"]]) {
         //no image
         if (![self.textField.text length]) {
             //no text or image
@@ -419,14 +420,13 @@
             title = self.textField.text;
             
             //moved up b/c if no text, useless. Therefore, only work if text
-            HCSShortcut *shortObj = [[HCSShortcut alloc]initWithTitle:title image:self.currentlySelectedImage];
+            HCSShortcut *shortObj = [[HCSShortcut alloc]initWithTitle:title image:image];
             NSData *shortcut = [NSKeyedArchiver archivedDataWithRootObject:shortObj];
             NSArray *regularShortcuts = [defaults arrayForKey:@"shortcuts"];
             regularShortcuts = [regularShortcuts arrayByAddingObject:shortcut];
             [defaults setObject:regularShortcuts forKey:@"shortcuts"];
             [defaults synchronize];
         }
-        
     }
     self.imageArrayForPicker = nil; //so will reload when view loads again
 }
