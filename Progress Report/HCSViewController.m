@@ -12,6 +12,7 @@
 #import "HCSShortCutViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
+const int scheduleAlertTextFieldTag = 4;
 const int scheduleAlertTag = 1;
 const int resetAlertTag = 2;
 const int calendarAccessMissingAlertTag = 99999999;
@@ -32,6 +33,7 @@ const double roundButtonBorderWidth = 1.15;
 @property (strong, nonatomic) NSDate *startDate;
 @property (strong, nonatomic) NSDate *endDate;
 @property (strong, nonatomic) NSDate *pauseStartDate;
+@property (nonatomic) UIAlertView *confirmAlertProperty;
 
 @property (nonatomic) NSTimeInterval pausedSeconds; //lol typedef double
 @property (strong, nonatomic) NSTimer *timer;
@@ -97,7 +99,10 @@ const double roundButtonBorderWidth = 1.15;
     confirmAlert.tag = scheduleAlertTag;
     confirmAlert.alertViewStyle = UIAlertViewStylePlainTextInput;
     UITextField *alertInputTextField = [confirmAlert textFieldAtIndex:0];
+    alertInputTextField.tag = scheduleAlertTextFieldTag;
     alertInputTextField.delegate = self;
+    alertInputTextField.returnKeyType = UIReturnKeyDone;
+    
     //sets text to default
     alertInputTextField.text = self.titleButton.text;
     alertInputTextField.clearButtonMode = UITextFieldViewModeAlways;
@@ -107,8 +112,12 @@ const double roundButtonBorderWidth = 1.15;
         [self pauseTimer];
     [self updateUI];
     
+    //assign to property so uitextfield can access
+    self.confirmAlertProperty = confirmAlert;
+    
     //show alert after pausing
     [confirmAlert show];
+    
 }
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -117,17 +126,20 @@ const double roundButtonBorderWidth = 1.15;
         switch (buttonIndex) {
             //OK
             case 0:
+                //make sure matches textFieldShouldReturn too
                 self.titleButton.text = [alertView textFieldAtIndex:0].text;
                 [self scheduleEvent];
                 [self resultLabelUpdate];
                 [self endTimer];
                 [self resetVars];
                 [self updateUI];
+                self.confirmAlertProperty = nil;
                 break;
                 
             //Cancel
             case 1:
                 [self updateUI];
+                self.confirmAlertProperty = nil;
                 break;
             default:
                 break;
@@ -446,6 +458,11 @@ const double roundButtonBorderWidth = 1.15;
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
+    if (textField.tag == scheduleAlertTextFieldTag && self.confirmAlertProperty) {
+        NSLog(@"%ld %@",(long)textField.tag, self.confirmAlertProperty.description);
+        [self.confirmAlertProperty dismissWithClickedButtonIndex:0 animated:YES];
+        [self alertView:self.confirmAlertProperty clickedButtonAtIndex:0];
+    }
     return YES;
 }
 - (void) setViewMoveUp:(BOOL)movedUp
