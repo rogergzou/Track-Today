@@ -73,18 +73,27 @@
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="bh4-Da-7lg">
-                                <rect key="frame" x="20" y="463" width="280" height="85"/>
+                                <rect key="frame" x="20" y="483" width="280" height="65"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eeW-Pt-K3s">
+                                <rect key="frame" x="81" y="434" width="159" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Reminder">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.28756463668706478" green="0.48422123828880259" blue="0.82702105978260865" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
                         <outlet property="bigButton" destination="ehc-8E-bF1" id="Cds-Mh-969"/>
                         <outlet property="pauseButton" destination="bFo-sD-1zq" id="S7J-Cg-f4Z"/>
+                        <outlet property="reminderButton" destination="eeW-Pt-K3s" id="LVP-cV-9ot"/>
                         <outlet property="resetButton" destination="lc4-vr-Mkq" id="KLQ-lo-KEq"/>
                         <outlet property="resultLabel" destination="bh4-Da-7lg" id="cbc-Ux-aHu"/>
                         <outlet property="shortcutButton" destination="uAy-3H-TN8" id="Xhw-9U-VtT"/>

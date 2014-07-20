@@ -12,6 +12,8 @@
 #import "HCSShortCutViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
+//allow let add reminder for like after an hour or X time. Let user continue or stop the event with the notification.
+
 const int scheduleAlertTextFieldTag = 4;
 const int scheduleAlertTag = 1;
 const int resetAlertTag = 2;
@@ -27,6 +29,7 @@ const double roundButtonBorderWidth = 1.15;
 @property (weak, nonatomic) IBOutlet UILabel *timerLabel;
 @property (weak, nonatomic) IBOutlet UIButton *shortcutButton;
 @property (weak, nonatomic) IBOutlet UILabel *resultLabel;
+@property (weak, nonatomic) IBOutlet UIButton *reminderButton;
 
 @property (nonatomic, readwrite) BOOL isStart;
 @property (nonatomic, readwrite) BOOL isPaused;
@@ -292,6 +295,7 @@ const double roundButtonBorderWidth = 1.15;
     [self.timerLabel setFont:[UIFont fontWithName:self.timerLabel.font.fontName size:96]];
     self.isPaused = NO;
     self.isStart = YES;
+    self.titleButton.text = @"";
 }
 - (void)resultLabelUpdate
 {
@@ -353,6 +357,12 @@ const double roundButtonBorderWidth = 1.15;
         self.shortcutButton.layer.borderColor = self.shortcutButton.titleLabel.textColor.CGColor;
         //self.shortcutButton.backgroundColor = [UIColor whiteColor];
         
+        self.reminderButton.layer.borderWidth = 1;
+        self.reminderButton.layer.cornerRadius = self.reminderButton.frame.size.height/6;
+        self.reminderButton.layer.borderColor = self.reminderButton.titleLabel.textColor.CGColor;
+        
+        self.reminderButton.enabled = NO;
+        self.reminderButton.alpha = 0.15;
     } else {
         [self.bigButton setTitle:@"Stop" forState:UIControlStateNormal];
         [self.bigButton setTitleColor:[UIColor colorWithRed:1 green:0.0335468 blue:0.00867602 alpha:1] forState:UIControlStateNormal];
@@ -459,7 +469,7 @@ const double roundButtonBorderWidth = 1.15;
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     if (textField.tag == scheduleAlertTextFieldTag && self.confirmAlertProperty) {
-        NSLog(@"%ld %@",(long)textField.tag, self.confirmAlertProperty.description);
+        //NSLog(@"%ld %@",(long)textField.tag, self.confirmAlertProperty.description);
         [self.confirmAlertProperty dismissWithClickedButtonIndex:0 animated:YES];
         [self alertView:self.confirmAlertProperty clickedButtonAtIndex:0];
     }
