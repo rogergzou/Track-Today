@@ -361,8 +361,8 @@ const double roundButtonBorderWidth = 1.15;
         self.reminderButton.layer.cornerRadius = self.reminderButton.frame.size.height/6;
         self.reminderButton.layer.borderColor = self.reminderButton.titleLabel.textColor.CGColor;
         
-        self.reminderButton.enabled = NO;
-        self.reminderButton.alpha = 0.15;
+        //self.reminderButton.enabled = NO;
+        //self.reminderButton.alpha = 0.15;
     } else {
         [self.bigButton setTitle:@"Stop" forState:UIControlStateNormal];
         [self.bigButton setTitleColor:[UIColor colorWithRed:1 green:0.0335468 blue:0.00867602 alpha:1] forState:UIControlStateNormal];
