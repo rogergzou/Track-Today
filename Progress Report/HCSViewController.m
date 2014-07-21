@@ -93,8 +93,10 @@ const double roundButtonBorderWidth = 1.15;
     NSDate *endDateOnly = self.endDate;
     [[NSCalendar currentCalendar] rangeOfUnit:NSDayCalendarUnit startDate:&startDateOnly interval:NULL forDate:startDateOnly];
     [[NSCalendar currentCalendar] rangeOfUnit:NSDayCalendarUnit startDate:&endDateOnly interval:NULL forDate:endDateOnly];
-    if ([startDateOnly compare:endDateOnly] == NSOrderedSame)
-        endDateString = [endDateString substringFromIndex:[endDateString length]-10];
+    if ([startDateOnly compare:endDateOnly] == NSOrderedSame) {
+        //endDateString = [endDateString substringFromIndex:[endDateString length]-10];
+        endDateString = [endDateString componentsSeparatedByString:@", "][1];
+    }
     
     UIAlertView *confirmAlert = [[UIAlertView alloc]initWithTitle:@"Schedule" message:[NSString stringWithFormat:@"Place event onto iCal? %@ to %@", startDateString, endDateString] delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", @"Cancel", nil];
     confirmAlert.cancelButtonIndex = 1; //set cancel as cancel
@@ -306,9 +308,10 @@ const double roundButtonBorderWidth = 1.15;
     NSDate *endDateOnly = self.endDate;
     [[NSCalendar currentCalendar] rangeOfUnit:NSDayCalendarUnit startDate:&startDateOnly interval:NULL forDate:startDateOnly];
     [[NSCalendar currentCalendar] rangeOfUnit:NSDayCalendarUnit startDate:&endDateOnly interval:NULL forDate:endDateOnly];
-    if ([startDateOnly compare:endDateOnly] == NSOrderedSame)
-        endDateString = [endDateString substringFromIndex:[endDateString length]-10];
-    
+    if ([startDateOnly compare:endDateOnly] == NSOrderedSame) {
+        //endDateString = [endDateString substringFromIndex:[endDateString length]-10];
+        endDateString = [endDateString componentsSeparatedByString:@", "][1];
+    }
     
     self.resultLabel.text = [NSString stringWithFormat:@"Event '%@' added to calendar (%@ to %@)", self.titleButton.text, startDateString, endDateString];
     
