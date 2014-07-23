@@ -30,6 +30,7 @@ const double roundButtonBorderWidth = 1.15;
 @property (weak, nonatomic) IBOutlet UIButton *shortcutButton;
 @property (weak, nonatomic) IBOutlet UILabel *resultLabel;
 @property (weak, nonatomic) IBOutlet UIButton *reminderButton;
+@property (weak, nonatomic) IBOutlet UILabel *reminderLabel;
 
 @property (nonatomic, readwrite) BOOL isStart;
 @property (nonatomic, readwrite) BOOL isPaused;
@@ -364,6 +365,8 @@ const double roundButtonBorderWidth = 1.15;
         self.reminderButton.layer.cornerRadius = self.reminderButton.frame.size.height/6;
         self.reminderButton.layer.borderColor = self.reminderButton.titleLabel.textColor.CGColor;
         
+        self.reminderButton.hidden = YES;
+        self.reminderLabel.hidden = YES;
         //self.reminderButton.enabled = NO;
         //self.reminderButton.alpha = 0.15;
     } else {

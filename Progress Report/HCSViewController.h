@@ -19,5 +19,7 @@
 - (IBAction)myShortcutTextUnwindSegueCallback:(UIStoryboardSegue *)segue;
 - (void)endTimer;
 - (void)beginTimer;
+//- (void)saveState;
+//- (void)restoreState;
 
 @end

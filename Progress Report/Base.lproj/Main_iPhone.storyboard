@@ -79,16 +79,16 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eeW-Pt-K3s">
-                                <rect key="frame" x="163" y="434" width="93" height="35"/>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eeW-Pt-K3s">
+                                <rect key="frame" x="176" y="435" width="85" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title=" 100 minutes ">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title=" 60 minutes ">
+                                    <color key="titleColor" red="0.43518597146739135" green="0.097038527528670759" blue="0.37824565432583379" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Reminder in" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="psn-Kd-6Eg">
-                                <rect key="frame" x="67" y="434" width="88" height="35"/>
+                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Reminder set for" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="psn-Kd-6Eg">
+                                <rect key="frame" x="59" y="435" width="114" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -100,7 +100,8 @@
                     <connections>
                         <outlet property="bigButton" destination="ehc-8E-bF1" id="Cds-Mh-969"/>
                         <outlet property="pauseButton" destination="bFo-sD-1zq" id="S7J-Cg-f4Z"/>
-                        <outlet property="reminderButton" destination="eeW-Pt-K3s" id="LVP-cV-9ot"/>
+                        <outlet property="reminderButton" destination="eeW-Pt-K3s" id="eKY-hv-5Wl"/>
+                        <outlet property="reminderLabel" destination="psn-Kd-6Eg" id="dgh-dT-8zt"/>
                         <outlet property="resetButton" destination="lc4-vr-Mkq" id="KLQ-lo-KEq"/>
                         <outlet property="resultLabel" destination="bh4-Da-7lg" id="cbc-Ux-aHu"/>
                         <outlet property="shortcutButton" destination="uAy-3H-TN8" id="Xhw-9U-VtT"/>
