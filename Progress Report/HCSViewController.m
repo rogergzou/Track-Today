@@ -11,6 +11,7 @@
 #import "HCSShortcut.h"
 #import "HCSShortCutViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "HCSReminderTableViewController.h"
 
 //allow let add reminder for like after an hour or X time. Let user continue or stop the event with the notification.
 
@@ -31,6 +32,8 @@ const double roundButtonBorderWidth = 1.15;
 @property (weak, nonatomic) IBOutlet UILabel *resultLabel;
 @property (weak, nonatomic) IBOutlet UIButton *reminderButton;
 @property (weak, nonatomic) IBOutlet UILabel *reminderLabel;
+@property (weak, nonatomic) IBOutlet UIButton *addReminderButton;
+
 
 @property (nonatomic, readwrite) BOOL isStart;
 @property (nonatomic, readwrite) BOOL isPaused;
@@ -51,6 +54,8 @@ const double roundButtonBorderWidth = 1.15;
 
 
 @implementation HCSViewController
+
+
 
 - (IBAction)buttonPushed:(UIButton *)sender {
     if (self.isStart) {
@@ -369,6 +374,11 @@ const double roundButtonBorderWidth = 1.15;
         self.reminderLabel.hidden = YES;
         //self.reminderButton.enabled = NO;
         //self.reminderButton.alpha = 0.15;
+        
+        self.addReminderButton.layer.borderWidth = 1;
+        self.addReminderButton.layer.cornerRadius = self.addReminderButton.frame.size.height/6;
+        self.addReminderButton.layer.borderColor = self.addReminderButton.titleLabel.textColor.CGColor;
+        
     } else {
         [self.bigButton setTitle:@"Stop" forState:UIControlStateNormal];
         [self.bigButton setTitleColor:[UIColor colorWithRed:1 green:0.0335468 blue:0.00867602 alpha:1] forState:UIControlStateNormal];
@@ -404,6 +414,44 @@ const double roundButtonBorderWidth = 1.15;
         HCSShortCutViewController *shortcutVC = (HCSShortCutViewController *)sourceVC;
         self.titleButton.text = shortcutVC.title;
     }
+}
+- (IBAction)myReminderSegueCallback:(UIStoryboardSegue *)segue
+{
+    UIViewController *sourceVC = segue.sourceViewController;
+    NSLog(@"win");
+    if ([sourceVC isKindOfClass:[HCSReminderTableViewController class]]) {
+        HCSReminderTableViewController *reminderVC = (HCSReminderTableViewController *)sourceVC;
+
+        int minstring = reminderVC.minutes;
+        self.reminderButton.hidden = NO;
+        self.reminderLabel.hidden = NO;
+        self.addReminderButton.hidden = YES;
+        
+        double hourstring;
+        NSString *timeText;
+        if (minstring >= 60) {
+            hourstring = minstring/60.0;
+            if (hourstring == 1)
+                timeText = @"1 hour";
+            else
+                timeText = [NSString stringWithFormat:@"%.1f hours", hourstring];
+        } else if (minstring == 1)
+            timeText = @"1 minute";
+        else
+            timeText = [NSString stringWithFormat:@"%i minutes", minstring];
+        self.reminderButton.titleLabel.text = timeText;
+        NSDate *notificationDate = [NSDate dateWithTimeIntervalSinceNow:(reminderVC.minutes * 60)];
+        UILocalNotification *notif = [[UILocalNotification alloc]init];
+        notif.fireDate = notificationDate;
+        notif.timeZone = [NSTimeZone defaultTimeZone];
+        notif.alertBody = [NSString stringWithFormat: @"%@ has passed", timeText];
+        notif.alertAction = @"OK";
+        notif.soundName = UILocalNotificationDefaultSoundName;
+        notif.applicationIconBadgeNumber = 1;
+        //notif.userInfo;
+        [[UIApplication sharedApplication] scheduleLocalNotification:notif];
+    }
+    
 }
 //lazy instantiation for seconds, pauseNumber, pausedSeconds
 - (int)seconds

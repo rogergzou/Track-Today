@@ -17,6 +17,7 @@
 
 
 - (IBAction)myShortcutTextUnwindSegueCallback:(UIStoryboardSegue *)segue;
+- (IBAction)myReminderSegueCallback:(UIStoryboardSegue *)segue;
 - (void)endTimer;
 - (void)beginTimer;
 //- (void)saveState;
