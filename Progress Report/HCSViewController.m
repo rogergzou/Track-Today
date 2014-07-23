@@ -469,6 +469,70 @@ const double roundButtonBorderWidth = 1.15;
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Saving/Restoring States
+
+- (void)encodeRestorableStateWithCoder:(NSCoder *)coder
+{
+    if ([self.titleButton.text length])
+        [coder encodeObject:self.titleButton.text forKey:@"Title Text"];
+/*
+    [coder encodeBool:self.isStart forKey:@"isStart"];
+    [coder encodeBool:self.isPaused forKey:@"isPaused"];
+
+    if (self.startDate)
+        [coder encodeObject:self.startDate forKey:@"startDate"];
+    if (self.endDate)
+        [coder encodeObject:self.endDate forKey:@"endDate"];
+    if (self.pauseStartDate)
+        [coder encodeObject:self.pauseStartDate forKey:@"pauseStartDate"];
+    if (self.confirmAlertProperty)
+        [coder encodeObject:self.confirmAlertProperty forKey:@"confirmAlertProperty"];
+    if (self.pausedSeconds)
+        [coder encodeDouble:self.pausedSeconds forKey:@"pausedSeconds"];
+    
+    [coder encodeInt:self.seconds forKey:@"seconds"];
+ 
+ */
+    [super encodeRestorableStateWithCoder:coder];
+}
+
+- (void)decodeRestorableStateWithCoder:(NSCoder *)coder
+{
+    self.titleButton.text = [coder decodeObjectForKey:@"Title Text"];
+/*
+    self.isStart = [coder decodeBoolForKey:@"isStart"];
+    self.isPaused = [coder decodeBoolForKey:@"isPaused"];
+    
+    if ([coder decodeObjectForKey:@"startDate"])
+        self.startDate = [coder decodeObjectForKey:@"startDate"];
+    if ([coder decodeObjectForKey:@"endDate"])
+        self.endDate = [coder decodeObjectForKey:@"endDate"];
+    if ([coder decodeObjectForKey:@"pauseStartDate"])
+        self.pauseStartDate = [coder decodeObjectForKey:@"pauseStartDate"];
+    if ([coder decodeObjectForKey:@"confirmAlertProperty"])
+        self.confirmAlertProperty = [coder decodeObjectForKey:@"confirmAlertProperty"];
+    if ([coder decodeDoubleForKey:@"pausedSeconds"])
+        self.pausedSeconds = [coder decodeDoubleForKey:@"pausedSeconds"];
+    
+    self.seconds = [coder decodeIntForKey:@"seconds"];
+ 
+ */
+    [super decodeRestorableStateWithCoder:coder];
+    //[self updateUI];
+}
+
+/* 
+ 
+ @property (strong, nonatomic) NSDate *startDate;
+ @property (strong, nonatomic) NSDate *endDate;
+ @property (strong, nonatomic) NSDate *pauseStartDate;
+ @property (nonatomic) UIAlertView *confirmAlertProperty;
+ 
+ @property (nonatomic) NSTimeInterval pausedSeconds; //lol typedef double
+ @property (strong, nonatomic) NSTimer *timer;
+ seconds
+ */
+
 #pragma mark - UITextFieldDelegate
 //NOTE: This solution would probably fail if a UIScrollView was used b/c it uses a static comparison on double status bar. Utilize with caution on regular UIViews
 
