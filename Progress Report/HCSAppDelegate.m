@@ -24,9 +24,16 @@
     UIViewController *rootVC = self.window.rootViewController; //should be HCSViewController. Check anyway.
     if ([rootVC isKindOfClass:[HCSViewController class]]) {
         HCSViewController *hcsVC = (HCSViewController *)rootVC;
+        NSLog(@"trial");
+        UILocalNotification *localnotif = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+        if (localnotif) {
+            //application.applicationIconBadgeNumber = localnotif.applicationIconBadgeNumber-1; //No idea why to do this, see https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/IPhoneOSClientImp.html#//apple_ref/doc/uid/TP40008194-CH103-SW1
+            if ([localnotif.userInfo[@"typeKey"] isEqualToString:@"reminder"]) {
+                NSLog(@"reminderReached");
+                [hcsVC hideReminderLabel];
+            }
+        }
     }
-    
-    
     
     return YES;
 }
@@ -36,7 +43,7 @@
     NSLog(@"resign active");
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-    
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
@@ -82,6 +89,22 @@
 {
     NSLog(@"terminate");
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+{
+    UIViewController *rootVC = self.window.rootViewController; //should be HCSViewController. Check anyway.
+    if ([rootVC isKindOfClass:[HCSViewController class]]) {
+        HCSViewController *hcsVC = (HCSViewController *)rootVC;
+        //application.applicationIconBadgeNumber = localnotif.applicationIconBadgeNumber-1; //No idea why to do this, see https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/IPhoneOSClientImp.html#//apple_ref/doc/uid/TP40008194-CH103-SW1
+        if ([notification.userInfo[@"typeKey"] isEqualToString:@"reminder"] && application.applicationState == UIApplicationStateActive) {
+            NSLog(@"reminderReached");
+            [hcsVC hideReminderLabel];
+            UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Reminder!" message:[NSString stringWithFormat:@"This is your %@ reminder.", notification.userInfo[@"timeStringKey"]] delegate:hcsVC cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            alertView.tag = 123456; //shouldn't do anything basically and shouldn't be recognized
+            [alertView show];
+        }
+    }
 }
 
 - (BOOL)application:(UIApplication *)application shouldRestoreApplicationState:(NSCoder *)coder

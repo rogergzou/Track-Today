@@ -406,6 +406,13 @@ const double roundButtonBorderWidth = 1.15;
     //timerLabel updated on increaseTimerCount: method
 }
 
+- (void)hideReminderLabel
+{
+    self.reminderButton.hidden = YES;
+    self.reminderLabel.hidden = YES;
+    self.addReminderButton.hidden = NO;
+}
+
 //title is set in prepareSegue
 - (IBAction)myShortcutTextUnwindSegueCallback:(UIStoryboardSegue *)segue
 {
@@ -439,7 +446,7 @@ const double roundButtonBorderWidth = 1.15;
             timeText = @"1 minute";
         else
             timeText = [NSString stringWithFormat:@"%i minutes", minstring];
-        self.reminderButton.titleLabel.text = timeText;
+        //self.reminderButton.titleLabel.text = timeText;
         NSDate *notificationDate = [NSDate dateWithTimeIntervalSinceNow:(reminderVC.minutes * 60)];
         UILocalNotification *notif = [[UILocalNotification alloc]init];
         notif.fireDate = notificationDate;
@@ -447,10 +454,13 @@ const double roundButtonBorderWidth = 1.15;
         notif.alertBody = [NSString stringWithFormat: @"%@ has passed", timeText];
         notif.alertAction = @"OK";
         notif.soundName = UILocalNotificationDefaultSoundName;
-        notif.applicationIconBadgeNumber = 1;
-        //notif.userInfo;
+        //notif.applicationIconBadgeNumber = 1;
+        notif.userInfo = @{@"typeKey": @"reminder", @"timeStringKey": timeText};
         [[UIApplication sharedApplication] scheduleLocalNotification:notif];
+        [self.reminderButton setTitle:[NSString stringWithFormat:@"%@", [NSDateFormatter localizedStringFromDate:notificationDate dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle]] forState:UIControlStateNormal];
+        
     }
+    
     
 }
 //lazy instantiation for seconds, pauseNumber, pausedSeconds

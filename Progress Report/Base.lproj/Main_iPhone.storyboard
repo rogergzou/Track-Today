@@ -79,19 +79,12 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eeW-Pt-K3s">
-                                <rect key="frame" x="176" y="435" width="85" height="35"/>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eeW-Pt-K3s">
+                                <rect key="frame" x="177" y="437" width="81" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal">
-                                    <attributedString key="attributedTitle">
-                                        <fragment content=" 60 minutes ">
-                                            <attributes>
-                                                <color key="NSColor" red="0.43518597146739135" green="0.097038527528670759" blue="0.37824565432583379" alpha="1" colorSpace="calibratedRGB"/>
-                                                <font key="NSFont" size="15" name="HelveticaNeue-Bold"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                            </attributes>
-                                        </fragment>
-                                    </attributedString>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                <state key="normal" title="button">
+                                    <color key="titleColor" red="0.43518597146739135" green="0.097038527528670759" blue="0.37824565432583379" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                             </button>
                             <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Reminder set for" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="psn-Kd-6Eg">
@@ -175,7 +168,13 @@
                             <outlet property="delegate" destination="YZo-W6-hoA" id="vTh-Ow-Htu"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="SbL-GF-ldy"/>
+                    <navigationItem key="navigationItem" title="Root View Controller" id="SbL-GF-ldy">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="GYs-eg-CBV">
+                            <connections>
+                                <action selector="cancelButtonPressed:" destination="YZo-W6-hoA" id="Umq-MI-7dI"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qzV-cU-lWh" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="uhx-9v-IMQ" userLabel="Exit" sceneMemberID="exit"/>

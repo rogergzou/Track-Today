@@ -20,6 +20,7 @@
 - (IBAction)myReminderSegueCallback:(UIStoryboardSegue *)segue;
 - (void)endTimer;
 - (void)beginTimer;
+- (void)hideReminderLabel;
 //- (void)saveState;
 //- (void)restoreState;
 
