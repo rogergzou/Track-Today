@@ -29,6 +29,7 @@
 		DB679F06195BB92700C61F6F /* Progress_ReportTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DB679F05195BB92700C61F6F /* Progress_ReportTests.m */; };
 		DB679F12195BD43900C61F6F /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB679F11195BD43900C61F6F /* EventKit.framework */; };
 		DBCFA672197F80A800122581 /* HCSReminderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBCFA671197F80A800122581 /* HCSReminderTableViewController.m */; };
+		DBCFA6751980ABB100122581 /* HCSModifyReminderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBCFA6741980ABB100122581 /* HCSModifyReminderViewController.m */; };
 		DBE08AEF19721E77006AE034 /* LSCollectionViewHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = DBE08AE519721E77006AE034 /* LSCollectionViewHelper.m */; };
 		DBE08AF019721E77006AE034 /* LSCollectionViewLayoutHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = DBE08AE719721E77006AE034 /* LSCollectionViewLayoutHelper.m */; };
 		DBE08AF119721E77006AE034 /* DraggableCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = DBE08AEA19721E77006AE034 /* DraggableCollectionViewFlowLayout.m */; };
@@ -80,6 +81,8 @@
 		DB679F11195BD43900C61F6F /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
 		DBCFA670197F80A800122581 /* HCSReminderTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSReminderTableViewController.h; sourceTree = "<group>"; };
 		DBCFA671197F80A800122581 /* HCSReminderTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCSReminderTableViewController.m; sourceTree = "<group>"; };
+		DBCFA6731980ABB100122581 /* HCSModifyReminderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSModifyReminderViewController.h; sourceTree = "<group>"; };
+		DBCFA6741980ABB100122581 /* HCSModifyReminderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCSModifyReminderViewController.m; sourceTree = "<group>"; };
 		DBE08AE419721E77006AE034 /* LSCollectionViewHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSCollectionViewHelper.h; sourceTree = "<group>"; };
 		DBE08AE519721E77006AE034 /* LSCollectionViewHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSCollectionViewHelper.m; sourceTree = "<group>"; };
 		DBE08AE619721E77006AE034 /* LSCollectionViewLayoutHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSCollectionViewLayoutHelper.h; sourceTree = "<group>"; };
@@ -158,6 +161,8 @@
 				DB679EF0195BB92700C61F6F /* HCSViewController.m */,
 				DBCFA670197F80A800122581 /* HCSReminderTableViewController.h */,
 				DBCFA671197F80A800122581 /* HCSReminderTableViewController.m */,
+				DBCFA6731980ABB100122581 /* HCSModifyReminderViewController.h */,
+				DBCFA6741980ABB100122581 /* HCSModifyReminderViewController.m */,
 				DBCFA66F197F808300122581 /* AutoFill */,
 				DB679EF2195BB92700C61F6F /* Images.xcassets */,
 				DB679EDE195BB92700C61F6F /* Supporting Files */,
@@ -352,6 +357,7 @@
 				DB679EE4195BB92700C61F6F /* main.m in Sources */,
 				DB49F364195CF1C000067F96 /* HCSShortCutTextViewCell.m in Sources */,
 				DB6765A51960BAB400C113D2 /* HCSCustomViewCell.m in Sources */,
+				DBCFA6751980ABB100122581 /* HCSModifyReminderViewController.m in Sources */,
 				DBCFA672197F80A800122581 /* HCSReminderTableViewController.m in Sources */,
 				DB49FF06196634EF00D91BFE /* HCSMyHeaderReusableView.m in Sources */,
 				DB67659F19608E8D00C113D2 /* HCSShortcut.m in Sources */,

@@ -19,17 +19,16 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    NSLog(@"lanch");
     // Override point for customization after application launch.
     UIViewController *rootVC = self.window.rootViewController; //should be HCSViewController. Check anyway.
     if ([rootVC isKindOfClass:[HCSViewController class]]) {
         HCSViewController *hcsVC = (HCSViewController *)rootVC;
-        NSLog(@"trial");
+        //NSLog(@"trial");
         UILocalNotification *localnotif = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
         if (localnotif) {
             //application.applicationIconBadgeNumber = localnotif.applicationIconBadgeNumber-1; //No idea why to do this, see https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/IPhoneOSClientImp.html#//apple_ref/doc/uid/TP40008194-CH103-SW1
             if ([localnotif.userInfo[@"typeKey"] isEqualToString:@"reminder"]) {
-                NSLog(@"reminderReached");
+                //NSLog(@"reminderReached");
                 [hcsVC hideReminderLabel];
             }
         }
@@ -40,7 +39,7 @@
 							
 - (void)applicationWillResignActive:(UIApplication *)application
 {
-    NSLog(@"resign active");
+    //NSLog(@"resign active");
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
@@ -48,7 +47,7 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    NSLog(@"background");
+    //NSLog(@"background");
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     
@@ -64,7 +63,7 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-    NSLog(@"enter foreground");
+    //NSLog(@"enter foreground");
 
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     UIViewController *rootVC = self.window.rootViewController; //should be HCSViewController. Modals aren't rootVC's. Check anyway
@@ -81,13 +80,13 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    NSLog(@"active");
+    //NSLog(@"active");
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-    NSLog(@"terminate");
+    //NSLog(@"terminate");
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
@@ -97,12 +96,14 @@
     if ([rootVC isKindOfClass:[HCSViewController class]]) {
         HCSViewController *hcsVC = (HCSViewController *)rootVC;
         //application.applicationIconBadgeNumber = localnotif.applicationIconBadgeNumber-1; //No idea why to do this, see https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/IPhoneOSClientImp.html#//apple_ref/doc/uid/TP40008194-CH103-SW1
-        if ([notification.userInfo[@"typeKey"] isEqualToString:@"reminder"] && application.applicationState == UIApplicationStateActive) {
-            NSLog(@"reminderReached");
+        if ([notification.userInfo[@"typeKey"] isEqualToString:@"reminder"]) {
+            //NSLog(@"reminderReached");
             [hcsVC hideReminderLabel];
-            UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Reminder!" message:[NSString stringWithFormat:@"This is your %@ reminder.", notification.userInfo[@"timeStringKey"]] delegate:hcsVC cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            alertView.tag = 123456; //shouldn't do anything basically and shouldn't be recognized
-            [alertView show];
+            if  (application.applicationState == UIApplicationStateActive) {
+                UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Reminder!" message:[NSString stringWithFormat:@"This is your %@ reminder.", notification.userInfo[@"timeStringKey"]] delegate:hcsVC cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                alertView.tag = 123456; //shouldn't do anything basically and shouldn't be recognized
+                [alertView show];
+            }
         }
     }
 }

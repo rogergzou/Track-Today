@@ -86,6 +86,9 @@
                                 <state key="normal" title="button">
                                     <color key="titleColor" red="0.43518597146739135" green="0.097038527528670759" blue="0.37824565432583379" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <segue destination="24O-nx-T3A" kind="modal" id="9Fn-ke-8Up"/>
+                                </connections>
                             </button>
                             <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Reminder set for" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="psn-Kd-6Eg">
                                 <rect key="frame" x="59" y="435" width="114" height="35"/>
@@ -125,7 +128,7 @@
             </objects>
             <point key="canvasLocation" x="-194" y="-121"/>
         </scene>
-        <!--Reminder Table View Controller - Root View Controller-->
+        <!--Reminder Table View Controller - Add Reminder-->
         <scene sceneID="C5V-Kn-a7p">
             <objects>
                 <tableViewController id="YZo-W6-hoA" customClass="HCSReminderTableViewController" sceneMemberID="viewController">
@@ -168,7 +171,7 @@
                             <outlet property="delegate" destination="YZo-W6-hoA" id="vTh-Ow-Htu"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="SbL-GF-ldy">
+                    <navigationItem key="navigationItem" title="Add Reminder" id="SbL-GF-ldy">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="GYs-eg-CBV">
                             <connections>
                                 <action selector="cancelButtonPressed:" destination="YZo-W6-hoA" id="Umq-MI-7dI"/>
@@ -179,7 +182,81 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qzV-cU-lWh" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="uhx-9v-IMQ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="845" y="-200"/>
+            <point key="canvasLocation" x="425" y="-154"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="IkB-yV-mfC">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="24O-nx-T3A" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="K9D-iX-Kjm">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="2gL-pe-8z9" kind="relationship" relationship="rootViewController" id="ALV-cV-TFo"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Trt-WH-R9h" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="269" y="117"/>
+        </scene>
+        <!--Modify Reminder View Controller - Change Reminder Time-->
+        <scene sceneID="70O-Cl-Flr">
+            <objects>
+                <viewController id="2gL-pe-8z9" customClass="HCSModifyReminderViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ejE-qX-qZj"/>
+                        <viewControllerLayoutGuide type="bottom" id="kMv-Eb-bwh"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="T7T-FX-gCX">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="iqy-MP-4Ny">
+                                <rect key="frame" x="0.0" y="203" width="320" height="162"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <date key="date" timeIntervalSinceReferenceDate="427862761.95371598">
+                                    <!--2014-07-24 02:46:01 +0000-->
+                                </date>
+                                <timeZone key="timeZone" name="America/Los_Angeles">
+                                    <mutableData key="data">
+VFppZgAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAC5AAAABAAAABCepkign7sVkKCGKqChmveQ
+y4kaoNIj9HDSYSYQ1v50INiArZDa/tGg28CQENzes6DdqayQ3r6VoN+JjpDgnneg4WlwkOJ+WaDjSVKQ
+5F47oOUpNJDmR1gg5xJREOgnOiDo8jMQ6gccIOrSFRDr5v4g7LH3EO3G4CDukdkQ76/8oPBxuxDxj96g
+8n/BkPNvwKD0X6OQ9U+ioPY/hZD3L4Sg+CiiEPkPZqD6CIQQ+viDIPvoZhD82GUg/chIEP64RyD/qCoQ
+AJgpIAGIDBACeAsgA3EokARhJ6AFUQqQBkEJoAcw7JAHjUOgCRDOkAmtvyAK8LCQC+CvoAzZzRANwJGg
+DrmvEA+priAQmZEQEYmQIBJ5cxATaXIgFFlVEBVJVCAWOTcQFyk2IBgiU5AZCRggGgI1kBryNKAb4heQ
+HNIWoB3B+ZAesfigH6HbkCB2KyAhgb2QIlYNICNq2hAkNe8gJUq8ECYV0SAnKp4QJ/7toCkKgBAp3s+g
+KupiECu+saAs036QLZ6ToC6zYJAvfnWgMJNCkDFnkiAycySQM0d0IDRTBpA1J1YgNjLokDcHOCA4HAUQ
+OOcaIDn75xA6xvwgO9vJEDywGKA9u6sQPo/6oD+bjRBAb9ygQYSpkEJPvqBDZIuQRC+goEVEbZBF89Mg
+Ry2KEEfTtSBJDWwQSbOXIErtThBLnLOgTNZqkE18laBOtkyQT1x3oFCWLpBRPFmgUnYQkFMcO6BUVfKQ
+VPwdoFY11JBW5TogWB7xEFjFHCBZ/tMQWqT+IFvetRBchOAgXb6XEF5kwiBfnnkQYE3eoGGHlZBiLcCg
+Y2d3kGQNoqBlR1mQZe2EoGcnO5BnzWagaQcdkGmtSKBq5v+Qa5ZlIGzQHBBtdkcgbq/+EG9WKSBwj+AQ
+cTYLIHJvwhBzFe0gdE+kEHT/CaB2OMCQdt7roHgYopB4vs2gefiEkHqer6B72GaQfH6RoH24SJB+XnOg
+f5gqkAABAAECAwEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
+AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
+AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
+AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
+</mutableData>
+                                </timeZone>
+                            </datePicker>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Change Reminder Time" id="tjQ-aL-rZc">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="iqn-o3-dgd">
+                            <connections>
+                                <segue destination="EoW-MG-ut3" kind="unwind" unwindAction="myReminderSegueCallback:" id="GWW-kg-Sgo"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="datePicker" destination="iqy-MP-4Ny" id="ZtI-40-sc9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hHr-GL-mXI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="EoW-MG-ut3" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="659" y="175"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="AIl-Cx-31r">
@@ -194,7 +271,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lf0-jd-wU7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="311" y="-200"/>
+            <point key="canvasLocation" x="337" y="-216"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="add-Zm-oXT">

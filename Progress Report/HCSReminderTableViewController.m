@@ -138,7 +138,7 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    NSLog(@"%@", sender);
+    //NSLog(@"%@", sender);
     if ([sender isKindOfClass:[UITableViewCell class]]) {
         UITableViewCell *cell = (UITableViewCell *)sender;
         self.minutes = [self.timeIntervalSelectionArray[[self.tableView indexPathForCell:cell].row] intValue];

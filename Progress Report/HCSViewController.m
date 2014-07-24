@@ -12,6 +12,7 @@
 #import "HCSShortCutViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "HCSReminderTableViewController.h"
+#import "HCSModifyReminderViewController.h"
 
 //allow let add reminder for like after an hour or X time. Let user continue or stop the event with the notification.
 
@@ -218,7 +219,7 @@ const double roundButtonBorderWidth = 1.15;
             
         } else {
             //user no calendar access
-            NSLog(@"No access :(");
+            //NSLog(@"No access :(");
             UIAlertView *accessAlert = [[UIAlertView alloc]initWithTitle:@"Please allow calendar access for full app functionality" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
             // tag for identification when handling
             accessAlert.tag = calendarAccessMissingAlertTag;
@@ -425,7 +426,7 @@ const double roundButtonBorderWidth = 1.15;
 - (IBAction)myReminderSegueCallback:(UIStoryboardSegue *)segue
 {
     UIViewController *sourceVC = segue.sourceViewController;
-    NSLog(@"win");
+    //NSLog(@"win");
     if ([sourceVC isKindOfClass:[HCSReminderTableViewController class]]) {
         HCSReminderTableViewController *reminderVC = (HCSReminderTableViewController *)sourceVC;
 
@@ -459,8 +460,63 @@ const double roundButtonBorderWidth = 1.15;
         [[UIApplication sharedApplication] scheduleLocalNotification:notif];
         [self.reminderButton setTitle:[NSString stringWithFormat:@"%@", [NSDateFormatter localizedStringFromDate:notificationDate dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle]] forState:UIControlStateNormal];
         
+    } else if ([sourceVC isKindOfClass:[HCSModifyReminderViewController class]]) {
+        HCSModifyReminderViewController *modifyVC = (HCSModifyReminderViewController *)sourceVC;
+        
+        //cancel all reminder local notifs
+        UIApplication *app = [UIApplication sharedApplication];
+        NSArray *scheduledLocalNotifs = [app scheduledLocalNotifications];
+        if ([scheduledLocalNotifs count]) {
+            for (UILocalNotification *localNotif in scheduledLocalNotifs) {
+                if ([localNotif.userInfo[@"typeKey"] isEqualToString:@"reminder"]) {
+                    [app cancelLocalNotification:localNotif];
+                    //NSLog(@"cancel notif");
+                }
+            }
+        }
+        
+        //check to make sure date is later
+        if ([modifyVC.date timeIntervalSinceNow] <= 0) {
+            //time was earlier. Cancel everything and revert.
+            [self hideReminderLabel];
+            //NSLog(@"hide");
+        } else {
+            //time is later, reschedule the local notif
+            
+            //schedule new reminder local notif
+            NSTimeInterval seconds = [modifyVC.date timeIntervalSinceNow];
+            int minstring = (int)(seconds/60);
+            if (seconds - minstring * 60 > 0) {
+                //extra seconds, round up?
+                minstring++;
+            }
+            double hourstring;
+            NSString *timeText;
+            if (minstring >= 60) {
+                hourstring = minstring/60.0;
+                if (hourstring == 1)
+                    timeText = @"1 hour";
+                else
+                    timeText = [NSString stringWithFormat:@"%.1f hours", hourstring];
+            } else if (minstring == 1)
+                timeText = @"1 minute";
+            else
+                timeText = [NSString stringWithFormat:@"%i minutes", minstring];
+            
+            UILocalNotification *notif = [[UILocalNotification alloc]init];
+            notif.fireDate = modifyVC.date;
+            notif.timeZone = [NSTimeZone defaultTimeZone];
+            notif.alertBody = [NSString stringWithFormat: @"%@ has passed", timeText];
+            notif.alertAction = @"OK";
+            notif.soundName = UILocalNotificationDefaultSoundName;
+            //notif.applicationIconBadgeNumber = 1;
+            notif.userInfo = @{@"typeKey": @"reminder", @"timeStringKey": timeText};
+            [[UIApplication sharedApplication] scheduleLocalNotification:notif];
+            
+            [self.reminderButton setTitle:[NSString stringWithFormat:@"%@", [NSDateFormatter localizedStringFromDate:modifyVC.date dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle]] forState:UIControlStateNormal];
+            //NSLog(@"scheduled");
+        }
     }
-    
     
 }
 //lazy instantiation for seconds, pauseNumber, pausedSeconds
@@ -498,7 +554,7 @@ const double roundButtonBorderWidth = 1.15;
     
     if (![defaults boolForKey:@"firstTime"]) {
         //set firstTime defaults
-        NSLog(@"first");
+        //NSLog(@"first");
         NSArray *wordArr = @[@"Procrastination", @"Work", @"Eating", @"Exercise", @"Fun", @"Social", @"Travel", @"Shopping"];
         NSMutableArray *storeWords = [NSMutableArray array];
         
