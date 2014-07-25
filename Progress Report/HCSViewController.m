@@ -14,8 +14,6 @@
 #import "HCSReminderTableViewController.h"
 #import "HCSModifyReminderViewController.h"
 
-//allow let add reminder for like after an hour or X time. Let user continue or stop the event with the notification.
-
 const int scheduleAlertTextFieldTag = 4;
 const int scheduleAlertTag = 1;
 const int resetAlertTag = 2;
@@ -308,6 +306,8 @@ const double roundButtonBorderWidth = 1.15;
     self.isPaused = NO;
     self.isStart = YES;
     self.titleButton.text = @"";
+    [self hideReminderLabel];
+    [self cancelAllReminderLocalNotifs];
 }
 - (void)resultLabelUpdate
 {
@@ -374,8 +374,11 @@ const double roundButtonBorderWidth = 1.15;
         self.reminderButton.layer.cornerRadius = self.reminderButton.frame.size.height/6;
         self.reminderButton.layer.borderColor = self.reminderButton.titleLabel.textColor.CGColor;
         
-        self.reminderButton.hidden = YES;
-        self.reminderLabel.hidden = YES;
+        //self.reminderButton.hidden = YES;
+        //self.reminderLabel.hidden = YES;
+        //self.addReminderButton.hidden = NO;
+        [self hideReminderLabel];
+        
         //self.reminderButton.enabled = NO;
         //self.reminderButton.alpha = 0.15;
         
@@ -467,6 +470,8 @@ const double roundButtonBorderWidth = 1.15;
         HCSModifyReminderViewController *modifyVC = (HCSModifyReminderViewController *)sourceVC;
         
         //cancel all reminder local notifs
+        //same as [self cancelAllReminderLocalNotifs];
+        /*
         UIApplication *app = [UIApplication sharedApplication];
         NSArray *scheduledLocalNotifs = [app scheduledLocalNotifications];
         if ([scheduledLocalNotifs count]) {
@@ -476,7 +481,8 @@ const double roundButtonBorderWidth = 1.15;
                     //NSLog(@"cancel notif");
                 }
             }
-        }
+        }*/
+        [self cancelAllReminderLocalNotifs];
         
         //check to make sure date is later
         if ([modifyVC.date timeIntervalSinceNow] <= 0) {
@@ -521,6 +527,20 @@ const double roundButtonBorderWidth = 1.15;
         }
     }
     
+}
+
+- (void)cancelAllReminderLocalNotifs
+{
+    UIApplication *app = [UIApplication sharedApplication];
+    NSArray *scheduledLocalNotifs = [app scheduledLocalNotifications];
+    if ([scheduledLocalNotifs count]) {
+        for (UILocalNotification *localNotif in scheduledLocalNotifs) {
+            if ([localNotif.userInfo[@"typeKey"] isEqualToString:@"reminder"]) {
+                [app cancelLocalNotification:localNotif];
+                //NSLog(@"cancel notif");
+            }
+        }
+    }
 }
 //lazy instantiation for seconds, pauseNumber, pausedSeconds
 - (int)seconds

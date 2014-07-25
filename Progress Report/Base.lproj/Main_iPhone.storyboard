@@ -135,7 +135,7 @@
             </objects>
             <point key="canvasLocation" x="-194" y="-121"/>
         </scene>
-        <!--Reminder Table View Controller - Add Reminder-->
+        <!--Reminder Table View Controller - Add Reminder in-->
         <scene sceneID="C5V-Kn-a7p">
             <objects>
                 <tableViewController id="YZo-W6-hoA" customClass="HCSReminderTableViewController" sceneMemberID="viewController">
@@ -144,11 +144,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MyTimeCell" textLabel="Kbv-KE-Hsx" detailTextLabel="bUP-Vq-LdU" style="IBUITableViewCellStyleValue2" id="BfW-8V-1G2">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MyTimeCell" textLabel="Kbv-KE-Hsx" detailTextLabel="bUP-Vq-LdU" style="IBUITableViewCellStyleValue2" id="BfW-8V-1G2">
                                 <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BfW-8V-1G2" id="WjT-d4-euc">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Kbv-KE-Hsx">
@@ -178,7 +178,7 @@
                             <outlet property="delegate" destination="YZo-W6-hoA" id="vTh-Ow-Htu"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Add Reminder" id="SbL-GF-ldy">
+                    <navigationItem key="navigationItem" title="Add Reminder in" id="SbL-GF-ldy">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="GYs-eg-CBV">
                             <connections>
                                 <action selector="cancelButtonPressed:" destination="YZo-W6-hoA" id="Umq-MI-7dI"/>
