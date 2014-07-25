@@ -20,6 +20,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 // Override point for customization after application launch.
+    
+                    //NOTE also done in viewDidLoad so not needed
+    
+    /*
     UIViewController *rootVC = self.window.rootViewController; //should be HCSViewController. Check anyway.
     if ([rootVC isKindOfClass:[HCSViewController class]]) {
         HCSViewController *hcsVC = (HCSViewController *)rootVC;
@@ -29,9 +33,12 @@
             if ([localnotif.userInfo[@"typeKey"] isEqualToString:@"reminder"] && ([[[UIApplication sharedApplication] scheduledLocalNotifications] count] == 0)) {
                 //hide if no more schedule notifs (assuming reminders are the only notifs...this may break lol WARNING
                 [hcsVC hideReminderLabel];
+                
+
             }
         }
     }
+    */
     
     return YES;
 }
@@ -68,11 +75,14 @@
     UIViewController *rootVC = self.window.rootViewController; //should be HCSViewController. Modals aren't rootVC's. Check anyway
     if ([rootVC isKindOfClass:[HCSViewController class]]) {
         HCSViewController *hcsVC = (HCSViewController *)rootVC;
-                if (!hcsVC.isPaused && !hcsVC.isStart) {
+        if (!hcsVC.isPaused && !hcsVC.isStart) {
             hcsVC.seconds -= floor([self.exitDate timeIntervalSinceNow]); //-= b/c timeIntervalSince returns a neg #
             //developer's note: screw timeIntervalSinceReferenceDate and autocomplete. Didn't realize, meant timeIntervalSinceNow
             self.exitDate = nil; //resets for next time just in case
             [hcsVC beginTimer];
+        }
+        if ([[[UIApplication sharedApplication] scheduledLocalNotifications] count] == 0) {
+            [hcsVC hideReminderLabel];
         }
     }
 }
