@@ -148,6 +148,7 @@ const double roundButtonBorderWidth = 1.15;
                 [self endTimer];
                 [self resetVars];
                 [self cancelAllReminderLocalNotifs];
+                [self hideReminderLabel];
                 [self updateUI];
                 self.confirmAlertProperty = nil;
                 break;
@@ -169,6 +170,7 @@ const double roundButtonBorderWidth = 1.15;
                     [self endTimer];
                 [self resetVars];
                 [self cancelAllReminderLocalNotifs];
+                [self hideReminderLabel];
                 [self updateUI];
                 break;
                 
@@ -312,7 +314,7 @@ const double roundButtonBorderWidth = 1.15;
     self.isPaused = NO;
     self.isStart = YES;
     self.titleButton.text = @"";
-    [self hideReminderLabel];
+    //[self hideReminderLabel];
     //[self cancelAllReminderLocalNotifs];
     //holy shit this self induced stupidity cost me ~2 hours of manic frustration confronting a dumb nonissue
 }
@@ -384,7 +386,7 @@ const double roundButtonBorderWidth = 1.15;
         //self.reminderButton.hidden = YES;
         //self.reminderLabel.hidden = YES;
         //self.addReminderButton.hidden = NO;
-        [self hideReminderLabel];
+        //[self hideReminderLabel];
         
         //self.reminderButton.enabled = NO;
         //self.reminderButton.alpha = 0.15;
@@ -419,7 +421,6 @@ const double roundButtonBorderWidth = 1.15;
     
     //timerLabel updated on increaseTimerCount: method
 }
-
 - (void)hideReminderLabel
 {
     self.reminderButton.hidden = YES;
@@ -439,7 +440,6 @@ const double roundButtonBorderWidth = 1.15;
 - (IBAction)myReminderSegueCallback:(UIStoryboardSegue *)segue
 {
     UIViewController *sourceVC = segue.sourceViewController;
-    //NSLog(@"win");
     if ([sourceVC isKindOfClass:[HCSReminderTableViewController class]]) {
         HCSReminderTableViewController *reminderVC = (HCSReminderTableViewController *)sourceVC;
 
@@ -495,7 +495,6 @@ const double roundButtonBorderWidth = 1.15;
         if ([modifyVC.date timeIntervalSinceNow] <= 0) {
             //time was earlier. Cancel everything and revert.
             [self hideReminderLabel];
-            //NSLog(@"hide");
         } else {
             //time is later, reschedule the local notif
             
@@ -530,7 +529,6 @@ const double roundButtonBorderWidth = 1.15;
             [[UIApplication sharedApplication] scheduleLocalNotification:notif];
             
             [self.reminderButton setTitle:[NSString stringWithFormat:@"%@", [NSDateFormatter localizedStringFromDate:modifyVC.date dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle]] forState:UIControlStateNormal];
-            //NSLog(@"scheduled");
         }
     }
     
@@ -544,7 +542,6 @@ const double roundButtonBorderWidth = 1.15;
         for (UILocalNotification *localNotif in scheduledLocalNotifs) {
             if ([localNotif.userInfo[@"typeKey"] isEqualToString:@"reminder"]) {
                 [app cancelLocalNotification:localNotif];
-                //NSLog(@"cancel notif");
             }
         }
     }
@@ -574,6 +571,19 @@ const double roundButtonBorderWidth = 1.15;
     //set defaults
     [self resetVars];
     self.resultLabel.text = @"";
+    //update reminder thingy
+    if ([[[UIApplication sharedApplication] scheduledLocalNotifications] count] > 0) {
+        for (UILocalNotification *localnotif in [[UIApplication sharedApplication]scheduledLocalNotifications]) {
+            if ([localnotif.userInfo[@"typeKey"] isEqualToString:@"reminder"]) {
+                self.reminderButton.hidden = NO;
+                self.reminderLabel.hidden = NO;
+                self.addReminderButton.hidden = YES;
+                [self.reminderButton setTitle:[NSString stringWithFormat:@"%@", [NSDateFormatter localizedStringFromDate:localnotif.fireDate dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle]] forState:UIControlStateNormal];
+            }
+        }
+    } else
+        [self hideReminderLabel];
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     
@@ -617,7 +627,6 @@ const double roundButtonBorderWidth = 1.15;
 
 - (void)encodeRestorableStateWithCoder:(NSCoder *)coder
 {
-    NSLog(@"%lu a", (unsigned long)[[[UIApplication sharedApplication] scheduledLocalNotifications] count]);
     if ([self.titleButton.text length])
         [coder encodeObject:self.titleButton.text forKey:@"Title Text"];
     
@@ -638,7 +647,6 @@ const double roundButtonBorderWidth = 1.15;
         if (self.pauseNumber > 0)
             [coder encodeObject:self.pauseStartDate forKey:@"pauseStartDate"];
     }
-    //NSLog(@"cooding");
 /*
     [coder encodeBool:self.isStart forKey:@"isStart"];
     [coder encodeBool:self.isPaused forKey:@"isPaused"];
@@ -658,16 +666,11 @@ const double roundButtonBorderWidth = 1.15;
  
  */
     [super encodeRestorableStateWithCoder:coder];
-    NSLog(@"%lu a1", (unsigned long)[[[UIApplication sharedApplication] scheduledLocalNotifications] count]);
 }
 
 - (void)decodeRestorableStateWithCoder:(NSCoder *)coder
 {
-    NSLog(@"%lu d1", (unsigned long)[[[UIApplication sharedApplication] scheduledLocalNotifications] count]);
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"firstTime"]) {
-        
-    
-        //NSLog(@"dcoding");
         self.titleButton.text = [coder decodeObjectForKey:@"Title Text"];
         
         self.isStart = [coder decodeBoolForKey:@"isStart"];
@@ -682,7 +685,6 @@ const double roundButtonBorderWidth = 1.15;
             self.isPaused = [coder decodeBoolForKey:@"isPaused"];
             self.pauseNumber = [coder decodeIntForKey:@"pauseNumber"];
             self.pausedSeconds = [coder decodeDoubleForKey:@"pausedSeconds"];
-            
             
             [self beginTimer];
             [self updateUI];
@@ -725,21 +727,8 @@ const double roundButtonBorderWidth = 1.15;
  
  */
     [super decodeRestorableStateWithCoder:coder];
-    NSLog(@"%lu d2", (unsigned long)[[[UIApplication sharedApplication] scheduledLocalNotifications] count]);
     //[self updateUI];
 }
-
-/* 
- 
- @property (strong, nonatomic) NSDate *startDate;
- @property (strong, nonatomic) NSDate *endDate;
- @property (strong, nonatomic) NSDate *pauseStartDate;
- @property (nonatomic) UIAlertView *confirmAlertProperty;
- 
- @property (nonatomic) NSTimeInterval pausedSeconds; //lol typedef double
- @property (strong, nonatomic) NSTimer *timer;
- seconds
- */
 
 #pragma mark - UITextFieldDelegate
 //NOTE: This solution would probably fail if a UIScrollView was used b/c it uses a static comparison on double status bar. Utilize with caution on regular UIViews
