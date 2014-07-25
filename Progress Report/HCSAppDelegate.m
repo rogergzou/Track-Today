@@ -19,17 +19,28 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    [[[UIAlertView alloc]initWithTitle:@"few" message:[NSString stringWithFormat:@"%lu", (unsigned long)[[[UIApplication sharedApplication] scheduledLocalNotifications] count]] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil]show];
+    
+    NSLog(@"%lu", (unsigned long)[[[UIApplication sharedApplication] scheduledLocalNotifications] count]);
+    
+// Override point for customization after application launch.
+    UILocalNotification *localnotif = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+    if (localnotif) {
+        NSLog(@"yep");
+        
+            }
+    
     UIViewController *rootVC = self.window.rootViewController; //should be HCSViewController. Check anyway.
     if ([rootVC isKindOfClass:[HCSViewController class]]) {
         HCSViewController *hcsVC = (HCSViewController *)rootVC;
-        //NSLog(@"trial");
+        NSLog(@"trial");
         UILocalNotification *localnotif = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
         if (localnotif) {
             //application.applicationIconBadgeNumber = localnotif.applicationIconBadgeNumber-1; //No idea why to do this, see https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/IPhoneOSClientImp.html#//apple_ref/doc/uid/TP40008194-CH103-SW1
             if ([localnotif.userInfo[@"typeKey"] isEqualToString:@"reminder"]) {
                 //NSLog(@"reminderReached");
                 [hcsVC hideReminderLabel];
+                NSLog(@"hidden");
             }
         }
     }
@@ -86,8 +97,9 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-    //NSLog(@"terminate");
+    NSLog(@"terminate");
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    NSLog(@"%lu", (unsigned long)[[[UIApplication sharedApplication] scheduledLocalNotifications] count]);
 }
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification

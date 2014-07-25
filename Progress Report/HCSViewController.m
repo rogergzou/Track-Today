@@ -14,6 +14,10 @@
 #import "HCSReminderTableViewController.h"
 #import "HCSModifyReminderViewController.h"
 
+//set reminder
+//terminate, then reopen
+//reminder is not there, only setReminder
+
 const int scheduleAlertTextFieldTag = 4;
 const int scheduleAlertTag = 1;
 const int resetAlertTag = 2;
@@ -143,6 +147,7 @@ const double roundButtonBorderWidth = 1.15;
                 [self resultLabelUpdate];
                 [self endTimer];
                 [self resetVars];
+                [self cancelAllReminderLocalNotifs];
                 [self updateUI];
                 self.confirmAlertProperty = nil;
                 break;
@@ -163,6 +168,7 @@ const double roundButtonBorderWidth = 1.15;
                 if (self.timer)
                     [self endTimer];
                 [self resetVars];
+                [self cancelAllReminderLocalNotifs];
                 [self updateUI];
                 break;
                 
@@ -307,7 +313,8 @@ const double roundButtonBorderWidth = 1.15;
     self.isStart = YES;
     self.titleButton.text = @"";
     [self hideReminderLabel];
-    [self cancelAllReminderLocalNotifs];
+    //[self cancelAllReminderLocalNotifs];
+    //holy shit this self induced stupidity cost me ~2 hours of manic frustration confronting a dumb nonissue
 }
 - (void)resultLabelUpdate
 {
@@ -610,6 +617,7 @@ const double roundButtonBorderWidth = 1.15;
 
 - (void)encodeRestorableStateWithCoder:(NSCoder *)coder
 {
+    NSLog(@"%lu a", (unsigned long)[[[UIApplication sharedApplication] scheduledLocalNotifications] count]);
     if ([self.titleButton.text length])
         [coder encodeObject:self.titleButton.text forKey:@"Title Text"];
     
@@ -650,46 +658,52 @@ const double roundButtonBorderWidth = 1.15;
  
  */
     [super encodeRestorableStateWithCoder:coder];
+    NSLog(@"%lu a1", (unsigned long)[[[UIApplication sharedApplication] scheduledLocalNotifications] count]);
 }
 
 - (void)decodeRestorableStateWithCoder:(NSCoder *)coder
 {
-    //NSLog(@"dcoding");
-    self.titleButton.text = [coder decodeObjectForKey:@"Title Text"];
+    NSLog(@"%lu d1", (unsigned long)[[[UIApplication sharedApplication] scheduledLocalNotifications] count]);
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"firstTime"]) {
+        
     
-    self.isStart = [coder decodeBoolForKey:@"isStart"];
-    if (!self.isStart) {
-        //only act if not new/isStart
+        //NSLog(@"dcoding");
+        self.titleButton.text = [coder decodeObjectForKey:@"Title Text"];
         
-        //NSString *datestring = [NSDateFormatter localizedStringFromDate:[coder decodeObjectForKey:@"wentBackgroundDate"] dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
-        //self.testLabel.text = [NSString stringWithFormat:@"%i %d p%d %@", [coder decodeIntForKey:@"seconds"], [coder decodeBoolForKey:@"isStart"], [coder decodeBoolForKey:@"isPaused"], datestring];
-        
-        self.startDate = [coder decodeObjectForKey:@"startDate"];
-        self.seconds = [coder decodeIntForKey:@"seconds"];
-        self.isPaused = [coder decodeBoolForKey:@"isPaused"];
-        self.pauseNumber = [coder decodeIntForKey:@"pauseNumber"];
-        self.pausedSeconds = [coder decodeDoubleForKey:@"pausedSeconds"];
-        
-        
-        [self beginTimer];
-        [self updateUI];
-        //if (!self.isStart && self.isPaused) {
-        if (self.isPaused) {
-            //was paused when terminated
-            [self pauseTimer];
-        } else {
-            //not paused when terminated
-            //adjust second count
-            NSTimeInterval terminationToNow = fabs([[coder decodeObjectForKey:@"wentBackgroundDate"] timeIntervalSinceNow]); //would've been negative so must abs
-            self.seconds += (int)floor(terminationToNow);
-        }
-        //update timer label
-        self.seconds--;
-        [self increaseTimerCount];
-        
-        if (self.pauseNumber > 0) {
-            //check if was ever paused and if pauseStartDate exists
-            self.pauseStartDate = [coder decodeObjectForKey:@"pauseStartDate"];
+        self.isStart = [coder decodeBoolForKey:@"isStart"];
+        if (!self.isStart) {
+            //only act if not new/isStart
+            
+            //NSString *datestring = [NSDateFormatter localizedStringFromDate:[coder decodeObjectForKey:@"wentBackgroundDate"] dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
+            //self.testLabel.text = [NSString stringWithFormat:@"%i %d p%d %@", [coder decodeIntForKey:@"seconds"], [coder decodeBoolForKey:@"isStart"], [coder decodeBoolForKey:@"isPaused"], datestring];
+            
+            self.startDate = [coder decodeObjectForKey:@"startDate"];
+            self.seconds = [coder decodeIntForKey:@"seconds"];
+            self.isPaused = [coder decodeBoolForKey:@"isPaused"];
+            self.pauseNumber = [coder decodeIntForKey:@"pauseNumber"];
+            self.pausedSeconds = [coder decodeDoubleForKey:@"pausedSeconds"];
+            
+            
+            [self beginTimer];
+            [self updateUI];
+            //if (!self.isStart && self.isPaused) {
+            if (self.isPaused) {
+                //was paused when terminated
+                [self pauseTimer];
+            } else {
+                //not paused when terminated
+                //adjust second count
+                NSTimeInterval terminationToNow = fabs([[coder decodeObjectForKey:@"wentBackgroundDate"] timeIntervalSinceNow]); //would've been negative so must abs
+                self.seconds += (int)floor(terminationToNow);
+            }
+            //update timer label
+            self.seconds--;
+            [self increaseTimerCount];
+            
+            if (self.pauseNumber > 0) {
+                //check if was ever paused and if pauseStartDate exists
+                self.pauseStartDate = [coder decodeObjectForKey:@"pauseStartDate"];
+            }
         }
     }
 /*
@@ -711,6 +725,7 @@ const double roundButtonBorderWidth = 1.15;
  
  */
     [super decodeRestorableStateWithCoder:coder];
+    NSLog(@"%lu d2", (unsigned long)[[[UIApplication sharedApplication] scheduledLocalNotifications] count]);
     //[self updateUI];
 }
 
