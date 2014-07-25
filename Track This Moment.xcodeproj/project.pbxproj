@@ -159,10 +159,7 @@
 				DB679EE9195BB92700C61F6F /* Main_iPhone.storyboard */,
 				DB679EEF195BB92700C61F6F /* HCSViewController.h */,
 				DB679EF0195BB92700C61F6F /* HCSViewController.m */,
-				DBCFA670197F80A800122581 /* HCSReminderTableViewController.h */,
-				DBCFA671197F80A800122581 /* HCSReminderTableViewController.m */,
-				DBCFA6731980ABB100122581 /* HCSModifyReminderViewController.h */,
-				DBCFA6741980ABB100122581 /* HCSModifyReminderViewController.m */,
+				DBCFA6761982635600122581 /* Reminder */,
 				DBCFA66F197F808300122581 /* AutoFill */,
 				DB679EF2195BB92700C61F6F /* Images.xcassets */,
 				DB679EDE195BB92700C61F6F /* Supporting Files */,
@@ -217,6 +214,17 @@
 				DB67659E19608E8D00C113D2 /* HCSShortcut.m */,
 			);
 			name = AutoFill;
+			sourceTree = "<group>";
+		};
+		DBCFA6761982635600122581 /* Reminder */ = {
+			isa = PBXGroup;
+			children = (
+				DBCFA670197F80A800122581 /* HCSReminderTableViewController.h */,
+				DBCFA671197F80A800122581 /* HCSReminderTableViewController.m */,
+				DBCFA6731980ABB100122581 /* HCSModifyReminderViewController.h */,
+				DBCFA6741980ABB100122581 /* HCSModifyReminderViewController.m */,
+			);
+			name = Reminder;
 			sourceTree = "<group>";
 		};
 		DBE08AE219721E77006AE034 /* DraggableCollectionView */ = {

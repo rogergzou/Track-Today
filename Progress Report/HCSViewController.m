@@ -594,7 +594,6 @@ const double roundButtonBorderWidth = 1.15;
     
     if (![defaults boolForKey:@"firstTime"]) {
         //set firstTime defaults
-        //NSLog(@"first");
         NSArray *wordArr = @[@"Procrastination", @"Work", @"Eating", @"Exercise", @"Fun", @"Social", @"Travel", @"Shopping"];
         NSMutableArray *storeWords = [NSMutableArray array];
         
@@ -605,16 +604,19 @@ const double roundButtonBorderWidth = 1.15;
         }
         [defaults setObject:storeWords forKey:@"shortcuts"];
         
-        NSArray *textOnlyArr = @[@"Sleep", @"Walk", @"Reading"];
+        NSArray *textOnlyArr = @[@"Sleep", @"Reading", @"Adventure!", @"Networking"];
         NSMutableArray *textWords = [NSMutableArray array];
         for (NSString *word in textOnlyArr) {
             NSData *encodedSampleWorkObj = [NSKeyedArchiver archivedDataWithRootObject:[[HCSShortcut alloc]initWithTitle:word image:nil]];
             [textWords addObject:encodedSampleWorkObj];
         }
+        [defaults setInteger:0 forKey:@"appCounter"];
         [defaults setObject:textWords forKey:@"textShortcuts"];
         [defaults setBool:true forKey:@"firstTime"];
         [defaults synchronize];
     }
+    [defaults setInteger:([defaults integerForKey:@"appCounter"]+1) forKey:@"appCounter"];
+    //NSLog(@"%li", (long)[defaults integerForKey:@"appCounter"]);
     [self updateUI];
 }
 - (void)didReceiveMemoryWarning
