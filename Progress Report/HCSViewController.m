@@ -35,6 +35,7 @@ const double roundButtonBorderWidth = 1.15;
 @property (weak, nonatomic) IBOutlet UILabel *reminderLabel;
 @property (weak, nonatomic) IBOutlet UIButton *addReminderButton;
 
+@property (weak, nonatomic) IBOutlet UILabel *testLabel;
 
 @property (nonatomic, readwrite) BOOL isStart;
 @property (nonatomic, readwrite) BOOL isPaused;
@@ -239,11 +240,13 @@ const double roundButtonBorderWidth = 1.15;
         self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(increaseTimerCount:) userInfo:nil repeats:YES];
     });
      */
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(increaseTimerCount:) userInfo:nil repeats:YES];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(increaseTimerCount) userInfo:nil repeats:YES];
+    //note change from increaseTimerCount: to increaseTimerCount
 }
 //see http://stackoverflow.com/questions/1189252/how-to-convert-an-nstimeinterval-seconds-into-minutes if want to convert to more complex hours/days/months
 
-- (void)increaseTimerCount: (NSTimer *)timer
+//note took off the :(NSTimer *)timer part
+- (void)increaseTimerCount
 {
     self.seconds++;
     
@@ -589,6 +592,25 @@ const double roundButtonBorderWidth = 1.15;
 {
     if ([self.titleButton.text length])
         [coder encodeObject:self.titleButton.text forKey:@"Title Text"];
+    
+    [coder encodeBool:self.isStart forKey:@"isStart"];
+    
+    if (!self.isStart) {
+        //only act if not new/isStart
+        [coder encodeInt:self.seconds forKey:@"seconds"];
+        [coder encodeObject:[NSDate date] forKey:@"wentBackgroundDate"];
+        [coder encodeBool:self.isPaused forKey:@"isPaused"];
+        [coder encodeInt:self.pauseNumber forKey:@"pauseNumber"];
+        [coder encodeDouble:self.pausedSeconds forKey:@"pausedSeconds"];
+        //start date should always exist if not isStart
+        [coder encodeObject:self.startDate forKey:@"startDate"];
+        //lol don't think end date is needed?
+        
+        //check if ever paused and if pauseStartDateExists
+        if (self.pauseNumber > 0)
+            [coder encodeObject:self.pauseStartDate forKey:@"pauseStartDate"];
+    }
+    //NSLog(@"cooding");
 /*
     [coder encodeBool:self.isStart forKey:@"isStart"];
     [coder encodeBool:self.isPaused forKey:@"isPaused"];
@@ -612,7 +634,44 @@ const double roundButtonBorderWidth = 1.15;
 
 - (void)decodeRestorableStateWithCoder:(NSCoder *)coder
 {
+    //NSLog(@"dcoding");
     self.titleButton.text = [coder decodeObjectForKey:@"Title Text"];
+    
+    self.isStart = [coder decodeBoolForKey:@"isStart"];
+    if (!self.isStart) {
+        //only act if not new/isStart
+        
+        //NSString *datestring = [NSDateFormatter localizedStringFromDate:[coder decodeObjectForKey:@"wentBackgroundDate"] dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
+        //self.testLabel.text = [NSString stringWithFormat:@"%i %d p%d %@", [coder decodeIntForKey:@"seconds"], [coder decodeBoolForKey:@"isStart"], [coder decodeBoolForKey:@"isPaused"], datestring];
+        
+        self.startDate = [coder decodeObjectForKey:@"startDate"];
+        self.seconds = [coder decodeIntForKey:@"seconds"];
+        self.isPaused = [coder decodeBoolForKey:@"isPaused"];
+        self.pauseNumber = [coder decodeIntForKey:@"pauseNumber"];
+        self.pausedSeconds = [coder decodeDoubleForKey:@"pausedSeconds"];
+        
+        
+        [self beginTimer];
+        [self updateUI];
+        //if (!self.isStart && self.isPaused) {
+        if (self.isPaused) {
+            //was paused when terminated
+            [self pauseTimer];
+        } else {
+            //not paused when terminated
+            //adjust second count
+            NSTimeInterval terminationToNow = fabs([[coder decodeObjectForKey:@"wentBackgroundDate"] timeIntervalSinceNow]); //would've been negative so must abs
+            self.seconds += (int)floor(terminationToNow);
+        }
+        //update timer label
+        self.seconds--;
+        [self increaseTimerCount];
+        
+        if (self.pauseNumber > 0) {
+            //check if was ever paused and if pauseStartDate exists
+            self.pauseStartDate = [coder decodeObjectForKey:@"pauseStartDate"];
+        }
+    }
 /*
     self.isStart = [coder decodeBoolForKey:@"isStart"];
     self.isPaused = [coder decodeBoolForKey:@"isPaused"];

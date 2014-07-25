@@ -108,6 +108,12 @@
                                     <segue destination="m9i-8V-0n7" kind="modal" id="anK-Af-eMU"/>
                                 </connections>
                             </button>
+                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="TestLabel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TAG-fm-5LG">
+                                <rect key="frame" x="33" y="51" width="226" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.28756463668706478" green="0.48422123828880259" blue="0.82702105978260865" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -120,6 +126,7 @@
                         <outlet property="resetButton" destination="lc4-vr-Mkq" id="KLQ-lo-KEq"/>
                         <outlet property="resultLabel" destination="bh4-Da-7lg" id="cbc-Ux-aHu"/>
                         <outlet property="shortcutButton" destination="uAy-3H-TN8" id="Xhw-9U-VtT"/>
+                        <outlet property="testLabel" destination="TAG-fm-5LG" id="m5C-wM-rJn"/>
                         <outlet property="timerLabel" destination="vKv-He-KRr" id="TGf-MD-trI"/>
                         <outlet property="titleButton" destination="fAd-b4-oZZ" id="Zfw-Eo-vFf"/>
                     </connections>
