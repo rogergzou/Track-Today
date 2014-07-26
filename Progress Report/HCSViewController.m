@@ -261,13 +261,16 @@ const double roundButtonBorderWidth = 1.15;
     //if (statsDict) {
     
     //dict exists b/c was created in viewDidLoad firstTime method
-    HCSActivityRecord *record = [NSKeyedUnarchiver unarchiveObjectWithData: statsDict[self.titleButton.text]];
-    if (!record) {
+    NSData *recordData = statsDict[self.titleButton.text];
+    HCSActivityRecord *record;
+    if (!recordData) {
         //record is nil, set title & create obj
         record = [[HCSActivityRecord alloc]init];
         record.title = self.titleButton.text;
-        NSLog(@"%@ title here", record.title);
-    }
+        
+    } else
+        record = [NSKeyedUnarchiver unarchiveObjectWithData: recordData];
+    
     //if record doesn't exist, lazy insantiation. If does, just adds
     record.seconds += self.seconds;
     record.pausedSeconds += self.pausedSeconds;
@@ -645,7 +648,6 @@ const double roundButtonBorderWidth = 1.15;
     if (![defaults boolForKey:@"firstTimeForStats"]) {
         //also set statsDict for later
         [defaults setObject:@{} forKey:@"fullStatsDict"];
-        NSLog(@"e'fw");
         [defaults setBool:true forKey:@"firstTimeForStats"];
     }
     

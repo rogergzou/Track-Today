@@ -50,7 +50,6 @@
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSDictionary *statsDict = [defaults dictionaryForKey:@"fullStatsDict"];
-    NSLog(@"%@ stats dict", statsDict);
     NSMutableArray *statsArray = [NSMutableArray array];
     for (NSString *key in statsDict) {
         [statsArray addObject:[NSKeyedUnarchiver unarchiveObjectWithData:statsDict[key]]];
@@ -61,7 +60,6 @@
     }];
     
     self.activityRecordArray = statsArray;
-    NSLog(@"%@ record array", self.activityRecordArray);
     [self.tableView reloadData];
 }
 
@@ -124,7 +122,6 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    NSLog(@"%lu", (unsigned long)[self.activityRecordArray count]);
     return [self.activityRecordArray count];
 }
 
@@ -138,7 +135,6 @@
         HCSActivityRecordTableViewCell *recordCell = (HCSActivityRecordTableViewCell *)cell;
         HCSActivityRecord *record = self.activityRecordArray[indexPath.row];
         recordCell.titleLabel.text = record.title;
-        NSLog(@"%@ %@", recordCell.titleLabel.text, record.title);
         
         recordCell.timesLabel.text = [NSString stringWithFormat:@"%i %@", record.activityNumber, ((record.activityNumber-1) ? @"events": @"event")];
         
