@@ -13,6 +13,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "HCSReminderTableViewController.h"
 #import "HCSModifyReminderViewController.h"
+#import "HCSActivityRecord.h"
 
 //set reminder
 //terminate, then reopen
@@ -237,6 +238,47 @@ const double roundButtonBorderWidth = 1.15;
             [eventStore saveEvent:event span:EKSpanThisEvent error:&err];
         }
     }];
+    
+    //wow so long since this method was updated --7/25/14
+    //set persistent info
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSMutableDictionary *statsDict = [[defaults dictionaryForKey:@"fullStatsDict"]mutableCopy];
+    
+    //have an array of objects in order of most time to least time
+    //have a method to order them while linked? Basically like another array
+    //goddamn I wish I had taken an algorithms class first
+    /*
+     event.title = self.titleButton.text;
+     event.startDate = self.startDate;
+     event.endDate = self.endDate;
+     event.notes = [NSString stringWithFormat:@"%@ active, %@ inactive, paused %i times", timeString, pTimeString, self.pauseNumber];
+     */
+    
+    //if (statsDict) {
+    
+    //dict exists b/c was created in viewDidLoad firstTime method
+    HCSActivityRecord *record = statsDict[self.titleButton.text];
+    if (!record) {
+        //record is nil, set title & create obj
+        record = [[HCSActivityRecord alloc]init];
+        record.title = self.titleButton.text;
+    }
+    //if record doesn't exist, lazy insantiation. If does, just adds
+    record.seconds += self.seconds;
+    record.pausedSeconds += self.pausedSeconds;
+    record.pauseNumber += self.pauseNumber;
+    record.activityNumber++;
+    statsDict[self.titleButton.text] = record;
+    [defaults setObject:statsDict forKey:@"fullStatsDict"]; //will be autoconvert to nonmutable anyway
+    [defaults synchronize];
+    
+    //} else {
+        //dict doesn't exist
+      //  HCSActivityRecord *record = [[HCSActivityRecord alloc]init];
+        //record.title = self.titleButton.text;
+        
+    //}
 }
 - (void)beginTimer
 {
@@ -613,6 +655,10 @@ const double roundButtonBorderWidth = 1.15;
         [defaults setInteger:0 forKey:@"appCounter"];
         [defaults setObject:textWords forKey:@"textShortcuts"];
         [defaults setBool:true forKey:@"firstTime"];
+        
+        //also set statsDict for later
+        [defaults setObject:@{} forKey:@"fullStatsDict"];
+        
         [defaults synchronize];
     }
     [defaults setInteger:([defaults integerForKey:@"appCounter"]+1) forKey:@"appCounter"];
