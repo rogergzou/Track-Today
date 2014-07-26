@@ -37,6 +37,7 @@ const double roundButtonBorderWidth = 1.15;
 @property (weak, nonatomic) IBOutlet UIButton *reminderButton;
 @property (weak, nonatomic) IBOutlet UILabel *reminderLabel;
 @property (weak, nonatomic) IBOutlet UIButton *addReminderButton;
+@property (weak, nonatomic) IBOutlet UIButton *statsButton;
 
 @property (weak, nonatomic) IBOutlet UILabel *testLabel;
 
@@ -420,6 +421,10 @@ const double roundButtonBorderWidth = 1.15;
         self.shortcutButton.layer.cornerRadius = self.shortcutButton.frame.size.height/6;
         self.shortcutButton.layer.borderColor = self.shortcutButton.titleLabel.textColor.CGColor;
         //self.shortcutButton.backgroundColor = [UIColor whiteColor];
+        
+        //self.statsButton.layer.borderWidth = 1;
+        //self.statsButton.layer.cornerRadius = self.statsButton.frame.size.height/6;
+        //self.statsButton.layer.borderColor = [UIColor colorWithRed:239 green:60 blue:57 alpha:1].CGColor;
         
         self.reminderButton.layer.borderWidth = 1;
         self.reminderButton.layer.cornerRadius = self.reminderButton.frame.size.height/6;
