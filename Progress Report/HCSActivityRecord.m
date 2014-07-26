@@ -31,4 +31,27 @@
     return _pauseNumber;
 }
 
+- (void)encodeWithCoder:(NSCoder *)encoder
+{
+    [encoder encodeObject:self.title forKey:@"titleDuh"];
+    [encoder encodeInt:self.activityNumber forKey:@"activityNumber"];
+    [encoder encodeInt:self.pauseNumber forKey:@"pauseNumber"];
+    [encoder encodeDouble:self.seconds forKey:@"seconds"];
+    [encoder encodeDouble:self.pausedSeconds forKey:@"pausedSeconds"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder
+{
+    self = [super init];
+    if (self) {
+        self.title = [decoder decodeObjectForKey:@"titleDuh"];
+        self.seconds = [decoder decodeDoubleForKey:@"seconds"];
+        self.pausedSeconds = [decoder decodeDoubleForKey:@"pausedSeconds"];
+        self.activityNumber = [decoder decodeIntForKey:@"activityNumber"];
+        self.pauseNumber = [decoder decodeIntForKey:@"pauseNumber"];
+    }
+    
+    return self;
+}
+
 @end

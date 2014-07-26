@@ -49,7 +49,7 @@
 - (NSMutableArray *)timeIntervalSelectionArray
 {
     if (!_timeIntervalSelectionArray) {
-        _timeIntervalSelectionArray = [@[@1, @5, @10, @15, @30, @45, @60, @90, @120, @180, @300, @480, @600, @720]mutableCopy];
+        _timeIntervalSelectionArray = [@[@1, @3, @5, @10, @15, @30, @45, @60, @90, @120, @180, @300, @480, @600, @720]mutableCopy];
     }
     return _timeIntervalSelectionArray;
 }

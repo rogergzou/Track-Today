@@ -243,6 +243,8 @@ const double roundButtonBorderWidth = 1.15;
     //wow so long since this method was updated --7/25/14
     //set persistent info
     
+    
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSMutableDictionary *statsDict = [[defaults dictionaryForKey:@"fullStatsDict"]mutableCopy];
     
@@ -259,18 +261,21 @@ const double roundButtonBorderWidth = 1.15;
     //if (statsDict) {
     
     //dict exists b/c was created in viewDidLoad firstTime method
-    HCSActivityRecord *record = statsDict[self.titleButton.text];
+    HCSActivityRecord *record = [NSKeyedUnarchiver unarchiveObjectWithData: statsDict[self.titleButton.text]];
     if (!record) {
         //record is nil, set title & create obj
         record = [[HCSActivityRecord alloc]init];
         record.title = self.titleButton.text;
+        NSLog(@"%@ title here", record.title);
     }
     //if record doesn't exist, lazy insantiation. If does, just adds
     record.seconds += self.seconds;
     record.pausedSeconds += self.pausedSeconds;
     record.pauseNumber += self.pauseNumber;
     record.activityNumber++;
-    statsDict[self.titleButton.text] = record;
+    NSData *encodedRecord = [NSKeyedArchiver archivedDataWithRootObject:record];
+    statsDict[self.titleButton.text] = encodedRecord;
+    
     [defaults setObject:statsDict forKey:@"fullStatsDict"]; //will be autoconvert to nonmutable anyway
     [defaults synchronize];
     
@@ -637,7 +642,12 @@ const double roundButtonBorderWidth = 1.15;
     
     //[defaults setBool:NO forKey:@"firstTime"];
     
-    
+    if (![defaults boolForKey:@"firstTimeForStats"]) {
+        //also set statsDict for later
+        [defaults setObject:@{} forKey:@"fullStatsDict"];
+        NSLog(@"e'fw");
+        [defaults setBool:true forKey:@"firstTimeForStats"];
+    }
     
     if (![defaults boolForKey:@"firstTime"]) {
         //set firstTime defaults
@@ -662,8 +672,8 @@ const double roundButtonBorderWidth = 1.15;
         [defaults setBool:true forKey:@"firstTime"];
         
         //also set statsDict for later
-        [defaults setObject:@{} forKey:@"fullStatsDict"];
-        
+        //[defaults setObject:@{} forKey:@"fullStatsDict"];
+        //moved
         [defaults synchronize];
     }
     [defaults setInteger:([defaults integerForKey:@"appCounter"]+1) forKey:@"appCounter"];

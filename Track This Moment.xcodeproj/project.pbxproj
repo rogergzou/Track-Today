@@ -29,6 +29,9 @@
 		DB679F06195BB92700C61F6F /* Progress_ReportTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DB679F05195BB92700C61F6F /* Progress_ReportTests.m */; };
 		DB679F12195BD43900C61F6F /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB679F11195BD43900C61F6F /* EventKit.framework */; };
 		DBB922D019836DB300AEF1A7 /* HCSActivityRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB922CF19836DB300AEF1A7 /* HCSActivityRecord.m */; };
+		DBB922D61983AE6100AEF1A7 /* HCSActivityLogTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB922D51983AE6100AEF1A7 /* HCSActivityLogTableViewController.m */; };
+		DBB922D91983B9F300AEF1A7 /* HCSActivityRecordTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB922D81983B9F300AEF1A7 /* HCSActivityRecordTableViewCell.m */; };
+		DBB922DC1983CAA300AEF1A7 /* HCSExportActivityLogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB922DB1983CAA300AEF1A7 /* HCSExportActivityLogViewController.m */; };
 		DBCFA672197F80A800122581 /* HCSReminderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBCFA671197F80A800122581 /* HCSReminderTableViewController.m */; };
 		DBCFA6751980ABB100122581 /* HCSModifyReminderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBCFA6741980ABB100122581 /* HCSModifyReminderViewController.m */; };
 		DBE08AEF19721E77006AE034 /* LSCollectionViewHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = DBE08AE519721E77006AE034 /* LSCollectionViewHelper.m */; };
@@ -82,6 +85,12 @@
 		DB679F11195BD43900C61F6F /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
 		DBB922CE19836DB300AEF1A7 /* HCSActivityRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSActivityRecord.h; sourceTree = "<group>"; };
 		DBB922CF19836DB300AEF1A7 /* HCSActivityRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCSActivityRecord.m; sourceTree = "<group>"; };
+		DBB922D41983AE6100AEF1A7 /* HCSActivityLogTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSActivityLogTableViewController.h; sourceTree = "<group>"; };
+		DBB922D51983AE6100AEF1A7 /* HCSActivityLogTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCSActivityLogTableViewController.m; sourceTree = "<group>"; };
+		DBB922D71983B9F300AEF1A7 /* HCSActivityRecordTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSActivityRecordTableViewCell.h; sourceTree = "<group>"; };
+		DBB922D81983B9F300AEF1A7 /* HCSActivityRecordTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCSActivityRecordTableViewCell.m; sourceTree = "<group>"; };
+		DBB922DA1983CAA300AEF1A7 /* HCSExportActivityLogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSExportActivityLogViewController.h; sourceTree = "<group>"; };
+		DBB922DB1983CAA300AEF1A7 /* HCSExportActivityLogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCSExportActivityLogViewController.m; sourceTree = "<group>"; };
 		DBCFA670197F80A800122581 /* HCSReminderTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSReminderTableViewController.h; sourceTree = "<group>"; };
 		DBCFA671197F80A800122581 /* HCSReminderTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCSReminderTableViewController.m; sourceTree = "<group>"; };
 		DBCFA6731980ABB100122581 /* HCSModifyReminderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSModifyReminderViewController.h; sourceTree = "<group>"; };
@@ -162,6 +171,12 @@
 				DB679EE9195BB92700C61F6F /* Main_iPhone.storyboard */,
 				DB679EEF195BB92700C61F6F /* HCSViewController.h */,
 				DB679EF0195BB92700C61F6F /* HCSViewController.m */,
+				DBB922D41983AE6100AEF1A7 /* HCSActivityLogTableViewController.h */,
+				DBB922D51983AE6100AEF1A7 /* HCSActivityLogTableViewController.m */,
+				DBB922D71983B9F300AEF1A7 /* HCSActivityRecordTableViewCell.h */,
+				DBB922D81983B9F300AEF1A7 /* HCSActivityRecordTableViewCell.m */,
+				DBB922DA1983CAA300AEF1A7 /* HCSExportActivityLogViewController.h */,
+				DBB922DB1983CAA300AEF1A7 /* HCSExportActivityLogViewController.m */,
 				DBB922CE19836DB300AEF1A7 /* HCSActivityRecord.h */,
 				DBB922CF19836DB300AEF1A7 /* HCSActivityRecord.m */,
 				DBCFA6761982635600122581 /* Reminder */,
@@ -372,6 +387,9 @@
 				DB6765A51960BAB400C113D2 /* HCSCustomViewCell.m in Sources */,
 				DBCFA6751980ABB100122581 /* HCSModifyReminderViewController.m in Sources */,
 				DBCFA672197F80A800122581 /* HCSReminderTableViewController.m in Sources */,
+				DBB922DC1983CAA300AEF1A7 /* HCSExportActivityLogViewController.m in Sources */,
+				DBB922D91983B9F300AEF1A7 /* HCSActivityRecordTableViewCell.m in Sources */,
+				DBB922D61983AE6100AEF1A7 /* HCSActivityLogTableViewController.m in Sources */,
 				DB49FF06196634EF00D91BFE /* HCSMyHeaderReusableView.m in Sources */,
 				DB67659F19608E8D00C113D2 /* HCSShortcut.m in Sources */,
 				DBB922D019836DB300AEF1A7 /* HCSActivityRecord.m in Sources */,
