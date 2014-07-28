@@ -10,6 +10,7 @@
 #import "HCSActivityRecord.h"
 #import "HCSActivityRecordTableViewCell.h"
 #import "HCSExportActivityLogViewController.h"
+#import "HCSDetailedActivityRecordFromTableViewController.h"
 
 @interface HCSActivityLogTableViewController ()
 
@@ -224,6 +225,13 @@
         //HCSExportActivityLogViewController *segueVC = (HCSExportActivityLogViewController *)((UINavigationController *)[segue destinationViewController]).topViewController;
         HCSExportActivityLogViewController *segueVC = (HCSExportActivityLogViewController *)[segue destinationViewController];
         segueVC.actRecArr = self.activityRecordArray;
+    } else if ([segue.identifier isEqualToString:@"infoSegue"]) {
+        HCSDetailedActivityRecordFromTableViewController *detailedVC = (HCSDetailedActivityRecordFromTableViewController *)[segue destinationViewController];
+        if ([sender isKindOfClass:[UITableViewCell class]]) {
+            UITableViewCell *cell = (UITableViewCell *)sender;
+            detailedVC.record = self.activityRecordArray[[self.tableView indexPathForCell:cell].row];
+            NSLog(@"%@ f", detailedVC.record.startDateArray);
+        }
     }
 }
 

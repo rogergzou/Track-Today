@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DB07648619862A5E00DBABE4 /* HCSDetailedActivityRecordFromTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB07648519862A5E00DBABE4 /* HCSDetailedActivityRecordFromTableViewController.m */; };
+		DB07648919864CC800DBABE4 /* HCSDetailedActivityRecordTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DB07648819864CC800DBABE4 /* HCSDetailedActivityRecordTableViewCell.m */; };
 		DB49F361195CF0D400067F96 /* HCSShortCutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB49F360195CF0D400067F96 /* HCSShortCutViewController.m */; };
 		DB49F364195CF1C000067F96 /* HCSShortCutTextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DB49F363195CF1C000067F96 /* HCSShortCutTextViewCell.m */; };
 		DB49FF06196634EF00D91BFE /* HCSMyHeaderReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB49FF05196634EF00D91BFE /* HCSMyHeaderReusableView.m */; };
@@ -51,6 +53,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DB07648419862A5E00DBABE4 /* HCSDetailedActivityRecordFromTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSDetailedActivityRecordFromTableViewController.h; sourceTree = "<group>"; };
+		DB07648519862A5E00DBABE4 /* HCSDetailedActivityRecordFromTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCSDetailedActivityRecordFromTableViewController.m; sourceTree = "<group>"; };
+		DB07648719864CC800DBABE4 /* HCSDetailedActivityRecordTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSDetailedActivityRecordTableViewCell.h; sourceTree = "<group>"; };
+		DB07648819864CC800DBABE4 /* HCSDetailedActivityRecordTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCSDetailedActivityRecordTableViewCell.m; sourceTree = "<group>"; };
 		DB49F35F195CF0D400067F96 /* HCSShortCutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSShortCutViewController.h; sourceTree = "<group>"; };
 		DB49F360195CF0D400067F96 /* HCSShortCutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCSShortCutViewController.m; sourceTree = "<group>"; };
 		DB49F362195CF1C000067F96 /* HCSShortCutTextViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSShortCutTextViewCell.h; sourceTree = "<group>"; };
@@ -177,6 +183,10 @@
 				DBB922D81983B9F300AEF1A7 /* HCSActivityRecordTableViewCell.m */,
 				DBB922DA1983CAA300AEF1A7 /* HCSExportActivityLogViewController.h */,
 				DBB922DB1983CAA300AEF1A7 /* HCSExportActivityLogViewController.m */,
+				DB07648419862A5E00DBABE4 /* HCSDetailedActivityRecordFromTableViewController.h */,
+				DB07648519862A5E00DBABE4 /* HCSDetailedActivityRecordFromTableViewController.m */,
+				DB07648719864CC800DBABE4 /* HCSDetailedActivityRecordTableViewCell.h */,
+				DB07648819864CC800DBABE4 /* HCSDetailedActivityRecordTableViewCell.m */,
 				DBB922CE19836DB300AEF1A7 /* HCSActivityRecord.h */,
 				DBB922CF19836DB300AEF1A7 /* HCSActivityRecord.m */,
 				DBCFA6761982635600122581 /* Reminder */,
@@ -394,7 +404,9 @@
 				DB67659F19608E8D00C113D2 /* HCSShortcut.m in Sources */,
 				DBB922D019836DB300AEF1A7 /* HCSActivityRecord.m in Sources */,
 				DB6765A8196126FD00C113D2 /* HCSAddCustomShortCutViewController.m in Sources */,
+				DB07648919864CC800DBABE4 /* HCSDetailedActivityRecordTableViewCell.m in Sources */,
 				DBE08AF019721E77006AE034 /* LSCollectionViewLayoutHelper.m in Sources */,
+				DB07648619862A5E00DBABE4 /* HCSDetailedActivityRecordFromTableViewController.m in Sources */,
 				DB679EF1195BB92700C61F6F /* HCSViewController.m in Sources */,
 				DBE08AF219721E77006AE034 /* UICollectionView+Draggable.m in Sources */,
 				DB679EE8195BB92700C61F6F /* HCSAppDelegate.m in Sources */,

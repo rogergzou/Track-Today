@@ -283,6 +283,7 @@ const double roundButtonBorderWidth = 1.15;
     [record.endDateArray addObject:self.endDate];
     [record.secondsArray addObject:@(self.seconds)];
     [record.pausedSecondsArray addObject:@(self.pausedSeconds)];
+    NSLog(@"%@ ps %f", record.pausedSecondsArray, self.pausedSeconds);
     [record.pauseNumberArray addObject:@(self.pauseNumber)];
     
     NSData *encodedRecord = [NSKeyedArchiver archivedDataWithRootObject:record];
