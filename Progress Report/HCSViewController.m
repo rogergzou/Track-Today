@@ -279,12 +279,17 @@ const double roundButtonBorderWidth = 1.15;
     record.pauseNumber += self.pauseNumber;
     record.activityNumber++;
     
-    [record.startDateArray addObject:self.startDate];
-    [record.endDateArray addObject:self.endDate];
-    [record.secondsArray addObject:@(self.seconds)];
-    [record.pausedSecondsArray addObject:@(self.pausedSeconds)];
-    NSLog(@"%@ ps %f", record.pausedSecondsArray, self.pausedSeconds);
-    [record.pauseNumberArray addObject:@(self.pauseNumber)];
+    //[record.startDateArray addObject:self.startDate];
+    //[record.endDateArray addObject:self.endDate];
+    //[record.secondsArray addObject:@(self.seconds)];
+    //[record.pausedSecondsArray addObject:@(self.pausedSeconds)];
+    //NSLog(@"%@ ps %f", record.pausedSecondsArray, self.pausedSeconds);
+    //[record.pauseNumberArray addObject:@(self.pauseNumber)];
+    [record.startDateArray insertObject:self.startDate atIndex:0];
+    [record.endDateArray insertObject:self.endDate atIndex:0];
+    [record.secondsArray insertObject:@(self.seconds) atIndex:0];
+    [record.pausedSecondsArray insertObject:@(self.pausedSeconds) atIndex:0];
+    [record.pauseNumberArray insertObject:@(self.pauseNumber) atIndex:0];
     
     NSData *encodedRecord = [NSKeyedArchiver archivedDataWithRootObject:record];
     statsDict[self.titleButton.text] = encodedRecord;
