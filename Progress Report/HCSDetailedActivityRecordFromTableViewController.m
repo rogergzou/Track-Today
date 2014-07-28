@@ -101,7 +101,10 @@
             pTimeString = [NSString stringWithFormat:@"%i:%02i:%02i", phours, pmins, psecs];
         
         detailedCell.activeLabel.text = [NSString stringWithFormat:@"%@ active", timeString];
-        detailedCell.inactiveLabel.text = [NSString stringWithFormat:@"%@ inactive", pTimeString];
+        if (pnum)
+            detailedCell.inactiveLabel.text = [NSString stringWithFormat:@"%@ paused", pTimeString];
+        else
+            detailedCell.inactiveLabel.text = @"";
     }
     return cell;
 }
