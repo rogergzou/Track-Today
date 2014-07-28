@@ -30,6 +30,31 @@
     if (!_pauseNumber) _pauseNumber = 0;
     return _pauseNumber;
 }
+- (NSMutableArray *)startDateArray
+{
+    if (!_startDateArray) _startDateArray = [NSMutableArray array];
+    return _startDateArray;
+}
+- (NSMutableArray *)endDateArray
+{
+    if (!_endDateArray) _endDateArray = [NSMutableArray array];
+    return _endDateArray;
+}
+- (NSMutableArray *)secondsArray
+{
+    if (!_secondsArray) _secondsArray = [NSMutableArray array];
+    return _secondsArray;
+}
+- (NSMutableArray *)pausedSecondsArray
+{
+    if (!_pausedSecondsArray) _pausedSecondsArray = [NSMutableArray array];
+    return _pausedSecondsArray;
+}
+- (NSMutableArray *)pauseNumberArray
+{
+    if (!_pauseNumberArray) _pauseNumberArray = [NSMutableArray array];
+    return _pauseNumberArray;
+}
 
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
@@ -38,7 +63,18 @@
     [encoder encodeInt:self.pauseNumber forKey:@"pauseNumber"];
     [encoder encodeDouble:self.seconds forKey:@"seconds"];
     [encoder encodeDouble:self.pausedSeconds forKey:@"pausedSeconds"];
+    [encoder encodeObject:self.startDateArray forKey:@"startDateArray"];
+    [encoder encodeObject:self.endDateArray forKey:@"endDateArray"];
+    [encoder encodeObject:self.secondsArray forKey:@"secondsArray"];
+    [encoder encodeObject:self.pausedSecondsArray forKey:@"pausedSecondsArray"];
+    [encoder encodeObject:self.pauseNumberArray forKey:@"pauseNumberArray"];
 }
+/* @property (nonatomic, strong) NSMutableArray *startDateArray;
+ @property (nonatomic, strong) NSMutableArray *endDateArray;
+ @property (nonatomic, strong) NSMutableArray *secondsArray;
+ @property (nonatomic, strong) NSMutableArray *pausedSecondsArray;
+ @property (nonatomic, strong) NSMutableArray *pauseNumberArray;
+ */
 
 - (id)initWithCoder:(NSCoder *)decoder
 {
@@ -49,6 +85,11 @@
         self.pausedSeconds = [decoder decodeDoubleForKey:@"pausedSeconds"];
         self.activityNumber = [decoder decodeIntForKey:@"activityNumber"];
         self.pauseNumber = [decoder decodeIntForKey:@"pauseNumber"];
+        self.startDateArray = [decoder decodeObjectForKey:@"startDateArray"];
+        self.endDateArray = [decoder decodeObjectForKey:@"endDateArray"];
+        self.secondsArray = [decoder decodeObjectForKey:@"secondsArray"];
+        self.pausedSecondsArray = [decoder decodeObjectForKey:@"pausedSecondsArray"];
+        self.pauseNumberArray = [decoder decodeObjectForKey:@"pauseNumberArray"];
     }
     
     return self;

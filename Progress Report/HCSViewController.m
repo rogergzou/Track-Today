@@ -19,6 +19,9 @@
 //terminate, then reopen
 //reminder is not there, only setReminder
 
+//need to fix app state not being saved
+//need to add the extra tableview activity log info
+
 const int scheduleAlertTextFieldTag = 4;
 const int scheduleAlertTag = 1;
 const int resetAlertTag = 2;
@@ -60,7 +63,6 @@ const double roundButtonBorderWidth = 1.15;
 
 
 @implementation HCSViewController
-
 
 
 - (IBAction)buttonPushed:(UIButton *)sender {
@@ -276,6 +278,13 @@ const double roundButtonBorderWidth = 1.15;
     record.pausedSeconds += self.pausedSeconds;
     record.pauseNumber += self.pauseNumber;
     record.activityNumber++;
+    
+    [record.startDateArray addObject:self.startDate];
+    [record.endDateArray addObject:self.endDate];
+    [record.secondsArray addObject:@(self.seconds)];
+    [record.pausedSecondsArray addObject:@(self.pausedSeconds)];
+    [record.pauseNumberArray addObject:@(self.pauseNumber)];
+    
     NSData *encodedRecord = [NSKeyedArchiver archivedDataWithRootObject:record];
     statsDict[self.titleButton.text] = encodedRecord;
     
@@ -618,9 +627,11 @@ const double roundButtonBorderWidth = 1.15;
     return _pausedSeconds;
 }
 
+//failure when start timer/reminder, switch to another app, close this app, use local notif to load. Also happens if load even now with local notif. Reminder is irrelevant nvm.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    NSLog(@"viewdid");
 	// Do any additional setup after loading the view, typically from a nib.
 
     //set defaults
@@ -693,9 +704,10 @@ const double roundButtonBorderWidth = 1.15;
 - (void)encodeRestorableStateWithCoder:(NSCoder *)coder
 {
     if ([self.titleButton.text length])
-        [coder encodeObject:self.titleButton.text forKey:@"Title Text"];
-    
+        [coder encodeObject:_titleButton.text forKey:@"Title Text"];
+    NSLog(@"encode");
     [coder encodeBool:self.isStart forKey:@"isStart"];
+    NSLog(@"%d en", (self.isStart ? 1 : 0));
     
     if (!self.isStart) {
         //only act if not new/isStart
@@ -707,6 +719,8 @@ const double roundButtonBorderWidth = 1.15;
         //start date should always exist if not isStart
         [coder encodeObject:self.startDate forKey:@"startDate"];
         //lol don't think end date is needed?
+        NSLog(@"this was encoded too %f paused sec", self.pausedSeconds);
+        
         
         //check if ever paused and if pauseStartDateExists
         if (self.pauseNumber > 0)
@@ -737,8 +751,10 @@ const double roundButtonBorderWidth = 1.15;
 {
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"firstTime"]) {
         self.titleButton.text = [coder decodeObjectForKey:@"Title Text"];
-        
+        NSLog(@"hi");
+        self.testLabel.text = [coder decodeObjectForKey:@"Title Text"];
         self.isStart = [coder decodeBoolForKey:@"isStart"];
+        NSLog(@"%d dec", (self.isStart ? 1 : 0));
         if (!self.isStart) {
             //only act if not new/isStart
             
@@ -763,6 +779,7 @@ const double roundButtonBorderWidth = 1.15;
                 NSTimeInterval terminationToNow = fabs([[coder decodeObjectForKey:@"wentBackgroundDate"] timeIntervalSinceNow]); //would've been negative so must abs
                 self.seconds += (int)floor(terminationToNow);
             }
+            NSLog(@"decode");
             //update timer label
             self.seconds--;
             [self increaseTimerCount];

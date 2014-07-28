@@ -17,5 +17,10 @@
 @property (nonatomic) NSTimeInterval pausedSeconds;
 @property (nonatomic) int pauseNumber;
 @property (nonatomic) int activityNumber;
+@property (nonatomic, strong) NSMutableArray *startDateArray;
+@property (nonatomic, strong) NSMutableArray *endDateArray;
+@property (nonatomic, strong) NSMutableArray *secondsArray;
+@property (nonatomic, strong) NSMutableArray *pausedSecondsArray;
+@property (nonatomic, strong) NSMutableArray *pauseNumberArray;
 
 @end
