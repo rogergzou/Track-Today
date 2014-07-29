@@ -13,6 +13,8 @@
 
 @property (nonatomic, strong) NSDate *exitDate;
 
+//@property (nonatomic) BOOL decoded;
+
 @end
 
 @implementation HCSAppDelegate
@@ -39,7 +41,29 @@
         }
     }
     */
-    
+    /*
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSLog(@"finish launch");
+    if (!self.decoded) {
+        //get it from NSUserdefaults
+        NSLog(@"s1");
+        NSDictionary *savDict = [defaults dictionaryForKey:@"restorationDictionary"];
+        if (savDict) {
+            NSLog(@"s2");
+            UIViewController *rootVC = self.window.rootViewController; //should be HCSViewController. Check anyway.
+            if ([rootVC isKindOfClass:[HCSViewController class]]) {
+                HCSViewController *hcsVC = (HCSViewController *)rootVC;
+                NSLog(@"s3");
+                [hcsVC jankyRestoreStateWithDict:savDict];
+            }
+        }
+        
+        self.decoded = YES;
+    }
+    //reset just in case next time
+    [defaults setObject:nil forKey:@"restorationDictionary"];
+    [defaults synchronize];
+    */
     return YES;
 }
 							
@@ -64,6 +88,9 @@
             [hcsVC endTimer];
             self.exitDate = [NSDate date];
         }
+        
+        //set restoration info into nsuserdefaults
+        //[hcsVC jankySaveState];
     }
 }
 
@@ -125,5 +152,14 @@
 {
     return YES;
 }
-
+/*
+- (void)application:(UIApplication *)application didDecodeRestorableStateWithCoder:(NSCoder *)coder
+{
+    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Reminder!" message:[NSString stringWithFormat:@"This is your decoded."] delegate:application cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    //alertView.tag = 123456; //shouldn't do anything basically and shouldn't be recognized
+    [alertView show];
+    self.decoded = YES;
+    NSLog(@"did decoded");
+}
+*/
 @end

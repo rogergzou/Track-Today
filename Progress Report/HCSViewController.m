@@ -58,6 +58,8 @@ const double roundButtonBorderWidth = 1.15;
 
 @property (nonatomic) int pauseNumber;
 
+//@property (nonatomic) BOOL skipResetVarForStatePls;
+
 @end
 
 
@@ -616,6 +618,78 @@ const double roundButtonBorderWidth = 1.15;
         }
     }
 }
+
+/*
+
+- (void)jankySaveState
+{
+    NSMutableDictionary *savDict = [[NSMutableDictionary alloc]init];
+    if ([self.titleButton.text length]) {
+        //[coder encodeObject:_titleButton.text forKey:@"Title Text"];
+        savDict[@"Title Text"] = self.titleButton.text;
+    }
+    NSLog(@"dict janky encode");
+    //[coder encodeBool:self.isStart forKey:@"isStart"];
+    savDict[@"isStart"] = @(self.isStart);
+    //NSLog(@"%d en", (self.isStart ? 1 : 0));
+    
+    if (!self.isStart) {
+        //only act if not new/isStart
+        
+        savDict[@"seconds"] = @(self.seconds);
+        savDict[@"wentBackgroundDate"] = [NSDate date];
+        savDict[@"isPaused"] = @(self.isPaused);
+        savDict[@"pauseNumber"] = @(self.pauseNumber);
+        savDict[@"pausedSeconds"] = @(self.pausedSeconds);
+        savDict[@"startDate"] = self.startDate;
+
+        //[coder encodeInt:self.seconds forKey:@"seconds"];
+        //[coder encodeObject:[NSDate date] forKey:@"wentBackgroundDate"];
+        //[coder encodeBool:self.isPaused forKey:@"isPaused"];
+        //[coder encodeInt:self.pauseNumber forKey:@"pauseNumber"];
+        //[coder encodeDouble:self.pausedSeconds forKey:@"pausedSeconds"];
+        //start date should always exist if not isStart
+        //[coder encodeObject:self.startDate forKey:@"startDate"];
+        //lol don't think end date is needed?
+        NSLog(@"janky encode this was encoded too %f paused sec", self.pausedSeconds);
+        //check if ever paused and if pauseStartDateExists
+        if (self.pauseNumber > 0) {
+            //[coder encodeObject:self.pauseStartDate forKey:@"pauseStartDate"];
+            savDict[@"pauseStartDate"] = self.pauseStartDate;
+        }
+    }
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:savDict forKey:@"restorationDictionary"];
+    NSLog(@"restdict %@", savDict);
+    [defaults synchronize];
+}
+
+- (void)jankyRestoreStateWithDict:(NSDictionary *)savDict
+{
+    self.skipResetVarForStatePls = YES;
+    NSString *titleText = savDict[@"Title Text"];
+    NSLog(@"reached here");
+    if (titleText) {
+        self.titleButton.text = titleText;
+    }
+    self.isStart = [savDict[@"isStart"] boolValue];
+    if (self.isStart)
+        return;
+    self.seconds = [savDict[@"seconds"] intValue];
+    //background date shinanegins here
+    self.isPaused = [savDict[@"isPaused"] boolValue];
+    self.pauseNumber = [savDict[@"pauseNumber"]intValue];
+    self.pausedSeconds = [savDict[@"pausedSeconds"]doubleValue];
+    self.startDate = savDict[@"startDate"];
+    NSLog(@"janky restore pause # %i", self.pauseNumber);
+    
+    if (self.pauseNumber > 0) {
+        self.pauseStartDate = savDict[@"pauseStartDate"];
+    }
+}
+*/
+
 //lazy instantiation for seconds, pauseNumber, pausedSeconds
 - (int)seconds
 {
@@ -637,11 +711,17 @@ const double roundButtonBorderWidth = 1.15;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSLog(@"viewdid");
+    //NSLog(@"viewdid");
 	// Do any additional setup after loading the view, typically from a nib.
 
     //set defaults
+    /* if (self.skipResetVarForStatePls) {
+        self.skipResetVarForStatePls = NO;
+    } else {
+        [self resetVars];
+    }*/
     [self resetVars];
+    
     self.resultLabel.text = @"";
     //update reminder thingy
     if ([[[UIApplication sharedApplication] scheduledLocalNotifications] count] > 0) {
@@ -680,7 +760,7 @@ const double roundButtonBorderWidth = 1.15;
         }
         [defaults setObject:storeWords forKey:@"shortcuts"];
         
-        NSArray *textOnlyArr = @[@"Sleep", @"Reading", @"Adventure!", @"Networking"];
+        NSArray *textOnlyArr = @[@"Sleep", @"Reading", @"Adventure!", @"Emails"];
         NSMutableArray *textWords = [NSMutableArray array];
         for (NSString *word in textOnlyArr) {
             NSData *encodedSampleWorkObj = [NSKeyedArchiver archivedDataWithRootObject:[[HCSShortcut alloc]initWithTitle:word image:nil]];
@@ -711,9 +791,9 @@ const double roundButtonBorderWidth = 1.15;
 {
     if ([self.titleButton.text length])
         [coder encodeObject:_titleButton.text forKey:@"Title Text"];
-    NSLog(@"encode");
+    //NSLog(@"encode");
     [coder encodeBool:self.isStart forKey:@"isStart"];
-    NSLog(@"%d en", (self.isStart ? 1 : 0));
+    //NSLog(@"%d en", (self.isStart ? 1 : 0));
     
     if (!self.isStart) {
         //only act if not new/isStart
@@ -725,7 +805,7 @@ const double roundButtonBorderWidth = 1.15;
         //start date should always exist if not isStart
         [coder encodeObject:self.startDate forKey:@"startDate"];
         //lol don't think end date is needed?
-        NSLog(@"this was encoded too %f paused sec", self.pausedSeconds);
+        //NSLog(@"this was encoded too %f paused sec", self.pausedSeconds);
         
         
         //check if ever paused and if pauseStartDateExists
@@ -757,10 +837,10 @@ const double roundButtonBorderWidth = 1.15;
 {
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"firstTime"]) {
         self.titleButton.text = [coder decodeObjectForKey:@"Title Text"];
-        NSLog(@"hi");
-        self.testLabel.text = [coder decodeObjectForKey:@"Title Text"];
+        //self.testLabel.text = [coder decodeObjectForKey:@"Title Text"];
+        //self.testLabel.text = @"decoded";
         self.isStart = [coder decodeBoolForKey:@"isStart"];
-        NSLog(@"%d dec", (self.isStart ? 1 : 0));
+        //NSLog(@"%d dec", (self.isStart ? 1 : 0));
         if (!self.isStart) {
             //only act if not new/isStart
             
@@ -785,7 +865,7 @@ const double roundButtonBorderWidth = 1.15;
                 NSTimeInterval terminationToNow = fabs([[coder decodeObjectForKey:@"wentBackgroundDate"] timeIntervalSinceNow]); //would've been negative so must abs
                 self.seconds += (int)floor(terminationToNow);
             }
-            NSLog(@"decode");
+            //NSLog(@"decode");
             //update timer label
             self.seconds--;
             [self increaseTimerCount];
@@ -883,6 +963,5 @@ const double roundButtonBorderWidth = 1.15;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
-
 
 @end
