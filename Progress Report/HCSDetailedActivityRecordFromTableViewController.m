@@ -74,7 +74,7 @@
         
         int recsecs = [self.record.secondsArray[indexPath.row] intValue];
         NSTimeInterval recpsecs = [self.record.pausedSecondsArray[indexPath.row] doubleValue];
-        NSLog(@"%f fwef %@", recpsecs, self.record.pausedSecondsArray);
+        //NSLog(@"%f fwef %@", recpsecs, self.record.pausedSecondsArray);
         int mins = floor(recsecs/60);
         int secs = recsecs - (mins * 60);
         int hours = 0;

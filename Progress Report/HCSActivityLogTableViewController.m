@@ -230,7 +230,7 @@
         if ([sender isKindOfClass:[UITableViewCell class]]) {
             UITableViewCell *cell = (UITableViewCell *)sender;
             detailedVC.record = self.activityRecordArray[[self.tableView indexPathForCell:cell].row];
-            NSLog(@"%@ f", detailedVC.record.startDateArray);
+            //NSLog(@"%@ f", detailedVC.record.startDateArray);
         }
     }
 }
