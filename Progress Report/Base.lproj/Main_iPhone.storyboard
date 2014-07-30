@@ -87,7 +87,7 @@
                                     <color key="titleColor" red="0.43518597146739135" green="0.097038527528670759" blue="0.37824565432583379" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="24O-nx-T3A" kind="modal" id="9Fn-ke-8Up"/>
+                                    <segue destination="24O-nx-T3A" kind="modal" identifier="changeReminderSegue" id="9Fn-ke-8Up"/>
                                 </connections>
                             </button>
                             <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Reminder set for" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="psn-Kd-6Eg">

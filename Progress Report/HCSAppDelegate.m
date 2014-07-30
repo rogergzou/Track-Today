@@ -13,8 +13,6 @@
 
 @property (nonatomic, strong) NSDate *exitDate;
 
-//@property (nonatomic) BOOL decoded;
-
 @end
 
 @implementation HCSAppDelegate
@@ -24,7 +22,6 @@
 // Override point for customization after application launch.
     
                     //NOTE also done in viewDidLoad so not needed
-    
     /*
     UIViewController *rootVC = self.window.rootViewController; //should be HCSViewController. Check anyway.
     if ([rootVC isKindOfClass:[HCSViewController class]]) {

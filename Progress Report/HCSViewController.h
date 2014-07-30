@@ -21,9 +21,5 @@
 - (void)endTimer;
 - (void)beginTimer;
 - (void)hideReminderLabel;
-//- (void)jankySaveState;
-//- (void)jankyRestoreStateWithDict:(NSDictionary *)savDict;
-//- (void)saveState;
-//- (void)restoreState;
 
 @end
