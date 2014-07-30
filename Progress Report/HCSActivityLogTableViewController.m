@@ -9,7 +9,7 @@
 #import "HCSActivityLogTableViewController.h"
 #import "HCSActivityRecord.h"
 #import "HCSActivityRecordTableViewCell.h"
-#import "HCSExportActivityLogViewController.h"
+//#import "HCSExportActivityLogViewController.h"
 #import "HCSDetailedActivityRecordFromTableViewController.h"
 #import <MessageUI/MessageUI.h>
 
@@ -354,12 +354,14 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    /*
     if ([segue.identifier isEqualToString:@"writeSegue"])
     {
         //HCSExportActivityLogViewController *segueVC = (HCSExportActivityLogViewController *)((UINavigationController *)[segue destinationViewController]).topViewController;
         HCSExportActivityLogViewController *segueVC = (HCSExportActivityLogViewController *)[segue destinationViewController];
         segueVC.actRecArr = self.activityRecordArray;
-    } else if ([segue.identifier isEqualToString:@"infoSegue"]) {
+    } else if ([segue.identifier isEqualToString:@"infoSegue"]) {*/
+    if ([segue.identifier isEqualToString:@"infoSegue"]) {
         HCSDetailedActivityRecordFromTableViewController *detailedVC = (HCSDetailedActivityRecordFromTableViewController *)[segue destinationViewController];
         if ([sender isKindOfClass:[UITableViewCell class]]) {
             UITableViewCell *cell = (UITableViewCell *)sender;
