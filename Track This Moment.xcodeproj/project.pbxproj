@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DB0206D31989AF4C00463C3A /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB0206D21989AF4C00463C3A /* MessageUI.framework */; };
 		DB07648619862A5E00DBABE4 /* HCSDetailedActivityRecordFromTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB07648519862A5E00DBABE4 /* HCSDetailedActivityRecordFromTableViewController.m */; };
 		DB07648919864CC800DBABE4 /* HCSDetailedActivityRecordTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DB07648819864CC800DBABE4 /* HCSDetailedActivityRecordTableViewCell.m */; };
 		DB49F361195CF0D400067F96 /* HCSShortCutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB49F360195CF0D400067F96 /* HCSShortCutViewController.m */; };
@@ -53,6 +54,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DB0206D21989AF4C00463C3A /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		DB07648419862A5E00DBABE4 /* HCSDetailedActivityRecordFromTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSDetailedActivityRecordFromTableViewController.h; sourceTree = "<group>"; };
 		DB07648519862A5E00DBABE4 /* HCSDetailedActivityRecordFromTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCSDetailedActivityRecordFromTableViewController.m; sourceTree = "<group>"; };
 		DB07648719864CC800DBABE4 /* HCSDetailedActivityRecordTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSDetailedActivityRecordTableViewCell.h; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB0206D31989AF4C00463C3A /* MessageUI.framework in Frameworks */,
 				DB679F12195BD43900C61F6F /* EventKit.framework in Frameworks */,
 				DB679EDA195BB92700C61F6F /* CoreGraphics.framework in Frameworks */,
 				DB679EDC195BB92700C61F6F /* UIKit.framework in Frameworks */,
@@ -160,6 +163,7 @@
 		DB679ED6195BB92700C61F6F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DB0206D21989AF4C00463C3A /* MessageUI.framework */,
 				DB679F11195BD43900C61F6F /* EventKit.framework */,
 				DB679ED7195BB92700C61F6F /* Foundation.framework */,
 				DB679ED9195BB92700C61F6F /* CoreGraphics.framework */,

@@ -357,7 +357,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="compose" id="nnq-Oc-Cah">
                             <connections>
-                                <segue destination="cQa-o6-eT6" kind="push" identifier="writeSegue" id="K36-81-YJ8"/>
+                                <action selector="emailButtonPressed:" destination="Zrb-S7-A2e" id="tHd-3p-rSJ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

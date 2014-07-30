@@ -400,7 +400,7 @@ const double roundButtonBorderWidth = 1.15;
         endDateString = [endDateString componentsSeparatedByString:@", "][1];
     }
     
-    self.resultLabel.text = [NSString stringWithFormat:@"Event '%@' added to calendar (%@ to %@)", self.titleButton.text, startDateString, endDateString];
+    self.resultLabel.text = [NSString stringWithFormat:@"'%@' added to calendar (%@ to %@)", self.titleButton.text, startDateString, endDateString];
     
     //animation fails and just is blank if user schedules events within 4.5 seconds of each ending. However, I find that unlikely and thus this should work
     [UIView animateWithDuration:5.0 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{ self.resultLabel.alpha = 0;} completion:^(BOOL finished){

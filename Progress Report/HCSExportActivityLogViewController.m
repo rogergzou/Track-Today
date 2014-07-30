@@ -62,6 +62,60 @@
             pTimeString = [NSString stringWithFormat:@"%i:%02i:%02i", phours, pmins, psecs];
         
         placeholderString = [placeholderString stringByAppendingString:[NSString stringWithFormat:@"'%@' was scheduled %d %@, %@ active, %@ inactive, paused %d %@.\n", record.title, record.activityNumber, (record.activityNumber-1 ? @"times" : @"time"), timeString, pTimeString, record.pauseNumber, (record.pauseNumber-1 ? @"times" : @"time")]];
+        
+        /*
+        int arraytotal = (int)[record.startDateArray count];
+        
+        for (int i = arraytotal - 1; i >= 0; i--) {
+            NSDate *startDate = record.startDateArray[i];
+            NSDate *endDate = record.endDateArray[i];
+            
+            NSString *startDateString = [NSDateFormatter localizedStringFromDate:startDate dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
+            NSString *endDateString = [NSDateFormatter localizedStringFromDate:endDate dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
+            //NSDate *startDateOnly = self.startDate;
+            //NSDate *endDateOnly = self.endDate;
+            [[NSCalendar currentCalendar] rangeOfUnit:NSDayCalendarUnit startDate:&startDate interval:NULL forDate:startDate];
+            [[NSCalendar currentCalendar] rangeOfUnit:NSDayCalendarUnit startDate:&endDate interval:NULL forDate:endDate];
+            if ([startDate compare:endDate] == NSOrderedSame) {
+                //endDateString = [endDateString substringFromIndex:[endDateString length]-10];
+                endDateString = [endDateString componentsSeparatedByString:@", "][1];
+            }
+            int pnum = [record.pauseNumberArray[i] intValue];
+            NSString *pauseNumString = [NSString stringWithFormat:@"%d %@", pnum, (pnum - 1 ? @"pauses" : @"pause")];
+            
+            int recsecs = [record.secondsArray[i] intValue];
+            NSTimeInterval recpsecs = [record.pausedSecondsArray[i] doubleValue];
+            //NSLog(@"%f fwef %@", recpsecs, self.record.pausedSecondsArray);
+            int mins = floor(recsecs/60);
+            int secs = recsecs - (mins * 60);
+            int hours = 0;
+            if (mins > 59) {
+                hours = floor(mins/60);
+                mins -= hours * 60;
+            }
+            int pmins = floor(recpsecs/60);
+            int psecs = floor(recpsecs - (pmins * 60));
+            int phours = 0;
+            if (pmins > 59) {
+                phours = floor(pmins/60);
+                pmins -= phours * 60;
+            }
+            NSString *timeString;
+            NSString *pTimeString;
+            if (hours == 0)
+                timeString = [NSString stringWithFormat:@"%i:%02i", mins, secs];
+            else
+                timeString = [NSString stringWithFormat:@"%i:%02i:%02i", hours, mins, secs];
+            if (phours == 0)
+                pTimeString = [NSString stringWithFormat:@"%i:%02i", pmins, psecs];
+            else
+                pTimeString = [NSString stringWithFormat:@"%i:%02i:%02i", phours, pmins, psecs];
+            
+            placeholderString = [placeholderString stringByAppendingString:[NSString stringWithFormat:@"    %@ - %@: %@ active, %@ paused, %@.\n", startDateString, endDateString, timeString, pTimeString, pauseNumString]];
+        }
+        */
+        placeholderString = [placeholderString stringByAppendingString:@"\n"];
+        
     }
     self.textview.text = placeholderString;
 }
