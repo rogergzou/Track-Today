@@ -15,5 +15,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *inactiveLabel;
 @property (weak, nonatomic) IBOutlet UILabel *eventTitleLabel;
 //@property (weak, nonatomic) IBOutlet UILabel *pauseNumberLabel;
+@property (weak, nonatomic) IBOutlet UILabel *longerEventTitleLabel;
 
 @end

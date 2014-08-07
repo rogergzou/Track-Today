@@ -75,10 +75,21 @@
         
         //lol some people may already have used, this avoids crash between version 1.2 and version 1.3
         if (indexPath.row < [self.record.eventTitleArray count]) {
-            detailedCell.eventTitleLabel.text = self.record.eventTitleArray[indexPath.row];
-        } else
+            if (pnum) {
+                detailedCell.eventTitleLabel.text = self.record.eventTitleArray[indexPath.row];
+                detailedCell.longerEventTitleLabel.hidden = YES;
+                detailedCell.inactiveLabel.hidden = NO;
+                detailedCell.eventTitleLabel.hidden = NO;
+            } else {
+                detailedCell.longerEventTitleLabel.text = self.record.eventTitleArray[indexPath.row];
+                detailedCell.eventTitleLabel.hidden = YES;
+                detailedCell.inactiveLabel.hidden = YES;
+                detailedCell.longerEventTitleLabel.hidden = NO;
+            }
+        } else {
             detailedCell.eventTitleLabel.text = [NSString stringWithFormat:@"%d %@", pnum, (pnum - 1 ? @"pauses" : @"pause")];
-        
+            detailedCell.longerEventTitleLabel.hidden = YES;
+        }
         int recsecs = [self.record.secondsArray[indexPath.row] intValue];
         NSTimeInterval recpsecs = [self.record.pausedSecondsArray[indexPath.row] doubleValue];
         //NSLog(@"%f fwef %@", recpsecs, self.record.pausedSecondsArray);
