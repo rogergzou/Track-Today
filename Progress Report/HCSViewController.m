@@ -41,6 +41,7 @@ const double roundButtonBorderWidth = 1.15;
 @property (weak, nonatomic) IBOutlet UILabel *reminderLabel;
 @property (weak, nonatomic) IBOutlet UIButton *addReminderButton;
 @property (weak, nonatomic) IBOutlet UIButton *statsButton;
+@property (weak, nonatomic) IBOutlet UILabel *categoryLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *testLabel;
 
@@ -60,12 +61,13 @@ const double roundButtonBorderWidth = 1.15;
 
 //@property (nonatomic) BOOL skipResetVarForStatePls;
 
+@property (strong, nonatomic) NSString *category;
+
 @end
 
 
 
 @implementation HCSViewController
-
 
 - (IBAction)buttonPushed:(UIButton *)sender {
     if (self.isStart) {
@@ -114,7 +116,7 @@ const double roundButtonBorderWidth = 1.15;
         endDateString = [endDateString componentsSeparatedByString:@", "][1];
     }
     
-    UIAlertView *confirmAlert = [[UIAlertView alloc]initWithTitle:@"Schedule" message:[NSString stringWithFormat:@"Place event onto iCal? %@ to %@", startDateString, endDateString] delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", @"Cancel", nil];
+    UIAlertView *confirmAlert = [[UIAlertView alloc]initWithTitle:@"Schedule" message:[NSString stringWithFormat:@"Place onto calendar? %@ to %@. Category: %@.", startDateString, endDateString, self.category] delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", @"Cancel", nil];
     confirmAlert.cancelButtonIndex = 1; //set cancel as cancel
     //tag for identification when handling
     confirmAlert.tag = scheduleAlertTag;
@@ -193,7 +195,12 @@ const double roundButtonBorderWidth = 1.15;
     //NSCalendar *cal = [[NSCalendar alloc]initWithCalendarIdentifier:NSGregorianCalendar];
     EKEventStore *eventStore = [[EKEventStore alloc]init];
     EKEvent *event = [EKEvent eventWithEventStore:eventStore];
-    event.title = self.titleButton.text;
+    NSString *cat;
+    if ([self.category isEqualToString:@"None"])
+        cat = @"";
+    else
+        cat = [NSString stringWithFormat:@" (%@)", self.category];
+    event.title = [NSString stringWithFormat:@"%@%@", self.titleButton.text, cat];
     event.startDate = self.startDate;
     event.endDate = self.endDate;
     //event.location for later updates
@@ -265,13 +272,17 @@ const double roundButtonBorderWidth = 1.15;
     //if (statsDict) {
     
     //dict exists b/c was created in viewDidLoad firstTime method
-    NSData *recordData = statsDict[self.titleButton.text];
+    
+    //NSData *recordData = statsDict[self.titleButton.text];
+    //use category now
+    NSData *recordData = statsDict[self.category];
+
     HCSActivityRecord *record;
     if (!recordData) {
         //record is nil, set title & create obj
         record = [[HCSActivityRecord alloc]init];
-        record.title = self.titleButton.text;
-        
+        //record.title = self.titleButton.text;
+        record.title = self.category;
     } else
         record = [NSKeyedUnarchiver unarchiveObjectWithData: recordData];
     
@@ -292,9 +303,10 @@ const double roundButtonBorderWidth = 1.15;
     [record.secondsArray insertObject:@(self.seconds) atIndex:0];
     [record.pausedSecondsArray insertObject:@(self.pausedSeconds) atIndex:0];
     [record.pauseNumberArray insertObject:@(self.pauseNumber) atIndex:0];
+    [record.eventTitleArray insertObject:self.titleButton.text atIndex:0];
     
     NSData *encodedRecord = [NSKeyedArchiver archivedDataWithRootObject:record];
-    statsDict[self.titleButton.text] = encodedRecord;
+    statsDict[self.category] = encodedRecord;
     
     [defaults setObject:statsDict forKey:@"fullStatsDict"]; //will be autoconvert to nonmutable anyway
     [defaults synchronize];
@@ -385,6 +397,7 @@ const double roundButtonBorderWidth = 1.15;
     //[self hideReminderLabel];
     //[self cancelAllReminderLocalNotifs];
     //holy shit this self induced stupidity cost me ~2 hours of manic frustration confronting a dumb nonissue
+    self.category = nil;
 }
 - (void)resultLabelUpdate
 {
@@ -400,7 +413,12 @@ const double roundButtonBorderWidth = 1.15;
         endDateString = [endDateString componentsSeparatedByString:@", "][1];
     }
     
-    self.resultLabel.text = [NSString stringWithFormat:@"'%@' added to calendar (%@ to %@)", self.titleButton.text, startDateString, endDateString];
+    NSString *cat;
+    if ([self.category isEqualToString:@"None"])
+        cat = @"";
+    else
+        cat = [NSString stringWithFormat:@" (%@)", self.category];
+    self.resultLabel.text = [NSString stringWithFormat:@"'%@%@' added to calendar (%@ to %@)", self.titleButton.text, cat, startDateString, endDateString];
     
     //animation fails and just is blank if user schedules events within 4.5 seconds of each ending. However, I find that unlikely and thus this should work
     [UIView animateWithDuration:5.0 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{ self.resultLabel.alpha = 0;} completion:^(BOOL finished){
@@ -467,6 +485,8 @@ const double roundButtonBorderWidth = 1.15;
         self.addReminderButton.layer.cornerRadius = self.addReminderButton.frame.size.height/6;
         self.addReminderButton.layer.borderColor = self.addReminderButton.titleLabel.textColor.CGColor;
         
+        [self.categoryLabel setFont:[UIFont boldSystemFontOfSize:17]];
+        self.categoryLabel.text = [NSString stringWithFormat:@"Category: %@", self.category];
     } else {
         [self.bigButton setTitle:@"Stop" forState:UIControlStateNormal];
         [self.bigButton setTitleColor:[UIColor colorWithRed:1 green:0.0335468 blue:0.00867602 alpha:1] forState:UIControlStateNormal];
@@ -506,7 +526,10 @@ const double roundButtonBorderWidth = 1.15;
     UIViewController *sourceVC = segue.sourceViewController;
     if ([sourceVC isKindOfClass:[HCSShortCutViewController class]]) {
         HCSShortCutViewController *shortcutVC = (HCSShortCutViewController *)sourceVC;
-        self.titleButton.text = shortcutVC.title;
+        //self.titleButton.text = shortcutVC.title;
+        //changed to category
+        self.category = shortcutVC.title;
+        self.categoryLabel.text = [NSString stringWithFormat:@"Category: %@", self.category];
     }
 }
 - (IBAction)myReminderSegueCallback:(UIStoryboardSegue *)segue
@@ -690,7 +713,7 @@ const double roundButtonBorderWidth = 1.15;
 }
 */
 
-//lazy instantiation for seconds, pauseNumber, pausedSeconds
+//lazy instantiation for seconds, pauseNumber, pausedSeconds,category
 - (int)seconds
 {
     if (!_seconds) _seconds = 0;
@@ -705,6 +728,11 @@ const double roundButtonBorderWidth = 1.15;
 {
     if (!_pausedSeconds) _pausedSeconds = 0;
     return _pausedSeconds;
+}
+- (NSString *)category
+{
+    if (!_category) _category = @"None";
+    return _category;
 }
 
 //failure when start timer/reminder, switch to another app, close this app, use local notif to load. Also happens if load even now with local notif. Reminder is irrelevant nvm.
@@ -789,9 +817,11 @@ const double roundButtonBorderWidth = 1.15;
 
 - (void)encodeRestorableStateWithCoder:(NSCoder *)coder
 {
-    if ([self.titleButton.text length])
-        [coder encodeObject:_titleButton.text forKey:@"Title Text"];
+    //if ([self.titleButton.text length])
+    [coder encodeObject:self.titleButton.text forKey:@"Title Text"];
     //NSLog(@"encode");
+    if (self.category)
+        [coder encodeObject:self.category forKey:@"category"];
     [coder encodeBool:self.isStart forKey:@"isStart"];
     //NSLog(@"%d en", (self.isStart ? 1 : 0));
     
@@ -820,6 +850,10 @@ const double roundButtonBorderWidth = 1.15;
 {
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"firstTime"]) {
         self.titleButton.text = [coder decodeObjectForKey:@"Title Text"];
+        if ([coder decodeObjectForKey:@"category"]) {
+            self.category = [coder decodeObjectForKey:@"category"];
+            self.categoryLabel.text = [NSString stringWithFormat:@"Category: %@", self.category];
+        }
         //self.testLabel.text = [coder decodeObjectForKey:@"Title Text"];
         //self.testLabel.text = @"decoded";
         self.isStart = [coder decodeBoolForKey:@"isStart"];

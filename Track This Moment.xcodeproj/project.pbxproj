@@ -138,6 +138,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DB0206D41989BBD600463C3A /* Activity Log */ = {
+			isa = PBXGroup;
+			children = (
+				DBB922D41983AE6100AEF1A7 /* HCSActivityLogTableViewController.h */,
+				DBB922D51983AE6100AEF1A7 /* HCSActivityLogTableViewController.m */,
+				DBB922D71983B9F300AEF1A7 /* HCSActivityRecordTableViewCell.h */,
+				DBB922D81983B9F300AEF1A7 /* HCSActivityRecordTableViewCell.m */,
+				DB07648419862A5E00DBABE4 /* HCSDetailedActivityRecordFromTableViewController.h */,
+				DB07648519862A5E00DBABE4 /* HCSDetailedActivityRecordFromTableViewController.m */,
+				DB07648719864CC800DBABE4 /* HCSDetailedActivityRecordTableViewCell.h */,
+				DB07648819864CC800DBABE4 /* HCSDetailedActivityRecordTableViewCell.m */,
+				DBB922CE19836DB300AEF1A7 /* HCSActivityRecord.h */,
+				DBB922CF19836DB300AEF1A7 /* HCSActivityRecord.m */,
+			);
+			name = "Activity Log";
+			sourceTree = "<group>";
+		};
 		DB679ECB195BB92700C61F6F = {
 			isa = PBXGroup;
 			children = (
@@ -178,18 +195,9 @@
 				DB679EE9195BB92700C61F6F /* Main_iPhone.storyboard */,
 				DB679EEF195BB92700C61F6F /* HCSViewController.h */,
 				DB679EF0195BB92700C61F6F /* HCSViewController.m */,
-				DBB922D41983AE6100AEF1A7 /* HCSActivityLogTableViewController.h */,
-				DBB922D51983AE6100AEF1A7 /* HCSActivityLogTableViewController.m */,
-				DBB922D71983B9F300AEF1A7 /* HCSActivityRecordTableViewCell.h */,
-				DBB922D81983B9F300AEF1A7 /* HCSActivityRecordTableViewCell.m */,
-				DB07648419862A5E00DBABE4 /* HCSDetailedActivityRecordFromTableViewController.h */,
-				DB07648519862A5E00DBABE4 /* HCSDetailedActivityRecordFromTableViewController.m */,
-				DB07648719864CC800DBABE4 /* HCSDetailedActivityRecordTableViewCell.h */,
-				DB07648819864CC800DBABE4 /* HCSDetailedActivityRecordTableViewCell.m */,
-				DBB922CE19836DB300AEF1A7 /* HCSActivityRecord.h */,
-				DBB922CF19836DB300AEF1A7 /* HCSActivityRecord.m */,
+				DB0206D41989BBD600463C3A /* Activity Log */,
 				DBCFA6761982635600122581 /* Reminder */,
-				DBCFA66F197F808300122581 /* AutoFill */,
+				DBCFA66F197F808300122581 /* Category */,
 				DB679EF2195BB92700C61F6F /* Images.xcassets */,
 				DB679EDE195BB92700C61F6F /* Supporting Files */,
 			);
@@ -226,7 +234,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		DBCFA66F197F808300122581 /* AutoFill */ = {
+		DBCFA66F197F808300122581 /* Category */ = {
 			isa = PBXGroup;
 			children = (
 				DB49F35F195CF0D400067F96 /* HCSShortCutViewController.h */,
@@ -242,7 +250,7 @@
 				DB49F365195D19AC00067F96 /* HCSShortcut.h */,
 				DB67659E19608E8D00C113D2 /* HCSShortcut.m */,
 			);
-			name = AutoFill;
+			name = Category;
 			sourceTree = "<group>";
 		};
 		DBCFA6761982635600122581 /* Reminder */ = {

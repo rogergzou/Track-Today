@@ -108,7 +108,13 @@
              else
                  pTimeString = [NSString stringWithFormat:@"%i:%02i:%02i", phours, pmins, psecs];
              
-             fullString = [fullString stringByAppendingString:[NSString stringWithFormat:@"    %@ - %@: %@ active, %@ paused, %@.\n", startDateString, endDateString, timeString, pTimeString, pauseNumString]];
+             NSString *eventTitleString;
+             if (i < [record.eventTitleArray count]) {
+                 eventTitleString = [NSString stringWithFormat:@" '%@'.", record.eventTitleArray[i]];
+             } else {
+                 eventTitleString = @"";
+             }
+             fullString = [fullString stringByAppendingString:[NSString stringWithFormat:@"    %@ - %@: %@ active, %@ paused, %@.%@\n", startDateString, endDateString, timeString, pTimeString, pauseNumString, eventTitleString]];
          }
         fullString = [fullString stringByAppendingString:@"\n"];
         //placeholderString = [placeholderString stringByAppendingString:@"\n"];
@@ -328,16 +334,16 @@
     switch (result)
     {
         case MFMailComposeResultCancelled:
-            NSLog(@"Mail cancelled");
+            //NSLog(@"Mail cancelled");
             break;
         case MFMailComposeResultSaved:
-            NSLog(@"Mail saved");
+            //NSLog(@"Mail saved");
             break;
         case MFMailComposeResultSent:
-            NSLog(@"Mail sent");
+            //NSLog(@"Mail sent");
             break;
         case MFMailComposeResultFailed:
-            NSLog(@"Mail sent failure: %@", [error localizedDescription]);
+            //NSLog(@"Mail sent failure: %@", [error localizedDescription]);
             break;
         default:
             break;

@@ -70,7 +70,14 @@
         detailedCell.dateLabel.text = [NSString stringWithFormat:@"%@ - %@", startDateString, endDateString];
         
         int pnum = [self.record.pauseNumberArray[indexPath.row]intValue];
-        detailedCell.pauseNumberLabel.text = [NSString stringWithFormat:@"%d %@", pnum, (pnum - 1 ? @"pauses" : @"pause")];
+        //detailedCell.pauseNumberLabel.text = [NSString stringWithFormat:@"%d %@", pnum, (pnum - 1 ? @"pauses" : @"pause")];
+        //redesign lol for category instead of autofill. Means event title instead of pause #
+        
+        //lol some people may already have used, this avoids crash between version 1.2 and version 1.3
+        if (indexPath.row < [self.record.eventTitleArray count]) {
+            detailedCell.eventTitleLabel.text = self.record.eventTitleArray[indexPath.row];
+        } else
+            detailedCell.eventTitleLabel.text = [NSString stringWithFormat:@"%d %@", pnum, (pnum - 1 ? @"pauses" : @"pause")];
         
         int recsecs = [self.record.secondsArray[indexPath.row] intValue];
         NSTimeInterval recpsecs = [self.record.pausedSecondsArray[indexPath.row] doubleValue];

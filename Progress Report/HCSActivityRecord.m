@@ -55,6 +55,11 @@
     if (!_pauseNumberArray) _pauseNumberArray = [NSMutableArray array];
     return _pauseNumberArray;
 }
+- (NSMutableArray *)eventTitleArray
+{
+    if (!_eventTitleArray) _eventTitleArray = [NSMutableArray array];
+    return _eventTitleArray;
+}
 
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
@@ -68,6 +73,7 @@
     [encoder encodeObject:self.secondsArray forKey:@"secondsArray"];
     [encoder encodeObject:self.pausedSecondsArray forKey:@"pausedSecondsArray"];
     [encoder encodeObject:self.pauseNumberArray forKey:@"pauseNumberArray"];
+    [encoder encodeObject:self.eventTitleArray forKey:@"eventTitleArray"];
 }
 /* @property (nonatomic, strong) NSMutableArray *startDateArray;
  @property (nonatomic, strong) NSMutableArray *endDateArray;
@@ -90,6 +96,7 @@
         self.secondsArray = [decoder decodeObjectForKey:@"secondsArray"];
         self.pausedSecondsArray = [decoder decodeObjectForKey:@"pausedSecondsArray"];
         self.pauseNumberArray = [decoder decodeObjectForKey:@"pauseNumberArray"];
+        self.eventTitleArray = [decoder decodeObjectForKey:@"eventTitleArray"];
     }
     
     return self;

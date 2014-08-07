@@ -22,5 +22,6 @@
 @property (nonatomic, strong) NSMutableArray *secondsArray;
 @property (nonatomic, strong) NSMutableArray *pausedSecondsArray;
 @property (nonatomic, strong) NSMutableArray *pauseNumberArray;
+@property (nonatomic, strong) NSMutableArray *eventTitleArray;
 
 @end
