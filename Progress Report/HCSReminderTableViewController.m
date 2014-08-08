@@ -1,6 +1,6 @@
 //
 //  HCSReminderTableViewController.m
-//  Track This Moment
+//  Track Today
 //
 //  Created by Roger on 7/22/14.
 //  Copyright (c) 2014 Roger Zou. All rights reserved.

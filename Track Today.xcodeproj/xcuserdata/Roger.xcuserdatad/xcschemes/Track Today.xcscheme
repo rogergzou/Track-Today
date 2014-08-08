@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "DB679ED3195BB92700C61F6F"
-               BuildableName = "Track This Moment.app"
-               BlueprintName = "Track This Moment"
-               ReferencedContainer = "container:Track This Moment.xcodeproj">
+               BuildableName = "Track Today.app"
+               BlueprintName = "Track Today"
+               ReferencedContainer = "container:Track Today.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "DB679EF7195BB92700C61F6F"
-               BuildableName = "Track This MomentTests.xctest"
-               BlueprintName = "Track This MomentTests"
-               ReferencedContainer = "container:Track This Moment.xcodeproj">
+               BuildableName = "Track TodayTests.xctest"
+               BlueprintName = "Track TodayTests"
+               ReferencedContainer = "container:Track Today.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -43,9 +43,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DB679ED3195BB92700C61F6F"
-            BuildableName = "Track This Moment.app"
-            BlueprintName = "Track This Moment"
-            ReferencedContainer = "container:Track This Moment.xcodeproj">
+            BuildableName = "Track Today.app"
+            BlueprintName = "Track Today"
+            ReferencedContainer = "container:Track Today.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DB679ED3195BB92700C61F6F"
-            BuildableName = "Track This Moment.app"
-            BlueprintName = "Track This Moment"
-            ReferencedContainer = "container:Track This Moment.xcodeproj">
+            BuildableName = "Track Today.app"
+            BlueprintName = "Track Today"
+            ReferencedContainer = "container:Track Today.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -80,9 +80,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DB679ED3195BB92700C61F6F"
-            BuildableName = "Track This Moment.app"
-            BlueprintName = "Track This Moment"
-            ReferencedContainer = "container:Track This Moment.xcodeproj">
+            BuildableName = "Track Today.app"
+            BlueprintName = "Track Today"
+            ReferencedContainer = "container:Track Today.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

@@ -1,6 +1,6 @@
 //
 //  HCSViewController.h
-//  Progress Report
+//  Track Today
 //
 //  Created by Roger on 6/25/14.
 //  Copyright (c) 2014 Roger Zou. All rights reserved.
