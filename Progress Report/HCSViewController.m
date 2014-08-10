@@ -196,11 +196,16 @@ const double roundButtonBorderWidth = 1.15;
     EKEventStore *eventStore = [[EKEventStore alloc]init];
     EKEvent *event = [EKEvent eventWithEventStore:eventStore];
     NSString *cat;
+
+    //will remove space in front of category if no title present
     if ([self.category isEqualToString:@"None"])
         cat = @"";
+    else if ([self.titleButton.text length] == 0)
+        cat = [NSString stringWithFormat:@"(%@)", self.category];
     else
         cat = [NSString stringWithFormat:@" (%@)", self.category];
     event.title = [NSString stringWithFormat:@"%@%@", self.titleButton.text, cat];
+
     event.startDate = self.startDate;
     event.endDate = self.endDate;
     //event.location for later updates
@@ -414,8 +419,11 @@ const double roundButtonBorderWidth = 1.15;
     }
     
     NSString *cat;
+    //will remove space in front of category if no title present
     if ([self.category isEqualToString:@"None"])
         cat = @"";
+    else if ([self.titleButton.text length] == 0)
+        cat = [NSString stringWithFormat:@"(%@)", self.category];
     else
         cat = [NSString stringWithFormat:@" (%@)", self.category];
     self.resultLabel.text = [NSString stringWithFormat:@"'%@%@' added to calendar (%@ to %@)", self.titleButton.text, cat, startDateString, endDateString];
