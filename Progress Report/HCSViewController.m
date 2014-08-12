@@ -553,22 +553,25 @@ const double roundButtonBorderWidth = 1.15;
         
         double hourstring;
         NSString *timeText;
+        BOOL singular = NO;
         if (minstring >= 60) {
             hourstring = minstring/60.0;
-            if (hourstring == 1)
+            if (hourstring == 1) {
                 timeText = @"1 hour";
-            else
+                singular = YES;
+            } else
                 timeText = [NSString stringWithFormat:@"%.1f hours", hourstring];
-        } else if (minstring == 1)
+        } else if (minstring == 1) {
             timeText = @"1 minute";
-        else
+            singular = YES;
+        } else
             timeText = [NSString stringWithFormat:@"%i minutes", minstring];
         //self.reminderButton.titleLabel.text = timeText;
         NSDate *notificationDate = [NSDate dateWithTimeIntervalSinceNow:(reminderVC.minutes * 60)];
         UILocalNotification *notif = [[UILocalNotification alloc]init];
         notif.fireDate = notificationDate;
         notif.timeZone = [NSTimeZone defaultTimeZone];
-        notif.alertBody = [NSString stringWithFormat: @"%@ has passed", timeText];
+        notif.alertBody = [NSString stringWithFormat: @"%@ %@ passed", timeText, (singular ? @"has" : @"have")];
         notif.alertAction = @"OK";
         notif.soundName = UILocalNotificationDefaultSoundName;
         //notif.applicationIconBadgeNumber = 1;
@@ -610,21 +613,24 @@ const double roundButtonBorderWidth = 1.15;
             }
             double hourstring;
             NSString *timeText;
+            BOOL singular = NO;
             if (minstring >= 60) {
                 hourstring = minstring/60.0;
-                if (hourstring == 1)
+                if (hourstring == 1) {
                     timeText = @"1 hour";
-                else
+                    singular = YES;
+                } else
                     timeText = [NSString stringWithFormat:@"%.1f hours", hourstring];
-            } else if (minstring == 1)
+            } else if (minstring == 1) {
                 timeText = @"1 minute";
-            else
+                singular = YES;
+            } else
                 timeText = [NSString stringWithFormat:@"%i minutes", minstring];
             
             UILocalNotification *notif = [[UILocalNotification alloc]init];
             notif.fireDate = modifyVC.date;
             notif.timeZone = [NSTimeZone defaultTimeZone];
-            notif.alertBody = [NSString stringWithFormat: @"%@ has passed", timeText];
+            notif.alertBody = [NSString stringWithFormat: @"%@ %@ passed", timeText, (singular ? @"has" : @"have")];
             notif.alertAction = @"OK";
             notif.soundName = UILocalNotificationDefaultSoundName;
             //notif.applicationIconBadgeNumber = 1;
