@@ -58,8 +58,8 @@
         else
             pTimeString = [NSString stringWithFormat:@"%i:%02i:%02i", phours, pmins, psecs];
         
-        placeholderString = [placeholderString stringByAppendingString:[NSString stringWithFormat:@"'%@' was scheduled %d %@, %@ active, %@ inactive, paused %d %@.\n", record.title, record.activityNumber, (record.activityNumber-1 ? @"times" : @"time"), timeString, pTimeString, record.pauseNumber, (record.pauseNumber-1 ? @"times" : @"time")]];
-        fullString = [fullString stringByAppendingString:[NSString stringWithFormat:@"'%@' was scheduled %d %@, %@ active, %@ inactive, paused %d %@.\n", record.title, record.activityNumber, (record.activityNumber-1 ? @"times" : @"time"), timeString, pTimeString, record.pauseNumber, (record.pauseNumber-1 ? @"times" : @"time")]];
+        placeholderString = [placeholderString stringByAppendingString:[NSString stringWithFormat:@"'%@' was scheduled %d %@, active %@, paused %@, %d %@.\n", record.title, record.activityNumber, (record.activityNumber-1 ? @"times" : @"time"), timeString, pTimeString, record.pauseNumber, (record.pauseNumber-1 ? @"pauses" : @"pause")]];
+        fullString = [fullString stringByAppendingString:[NSString stringWithFormat:@"'%@' was scheduled %d %@, active %@, paused %@, %d %@.\n", record.title, record.activityNumber, (record.activityNumber-1 ? @"times" : @"time"), timeString, pTimeString, record.pauseNumber, (record.pauseNumber-1 ? @"pauses" : @"pause")]];
         
          int arraytotal = (int)[record.startDateArray count];
          
@@ -70,7 +70,7 @@
              NSString *startDateString = [NSDateFormatter localizedStringFromDate:startDate dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
              NSString *endDateString = [NSDateFormatter localizedStringFromDate:endDate dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
              //NSDate *startDateOnly = self.startDate;
-             //NSDate *endDateOnly = self.endDate;
+             NSDate *endDateUnmodified = endDate;
              [[NSCalendar currentCalendar] rangeOfUnit:NSDayCalendarUnit startDate:&startDate interval:NULL forDate:startDate];
              [[NSCalendar currentCalendar] rangeOfUnit:NSDayCalendarUnit startDate:&endDate interval:NULL forDate:endDate];
              if ([startDate compare:endDate] == NSOrderedSame) {
@@ -78,7 +78,7 @@
                  
                  //this is the Grant bug
                  //endDateString = [endDateString componentsSeparatedByString:@", "][1];
-                 endDateString = [NSDateFormatter localizedStringFromDate:endDate dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle];
+                 endDateString = [NSDateFormatter localizedStringFromDate:endDateUnmodified dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle];
              }
              int pnum = [record.pauseNumberArray[i] intValue];
              NSString *pauseNumString = [NSString stringWithFormat:@"%d %@", pnum, (pnum - 1 ? @"pauses" : @"pause")];
@@ -111,13 +111,13 @@
              else
                  pTimeString = [NSString stringWithFormat:@"%i:%02i:%02i", phours, pmins, psecs];
              
-             NSString *eventTitleString;
+             NSString *eventTitleString = @"";
              if (i < [record.eventTitleArray count]) {
-                 eventTitleString = [NSString stringWithFormat:@" '%@'.", record.eventTitleArray[i]];
-             } else {
-                 eventTitleString = @"";
+                 if ([record.eventTitleArray[i] length]) {
+                     eventTitleString = [NSString stringWithFormat:@" '%@'.", record.eventTitleArray[i]];
+                 }
              }
-             fullString = [fullString stringByAppendingString:[NSString stringWithFormat:@"    %@ - %@: %@ active, %@ paused, %@.%@\n", startDateString, endDateString, timeString, pTimeString, pauseNumString, eventTitleString]];
+             fullString = [fullString stringByAppendingString:[NSString stringWithFormat:@"    %@ - %@. Active %@, paused %@, %@.%@\n", startDateString, endDateString, timeString, pTimeString, pauseNumString, eventTitleString]];
          }
         fullString = [fullString stringByAppendingString:@"\n"];
         //placeholderString = [placeholderString stringByAppendingString:@"\n"];

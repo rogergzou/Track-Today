@@ -419,7 +419,10 @@ const double roundButtonBorderWidth = 1.15;
     [[NSCalendar currentCalendar] rangeOfUnit:NSDayCalendarUnit startDate:&endDateOnly interval:NULL forDate:endDateOnly];
     if ([startDateOnly compare:endDateOnly] == NSOrderedSame) {
         //endDateString = [endDateString substringFromIndex:[endDateString length]-10];
-        endDateString = [endDateString componentsSeparatedByString:@", "][1];
+        
+        //this is the Grant bug
+        //endDateString = [endDateString componentsSeparatedByString:@", "][1];
+        endDateString = [NSDateFormatter localizedStringFromDate:self.endDate dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterMediumStyle];
     }
     
     NSString *cat;
