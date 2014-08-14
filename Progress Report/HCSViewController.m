@@ -23,7 +23,8 @@
 //need to add the extra tableview activity log info
 
 const int scheduleAlertTextFieldTag = 4;
-const int scheduleAlertTag = 1;
+//const int scheduleAlertTag = 1;
+const int scheduleAlertTag = 3;
 const int resetAlertTag = 2;
 const int calendarAccessMissingAlertTag = 99999999;
 const double roundButtonBorderWidth = 1.15;
@@ -113,7 +114,10 @@ const double roundButtonBorderWidth = 1.15;
     [[NSCalendar currentCalendar] rangeOfUnit:NSDayCalendarUnit startDate:&endDateOnly interval:NULL forDate:endDateOnly];
     if ([startDateOnly compare:endDateOnly] == NSOrderedSame) {
         //endDateString = [endDateString substringFromIndex:[endDateString length]-10];
-        endDateString = [endDateString componentsSeparatedByString:@", "][1];
+        
+        //this is the Grant bug
+        //endDateString = [endDateString componentsSeparatedByString:@", "][1];
+        endDateString = [NSDateFormatter localizedStringFromDate:self.endDate dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterMediumStyle];
     }
     
     UIAlertView *confirmAlert = [[UIAlertView alloc]initWithTitle:@"Schedule" message:[NSString stringWithFormat:@"Place onto calendar? %@ to %@. Category: %@.", startDateString, endDateString, self.category] delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", @"Cancel", nil];
@@ -919,8 +923,29 @@ const double roundButtonBorderWidth = 1.15;
     [textField resignFirstResponder];
     if (textField.tag == scheduleAlertTextFieldTag && self.confirmAlertProperty) {
         //NSLog(@"%ld %@",(long)textField.tag, self.confirmAlertProperty.description);
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         [self.confirmAlertProperty dismissWithClickedButtonIndex:0 animated:YES];
+        
+        //may be the issue? No, probably not. Most likely just a red herring.
         [self alertView:self.confirmAlertProperty clickedButtonAtIndex:0];
+        
+        
+        
+        
+        
+        
+        
     }
     return YES;
 }

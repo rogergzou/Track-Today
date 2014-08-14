@@ -64,7 +64,10 @@
         [[NSCalendar currentCalendar] rangeOfUnit:NSDayCalendarUnit startDate:&endDate interval:NULL forDate:endDate];
         if ([startDate compare:endDate] == NSOrderedSame) {
             //endDateString = [endDateString substringFromIndex:[endDateString length]-10];
-            endDateString = [endDateString componentsSeparatedByString:@", "][1];
+            
+            //this is the Grant bug
+            //endDateString = [endDateString componentsSeparatedByString:@", "][1];
+            endDateString = [NSDateFormatter localizedStringFromDate:endDate dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle];
         }
 
         detailedCell.dateLabel.text = [NSString stringWithFormat:@"%@ - %@", startDateString, endDateString];
