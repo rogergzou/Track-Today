@@ -121,13 +121,12 @@
          }
         fullString = [fullString stringByAppendingString:@"\n"];
         //placeholderString = [placeholderString stringByAppendingString:@"\n"];
-    }
-    NSString *promoteString = @"Sent via Track Today";
+    };
     
     // Email Subject
-    NSString *emailTitle = [NSString stringWithFormat:@"Activity Log from Track This Moment %@", [NSDateFormatter localizedStringFromDate:[NSDate date] dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterNoStyle]];
+    NSString *emailTitle = [NSString stringWithFormat:@"Activity Log from Track Today %@", [NSDateFormatter localizedStringFromDate:[NSDate date] dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterNoStyle]];
     // Email Content
-    NSString *messageBody = [NSString stringWithFormat:@"%@\n\n\n\n%@\n\n\n\n%@", placeholderString, fullString, promoteString];
+    NSString *messageBody = [NSString stringWithFormat:@"%@\n\n\n\n%@", placeholderString, fullString];
     // To address
     //NSArray *toRecipents = [NSArray arrayWithObject:@"support@appcoda.com"];
     
