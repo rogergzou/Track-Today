@@ -125,12 +125,13 @@
                 HCSShortCutTextViewCell *theCell = [collectionView dequeueReusableCellWithReuseIdentifier:imageCellReuseIdentifier forIndexPath:indexPath];
                 theCell.imageView.image = shortcut.image;
                 theCell.titleLabel.text = shortcut.title;
-                if ([shortcut.title isEqualToString:@"Procrastination"]) {
-                    //hack to get around Procrastination being too long, but not wanting to cause potential error with changing defaults
+                
+                //hack to get around Procrastination being too long, but not wanting to cause potential error with changing defaults
+                if ([shortcut.title isEqualToString:@"Procrastination"])
                     [theCell.titleLabel setFont:[UIFont systemFontOfSize:14]];
-                } else {
+                else
                     [theCell.titleLabel setFont:[UIFont systemFontOfSize:17]];
-                }
+                
                 
                 if (self.imageDeleteActive) {
                     theCell.deleteButton.hidden = NO;
