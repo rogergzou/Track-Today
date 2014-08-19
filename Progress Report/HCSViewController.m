@@ -209,7 +209,7 @@ const double roundButtonBorderWidth = 1.15;
     else
         cat = [NSString stringWithFormat:@" (%@)", self.category];
     event.title = [NSString stringWithFormat:@"%@%@", self.titleButton.text, cat];
-
+    
     event.startDate = self.startDate;
     event.endDate = self.endDate;
     //event.location for later updates
