@@ -29,7 +29,7 @@
     
     
     
-    NSString *placeholderString = @"Activity log for Track This Moment:\n\n";
+    NSString *placeholderString = @"Activity log for Track Today:\n\n";
     NSString *fullString = @"Individual event logs:\n\n";
     for (HCSActivityRecord *record in self.activityRecordArray) {
         
@@ -124,7 +124,7 @@
     };
     
     // Email Subject
-    NSString *emailTitle = [NSString stringWithFormat:@"Activity Log from Track Today %@", [NSDateFormatter localizedStringFromDate:[NSDate date] dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterNoStyle]];
+    NSString *emailTitle = [NSString stringWithFormat:@"Activity Log for Track Today %@", [NSDateFormatter localizedStringFromDate:[NSDate date] dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterNoStyle]];
     // Email Content
     NSString *messageBody = [NSString stringWithFormat:@"%@\n\n\n\n%@", placeholderString, fullString];
     // To address

@@ -1,5 +1,6 @@
 # ignore weird log and OS generated files
-iphonelog
+ignore/
+# iphonelog
 .DS_Store
 .DS_Store?
 ._*
