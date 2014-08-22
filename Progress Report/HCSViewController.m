@@ -826,6 +826,11 @@ const double roundButtonBorderWidth = 1.15;
     }
     [defaults setInteger:([defaults integerForKey:@"appCounter"]+1) forKey:@"appCounter"];
     //NSLog(@"%li", (long)[defaults integerForKey:@"appCounter"]);
+    
+    //to resign keyboard. One liner lol. http://stackoverflow.com/questions/5306240/iphone-dismiss-keyboard-when-touching-outside-of-textfield
+    [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self.view action:@selector(endEditing:)]];
+    //fml keyboardDismissMode only in scrollView
+    
     [self updateUI];
 }
 - (void)didReceiveMemoryWarning

@@ -94,6 +94,11 @@
     [myPickerView setTransform:rot];
     [self.view addSubview:myPickerView];
      */
+    
+    //to resign keyboard. One liner lol. http://stackoverflow.com/questions/5306240/iphone-dismiss-keyboard-when-touching-outside-of-textfield
+    [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self.view action:@selector(endEditing:)]];
+    //fml keyboardDismissMode only in scrollView
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -103,11 +108,13 @@
 }
 
 
-
+/*
 - (IBAction)imageUploadButtonTouch:(id)sender {
     [self imagePickerWithSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
 }
+ */
 - (IBAction)cameraButtonTouch:(id)sender {
+    [self.view endEditing:NO];
     UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         [actionSheet addButtonWithTitle:@"Take Picture"];
