@@ -63,6 +63,7 @@ const double roundButtonBorderWidth = 1.15;
 //@property (nonatomic) BOOL skipResetVarForStatePls;
 
 @property (strong, nonatomic) NSString *category;
+@property (nonatomic) BOOL wasPausedBeforeStop;
 
 @end
 
@@ -134,9 +135,14 @@ const double roundButtonBorderWidth = 1.15;
     alertInputTextField.text = self.titleButton.text;
     alertInputTextField.clearButtonMode = UITextFieldViewModeAlways;
     
-    //if not paused, pause
-    if (!self.isPaused)
+    //if not paused, pause.
+    if (!self.isPaused) {
         [self pauseTimer];
+        self.pauseNumber++;
+        self.wasPausedBeforeStop = NO;
+    } else {
+        self.wasPausedBeforeStop = YES;
+    }
     [self updateUI];
     
     //assign to property so uitextfield can access
@@ -154,6 +160,9 @@ const double roundButtonBorderWidth = 1.15;
             //OK
             case 0:
                 //make sure matches textFieldShouldReturn too
+                if (self.wasPausedBeforeStop == NO)
+                    self.pauseNumber--;
+                [self resumeTimer]; //updates pausedSeconds
                 self.titleButton.text = [alertView textFieldAtIndex:0].text;
                 [self scheduleEvent];
                 [self resultLabelUpdate];
@@ -375,6 +384,7 @@ const double roundButtonBorderWidth = 1.15;
     self.pauseStartDate = [NSDate date];
     [self.timer setFireDate:[NSDate distantFuture]];
     self.isPaused = YES;
+    //self.pauseNumber++;
 }
 - (void)resumeTimer
 {
