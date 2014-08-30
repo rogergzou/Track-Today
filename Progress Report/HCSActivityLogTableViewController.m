@@ -27,7 +27,7 @@
 }
 
 - (IBAction)sortButtonPressed:(UIBarButtonItem *)sender {
-    UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:@"Order By" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Time", @"Date", @"Log", @"Events", @"Paused Time", nil];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:@"Order By" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Time", @"Date", @"Log", @"Events", @"Paused Time", @"Reverse", nil];
     //actionSheet.cancelButtonIndex = [actionSheet addButtonWithTitle:@"Cancel"];
     [actionSheet showFromBarButtonItem:sender animated:YES];
 }
@@ -278,6 +278,23 @@
             }];
             [self.tableView reloadData];
             self.sortBarButtonItem.title = @"Order: Paused Time";
+            break;
+        case 5:
+            self.activityRecordArray = [[[self.activityRecordArray reverseObjectEnumerator] allObjects] mutableCopy];
+            [self.tableView reloadData];
+            if ([[self.sortBarButtonItem.title substringFromIndex:[self.sortBarButtonItem.title length] - 4] isEqualToString:@"sed)"]) {
+                //checks if ends in "(Reverse)"
+                
+                // define the range you're interested in
+                NSRange stringRange = {0, MIN([self.sortBarButtonItem.title length], [self.sortBarButtonItem.title length] - 11)};
+                
+                // adjust the range to include dependent chars
+                stringRange = [self.sortBarButtonItem.title rangeOfComposedCharacterSequencesForRange:stringRange];
+                
+                // Now you can create the short string
+                self.sortBarButtonItem.title = [self.sortBarButtonItem.title substringWithRange:stringRange];
+            } else
+                self.sortBarButtonItem.title = [self.sortBarButtonItem.title stringByAppendingString:@" (Reversed)"];
             break;
         default:
             break;
