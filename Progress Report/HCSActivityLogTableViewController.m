@@ -12,11 +12,13 @@
 //#import "HCSExportActivityLogViewController.h"
 #import "HCSDetailedActivityRecordFromTableViewController.h"
 #import <MessageUI/MessageUI.h>
+#import "HCSDetailedActivityRecordTableViewCell.h"
 
 @interface HCSActivityLogTableViewController () <MFMailComposeViewControllerDelegate, UIActionSheetDelegate>
 
 @property (nonatomic, strong) NSMutableArray *activityRecordArray;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *sortBarButtonItem;
+@property (nonatomic) BOOL wasLog;
 
 @end
 
@@ -238,6 +240,28 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     NSLog(@"%li", (long)buttonIndex);
+    
+    //resets the activity record array to not-logged state
+    if (self.wasLog) {
+        switch (buttonIndex) {
+            case 0:
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+                if (false){}//nothing
+                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                NSDictionary *statsDict = [defaults dictionaryForKey:@"fullStatsDict"];
+                NSMutableArray *statsArray = [NSMutableArray array];
+                for (NSString *key in statsDict) {
+                    [statsArray addObject:[NSKeyedUnarchiver unarchiveObjectWithData:statsDict[key]]];
+                }
+                self.activityRecordArray = statsArray;
+                self.wasLog = NO;
+                break;
+        }
+    }
+    
     switch (buttonIndex) {
         case 0:
             [self.activityRecordArray sortUsingComparator:^NSComparisonResult(HCSActivityRecord *obj1, HCSActivityRecord *obj2) {
@@ -263,6 +287,36 @@
             self.sortBarButtonItem.title = @"Order: Date";
             break;
         case 2:
+            if(true){
+                NSMutableArray *logArray = [NSMutableArray array];
+                for (HCSActivityRecord *record in self.activityRecordArray) {
+                    for (int i = 0, b = (int)[record.eventTitleArray count]; i < b; i++) {
+                        HCSActivityRecord *newrecord = [[HCSActivityRecord alloc]init];
+                        [newrecord.startDateArray addObject: record.startDateArray[i]];
+                        [newrecord.endDateArray addObject: record.endDateArray[i]];
+                        newrecord.title = record.title;
+                        [newrecord.secondsArray addObject: record.secondsArray[i]];
+                        [newrecord.pausedSecondsArray addObject: record.pausedSecondsArray[i]];
+                        [newrecord.eventTitleArray addObject: record.eventTitleArray[i]];
+                        [logArray addObject:newrecord];
+                    }
+                }
+                self.activityRecordArray = logArray;
+            }
+            [self.activityRecordArray sortUsingComparator:^(HCSActivityRecord *obj1, HCSActivityRecord *obj2) {
+                if (![obj2.startDateArray firstObject]) {
+                    if (![obj1.startDateArray firstObject])
+                        return NSOrderedSame;
+                    else
+                        return NSOrderedAscending;
+                } else if (![obj1.startDateArray firstObject])
+                    return NSOrderedDescending;
+                //NSLog(@"%ld is -1", (long)NSOrderedAscending);
+                //NSLog(@"o2 %@ to o1 %@ results in %ld", [obj2.startDateArray firstObject], [obj1.startDateArray firstObject], [[obj2.startDateArray firstObject] compare: [obj1.startDateArray firstObject]]);
+                return [[obj2.startDateArray firstObject] compare: [obj1.startDateArray firstObject]];
+            }];
+            [self.tableView reloadData];
+            self.wasLog = YES;
             self.sortBarButtonItem.title = @"Order: Log";
             break;
         case 3:
@@ -318,7 +372,11 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyCell" forIndexPath:indexPath];
+    UITableViewCell *cell;
+    if (self.wasLog)
+        cell = [tableView dequeueReusableCellWithIdentifier:@"LogCell" forIndexPath:indexPath];
+    else
+        cell = [tableView dequeueReusableCellWithIdentifier:@"MyCell" forIndexPath:indexPath];
     
     // Configure the cell...
     if ([cell isKindOfClass:[HCSActivityRecordTableViewCell class]]) {
@@ -357,7 +415,72 @@
         recordCell.pausedTimeLabel.text = [NSString stringWithFormat:@"%@ paused", pTimeString];
         
         return recordCell;
+        
+    } else if ([cell isKindOfClass:[HCSDetailedActivityRecordTableViewCell class]]) {
+        HCSDetailedActivityRecordTableViewCell *recordCell = (HCSDetailedActivityRecordTableViewCell *)cell;
+        HCSActivityRecord *record = self.activityRecordArray[indexPath.row];
+        
+        //activeLabel = event title, inactiveLabel = active time, eventTitle = inactive time, date = date
+        recordCell.activeLabel.text = [record.title stringByAppendingString:[NSString stringWithFormat:@": %@", [record.eventTitleArray firstObject]]];
+        
+        int recsecs = [[record.secondsArray firstObject] intValue];
+        NSTimeInterval recpsecs = [[record.pausedSecondsArray firstObject] doubleValue];
+        //NSLog(@"%f fwef %@", recpsecs, self.record.pausedSecondsArray);
+        int mins = floor(recsecs/60);
+        int secs = recsecs - (mins * 60);
+        int hours = 0;
+        if (mins > 59) {
+            hours = floor(mins/60);
+            mins -= hours * 60;
+        }
+        int pmins = floor(recpsecs/60);
+        int psecs = floor(recpsecs - (pmins * 60));
+        int phours = 0;
+        if (pmins > 59) {
+            phours = floor(pmins/60);
+            pmins -= phours * 60;
+        }
+        NSString *timeString;
+        NSString *pTimeString;
+        if (hours == 0)
+            timeString = [NSString stringWithFormat:@"%i:%02i", mins, secs];
+        else
+            timeString = [NSString stringWithFormat:@"%i:%02i:%02i", hours, mins, secs];
+        if (phours == 0)
+            pTimeString = [NSString stringWithFormat:@"%i:%02i", pmins, psecs];
+        else
+            pTimeString = [NSString stringWithFormat:@"%i:%02i:%02i", phours, pmins, psecs];
+        
+        recordCell.inactiveLabel.text = [NSString stringWithFormat:@"%@ active", timeString];
+        if ([record.pausedSecondsArray firstObject] != 0)
+            recordCell.eventTitleLabel.text = [NSString stringWithFormat:@"%@ paused", pTimeString];
+        else
+            recordCell.eventTitleLabel.text = @"";
+        
+        
+        
+        NSDate *startDate = [record.startDateArray firstObject];
+        NSDate *endDate = [record.endDateArray firstObject];
+        
+        NSString *startDateString = [NSDateFormatter localizedStringFromDate:startDate dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
+        NSString *endDateString = [NSDateFormatter localizedStringFromDate:endDate dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
+        //NSDate *startDateOnly = self.startDate;
+        NSDate *endDateUnmodified = endDate;
+        [[NSCalendar currentCalendar] rangeOfUnit:NSDayCalendarUnit startDate:&startDate interval:NULL forDate:startDate];
+        [[NSCalendar currentCalendar] rangeOfUnit:NSDayCalendarUnit startDate:&endDate interval:NULL forDate:endDate];
+        if ([startDate compare:endDate] == NSOrderedSame) {
+            //endDateString = [endDateString substringFromIndex:[endDateString length]-10];
+            
+            //this is the Grant bug
+            //endDateString = [endDateString componentsSeparatedByString:@", "][1];
+            endDateString = [NSDateFormatter localizedStringFromDate:endDateUnmodified dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle];
+        }
+        
+        recordCell.dateLabel.text = [NSString stringWithFormat:@"%@ - %@", startDateString, endDateString];
+        
+        return recordCell;
     }
+
     
     return cell;
 }
