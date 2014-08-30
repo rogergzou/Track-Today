@@ -172,6 +172,13 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSInteger buttonIndex;
+    if ([defaults integerForKey:@"buttonIndex"]) {
+        buttonIndex = [defaults integerForKey:@"buttonIndex"];
+    } else {
+        buttonIndex = 0;
+    }
+
     NSDictionary *statsDict = [defaults dictionaryForKey:@"fullStatsDict"];
     NSMutableArray *statsArray = [NSMutableArray array];
     for (NSString *key in statsDict) {
@@ -185,6 +192,9 @@
     
     self.activityRecordArray = statsArray;
     [self.tableView reloadData];
+    
+    //[self actionSheet:nil clickedButtonAtIndex:buttonIndex];
+    [self sortLogWithButtonIndex:buttonIndex];
 }
 
 - (void)didReceiveMemoryWarning
@@ -235,12 +245,8 @@
 }
  */
 
-#pragma mark - UIActionSheetDelegate
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    NSLog(@"%li", (long)buttonIndex);
-    
+- (void)sortLogWithButtonIndex:(NSInteger)buttonIndex {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     //resets the activity record array to not-logged state
     if (self.wasLog) {
         switch (buttonIndex) {
@@ -250,7 +256,6 @@
             case 3:
             case 4:
                 if (false){}//nothing
-                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
                 NSDictionary *statsDict = [defaults dictionaryForKey:@"fullStatsDict"];
                 NSMutableArray *statsArray = [NSMutableArray array];
                 for (NSString *key in statsDict) {
@@ -265,25 +270,25 @@
     switch (buttonIndex) {
         case 0:
             [self.activityRecordArray sortUsingComparator:^NSComparisonResult(HCSActivityRecord *obj1, HCSActivityRecord *obj2) {
-             return [@(obj2.seconds) compare: @(obj1.seconds)];
-             }];
+                return [@(obj2.seconds) compare: @(obj1.seconds)];
+            }];
             [self.tableView reloadData];
             self.sortBarButtonItem.title = @"Order: Time";
             break;
         case 1:
-             [self.activityRecordArray sortUsingComparator:^(HCSActivityRecord *obj1, HCSActivityRecord *obj2) {
-             if (![obj2.startDateArray firstObject]) {
-             if (![obj1.startDateArray firstObject])
-             return NSOrderedSame;
-             else
-             return NSOrderedAscending;
-             } else if (![obj1.startDateArray firstObject])
-             return NSOrderedDescending;
-             //NSLog(@"%ld is -1", (long)NSOrderedAscending);
-             //NSLog(@"o2 %@ to o1 %@ results in %ld", [obj2.startDateArray firstObject], [obj1.startDateArray firstObject], [[obj2.startDateArray firstObject] compare: [obj1.startDateArray firstObject]]);
-             return [[obj2.startDateArray firstObject] compare: [obj1.startDateArray firstObject]];
-             }];
-             [self.tableView reloadData];
+            [self.activityRecordArray sortUsingComparator:^(HCSActivityRecord *obj1, HCSActivityRecord *obj2) {
+                if (![obj2.startDateArray firstObject]) {
+                    if (![obj1.startDateArray firstObject])
+                        return NSOrderedSame;
+                    else
+                        return NSOrderedAscending;
+                } else if (![obj1.startDateArray firstObject])
+                    return NSOrderedDescending;
+                //NSLog(@"%ld is -1", (long)NSOrderedAscending);
+                //NSLog(@"o2 %@ to o1 %@ results in %ld", [obj2.startDateArray firstObject], [obj1.startDateArray firstObject], [[obj2.startDateArray firstObject] compare: [obj1.startDateArray firstObject]]);
+                return [[obj2.startDateArray firstObject] compare: [obj1.startDateArray firstObject]];
+            }];
+            [self.tableView reloadData];
             self.sortBarButtonItem.title = @"Order: Date";
             break;
         case 2:
@@ -351,8 +356,21 @@
                 self.sortBarButtonItem.title = [self.sortBarButtonItem.title stringByAppendingString:@" (Reversed)"];
             break;
         default:
+            //cancel
             break;
     }
+    //if not cancel or reverse, save to defaults
+    if (buttonIndex < 5) {
+        [defaults setInteger:buttonIndex forKey:@"buttonIndex"];
+        [defaults synchronize];
+    }
+}
+
+#pragma mark - UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    [self sortLogWithButtonIndex:buttonIndex];
 }
 
 #pragma mark - Table view data source
