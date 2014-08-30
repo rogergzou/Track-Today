@@ -13,9 +13,10 @@
 #import "HCSDetailedActivityRecordFromTableViewController.h"
 #import <MessageUI/MessageUI.h>
 
-@interface HCSActivityLogTableViewController () <MFMailComposeViewControllerDelegate>
+@interface HCSActivityLogTableViewController () <MFMailComposeViewControllerDelegate, UIActionSheetDelegate>
 
 @property (nonatomic, strong) NSMutableArray *activityRecordArray;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *sortBarButtonItem;
 
 @end
 
@@ -25,10 +26,13 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (IBAction)sortButtonPressed:(UIBarButtonItem *)sender {
+    UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:@"Order By" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Time", @"Date", @"Log", @"Events", @"Paused Time", nil];
+    //actionSheet.cancelButtonIndex = [actionSheet addButtonWithTitle:@"Cancel"];
+    [actionSheet showFromBarButtonItem:sender animated:YES];
+}
+
 - (IBAction)emailButtonPressed:(id)sender {
-    
-    
-    
     NSString *placeholderString = @"Activity log for Track Today:\n\n";
     NSString *fullString = @"Individual event logs:\n\n";
     for (HCSActivityRecord *record in self.activityRecordArray) {
@@ -140,7 +144,6 @@
     [self presentViewController:mc animated:YES completion:NULL];
 }
 
-
 - (NSMutableArray *)activityRecordArray
 {
     if (!_activityRecordArray) _activityRecordArray = [NSMutableArray array];
@@ -173,6 +176,7 @@
         [statsArray addObject:[NSKeyedUnarchiver unarchiveObjectWithData:statsDict[key]]];
     }
     //NSArray *sortedArray = [self sortMutableArray:statsArray ByType:@"seconds"];
+    
     [statsArray sortUsingComparator:^NSComparisonResult(HCSActivityRecord *obj1, HCSActivityRecord *obj2) {
         return [@(obj2.seconds) compare: @(obj1.seconds)];
     }];
@@ -228,6 +232,57 @@
     return nil;
 }
  */
+
+#pragma mark - UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSLog(@"%li", (long)buttonIndex);
+    switch (buttonIndex) {
+        case 0:
+            [self.activityRecordArray sortUsingComparator:^NSComparisonResult(HCSActivityRecord *obj1, HCSActivityRecord *obj2) {
+             return [@(obj2.seconds) compare: @(obj1.seconds)];
+             }];
+            [self.tableView reloadData];
+            self.sortBarButtonItem.title = @"Order: Time";
+            break;
+        case 1:
+             [self.activityRecordArray sortUsingComparator:^(HCSActivityRecord *obj1, HCSActivityRecord *obj2) {
+             if (![obj2.startDateArray firstObject]) {
+             if (![obj1.startDateArray firstObject])
+             return NSOrderedSame;
+             else
+             return NSOrderedAscending;
+             } else if (![obj1.startDateArray firstObject])
+             return NSOrderedDescending;
+             //NSLog(@"%ld is -1", (long)NSOrderedAscending);
+             //NSLog(@"o2 %@ to o1 %@ results in %ld", [obj2.startDateArray firstObject], [obj1.startDateArray firstObject], [[obj2.startDateArray firstObject] compare: [obj1.startDateArray firstObject]]);
+             return [[obj2.startDateArray firstObject] compare: [obj1.startDateArray firstObject]];
+             }];
+             [self.tableView reloadData];
+            self.sortBarButtonItem.title = @"Order: Date";
+            break;
+        case 2:
+            self.sortBarButtonItem.title = @"Order: Log";
+            break;
+        case 3:
+            [self.activityRecordArray sortUsingComparator:^NSComparisonResult(HCSActivityRecord *obj1, HCSActivityRecord *obj2) {
+                return [@(obj2.activityNumber) compare: @(obj1.activityNumber)];
+            }];
+            [self.tableView reloadData];
+            self.sortBarButtonItem.title = @"Order: Events";
+            break;
+        case 4:
+            [self.activityRecordArray sortUsingComparator:^NSComparisonResult(HCSActivityRecord *obj1, HCSActivityRecord *obj2) {
+                return [@(obj2.pausedSeconds) compare: @(obj1.pausedSeconds)];
+            }];
+            [self.tableView reloadData];
+            self.sortBarButtonItem.title = @"Order: Paused Time";
+            break;
+        default:
+            break;
+    }
+}
 
 #pragma mark - Table view data source
 
@@ -289,7 +344,6 @@
     
     return cell;
 }
-
 
 /*
 // Override to support conditional editing of the table view.

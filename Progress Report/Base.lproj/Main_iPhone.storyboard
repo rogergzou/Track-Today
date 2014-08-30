@@ -287,11 +287,15 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <!--Navigation Controller-->
         <scene sceneID="UFJ-Qm-HhH">
             <objects>
-                <navigationController definesPresentationContext="YES" id="BMe-6M-kEt" sceneMemberID="viewController">
+                <navigationController definesPresentationContext="YES" toolbarHidden="NO" id="BMe-6M-kEt" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="Kbq-8S-P1A"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="cF2-RH-IS3">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="WLz-Wd-t9q">
+                        <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="Zrb-S7-A2e" kind="relationship" relationship="rootViewController" id="cjo-5F-PCa"/>
                     </connections>
@@ -357,18 +361,30 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             <outlet property="delegate" destination="Zrb-S7-A2e" id="9n6-fa-jsU"/>
                         </connections>
                     </tableView>
+                    <toolbarItems>
+                        <barButtonItem title="Item" id="ci1-xB-ukx">
+                            <connections>
+                                <action selector="sortButtonPressed:" destination="Zrb-S7-A2e" id="IIr-ra-lHI"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="AYa-9M-FPo"/>
+                        <barButtonItem systemItem="compose" id="nnq-Oc-Cah">
+                            <connections>
+                                <action selector="emailButtonPressed:" destination="Zrb-S7-A2e" id="tHd-3p-rSJ"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" title="Activity Log" id="MBe-IX-gXC">
                         <barButtonItem key="leftBarButtonItem" systemItem="stop" id="M0N-ZI-GAe">
                             <connections>
                                 <action selector="cancelButtonPressed:" destination="Zrb-S7-A2e" id="abv-TL-2u0"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="nnq-Oc-Cah">
-                            <connections>
-                                <action selector="emailButtonPressed:" destination="Zrb-S7-A2e" id="tHd-3p-rSJ"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="sortBarButtonItem" destination="ci1-xB-ukx" id="yDo-1p-8IY"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="abn-0R-JnB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
