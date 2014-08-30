@@ -162,7 +162,8 @@ const double roundButtonBorderWidth = 1.15;
                 //make sure matches textFieldShouldReturn too
                 if (self.wasPausedBeforeStop == NO)
                     self.pauseNumber--;
-                [self resumeTimer]; //updates pausedSeconds
+                else
+                    [self resumeTimer]; //updates pausedSeconds
                 self.titleButton.text = [alertView textFieldAtIndex:0].text;
                 [self scheduleEvent];
                 [self resultLabelUpdate];
