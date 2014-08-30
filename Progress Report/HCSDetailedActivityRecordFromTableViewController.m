@@ -9,14 +9,19 @@
 #import "HCSDetailedActivityRecordFromTableViewController.h"
 #import "HCSDetailedActivityRecordTableViewCell.h"
 
-@interface HCSDetailedActivityRecordFromTableViewController ()
+@interface HCSDetailedActivityRecordFromTableViewController () <UIActionSheetDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *sortBarButtonItem;
 
 @end
 
 @implementation HCSDetailedActivityRecordFromTableViewController
 
+- (IBAction)sortBarButtonPressed:(UIBarButtonItem *)sender {
+    UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:@"Order By" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Time", @"Date", @"Paused Time", @"Reverse", nil];
+    [actionSheet showFromBarButtonItem:sender animated:YES];
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -39,6 +44,47 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+- (void)sortLogWithButtonIndex:(NSInteger)buttonIndex {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    //resets the activity record array to not-logged state
+    
+    switch (buttonIndex) {
+        case 0:
+            //time
+            /*[self.record sortUsingComparator:^NSComparisonResult(HCSActivityRecord *obj1, HCSActivityRecord *obj2) {
+                return [@(obj2.seconds) compare: @(obj1.seconds)];
+            }];*/
+            [self.tableView reloadData];
+            self.sortBarButtonItem.title = @"Order: Time";
+            break;
+        case 1:
+            //date
+            break;
+        case 2:
+            //paused time
+            break;
+        case 3:
+            //reverse
+        default:
+            //cancel
+            break;
+    }
+    //if not cancel or reverse, save to defaults
+    //not done
+    if (buttonIndex < 3) {
+        [defaults setInteger:buttonIndex forKey:@"detailedButtonIndex"];
+        [defaults synchronize];
+    }
+}
+
+#pragma mark - UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    [self sortLogWithButtonIndex:buttonIndex];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

@@ -410,7 +410,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </connections>
                     </tableView>
                     <toolbarItems>
-                        <barButtonItem title="Item" id="ci1-xB-ukx">
+                        <barButtonItem title="Order" id="ci1-xB-ukx">
                             <connections>
                                 <action selector="sortButtonPressed:" destination="Zrb-S7-A2e" id="IIr-ra-lHI"/>
                             </connections>
@@ -512,14 +512,22 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <toolbarItems>
+                        <barButtonItem title="Order" id="9Ge-ML-PDA">
+                            <connections>
+                                <action selector="sortBarButtonPressed:" destination="OfE-TX-AmE" id="tQF-XG-LDY"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" id="mpg-sj-Bvd"/>
                     <connections>
+                        <outlet property="sortBarButtonItem" destination="9Ge-ML-PDA" id="ExO-Z3-NWZ"/>
                         <outlet property="tableView" destination="URG-Kk-JRR" id="MXw-IH-P7h"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XP7-20-VZ1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-241" y="-1538"/>
+            <point key="canvasLocation" x="-115" y="-1582"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="AIl-Cx-31r">
