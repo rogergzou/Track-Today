@@ -101,5 +101,24 @@
     
     return self;
 }
+/*
+#pragma mark - NSCopying
 
+- (id)copyWithZone:(NSZone *)zone
+{
+    HCSActivityRecord *newRecord = [[HCSActivityRecord alloc]init];
+    newRecord.title = [self.title copy];
+    newRecord.seconds = self.seconds; //no copy for nonobjects?
+    newRecord.pausedSeconds = self.pausedSeconds;
+    newRecord.pauseNumber = self.pauseNumber;
+    newRecord.activityNumber = self.activityNumber;
+    newRecord.secondsArray = [self.secondsArray copy];
+    newRecord.startDateArray = [self.startDateArray copy];
+    newRecord.endDateArray = [self.endDateArray copy];
+    newRecord.pausedSecondsArray = [self.pausedSecondsArray copy];
+    newRecord.pauseNumberArray = [self.pauseNumberArray copy];
+    newRecord.eventTitleArray = [self.eventTitleArray copy];
+    return newRecord;
+}
+*/
 @end

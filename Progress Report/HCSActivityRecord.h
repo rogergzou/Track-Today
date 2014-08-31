@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface HCSActivityRecord : NSObject
+@interface HCSActivityRecord : NSObject //<NSCopying>
 
 @property (nonatomic, strong) NSString *title;
 //@property (nonatomic, strong) NSDate *startDate;

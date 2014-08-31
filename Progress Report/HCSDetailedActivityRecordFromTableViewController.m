@@ -50,15 +50,79 @@
 - (void)sortLogWithButtonIndex:(NSInteger)buttonIndex {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     //resets the activity record array to not-logged state
-    
+    //HCSActivityRecord *testRecord = [self.record copy];
+    //NSMutableArray *storeSortArray = [NSMutableArray array];
+    //NSMutableArray *counterArray = [NSMutableArray array];
     switch (buttonIndex) {
         case 0:
             //time
+            //seconds
             /*[self.record sortUsingComparator:^NSComparisonResult(HCSActivityRecord *obj1, HCSActivityRecord *obj2) {
                 return [@(obj2.seconds) compare: @(obj1.seconds)];
-            }];*/
+            }];
+            
+             // //
+             
+            [storeSortArray addObjectsFromArray:self.record.secondsArray];
+            [storeSortArray sortUsingComparator:^NSComparisonResult(NSNumber *num1, NSNumber *num2) {
+                return [num2 compare:num1];
+            }];
+            
+            //inefficient sort
+            for (NSNumber *number in self.record.secondsArray) {
+                for (NSNumber *sortedNum in storeSortArray) {
+                    if ([sortedNum isEqualToNumber:number]) {
+                        [counterArray addObject:@([storeSortArray indexOfObject:sortedNum])];
+                        break;
+                    }
+                }
+            }
+            
+            //reorder
+            for (int i = 0; i < [storeSortArray count]; i++) {
+                int newIndex = [counterArray[i] intValue];
+                self.record.secondsArray[i] = testRecord.secondsArray[newIndex];
+                self.record.startDateArray[i] = testRecord.startDateArray[newIndex];
+                self.record.endDateArray[i] = testRecord.endDateArray[newIndex];
+                self.record.pausedSecondsArray[i] = testRecord.pausedSecondsArray[newIndex];
+                self.record.pauseNumberArray[i] = testRecord.pauseNumberArray[newIndex];
+                self.record.eventTitleArray[i] = testRecord.eventTitleArray[newIndex];
+            }
+            
             [self.tableView reloadData];
             self.sortBarButtonItem.title = @"Order: Time";
+            break;
+        case 1:
+            //date
+            [storeSortArray addObjectsFromArray:self.record.startDateArray];
+            [storeSortArray sortUsingComparator:^NSComparisonResult(NSDate *date1, NSDate *date2) {
+                return [date2 compare:date1];
+            }];
+            
+            //inefficient sort
+            for (NSDate *date in self.record.startDateArray) {
+                for (NSDate *sortedDate in storeSortArray) {
+                    if ([sortedDate isEqualToDate:date]) {
+                        [counterArray addObject:@([storeSortArray indexOfObject:sortedDate])];
+                        break;
+                    }
+                }
+            }
+            
+            //reorder
+            for (int i = 0; i < [storeSortArray count]; i++) {
+                int newIndex = [counterArray[i] intValue];
+                self.record.secondsArray[i] = testRecord.secondsArray[newIndex];
+                self.record.startDateArray[i] = testRecord.startDateArray[newIndex];
+                self.record.endDateArray[i] = testRecord.endDateArray[newIndex];
+                self.record.pausedSecondsArray[i] = testRecord.pausedSecondsArray[newIndex];
+                self.record.pauseNumberArray[i] = testRecord.pauseNumberArray[newIndex];
+                self.record.eventTitleArray[i] = testRecord.eventTitleArray[newIndex];
+            }
+            
+            [self.tableView reloadData];
+            self.sortBarButtonItem.title = @"Order: Date";
+            break;*/
             break;
         case 1:
             //date
@@ -68,6 +132,7 @@
             break;
         case 3:
             //reverse
+            break;
         default:
             //cancel
             break;
