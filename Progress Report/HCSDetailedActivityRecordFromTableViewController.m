@@ -51,7 +51,8 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     //resets the activity record array to not-logged state
     //HCSActivityRecord *testRecord = [self.record copy];
-    //NSMutableArray *storeSortArray = [NSMutableArray array];
+    NSMutableArray *storeSortArray = [NSMutableArray array];
+    NSUInteger arrLen = [self.record.secondsArray count];
     //NSMutableArray *counterArray = [NSMutableArray array];
     switch (buttonIndex) {
         case 0:
@@ -123,6 +124,23 @@
             [self.tableView reloadData];
             self.sortBarButtonItem.title = @"Order: Date";
             break;*/
+            /*
+            // Put the two arrays into a dictionary as keys and values
+            NSDictionary *dictSecs = [NSDictionary dictionaryWithObjects:secondArray forKeys:firstArray];
+            // Sort the first array
+            NSArray *sortedFirstArray = [[dictionary allKeys] sortedArrayUsingSelector:@selector(compare:)];
+            // Sort the second array based on the sorted first array
+            NSArray *sortedSecondArray = [dictionary objectsForKeys:sortedFirstArray notFoundMarker:[NSNull null]];
+             */
+            
+            //basically: make a new HCSActivityRecord for each object in array. Sort via selector. redistribute to record after.
+            //need to add start/end date to hcsactivityrecord before this ^^
+            for (NSUInteger i = 0; i < arrLen; i++) {
+                HCSActivityRecord *rec = [[HCSActivityRecord alloc]init];
+                rec.seconds = [self.record.secondsArray[i] intValue];
+                
+            }
+            
             break;
         case 1:
             //date

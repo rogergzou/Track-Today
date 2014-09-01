@@ -60,6 +60,16 @@
     if (!_eventTitleArray) _eventTitleArray = [NSMutableArray array];
     return _eventTitleArray;
 }
+- (NSDate *)startDate
+{
+    if (!_startDate) _startDate = [NSDate distantPast];
+    return _startDate;
+}
+- (NSDate *)endDate
+{
+    if (!_endDate) _endDate = [NSDate  distantFuture];
+    return _endDate;
+}
 
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
@@ -74,6 +84,8 @@
     [encoder encodeObject:self.pausedSecondsArray forKey:@"pausedSecondsArray"];
     [encoder encodeObject:self.pauseNumberArray forKey:@"pauseNumberArray"];
     [encoder encodeObject:self.eventTitleArray forKey:@"eventTitleArray"];
+    [encoder encodeObject:self.startDate forKey:@"startDate"];
+    [encoder encodeObject:self.endDate forKey:@"endDate"];
 }
 /* @property (nonatomic, strong) NSMutableArray *startDateArray;
  @property (nonatomic, strong) NSMutableArray *endDateArray;
@@ -97,6 +109,8 @@
         self.pausedSecondsArray = [decoder decodeObjectForKey:@"pausedSecondsArray"];
         self.pauseNumberArray = [decoder decodeObjectForKey:@"pauseNumberArray"];
         self.eventTitleArray = [decoder decodeObjectForKey:@"eventTitleArray"];
+        self.startDate = [decoder decodeObjectForKey:@"startDate"];
+        self.endDate = [decoder decodeObjectForKey:@"endDate"];
     }
     
     return self;

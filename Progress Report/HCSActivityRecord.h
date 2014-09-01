@@ -11,8 +11,10 @@
 @interface HCSActivityRecord : NSObject //<NSCopying>
 
 @property (nonatomic, strong) NSString *title;
-//@property (nonatomic, strong) NSDate *startDate;
-//@property (nonatomic, strong) NSDate *endDate;
+
+@property (nonatomic, strong) NSDate *startDate;
+@property (nonatomic, strong) NSDate *endDate;
+
 @property (nonatomic) NSTimeInterval seconds;
 @property (nonatomic) NSTimeInterval pausedSeconds;
 @property (nonatomic) int pauseNumber;
