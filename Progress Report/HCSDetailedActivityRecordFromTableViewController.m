@@ -54,6 +54,20 @@
     NSMutableArray *storeSortArray = [NSMutableArray array];
     NSUInteger arrLen = [self.record.secondsArray count];
     //NSMutableArray *counterArray = [NSMutableArray array];
+    
+    //basically: make a new HCSActivityRecord for each object in array. Sort via selector. redistribute to record after.
+    //need to add start/end date to hcsactivityrecord before this ^^
+    for (NSUInteger i = 0; i < arrLen; i++) {
+        HCSActivityRecord *rec = [[HCSActivityRecord alloc]init];
+        rec.seconds = [self.record.secondsArray[i] doubleValue];
+        rec.pausedSeconds = [self.record.pausedSecondsArray[i] doubleValue];
+        rec.pauseNumber = [self.record.pauseNumberArray[i] intValue];
+        rec.startDate = self.record.startDateArray[i];
+        rec.endDate = self.record.endDateArray[i];
+        rec.title = self.record.eventTitleArray[i];
+        [storeSortArray addObject:rec];
+    }
+    
     switch (buttonIndex) {
         case 0:
             //time
@@ -132,15 +146,10 @@
             // Sort the second array based on the sorted first array
             NSArray *sortedSecondArray = [dictionary objectsForKeys:sortedFirstArray notFoundMarker:[NSNull null]];
              */
-            
-            //basically: make a new HCSActivityRecord for each object in array. Sort via selector. redistribute to record after.
-            //need to add start/end date to hcsactivityrecord before this ^^
-            for (NSUInteger i = 0; i < arrLen; i++) {
-                HCSActivityRecord *rec = [[HCSActivityRecord alloc]init];
-                rec.seconds = [self.record.secondsArray[i] intValue];
-                
-            }
-            
+            [storeSortArray sortUsingComparator:^NSComparisonResult(HCSActivityRecord *obj1, HCSActivityRecord *obj2) {
+                return [@(obj2.seconds) compare: @(obj1.seconds)];
+            }];
+            self.sortBarButtonItem.title = @"Order: Time";
             break;
         case 1:
             //date
@@ -150,11 +159,38 @@
             break;
         case 3:
             //reverse
+            storeSortArray = [[[storeSortArray reverseObjectEnumerator] allObjects] mutableCopy];
+            //title below
+            if ([[self.sortBarButtonItem.title substringFromIndex:[self.sortBarButtonItem.title length] - 4] isEqualToString:@"sed)"]) {
+                //checks if ends in "(Reverse)"
+                
+                // define the range you're interested in
+                NSRange stringRange = {0, MIN([self.sortBarButtonItem.title length], [self.sortBarButtonItem.title length] - 11)};
+                
+                // adjust the range to include dependent chars
+                stringRange = [self.sortBarButtonItem.title rangeOfComposedCharacterSequencesForRange:stringRange];
+                
+                // Now you can create the short string
+                self.sortBarButtonItem.title = [self.sortBarButtonItem.title substringWithRange:stringRange];
+            } else
+                self.sortBarButtonItem.title = [self.sortBarButtonItem.title stringByAppendingString:@" (Reversed)"];
+            
             break;
         default:
             //cancel
             break;
     }
+    //make storeSortArray records back into self.record.yadaArray stuff
+    for (NSUInteger i = 0; i < arrLen; i++) {
+        HCSActivityRecord *rec= storeSortArray[i];
+        self.record.startDateArray[i] = rec.startDate;
+        self.record.endDateArray[i] = rec.endDate;
+        self.record.secondsArray[i] = @(rec.seconds);
+        self.record.pausedSecondsArray[i] = @(rec.pausedSeconds);
+        self.record.pauseNumberArray[i] = @(rec.pauseNumber);
+        self.record.eventTitleArray[i] = rec.title;
+    }
+    [self.tableView reloadData];
     //if not cancel or reverse, save to defaults
     //not done
     if (buttonIndex < 3) {
