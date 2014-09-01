@@ -13,6 +13,7 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *sortBarButtonItem;
+@property (strong, nonatomic) NSString *customDetailedButtonIndex;
 
 @end
 
@@ -36,8 +37,15 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.customDetailedButtonIndex = [NSString stringWithFormat:@"detailedButtonIndex%@", self.record.title];
     
     self.navigationItem.title = self.record.title;
+    //NSInteger buttonIndex;
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    //if ([defaults integerForKey:@"detailedButtonIndex"]) {
+    NSInteger buttonIndex = [defaults integerForKey:self.customDetailedButtonIndex];
+    //}
+    [self sortLogWithButtonIndex:buttonIndex];
 }
 
 - (void)didReceiveMemoryWarning
@@ -153,9 +161,19 @@
             break;
         case 1:
             //date
+            [storeSortArray sortUsingComparator:^NSComparisonResult(HCSActivityRecord *obj1, HCSActivityRecord *obj2) {
+                return [obj2.startDate compare: obj1.startDate];
+            }];
+            self.sortBarButtonItem.title = @"Order: Date";
+
             break;
         case 2:
             //paused time
+            [storeSortArray sortUsingComparator:^NSComparisonResult(HCSActivityRecord *obj1, HCSActivityRecord *obj2) {
+                return [@(obj2.pausedSeconds) compare: @(obj1.pausedSeconds)];
+            }];
+            self.sortBarButtonItem.title = @"Order: Paused Time";
+
             break;
         case 3:
             //reverse
@@ -194,7 +212,7 @@
     //if not cancel or reverse, save to defaults
     //not done
     if (buttonIndex < 3) {
-        [defaults setInteger:buttonIndex forKey:@"detailedButtonIndex"];
+        [defaults setInteger:buttonIndex forKey:self.customDetailedButtonIndex];
         [defaults synchronize];
     }
 }
@@ -205,6 +223,8 @@
 {
     [self sortLogWithButtonIndex:buttonIndex];
 }
+
+#pragma mark - UITableViewDelegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {

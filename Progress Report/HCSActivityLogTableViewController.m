@@ -186,9 +186,9 @@
     }
     //NSArray *sortedArray = [self sortMutableArray:statsArray ByType:@"seconds"];
     
-    [statsArray sortUsingComparator:^NSComparisonResult(HCSActivityRecord *obj1, HCSActivityRecord *obj2) {
-        return [@(obj2.seconds) compare: @(obj1.seconds)];
-    }];
+    //[statsArray sortUsingComparator:^NSComparisonResult(HCSActivityRecord *obj1, HCSActivityRecord *obj2) {
+      //  return [@(obj2.seconds) compare: @(obj1.seconds)];
+    //}];
     
     self.activityRecordArray = statsArray;
     [self.tableView reloadData];
