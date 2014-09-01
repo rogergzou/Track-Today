@@ -38,7 +38,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.customDetailedButtonIndex = [NSString stringWithFormat:@"detailedButtonIndex%@", self.record.title];
-    
+    [self checkEventArray];
     self.navigationItem.title = self.record.title;
     //NSInteger buttonIndex;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -54,6 +54,13 @@
     // Dispose of any resources that can be recreated.
 }
 
+//cleanup to prevent nsrangeexception: index is beyond bounds is in checkEventArray method
+- (void)checkEventArray {
+    if ([self.record.eventTitleArray count] < [self.record.secondsArray count]) {
+        [self.record.eventTitleArray addObject:@""];
+        [self checkEventArray];
+    }
+}
 
 - (void)sortLogWithButtonIndex:(NSInteger)buttonIndex {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -61,6 +68,7 @@
     //HCSActivityRecord *testRecord = [self.record copy];
     NSMutableArray *storeSortArray = [NSMutableArray array];
     NSUInteger arrLen = [self.record.secondsArray count];
+    
     //NSMutableArray *counterArray = [NSMutableArray array];
     
     //basically: make a new HCSActivityRecord for each object in array. Sort via selector. redistribute to record after.
@@ -70,9 +78,13 @@
         rec.seconds = [self.record.secondsArray[i] doubleValue];
         rec.pausedSeconds = [self.record.pausedSecondsArray[i] doubleValue];
         rec.pauseNumber = [self.record.pauseNumberArray[i] intValue];
-        rec.startDate = self.record.startDateArray[i];
-        rec.endDate = self.record.endDateArray[i];
-        rec.title = self.record.eventTitleArray[i];
+        
+        if (self.record.startDateArray[i])
+            rec.startDate = self.record.startDateArray[i];
+        if (self.record.endDateArray[i])
+            rec.endDate = self.record.endDateArray[i];
+        if (self.record.eventTitleArray[i])
+            rec.title = self.record.eventTitleArray[i];
         [storeSortArray addObject:rec];
     }
     
@@ -201,12 +213,15 @@
     //make storeSortArray records back into self.record.yadaArray stuff
     for (NSUInteger i = 0; i < arrLen; i++) {
         HCSActivityRecord *rec= storeSortArray[i];
-        self.record.startDateArray[i] = rec.startDate;
-        self.record.endDateArray[i] = rec.endDate;
+        if (rec.startDate)
+            self.record.startDateArray[i] = rec.startDate;
+        if (rec.endDate)
+            self.record.endDateArray[i] = rec.endDate;
         self.record.secondsArray[i] = @(rec.seconds);
         self.record.pausedSecondsArray[i] = @(rec.pausedSeconds);
         self.record.pauseNumberArray[i] = @(rec.pauseNumber);
-        self.record.eventTitleArray[i] = rec.title;
+        if (rec.title)
+            self.record.eventTitleArray[i] = rec.title;
     }
     [self.tableView reloadData];
     //if not cancel or reverse, save to defaults
