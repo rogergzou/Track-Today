@@ -20,7 +20,7 @@
 @implementation HCSDetailedActivityRecordFromTableViewController
 
 - (IBAction)sortBarButtonPressed:(UIBarButtonItem *)sender {
-    UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:@"Order By" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Time", @"Date", @"Paused Time", @"Reverse", nil];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:@"Order By" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Date", @"Time", @"Paused Time", @"Reverse", nil];
     [actionSheet showFromBarButtonItem:sender animated:YES];
 }
 
@@ -77,7 +77,7 @@
     }
     
     switch (buttonIndex) {
-        case 0:
+        case 1:
             //time
             //seconds
             /*[self.record sortUsingComparator:^NSComparisonResult(HCSActivityRecord *obj1, HCSActivityRecord *obj2) {
@@ -159,7 +159,7 @@
             }];
             self.sortBarButtonItem.title = @"Order: Time";
             break;
-        case 1:
+        case 0:
             //date
             [storeSortArray sortUsingComparator:^NSComparisonResult(HCSActivityRecord *obj1, HCSActivityRecord *obj2) {
                 return [obj2.startDate compare: obj1.startDate];
