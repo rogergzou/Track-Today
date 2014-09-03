@@ -1,5 +1,7 @@
 # ignore weird log and OS generated files
 ignore/
+Screenshots/
+Category\ Default\ Icons/
 # iphonelog
 .DS_Store
 .DS_Store?
