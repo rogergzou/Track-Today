@@ -11,7 +11,8 @@
 #import "HCSShortcut.h"
 #import "HCSShortCutViewController.h"
 #import <QuartzCore/QuartzCore.h>
-#import "HCSReminderTableViewController.h"
+//#import "HCSReminderTableViewController.h"
+#import "HCSAddReminderViewController.h"
 #import "HCSModifyReminderViewController.h"
 #import "HCSActivityRecord.h"
 
@@ -561,14 +562,19 @@ const double roundButtonBorderWidth = 1.15;
 - (IBAction)myReminderSegueCallback:(UIStoryboardSegue *)segue
 {
     UIViewController *sourceVC = segue.sourceViewController;
-    if ([sourceVC isKindOfClass:[HCSReminderTableViewController class]]) {
-        HCSReminderTableViewController *reminderVC = (HCSReminderTableViewController *)sourceVC;
+    if ([sourceVC isKindOfClass:[HCSAddReminderViewController class]]) {
+        HCSAddReminderViewController *reminderVC = (HCSAddReminderViewController *)sourceVC;
 
-        int minstring = reminderVC.minutes;
         self.reminderButton.hidden = NO;
         self.reminderLabel.hidden = NO;
         self.addReminderButton.hidden = YES;
         
+        int secs = reminderVC.seconds;
+        int mins = reminderVC.minutes;
+        int hours = reminderVC.hours;
+        
+        double totalSeconds = secs + mins * 60 + hours * 3600;
+        /*
         double hourstring;
         NSString *timeText;
         BOOL singular = NO;
@@ -585,15 +591,41 @@ const double roundButtonBorderWidth = 1.15;
         } else
             timeText = [NSString stringWithFormat:@"%i minutes", minstring];
         //self.reminderButton.titleLabel.text = timeText;
-        NSDate *notificationDate = [NSDate dateWithTimeIntervalSinceNow:(reminderVC.minutes * 60)];
+         */
+        NSString *timeString = @"";
+        BOOL singular = NO;
+        if (totalSeconds > 3600)
+            timeString = [NSString stringWithFormat:@"%.1f hours", totalSeconds/3600];
+        else if (totalSeconds == 3600) {
+            singular = YES;
+            timeString = @"1 hour";
+        } else if (totalSeconds > 60)
+            timeString = [NSString stringWithFormat:@"%.1f minutes", totalSeconds/60];
+        else if (totalSeconds == 60) {
+            singular = YES;
+            timeString = @"1 minute";
+        } else if (totalSeconds > 1)
+            timeString = [NSString stringWithFormat:@"%i seconds", (int)totalSeconds];
+        else if (totalSeconds == 1) {
+            singular = YES;
+            timeString = @"1 second";
+        } else {
+            self.reminderButton.hidden = YES;
+            self.reminderLabel.hidden = YES;
+            self.addReminderButton.hidden = NO;
+            return;
+        }
+        
+        NSLog(@"%f", totalSeconds);
+        NSDate *notificationDate = [NSDate dateWithTimeIntervalSinceNow:totalSeconds];
         UILocalNotification *notif = [[UILocalNotification alloc]init];
         notif.fireDate = notificationDate;
         notif.timeZone = [NSTimeZone defaultTimeZone];
-        notif.alertBody = [NSString stringWithFormat: @"%@ %@ passed", timeText, (singular ? @"has" : @"have")];
+        notif.alertBody = [NSString stringWithFormat: @"%@ %@ passed", timeString, (singular ? @"has" : @"have")];
         notif.alertAction = @"OK";
         notif.soundName = UILocalNotificationDefaultSoundName;
         //notif.applicationIconBadgeNumber = 1;
-        notif.userInfo = @{@"typeKey": @"reminder", @"timeStringKey": timeText};
+        notif.userInfo = @{@"typeKey": @"reminder", @"timeStringKey": timeString};
         [[UIApplication sharedApplication] scheduleLocalNotification:notif];
         [self.reminderButton setTitle:[NSString stringWithFormat:@"%@", [NSDateFormatter localizedStringFromDate:notificationDate dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle]] forState:UIControlStateNormal];
         

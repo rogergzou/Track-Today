@@ -17,6 +17,10 @@
 
 @implementation HCSAppDelegate
 
+//331 bottom
+//270 middle
+//need to add in daily statistics
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 // Override point for customization after application launch.

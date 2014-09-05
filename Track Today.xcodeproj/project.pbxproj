@@ -13,6 +13,7 @@
 		DB49F361195CF0D400067F96 /* HCSShortCutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB49F360195CF0D400067F96 /* HCSShortCutViewController.m */; };
 		DB49F364195CF1C000067F96 /* HCSShortCutTextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DB49F363195CF1C000067F96 /* HCSShortCutTextViewCell.m */; };
 		DB49FF06196634EF00D91BFE /* HCSMyHeaderReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB49FF05196634EF00D91BFE /* HCSMyHeaderReusableView.m */; };
+		DB62154019B8127D002D1296 /* HCSAddReminderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB62153F19B8127D002D1296 /* HCSAddReminderViewController.m */; };
 		DB67659F19608E8D00C113D2 /* HCSShortcut.m in Sources */ = {isa = PBXBuildFile; fileRef = DB67659E19608E8D00C113D2 /* HCSShortcut.m */; };
 		DB6765A51960BAB400C113D2 /* HCSCustomViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DB6765A41960BAB400C113D2 /* HCSCustomViewCell.m */; };
 		DB6765A8196126FD00C113D2 /* HCSAddCustomShortCutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB6765A7196126FD00C113D2 /* HCSAddCustomShortCutViewController.m */; };
@@ -65,6 +66,8 @@
 		DB49F365195D19AC00067F96 /* HCSShortcut.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSShortcut.h; sourceTree = "<group>"; };
 		DB49FF04196634EF00D91BFE /* HCSMyHeaderReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSMyHeaderReusableView.h; sourceTree = "<group>"; };
 		DB49FF05196634EF00D91BFE /* HCSMyHeaderReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCSMyHeaderReusableView.m; sourceTree = "<group>"; };
+		DB62153E19B8127D002D1296 /* HCSAddReminderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSAddReminderViewController.h; sourceTree = "<group>"; };
+		DB62153F19B8127D002D1296 /* HCSAddReminderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCSAddReminderViewController.m; sourceTree = "<group>"; };
 		DB67659E19608E8D00C113D2 /* HCSShortcut.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCSShortcut.m; sourceTree = "<group>"; };
 		DB6765A31960BAB400C113D2 /* HCSCustomViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSCustomViewCell.h; sourceTree = "<group>"; };
 		DB6765A41960BAB400C113D2 /* HCSCustomViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCSCustomViewCell.m; sourceTree = "<group>"; };
@@ -258,6 +261,8 @@
 			children = (
 				DBCFA670197F80A800122581 /* HCSReminderTableViewController.h */,
 				DBCFA671197F80A800122581 /* HCSReminderTableViewController.m */,
+				DB62153E19B8127D002D1296 /* HCSAddReminderViewController.h */,
+				DB62153F19B8127D002D1296 /* HCSAddReminderViewController.m */,
 				DBCFA6731980ABB100122581 /* HCSModifyReminderViewController.h */,
 				DBCFA6741980ABB100122581 /* HCSModifyReminderViewController.m */,
 			);
@@ -413,6 +418,7 @@
 				DB07648919864CC800DBABE4 /* HCSDetailedActivityRecordTableViewCell.m in Sources */,
 				DBE08AF019721E77006AE034 /* LSCollectionViewLayoutHelper.m in Sources */,
 				DB07648619862A5E00DBABE4 /* HCSDetailedActivityRecordFromTableViewController.m in Sources */,
+				DB62154019B8127D002D1296 /* HCSAddReminderViewController.m in Sources */,
 				DB679EF1195BB92700C61F6F /* HCSViewController.m in Sources */,
 				DBE08AF219721E77006AE034 /* UICollectionView+Draggable.m in Sources */,
 				DB679EE8195BB92700C61F6F /* HCSAppDelegate.m in Sources */,
