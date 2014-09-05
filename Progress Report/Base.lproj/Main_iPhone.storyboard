@@ -184,6 +184,7 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kNZ-e5-49T">
                                 <rect key="frame" x="125" y="430" width="70" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="CourierNewPSMT" family="Courier New" pointSize="18"/>
                                 <state key="normal" title="Add">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -212,8 +213,15 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Add Reminder in" id="Kxh-fb-a2N"/>
+                    <navigationItem key="navigationItem" title="Add Reminder in" id="Kxh-fb-a2N">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="4Iq-Ho-iIe">
+                            <connections>
+                                <action selector="cancelButtonPressed:" destination="Agd-y4-9Jr" id="kJ1-VX-w1q"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="addButton" destination="kNZ-e5-49T" id="4Hs-xd-KHt"/>
                         <outlet property="pickerView" destination="O1K-Qs-rHl" id="8jo-Gr-3E4"/>
                     </connections>
                 </viewController>

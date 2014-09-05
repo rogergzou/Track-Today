@@ -11,6 +11,7 @@
 @interface HCSAddReminderViewController () <UIPickerViewDataSource, UIPickerViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
+@property (weak, nonatomic) IBOutlet UIButton *addButton;
 @property (strong, nonatomic) NSArray *secondsArray;
 @property (strong, nonatomic) NSArray *minutesArray;
 @property (strong, nonatomic) NSArray *hoursArray;
@@ -19,6 +20,9 @@
 
 @implementation HCSAddReminderViewController
 
+- (IBAction)cancelButtonPressed:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 - (int)seconds
 {
@@ -76,6 +80,10 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.addButton.layer.borderWidth = 1;
+    self.addButton.layer.cornerRadius = self.addButton.frame.size.height/6;
+    self.addButton.layer.borderColor = self.addButton.titleLabel.textColor.CGColor;
 }
 
 - (void)didReceiveMemoryWarning

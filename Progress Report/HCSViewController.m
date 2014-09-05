@@ -616,7 +616,6 @@ const double roundButtonBorderWidth = 1.15;
             return;
         }
         
-        NSLog(@"%f", totalSeconds);
         NSDate *notificationDate = [NSDate dateWithTimeIntervalSinceNow:totalSeconds];
         UILocalNotification *notif = [[UILocalNotification alloc]init];
         notif.fireDate = notificationDate;
@@ -625,6 +624,9 @@ const double roundButtonBorderWidth = 1.15;
         notif.alertAction = @"OK";
         notif.soundName = UILocalNotificationDefaultSoundName;
         //notif.applicationIconBadgeNumber = 1;
+        //adjust timeString for grammar later
+        if (!singular && [timeString length])
+            timeString = [timeString substringToIndex:[timeString length]-1];
         notif.userInfo = @{@"typeKey": @"reminder", @"timeStringKey": timeString};
         [[UIApplication sharedApplication] scheduleLocalNotification:notif];
         [self.reminderButton setTitle:[NSString stringWithFormat:@"%@", [NSDateFormatter localizedStringFromDate:notificationDate dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle]] forState:UIControlStateNormal];
