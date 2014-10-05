@@ -65,6 +65,10 @@
     [defaults setObject:nil forKey:@"restorationDictionary"];
     [defaults synchronize];
     */
+    
+    if ([UIApplication instancesRespondToSelector:@selector(registerUserNotificationSettings:)] && [[[UIDevice currentDevice] systemVersion] compare:@"8.0" options:NSNumericSearch] != NSOrderedAscending){
+        [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
+    }
     return YES;
 }
 							

@@ -463,29 +463,39 @@ const double roundButtonBorderWidth = 1.15;
 {
     if (self.isStart) {
         //set default states for title textcolor backgroundcolor bordercolor borderwidth cornerradius enabling
-        [self.bigButton setTitle:@"Start" forState:UIControlStateNormal];
-        [self.bigButton setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
-        self.bigButton.backgroundColor = [UIColor whiteColor];
-        self.bigButton.layer.borderColor = [UIColor greenColor].CGColor;
-        self.bigButton.layer.borderWidth = roundButtonBorderWidth;
-        self.bigButton.layer.cornerRadius = self.bigButton.frame.size.width/2;
+        
+        //Vivs caps
+        [self.bigButton setTitle:@"START" forState:UIControlStateNormal];
+        [self.bigButton.titleLabel setFont:[UIFont fontWithName:@"Abadi MT Condensed Light" size:17]];
+        //Vivs
+        //[self.bigButton setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
+        //self.bigButton.backgroundColor = [UIColor whiteColor];
+        //self.bigButton.layer.borderColor = [UIColor greenColor].CGColor;
+        //self.bigButton.layer.borderWidth = roundButtonBorderWidth;
+        //self.bigButton.layer.cornerRadius = self.bigButton.frame.size.width/2;
         
         self.pauseButton.enabled = NO;
-        [self.pauseButton setTitleColor:[[UIColor lightGrayColor] colorWithAlphaComponent:0.3] forState:UIControlStateDisabled];
-        self.pauseButton.layer.borderColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.3].CGColor;
-        self.pauseButton.backgroundColor = nil;
-        [self.pauseButton setTitle:@"Pause" forState:UIControlStateDisabled];
-        self.pauseButton.layer.borderWidth = roundButtonBorderWidth;
-        self.pauseButton.layer.cornerRadius = self.pauseButton.frame.size.width/2;
+        [self.pauseButton.titleLabel setFont:[UIFont fontWithName:@"Abadi MT Condensed Light" size:17]];
+        //[self.pauseButton setTitleColor:[[UIColor lightGrayColor] colorWithAlphaComponent:0.3] forState:UIControlStateDisabled];
+        //self.pauseButton.layer.borderColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.3].CGColor;
+        //self.pauseButton.backgroundColor = nil;
+        
+        //Vivs caps
+        [self.pauseButton setTitle:@"PAUSE" forState:UIControlStateDisabled];
+        //self.pauseButton.layer.borderWidth = roundButtonBorderWidth;
+        //self.pauseButton.layer.cornerRadius = self.pauseButton.frame.size.width/2;
         
         self.resetButton.enabled = NO;
-        [self.resetButton setTitleColor:[UIColor colorWithRed:0.903978 green:0.344816 blue:0.823626 alpha:0.3] forState:UIControlStateDisabled];
+        [self.resetButton.titleLabel setFont:[UIFont fontWithName:@"Abadi MT Condensed Light" size:17]];
+        //[self.resetButton setTitleColor:[UIColor colorWithRed:0.903978 green:0.344816 blue:0.823626 alpha:0.3] forState:UIControlStateDisabled];
         //title never changes so just set here
-        [self.resetButton setTitle:@"Reset" forState:UIControlStateNormal];
-        self.resetButton.layer.borderColor = [UIColor colorWithRed:0.903978 green:0.344816 blue:0.823626 alpha:0.3].CGColor;
-        self.resetButton.backgroundColor = nil;
-        self.resetButton.layer.borderWidth = roundButtonBorderWidth;
-        self.resetButton.layer.cornerRadius = self.resetButton.frame.size.width/2;
+        
+        //Vivs caps
+        [self.resetButton setTitle:@"RESET" forState:UIControlStateNormal];
+        //self.resetButton.layer.borderColor = [UIColor colorWithRed:0.903978 green:0.344816 blue:0.823626 alpha:0.3].CGColor;
+        //self.resetButton.backgroundColor = nil;
+        //self.resetButton.layer.borderWidth = roundButtonBorderWidth;
+        //self.resetButton.layer.cornerRadius = self.resetButton.frame.size.width/2;
         
         self.shortcutButton.layer.borderWidth = 1;
         self.shortcutButton.layer.cornerRadius = self.shortcutButton.frame.size.height/6;
@@ -513,7 +523,10 @@ const double roundButtonBorderWidth = 1.15;
         self.addReminderButton.layer.borderColor = self.addReminderButton.titleLabel.textColor.CGColor;
         
         [self.categoryLabel setFont:[UIFont boldSystemFontOfSize:17]];
-        self.categoryLabel.text = [NSString stringWithFormat:@"Category: %@", self.category];
+        //Vivs changed from Category to CATEGORY. plus font change
+        self.categoryLabel.text = [NSString stringWithFormat:@"CATEGORY: %@", self.category];
+        [self.categoryLabel setFont:[UIFont fontWithName:@"Abadi MT Condensed Light" size:17]];
+        //self.categoryLabel.text =  [UIFont fontWithName:@"Abadi MT Condensed Light" size:17]
     } else {
         [self.bigButton setTitle:@"Stop" forState:UIControlStateNormal];
         [self.bigButton setTitleColor:[UIColor colorWithRed:1 green:0.0335468 blue:0.00867602 alpha:1] forState:UIControlStateNormal];
@@ -844,7 +857,7 @@ const double roundButtonBorderWidth = 1.15;
     
     if (![defaults boolForKey:@"firstTime"]) {
         //set firstTime defaults
-        NSArray *wordArr = @[@"Procrastination", @"Work", @"Eating", @"Exercise", @"Fun", @"Social", @"Travel", @"Shopping"];
+        NSArray *wordArr = @[@"Procrastination", @"Work", @"Eating", @"Exercise", @"Social", @"Travel"];
         NSMutableArray *storeWords = [NSMutableArray array];
         
         //encoding so able to store is nsuserdefaults
@@ -854,7 +867,7 @@ const double roundButtonBorderWidth = 1.15;
         }
         [defaults setObject:storeWords forKey:@"shortcuts"];
         
-        NSArray *textOnlyArr = @[@"Sleep", @"Reading", @"Adventure!", @"Emails"];
+        NSArray *textOnlyArr = @[@"Sleep", @"Reading", @"Class", @"Fun", @"Shopping", @"Music"];
         NSMutableArray *textWords = [NSMutableArray array];
         for (NSString *word in textOnlyArr) {
             NSData *encodedSampleWorkObj = [NSKeyedArchiver archivedDataWithRootObject:[[HCSShortcut alloc]initWithTitle:word image:nil]];

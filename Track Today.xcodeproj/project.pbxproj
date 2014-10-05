@@ -32,6 +32,9 @@
 		DB679F04195BB92700C61F6F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DB679F02195BB92700C61F6F /* InfoPlist.strings */; };
 		DB679F06195BB92700C61F6F /* Progress_ReportTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DB679F05195BB92700C61F6F /* Progress_ReportTests.m */; };
 		DB679F12195BD43900C61F6F /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB679F11195BD43900C61F6F /* EventKit.framework */; };
+		DBB7695D19E1060500D40B53 /* 1203539570.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DBB7695A19E1060500D40B53 /* 1203539570.ttf */; };
+		DBB7695E19E1060500D40B53 /* README.HTML in Resources */ = {isa = PBXBuildFile; fileRef = DBB7695B19E1060500D40B53 /* README.HTML */; };
+		DBB7695F19E1060500D40B53 /* ChaparralPro-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = DBB7695C19E1060500D40B53 /* ChaparralPro-Light.otf */; };
 		DBB922D019836DB300AEF1A7 /* HCSActivityRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB922CF19836DB300AEF1A7 /* HCSActivityRecord.m */; };
 		DBB922D61983AE6100AEF1A7 /* HCSActivityLogTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB922D51983AE6100AEF1A7 /* HCSActivityLogTableViewController.m */; };
 		DBB922D91983B9F300AEF1A7 /* HCSActivityRecordTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB922D81983B9F300AEF1A7 /* HCSActivityRecordTableViewCell.m */; };
@@ -93,6 +96,9 @@
 		DB679F03195BB92700C61F6F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DB679F05195BB92700C61F6F /* Progress_ReportTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Progress_ReportTests.m; sourceTree = "<group>"; };
 		DB679F11195BD43900C61F6F /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
+		DBB7695A19E1060500D40B53 /* 1203539570.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = 1203539570.ttf; sourceTree = "<group>"; };
+		DBB7695B19E1060500D40B53 /* README.HTML */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = README.HTML; sourceTree = "<group>"; };
+		DBB7695C19E1060500D40B53 /* ChaparralPro-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ChaparralPro-Light.otf"; sourceTree = "<group>"; };
 		DBB922CE19836DB300AEF1A7 /* HCSActivityRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSActivityRecord.h; sourceTree = "<group>"; };
 		DBB922CF19836DB300AEF1A7 /* HCSActivityRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCSActivityRecord.m; sourceTree = "<group>"; };
 		DBB922D41983AE6100AEF1A7 /* HCSActivityLogTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSActivityLogTableViewController.h; sourceTree = "<group>"; };
@@ -211,6 +217,7 @@
 			isa = PBXGroup;
 			children = (
 				DB679EDF195BB92700C61F6F /* Track Today-Info.plist */,
+				DBB7695819E1060500D40B53 /* Fonts */,
 				DB679EE0195BB92700C61F6F /* InfoPlist.strings */,
 				DB679EE3195BB92700C61F6F /* main.m */,
 				DB679EE5195BB92700C61F6F /* Track Today-Prefix.pch */,
@@ -235,6 +242,24 @@
 				DB679F02195BB92700C61F6F /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DBB7695819E1060500D40B53 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				DBB7695919E1060500D40B53 /* Abadi MT Condensed Light Regular */,
+				DBB7695C19E1060500D40B53 /* ChaparralPro-Light.otf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		DBB7695919E1060500D40B53 /* Abadi MT Condensed Light Regular */ = {
+			isa = PBXGroup;
+			children = (
+				DBB7695A19E1060500D40B53 /* 1203539570.ttf */,
+				DBB7695B19E1060500D40B53 /* README.HTML */,
+			);
+			path = "Abadi MT Condensed Light Regular";
 			sourceTree = "<group>";
 		};
 		DBCFA66F197F808300122581 /* Category */ = {
@@ -382,7 +407,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBB7695E19E1060500D40B53 /* README.HTML in Resources */,
 				DB679EF3195BB92700C61F6F /* Images.xcassets in Resources */,
+				DBB7695D19E1060500D40B53 /* 1203539570.ttf in Resources */,
+				DBB7695F19E1060500D40B53 /* ChaparralPro-Light.otf in Resources */,
 				DB679EEB195BB92700C61F6F /* Main_iPhone.storyboard in Resources */,
 				DB679EE2195BB92700C61F6F /* InfoPlist.strings in Resources */,
 			);
