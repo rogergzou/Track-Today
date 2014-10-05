@@ -37,7 +37,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vKv-He-KRr">
-                                <rect key="frame" x="0.0" y="73" width="320" height="145"/>
+                                <rect key="frame" x="49" y="73" width="204" height="145"/>
                                 <fontDescription key="fontDescription" name="AbadiMT-CondensedLight" family="Abadi MT Condensed Light" pointSize="96"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -144,7 +144,7 @@
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gi3-hA-860">
                                 <rect key="frame" x="115" y="357" width="4" height="40"/>
-                                <color key="backgroundColor" red="0.25096686344005348" green="0.80405455833881001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.1553545751" green="0.3354737075" blue="0.72333386479999995" alpha="0.40000000000000002" colorSpace="calibratedRGB"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vJf-8p-Fz5">
                                 <rect key="frame" x="243" y="401" width="4" height="40"/>
@@ -160,7 +160,7 @@
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yEO-dn-irD">
                                 <rect key="frame" x="201" y="357" width="4" height="40"/>
-                                <color key="backgroundColor" red="0.25096686340000002" green="0.80405455830000006" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.1553545751" green="0.3354737075" blue="0.72333386479999995" alpha="0.40000000000000002" colorSpace="calibratedRGB"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Npm-Qc-LfA">
                                 <rect key="frame" x="201" y="357" width="1" height="40"/>
@@ -192,19 +192,45 @@
                                 <rect key="frame" x="79" y="294" width="123" height="40"/>
                                 <color key="backgroundColor" red="0.1553545751" green="0.3354737075" blue="0.72333386479999995" alpha="0.40000000000000002" colorSpace="calibratedRGB"/>
                             </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pbG-sv-GfP">
+                                <rect key="frame" x="0.0" y="-1" width="320" height="55"/>
+                                <color key="backgroundColor" red="0.1553545751" green="0.3354737075" blue="0.72333386479999995" alpha="0.40000000000000002" colorSpace="calibratedRGB"/>
+                            </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dbs-uZ-Bl9">
                                 <rect key="frame" x="40" y="53" width="240" height="1"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZDJ-kz-fQo">
                                 <rect key="frame" x="225" y="43" width="95" height="1"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YvL-7e-LVl">
                                 <rect key="frame" x="0.0" y="43" width="95" height="1"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pbG-sv-GfP">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RN2-M8-Iim">
+                                <rect key="frame" x="40" y="102" width="4" height="80"/>
                                 <color key="backgroundColor" red="0.1553545751" green="0.3354737075" blue="0.72333386479999995" alpha="0.40000000000000002" colorSpace="calibratedRGB"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sIt-en-FeQ">
+                                <rect key="frame" x="40" y="102" width="1" height="80"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9ea-jf-CuS">
+                                <rect key="frame" x="43" y="102" width="1" height="80"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LZh-UA-jJC">
+                                <rect key="frame" x="261" y="102" width="4" height="80"/>
+                                <color key="backgroundColor" red="0.1553545751" green="0.3354737075" blue="0.72333386479999995" alpha="0.40000000000000002" colorSpace="calibratedRGB"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vIy-5u-6pv">
+                                <rect key="frame" x="261" y="102" width="1" height="80"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5gc-mE-VuT">
+                                <rect key="frame" x="264" y="102" width="1" height="80"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
