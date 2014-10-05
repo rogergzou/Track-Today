@@ -171,7 +171,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="THURSDAY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3et-80-Bd6">
-                                <rect key="frame" x="32" y="16" width="251" height="42"/>
+                                <rect key="frame" x="35" y="17" width="251" height="42"/>
                                 <fontDescription key="fontDescription" name="AbadiMT-CondensedLight" family="Abadi MT Condensed Light" pointSize="36"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -192,8 +192,18 @@
                                 <rect key="frame" x="79" y="294" width="123" height="40"/>
                                 <color key="backgroundColor" red="0.1553545751" green="0.3354737075" blue="0.72333386479999995" alpha="0.40000000000000002" colorSpace="calibratedRGB"/>
                             </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dbs-uZ-Bl9">
+                                <rect key="frame" x="40" y="53" width="240" height="1"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZDJ-kz-fQo">
+                                <rect key="frame" x="225" y="43" width="95" height="1"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YvL-7e-LVl">
+                                <rect key="frame" x="0.0" y="43" width="95" height="1"/>
+                            </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pbG-sv-GfP">
-                                <rect key="frame" x="-3" y="76" width="320" height="55"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
                                 <color key="backgroundColor" red="0.1553545751" green="0.3354737075" blue="0.72333386479999995" alpha="0.40000000000000002" colorSpace="calibratedRGB"/>
                             </imageView>
                         </subviews>
