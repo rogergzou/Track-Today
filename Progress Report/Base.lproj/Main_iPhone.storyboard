@@ -647,7 +647,9 @@
                             </connections>
                         </barButtonItem>
                     </toolbarItems>
-                    <navigationItem key="navigationItem" id="mpg-sj-Bvd"/>
+                    <navigationItem key="navigationItem" id="mpg-sj-Bvd">
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="0HV-2u-Tbz"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="sortBarButtonItem" destination="9Ge-ML-PDA" id="ExO-Z3-NWZ"/>
                         <outlet property="tableView" destination="URG-Kk-JRR" id="MXw-IH-P7h"/>
@@ -930,7 +932,7 @@
                                 </connections>
                             </textField>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="izs-DG-3yd">
-                                <rect key="frame" x="93" y="101" width="134" height="128"/>
+                                <rect key="frame" x="93" y="101" width="134" height="128.5"/>
                                 <inset key="contentEdgeInsets" minX="0.0" minY="50" maxX="0.0" maxY="0.0"/>
                                 <state key="normal" backgroundImage="Insert_Image">
                                     <attributedString key="attributedTitle">
@@ -953,6 +955,10 @@
                                     <outlet property="delegate" destination="Jkt-E0-hM4" id="r7R-fq-tYD"/>
                                 </connections>
                             </pickerView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jaL-Hp-cYn" customClass="V8HorizontalPickerView">
+                                <rect key="frame" x="84" y="105" width="153" height="122"/>
+                                <color key="backgroundColor" red="1" green="0.98138336839999996" blue="0.9518036111" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.81248376435286873" green="0.89012360644684163" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -971,6 +977,7 @@
                     <connections>
                         <outlet property="cameraButton" destination="hq1-rY-UwD" id="4Fp-UX-eu9"/>
                         <outlet property="createButton" destination="IPk-eD-xmF" id="fmC-pn-TS3"/>
+                        <outlet property="horizontalPickerView" destination="jaL-Hp-cYn" id="7Uy-q8-2RV"/>
                         <outlet property="imageButton" destination="izs-DG-3yd" id="uhy-82-Z25"/>
                         <outlet property="pickerOfImages" destination="uN0-o9-YQX" id="ubc-lI-UhT"/>
                         <outlet property="textField" destination="PuB-x3-2hq" id="kJJ-me-EuJ"/>

@@ -10,6 +10,7 @@
 		DB0206D31989AF4C00463C3A /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB0206D21989AF4C00463C3A /* MessageUI.framework */; };
 		DB07648619862A5E00DBABE4 /* HCSDetailedActivityRecordFromTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB07648519862A5E00DBABE4 /* HCSDetailedActivityRecordFromTableViewController.m */; };
 		DB07648919864CC800DBABE4 /* HCSDetailedActivityRecordTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DB07648819864CC800DBABE4 /* HCSDetailedActivityRecordTableViewCell.m */; };
+		DB3DDE7719E779EB00AFBFD0 /* V8HorizontalPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB3DDE7619E779EB00AFBFD0 /* V8HorizontalPickerView.m */; };
 		DB49F361195CF0D400067F96 /* HCSShortCutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB49F360195CF0D400067F96 /* HCSShortCutViewController.m */; };
 		DB49F364195CF1C000067F96 /* HCSShortCutTextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DB49F363195CF1C000067F96 /* HCSShortCutTextViewCell.m */; };
 		DB49FF06196634EF00D91BFE /* HCSMyHeaderReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB49FF05196634EF00D91BFE /* HCSMyHeaderReusableView.m */; };
@@ -62,6 +63,9 @@
 		DB07648519862A5E00DBABE4 /* HCSDetailedActivityRecordFromTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCSDetailedActivityRecordFromTableViewController.m; sourceTree = "<group>"; };
 		DB07648719864CC800DBABE4 /* HCSDetailedActivityRecordTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSDetailedActivityRecordTableViewCell.h; sourceTree = "<group>"; };
 		DB07648819864CC800DBABE4 /* HCSDetailedActivityRecordTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCSDetailedActivityRecordTableViewCell.m; sourceTree = "<group>"; };
+		DB3DDE7419E779D100AFBFD0 /* V8HorizontalPickerViewProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = V8HorizontalPickerViewProtocol.h; path = "V8HorizontalPickerView-master/V8HorizontalPickerViewProtocol.h"; sourceTree = "<group>"; };
+		DB3DDE7519E779EB00AFBFD0 /* V8HorizontalPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = V8HorizontalPickerView.h; path = "V8HorizontalPickerView-master/V8HorizontalPickerView.h"; sourceTree = "<group>"; };
+		DB3DDE7619E779EB00AFBFD0 /* V8HorizontalPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = V8HorizontalPickerView.m; path = "V8HorizontalPickerView-master/V8HorizontalPickerView.m"; sourceTree = "<group>"; };
 		DB49F35F195CF0D400067F96 /* HCSShortCutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSShortCutViewController.h; sourceTree = "<group>"; };
 		DB49F360195CF0D400067F96 /* HCSShortCutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCSShortCutViewController.m; sourceTree = "<group>"; };
 		DB49F362195CF1C000067F96 /* HCSShortCutTextViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSShortCutTextViewCell.h; sourceTree = "<group>"; };
@@ -216,6 +220,9 @@
 		DB679EDE195BB92700C61F6F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				DB3DDE7419E779D100AFBFD0 /* V8HorizontalPickerViewProtocol.h */,
+				DB3DDE7519E779EB00AFBFD0 /* V8HorizontalPickerView.h */,
+				DB3DDE7619E779EB00AFBFD0 /* V8HorizontalPickerView.m */,
 				DB679EDF195BB92700C61F6F /* Track Today-Info.plist */,
 				DBB7695819E1060500D40B53 /* Fonts */,
 				DB679EE0195BB92700C61F6F /* InfoPlist.strings */,
@@ -439,6 +446,7 @@
 				DBCFA672197F80A800122581 /* HCSReminderTableViewController.m in Sources */,
 				DBB922D91983B9F300AEF1A7 /* HCSActivityRecordTableViewCell.m in Sources */,
 				DBB922D61983AE6100AEF1A7 /* HCSActivityLogTableViewController.m in Sources */,
+				DB3DDE7719E779EB00AFBFD0 /* V8HorizontalPickerView.m in Sources */,
 				DB49FF06196634EF00D91BFE /* HCSMyHeaderReusableView.m in Sources */,
 				DB67659F19608E8D00C113D2 /* HCSShortcut.m in Sources */,
 				DBB922D019836DB300AEF1A7 /* HCSActivityRecord.m in Sources */,

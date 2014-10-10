@@ -11,7 +11,9 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <QuartzCore/QuartzCore.h>
 
-@interface HCSAddCustomShortCutViewController () <UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate, UIPickerViewDataSource, UIPickerViewDelegate> //V8HorizontalPickerViewDataSource, V8HorizontalPickerViewDelegate>
+#import "V8HorizontalPickerView.h"
+
+@interface HCSAddCustomShortCutViewController () <UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate, UIPickerViewDataSource, UIPickerViewDelegate,V8HorizontalPickerViewDataSource, V8HorizontalPickerViewDelegate>
 //UINavigationControllerDelegate prevents error for delegation of UIImagePickerController
 
 @property (weak, nonatomic) IBOutlet UIButton *imageButton;
@@ -21,6 +23,7 @@
 @property (strong, nonatomic) NSMutableArray *imageArrayForPicker;
 //@property (strong, nonatomic) UIImage *currentlySelectedImage;
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerOfImages;
+@property (weak, nonatomic) IBOutlet V8HorizontalPickerView *horizontalPickerView;
 
 
 @end
@@ -99,6 +102,11 @@
     [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self.view action:@selector(endEditing:)]];
     //fml keyboardDismissMode only in scrollView
     
+    
+    //lolwut
+    self.horizontalPickerView.delegate = self;
+    self.horizontalPickerView.dataSource = self;
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -123,6 +131,30 @@
     }
     actionSheet.cancelButtonIndex = [actionSheet addButtonWithTitle:@"Cancel"];
     [actionSheet showFromBarButtonItem:self.cameraButton animated:YES];
+}
+
+#pragma mark - V8HorizontalPickerViewDelegate
+
+- (NSInteger)numberOfElementsInHorizontalPickerView:(V8HorizontalPickerView *)picker
+{
+    return [self.imageArrayForPicker count];
+}
+
+#pragma mark - V8HorizontalPickerViewDataSource
+
+- (void)horizontalPickerView:(V8HorizontalPickerView *)picker didSelectElementAtIndex:(NSInteger)index
+{
+    //did select
+}
+
+- (UIView *)horizontalPickerView:(V8HorizontalPickerView *)picker viewForElementAtIndex:(NSInteger)index
+{
+    return [[UIImageView alloc]initWithImage:self.imageArrayForPicker[index]];
+}
+
+- (NSInteger)horizontalPickerView:(V8HorizontalPickerView *)picker widthForElementAtIndex:(NSInteger)index
+{
+    return 60;
 }
 
 #pragma mark - UIActionSheetDelegate
