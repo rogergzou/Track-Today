@@ -34,7 +34,7 @@ int indexCount;
 - (void)viewDidLoad {
 	[super viewDidLoad];
 
-	self.view.backgroundColor = [UIColor blackColor];
+	self.view.backgroundColor = [UIColor whiteColor];
 	CGFloat margin = 40.0f;
 	CGFloat width = (self.view.bounds.size.width - (margin * 2.0f));
 	CGFloat pickerHeight = 40.0f;

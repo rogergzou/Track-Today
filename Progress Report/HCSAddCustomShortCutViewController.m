@@ -107,6 +107,36 @@
     self.horizontalPickerView.delegate = self;
     self.horizontalPickerView.dataSource = self;
     
+    //self.horizontalPickerView.backgroundColor   = [UIColor darkGrayColor];
+    self.horizontalPickerView.backgroundColor = [UIColor colorWithRed:0.812484 green:0.890124 blue:1 alpha:1];
+    //self.pickerView.selectedTextColor = [UIColor whiteColor];
+    //self.pickerView.textColor   = [UIColor grayColor];
+    //self.pickerView.delegate    = self;
+    //self.pickerView.dataSource  = self;
+    //self.pickerView.elementFont = [UIFont boldSystemFontOfSize:14.0f];
+    self.horizontalPickerView.selectionPoint = CGPointMake(60, 0);
+    
+    // add carat or other view to indicate selected element
+    UIImageView *indicator = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"indicator"]];
+    self.horizontalPickerView.selectionIndicatorView = indicator;
+    //	pickerView.indicatorPosition = V8HorizontalPickerIndicatorTop; // specify indicator's location
+    
+    // add gradient images to left and right of view if desired
+    //	UIImageView *leftFade = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"left_fade"]];
+    //	pickerView.leftEdgeView = leftFade;
+    //
+    //	UIImageView *rightFade = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"right_fade"]];
+    //	pickerView.rightEdgeView = rightFade;
+    
+    // add image to left of scroll area
+    //	UIImageView *leftImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"loopback"]];
+    //	pickerView.leftScrollEdgeView = leftImage;
+    //	pickerView.scrollEdgeViewPadding = 20.0f;
+    //
+    //	UIImageView *rightImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"airplane"]];
+    //	pickerView.rightScrollEdgeView = rightImage;
+    //NSLog(@"%@", self.view.backgroundColor);
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -149,12 +179,17 @@
 
 - (UIView *)horizontalPickerView:(V8HorizontalPickerView *)picker viewForElementAtIndex:(NSInteger)index
 {
-    return [[UIImageView alloc]initWithImage:self.imageArrayForPicker[index]];
+    //return [[UIImageView alloc]initWithImage:self.imageArrayForPicker[index]];
+    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 32, 32)];
+    imageView.image = self.imageArrayForPicker[index];
+    return imageView;
 }
 
 - (NSInteger)horizontalPickerView:(V8HorizontalPickerView *)picker widthForElementAtIndex:(NSInteger)index
 {
-    return 60;
+    //return ((UIImage *)self.imageArrayForPicker[index]).size.width + 40;
+    //default set to 32x32 so 32 + 20
+    return 52;
 }
 
 #pragma mark - UIActionSheetDelegate
@@ -418,6 +453,9 @@
     [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardHide:) name:UIKeyboardWillHideNotification object:nil];
+    
+    
+    [self.horizontalPickerView scrollToElement:0 animated:NO];
 }
 - (void)viewWillDisappear:(BOOL)animated
 {

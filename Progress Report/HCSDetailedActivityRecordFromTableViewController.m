@@ -46,6 +46,10 @@
     NSInteger buttonIndex = [defaults integerForKey:self.customDetailedButtonIndex];
     //}
     [self sortLogWithButtonIndex:buttonIndex];
+    
+    
+    
+    
 }
 
 - (void)didReceiveMemoryWarning
