@@ -22,4 +22,4 @@ What's New in Version 1.3.3: Replaced references to old app name (Track This Mom
 
 Support URL: http://www.rogergzou.com/
 
-For support, send a pull request or email me at dev@rogergzou.com.
+For support, send a pull request or email me at dev@rogergzou.com. :P
