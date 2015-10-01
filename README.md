@@ -1,7 +1,7 @@
 Track Today (1.3.3)
 ===============
 
-Track Today answers the quintessential question: What did I do today? Track activities in real-time, with automatic placement onto the calendar and activity log for future reference. This app features lets users group events under categories for activity log grouping, as well as reminders to keep you on track. 
+Track Today answers the essential question: What did I do today? Track activities in real-time, with automatic placement onto the calendar and activity log for future reference. This app features lets users group events under categories for activity log grouping, as well as reminders to keep you on track. 
 
 Main Features include: 
 
